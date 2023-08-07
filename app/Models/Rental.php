@@ -18,7 +18,7 @@ class Rental extends Model
         'electric_bill',
         'total_bill',
         'due_date',
-        'rentalStatus'
+        'status'
     ];
 
     public function tenant(){

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PropertyController;
+use App\Http\Controllers\RentalController;
 use App\Http\Controllers\UserController;
 
 /*
@@ -53,8 +54,18 @@ Route::middleware(['auth', 'user-access:business_owner'])->group(function () {
 
     Route::post('/add_tenant', [UserController::class, 'addTenant'])->name('tenant.addTenant');
 
-    Route::get('/edit_tenant', function () {
-        return view('./business_owner/edit_tenant');
+    Route::get('/edit_tenant', function () { return view('./business_owner/edit_tenant'); });
+
+    Route::get('/tenants-list', [UserController::class, 'getTenantsList']);
+
+    Route::get('/get-tenant-details', [UserController::class, 'getTenantDetails']);
+
+    //Route::get('/get-rental-details', [RentalController::class, 'getRentalDetails']);
+
+    Route::post('/update-rental-details', [RentalController::class, 'editRentalDetails'])->name('tenant.editTenant');
+
+    Route::get('/tenants_list', function () {
+        return view('./business_owner/tenants_list');
     });
 
 

@@ -20,7 +20,11 @@
             <div class="col-md-8">
                 <div style="margin-top:15%" class="card">
                     <div class="card-header">{{ __('Add Tenant') }}</div>
-
+                    @if (session('status'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('status') }}
+                        </div>
+                    @endif
                     <div class="card-body">
                         <div class="nav nav-fill my-3">
                             <label class="nav-link shadow-sm step0    border ml-2 ">Personal Information</label>
@@ -145,7 +149,8 @@
                                             <option value="" selected>Choose Gender</option>
                                             <option value="Male" {{ old('gender') == 'Male' ? 'selected' : '' }}>Male
                                             </option>
-                                            <option value="Female" {{ old('gender') == 'Female' ? 'selected' : '' }}>Female
+                                            <option value="Female" {{ old('gender') == 'Female' ? 'selected' : '' }}>
+                                                Female
                                             </option>
                                         </select>
                                         @error('gender')
@@ -458,8 +463,9 @@
 
                                     <div class="col-md-6">
                                         <input id="rent_started" type="text"
-                                            class="form-control @error('rent_started') is-invalid @enderror" name="rent_started"
-                                            value="{{ old('rent_started') }}" required autocomplete="rent_started" autofocus>
+                                            class="form-control @error('rent_started') is-invalid @enderror"
+                                            name="rent_started" value="{{ old('rent_started') }}" required
+                                            autocomplete="rent_started" autofocus>
 
                                         @error('rent_started')
                                             <span class="invalid-feedback" role="alert">
@@ -485,8 +491,6 @@
                                         @enderror
                                     </div>
                                 </div>
-
-
 
                                 <div class="row mb-3">
                                     <label for="rentalStatus"
@@ -514,10 +518,10 @@
                             </div>
 
                             <div class="row mb-0 form form-navigation">
-                                <div class="col-md-6 offset-md-4">
+                                <div class="col-md-8 offset-md-4">
                                     <button type="button" class="previous btn btn-primary float-left">&lt;
                                         Previous</button>
-                                    <button type="button" class="next btn btn-primary float-right">Next &gt;</button>
+                                    <button type="button" class="next btn btn-primary">Next  &gt;</button>
 
                                     <button type="submit" class="btn btn-primary">
                                         {{ __('Add Tenant') }}
@@ -527,18 +531,28 @@
                                     onclick="history.back()">BACK
                                 </a> --}}
                             </div>
+                        </form>
+                    </div>
 
-                            {{-- <div class="row mb-0 form">
-                                <div class="col-md-6 offset-md-4">
-                                    <button type="submit" class="btn btn-primary">
-                                        {{ __('Add Tenant') }}
+                    {{-- FOR MODAL --}}
+                    <div class="modal fade" id="successModal" tabindex="-1" role="dialog"
+                        aria-labelledby="successModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="successModalLabel">Success</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <a style="cursor: pointer; width: 100px;color:#fff;" class="btn btn-danger"
-                                    onclick="history.back()">BACK
-                                </a>
-                            </div> --}}
-                        </form>
+                                <div class="modal-body">
+                                    Tenant added successfully!
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

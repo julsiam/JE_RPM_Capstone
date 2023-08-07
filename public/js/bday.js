@@ -16,3 +16,4 @@ function updateAge() {
 
     ageInput.value = age;
 }
+

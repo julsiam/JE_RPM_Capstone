@@ -31,9 +31,9 @@
     <script src="{{ asset('js/bday.js') }}" defer></script>
     <script src="{{ asset('js/room_unit.js') }}"></script>
     <script src="{{ asset('js/rental_details.js') }}"></script>
-
-
-
+    <script src="{{ asset('js/tenants_list.js') }}"></script>
+    <script src="{{ asset('js/success_add_Modal.js') }}"></script>
+    <script src="{{ asset('js/total_bill.js') }}"></script>
     {{-- <script src="{{ asset('js/status.js') }}"></script>
     <script src="{{ asset('js/confirm.js') }}"></script> --}}
 

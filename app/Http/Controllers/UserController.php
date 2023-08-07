@@ -40,7 +40,7 @@ class UserController extends Controller
      * @return \App\Models\User
      */
 
-     //ADD TENANT
+    //ADD TENANT
     protected function addTenant(Request $request)
     {
         $validator = $this->validator($request->all());
@@ -88,12 +88,15 @@ class UserController extends Controller
             'water_bill' => $request->input('water_bill'),
             'electric_bill' => $request->input('electric_bill'),
             'total_bill' => $request->input('total_bill'),
-            'rentalStatus' => $request->input('rentalStatus'),
+            'status' => $request->input('rentalStatus'),
         ]);
 
         $property->user_id = $user->id; // Update the user_id
         $property->status = 'Occupied'; // Update the status to Occupied
         $property->save();
+
+        //FOR MODAL
+       // session()->flash('tenant_added', true);
 
         return redirect()->route('tenants');
     }
@@ -151,4 +154,18 @@ class UserController extends Controller
 
 
     //EDIT TENANT
+
+    public function getTenantsList()
+    {
+        $tenants = User::where('type', 0)->select('id', 'first_name', 'last_name', 'email')->get();
+        return response()->json($tenants);
+    }
+    public function getTenantDetails(Request $request){
+        $id = $request->input('id');
+        $tenant = User::with('rental.property')->findOrFail($id);
+
+        return response()->json($tenant);
+    }
+
+
 }

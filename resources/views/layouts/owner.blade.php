@@ -34,6 +34,10 @@
     <script src="{{ asset('js/tenants_list.js') }}"></script>
     <script src="{{ asset('js/success_add_Modal.js') }}"></script>
     <script src="{{ asset('js/total_bill.js') }}"></script>
+    <script src="{{ asset('js/total_bill_at.js') }}"></script>
+    <script src="{{ asset('js/rent_date.js') }}"></script>
+
+
     {{-- <script src="{{ asset('js/status.js') }}"></script>
     <script src="{{ asset('js/confirm.js') }}"></script> --}}
 
@@ -76,8 +80,8 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {{ request()->is('business_owner/announcement') ? 'active' : null }}"
-                                href="{{ route('announcement') }}">
+                            <a class="nav-link {{ request()->is('announcements') ? 'active' : null }}"
+                                href="{{ url('/announcements') }}">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
                                     fill="currentColor" class="bi bi-megaphone" viewBox="0 0 16 16">
                                     <path
@@ -154,7 +158,8 @@
 
 
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url('properties') }}">
+                            <a class="nav-link {{ request()->is('properties') ? 'active' : null }}"
+                                href="{{ url('/properties') }}">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
                                     fill="currentColor" class="bi bi-houses" viewBox="0 0 16 16">
                                     <path

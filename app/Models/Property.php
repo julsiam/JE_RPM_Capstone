@@ -14,9 +14,11 @@ class Property extends Model
         'user_id', // Add the tenant_id to the $fillable array
         'location',
         'room_unit',
+        'inclusion',
         'room_fee',
         'status',
     ];
+
 
     public function user()
     {

@@ -387,13 +387,12 @@
                                 <div class="row mb-3">
                                     <label for="room_fee_display"
                                         class="col-md-4 col-form-label text-md-end">{{ __('Room Fee') }}</label>
-
                                     <div class="col-md-6">
                                         <input id="room_fee_display" type="text"
                                             class="form-control @error('room_fee_display') is-invalid @enderror"
                                             name="room_fee_display" value="{{ old('room_fee_display') }}" required
-                                            autocomplete="room_fee_display" autofocus readonly>
-
+                                            autocomplete="room_fee_display" autofocus readonly
+                                            oninput="calculateTotalBillAt()">
                                         @error('room_fee_display')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -402,17 +401,14 @@
                                     </div>
                                 </div>
 
-
                                 <div class="row mb-3">
                                     <label for="water_bill"
                                         class="col-md-4 col-form-label text-md-end">{{ __('Water Bill') }}</label>
-
                                     <div class="col-md-6">
                                         <input id="water_bill" type="text"
                                             class="form-control @error('water_bill') is-invalid @enderror"
                                             name="water_bill" value="{{ old('water_bill') }}" required
-                                            autocomplete="water_bill" autofocus>
-
+                                            autocomplete="water_bill" autofocus oninput="calculateTotalBillAt()">
                                         @error('water_bill')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -424,13 +420,11 @@
                                 <div class="row mb-3">
                                     <label for="electric_bill"
                                         class="col-md-4 col-form-label text-md-end">{{ __('Electric Bill') }}</label>
-
                                     <div class="col-md-6">
                                         <input id="electric_bill" type="text"
                                             class="form-control @error('electric_bill') is-invalid @enderror"
                                             name="electric_bill" value="{{ old('electric_bill') }}" required
-                                            autocomplete="electric_bill" autofocus>
-
+                                            autocomplete="electric_bill" autofocus oninput="calculateTotalBillAt()">
                                         @error('electric_bill')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -442,13 +436,11 @@
                                 <div class="row mb-3">
                                     <label for="total_bill"
                                         class="col-md-4 col-form-label text-md-end">{{ __('Total Bill') }}</label>
-
                                     <div class="col-md-6">
                                         <input id="total_bill" type="text"
                                             class="form-control @error('total_bill') is-invalid @enderror"
                                             name="total_bill" value="{{ old('total_bill') }}" required
-                                            autocomplete="total_bill" autofocus>
-
+                                            autocomplete="total_bill" autofocus readonly>
                                         @error('total_bill')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -462,9 +454,9 @@
                                         class="col-md-4 col-form-label text-md-end">{{ __('Rent Started') }}</label>
 
                                     <div class="col-md-6">
-                                        <input id="rent_started" type="text"
+                                        <input id="rent_started" type="date"
                                             class="form-control @error('rent_started') is-invalid @enderror"
-                                            name="rent_started" value="{{ old('rent_started') }}" required
+                                            name="rent_started" value="{{ old('rent_started', date('Y-m-d')) }}" required
                                             autocomplete="rent_started" autofocus>
 
                                         @error('rent_started')
@@ -480,9 +472,9 @@
                                         class="col-md-4 col-form-label text-md-end">{{ __('Due Date') }}</label>
 
                                     <div class="col-md-6">
-                                        <input id="due_date" type="text"
+                                        <input id="due_date" type="date"
                                             class="form-control @error('due_date') is-invalid @enderror" name="due_date"
-                                            value="{{ old('due_date') }}" required autocomplete="due_date" autofocus>
+                                            value="{{ old('due_date')}}" required autocomplete="due_date" autofocus>
 
                                         @error('due_date')
                                             <span class="invalid-feedback" role="alert">
@@ -500,7 +492,7 @@
                                         <select id="rentalStatus"
                                             class="form-select @error('rentalStatus') is-invalid @enderror"
                                             name="rentalStatus" required autocomplete="rentalStatus">
-                                            <option value="" selected>Choose rentalStatus</option>
+                                            <option value="" selected>Choose rental status</option>
                                             <option value="On Going">Wala pay total bill</option>
                                             <option value="Not Yet Paid">Wa pa kabayad</option>
                                             <option value="Paid">Paid</option>
@@ -521,7 +513,7 @@
                                 <div class="col-md-8 offset-md-4">
                                     <button type="button" class="previous btn btn-primary float-left">&lt;
                                         Previous</button>
-                                    <button type="button" class="next btn btn-primary">Next  &gt;</button>
+                                    <button type="button" class="next btn btn-primary">Next &gt;</button>
 
                                     <button type="submit" class="btn btn-primary">
                                         {{ __('Add Tenant') }}

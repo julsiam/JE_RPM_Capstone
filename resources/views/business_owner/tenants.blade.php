@@ -53,7 +53,7 @@
         <div class="row mt-4">
             <div class="col-md-6 justify-content-start">
                 <div class="input-group" style="width:30%">
-                    <input type="text" class="form-control form-control-sm" placeholder="Search tenants">
+                    <input id="search" type="text" class="form-control form-control-sm" placeholder="Search tenant">
                     <button class="btn btn-primary btn-sm" type="button">Search</button>
                 </div>
             </div>
@@ -78,7 +78,7 @@
 
         <div class="container-fluid body-content mt-4">
             <div class="table-responsive">
-                <table id="InventoryData" class="table table-bordered">
+                <table id="tenantsData" class="table table-bordered">
                     <thead class="thead-dark ">
                         <tr>
                             <th class="text-start">ID</th>
@@ -113,10 +113,11 @@
                                 </td>
                                 <td class="text-center">
                                     @if ($tenant->rental)
-                                    {{ $tenant->rental->due_date }}
-                                @else
-                                    N/A
-                                @endif</td>
+                                        {{ $tenant->rental->due_date }}
+                                    @else
+                                        N/A
+                                    @endif
+                                </td>
                                 <td class="text-center">
                                     <button class="btn btn-primary btn-sm">Profile</button>
                                     <button class="btn btn-primary btn-sm">Rental</button>
@@ -157,4 +158,5 @@
 
             </div>
         </div>
-</div @endsection
+    </div>
+@endsection

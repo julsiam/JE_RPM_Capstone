@@ -30,6 +30,12 @@ class UserController extends Controller
             'work_address' => ['string', 'max:255'],
             'password' => ['required', 'string', 'min:8'],
             'type' => ['integer'], // add integer rule for type field
+
+            'water_bill' => ['required', 'numeric'],
+            'electric_bill' => ['required', 'numeric'],
+            'total_bill' => ['required', 'numeric'],
+            'due_date' => ['required', 'date_format:Y-m-d', 'after:today'],
+            'status' => ['string', 'in:On Going,Not Yet Paid,Paid,Not Fully Paid'],
         ]);
     }
 
@@ -160,6 +166,8 @@ class UserController extends Controller
         $tenants = User::where('type', 0)->select('id', 'first_name', 'last_name', 'email')->get();
         return response()->json($tenants);
     }
+
+    
     public function getTenantDetails(Request $request){
         $id = $request->input('id');
         $tenant = User::with('rental.property')->findOrFail($id);

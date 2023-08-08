@@ -3,38 +3,50 @@
 namespace App\Http\Controllers;
 
 use App\Models\Property;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 
 
 class PropertyController extends Controller
 {
-    // public function getRoomUnits(Request $request)
-    // {
-    //     $selectedLocation = $request->input('location');
+    public function getProperties(Request $request)
+    {
+       $properties = Property::with('user')->get();
 
-    //     // Fetch room units based on the selected location and status (e.g., status 0 for available rooms)
-    //     $roomUnits = Property::where('location', $selectedLocation)
-    //         ->where('status', 0)
-    //         ->get(['id', 'room_unit']);
+        $totalProperties = $properties->count();
 
-    //     return response()->json($roomUnits);
-    // }
+       return view ('business_owner.property_list', compact('properties', "totalProperties"));
+    }
 
-    // public function showAddTenantForm()
-    // {
-    //     $locations = $this->getLocationOptions();
-    //     return view('business_owner.add_tenant', compact('locations'));
-    // }
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'location' => ['required', 'string', 'max:255'],
+            'room_unit' => ['required', 'string', 'max:255','unique:properties'],
+            'inclusion' => ['required', 'string', 'max:255'],
+            'room_rent' => ['required', 'numeric'],
+            'status' => ['required'],
+        ]);
+    }
 
-    // public function locations()
-    // {
-    //     $locations = $this->getLocationOptions();
-    //     return view('business_owner.add_tenant', compact('locations'));
-    // }
+    public function addProperty(Request $request){
 
-    // public function getLocationOptions()
-    // {
-    //     $locations = Property::select('location')->distinct()->get();
-    //     return $locations;
-    // }
+        $validator = $this->validator($request->all());
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $property = Property::create([
+            'location' => $request->input('location'),
+            'room_unit'=> $request->input('room_unit'),
+            'inclusion'=>$request->input('inclusion'),
+            'room_fee'=> $request->input('room_rent'),
+            'status'=>$request->input('status')
+        ]);
+
+        return redirect()->route('properties');
+    }
 }

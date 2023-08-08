@@ -43,7 +43,7 @@
                                     <div class="form-group col-md-5">
                                         <label style="color: rgb(128, 128, 128)">Email</label>
                                         <input id="email" style="border-color: rgb(166, 166, 166)" type="email"
-                                            class="form-control" name="email" value="">
+                                            class="form-control" name="email" value="" readonly>
                                     </div>
 
                                     <div class="form-group col-md-5">

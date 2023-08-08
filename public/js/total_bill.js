@@ -10,3 +10,6 @@ function calculateTotalBill() {
     // Update the 'total_bill' input with the calculated value
     document.getElementById('total_bill').value = totalBill.toFixed(2);
 }
+
+
+

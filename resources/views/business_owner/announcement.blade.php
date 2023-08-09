@@ -3,17 +3,19 @@
 @section('content')
     <div class="container-fluid">
         <div class="row justify-content-center">
-            <div style="margin-top:8%;" class="col-md-12">
+            <div style="margin-top:5%;" class="col-md-10">
                 {{-- <form action="{{ route('announcements.search') }}" method="GET" class="mb-3"> --}}
-                <form action="#" method="#" class="mb-3">
 
-                    <div class="input-group">
-                        <input type="text" name="keyword" class="form-control" placeholder="Search by subject or details">
-                        <button type="submit" class="btn btn-primary">Search</button>
-                    </div>
-                </form>
 
                 <div class="card mt-5">
+                    <form action="#" method="#" class="mb-3 p-4">
+
+                        <div class="input-group">
+                            <input type="text" name="keyword" class="form-control" placeholder="Search by subject or details">
+                            <button type="submit" class="btn btn-primary">Search</button>
+                        </div>
+                    </form>
+
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <span>{{ __('Announcement') }}</span>
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal"
@@ -45,7 +47,7 @@
                                         </div>
                                         <div class="col">
                                             <h5 class="card-title">{{ $announcement->user->first_name }}
-                                                {{ $announcement->user->first_name }}</h5>
+                                                {{ $announcement->user->last_name }}</h5>
                                             <p style="font-size: 14px">J and E Rentals and Property Owner</p>
                                             <p style="font-size: 12px">
                                                 {{ $announcement->date_created->format('F d, Y | g:i A') }}</p>
@@ -65,7 +67,7 @@
 
     <div class="modal fade" id="addAnnouncementModal" tabindex="-1" aria-labelledby="addAnnouncementModalLabel"
         aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="addAnnouncementModalLabel">{{ __('Add Announcement') }}</h5>

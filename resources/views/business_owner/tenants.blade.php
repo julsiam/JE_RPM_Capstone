@@ -2,13 +2,14 @@
 
 
 @section('content')
-    <div class="container-fluid">
+    <div class="container">
         @if (session('status'))
             <div class="alert alert-success" role="alert">
                 {{ session('status') }}
             </div>
         @endif
-        <div class="row justify-content-center" style="margin-top:8%">
+
+        <div class="row justify-content-center" style="margin-top:10%">
             <div class="col-md-6">
                 <h2>J and E Rental Tenants</h2>
             </div>

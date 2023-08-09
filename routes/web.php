@@ -4,6 +4,7 @@ use App\Http\Controllers\AnnouncementController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MaintenanceController;
 use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\RentalController;
 use App\Http\Controllers\UserController;
@@ -52,8 +53,6 @@ Route::middleware(['auth', 'user-access:business_owner'])->group(function () {
 
     Route::get('/announcements/search', [AnnouncementController::class, 'search'])->name('announcements.search');
 
-    Route::get('/tenants', [UserController::class, 'tenantsList'])->name('tenants');
-
     Route::get('/add_tenant_form', [UserController::class, 'showAddTenantForm'])->name('add_tenant_form');
 
     Route::get('/get_room_units', [UserController::class, 'getRoomUnits']);
@@ -62,17 +61,17 @@ Route::middleware(['auth', 'user-access:business_owner'])->group(function () {
 
     Route::post('/add_tenant', [UserController::class, 'addTenant'])->name('tenant.addTenant');
 
-    Route::get('/edit_tenant', function () { return view('./business_owner/edit_tenant'); });
+    Route::get('/edit_tenant', function () {
+        return view('./business_owner/edit_tenant');
+    });
 
-    Route::get('/tenants-list', [UserController::class, 'getTenantsList']);
+    Route::get('/tenants', [UserController::class, 'tenantsList'])->name('tenants'); //SHOW ALL TENANTS
 
-    Route::get('/get-tenant-details', [UserController::class, 'getTenantDetails']);
+    Route::get('/tenants-list', [UserController::class, 'getTenantsList']); //MODAL LIST OF TENANTS IN EDIT TENANT
+
+    Route::get('/get-tenant-details', [UserController::class, 'getTenantDetails']); //INDIVIDUAL
 
     Route::post('/update-rental-details', [RentalController::class, 'editRentalDetails'])->name('tenant.editTenant');
-
-    Route::get('/tenants_list', function () {
-        return view('./business_owner/tenants_list');
-    });
 
     Route::get('/add_property_form', function () {
         return view('./business_owner/add_property');
@@ -82,9 +81,12 @@ Route::middleware(['auth', 'user-access:business_owner'])->group(function () {
 
     Route::post('/add_property', [PropertyController::class, 'addProperty'])->name('property.addProperty');
 
-    // Route::get('/announcement', function(){
-    //     return view('./business_owner/announcement');
+    // Route::get('/maintenance', function(){
+    //     return view('./business_owner/maintenance');
     // });
+
+    Route::get('/maintenance', [MaintenanceController::class, 'getMaintenances'])->name('maintenance');
+
 
     // Route::get('/maintenance', function () {
     //     return view('./business_owner/maintenance');

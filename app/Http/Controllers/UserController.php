@@ -102,19 +102,9 @@ class UserController extends Controller
         $property->save();
 
         //FOR MODAL
-       // session()->flash('tenant_added', true);
+        // session()->flash('tenant_added', true);
 
         return redirect()->route('tenants');
-    }
-
-    //SHOW ALL TENANTS
-
-    public function tenantsList()
-    {
-        $tenants = User::where('type', 0)->get();
-        $totalTenants = $tenants->count();
-
-        return view('business_owner.tenants', compact('tenants', 'totalTenants'));
     }
 
 
@@ -159,21 +149,32 @@ class UserController extends Controller
     }
 
 
-    //EDIT TENANT
 
+
+//SHOW ALL TENANTS
+
+    public function tenantsList()
+    {
+        $tenants = User::where('type', 0)->get();
+        $totalTenants = $tenants->count();
+
+        return view('business_owner.tenants', compact('tenants', 'totalTenants'));
+    }
+
+
+   //SHOW ALL TENANTS AND DISPLAY IN MODAL
     public function getTenantsList()
     {
         $tenants = User::where('type', 0)->select('id', 'first_name', 'last_name', 'email')->get();
         return response()->json($tenants);
     }
 
-    
-    public function getTenantDetails(Request $request){
+
+    public function getTenantDetails(Request $request)
+    {
         $id = $request->input('id');
         $tenant = User::with('rental.property')->findOrFail($id);
 
         return response()->json($tenant);
     }
-
-
 }

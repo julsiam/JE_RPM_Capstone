@@ -47,7 +47,7 @@
                                     </div>
 
                                     <div class="form-group col-md-5">
-                                        <a style="cursor: pointer; margin-top:20px; width: 75px;color:#fff;" href="#"
+                                        <a style="cursor: pointer; margin-top:20px; width: 75px;color:#fff;" 
                                             class="btn btn-success me-2" class="btn btn-success me-2"
                                             onclick="fetchTenantsList()">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"

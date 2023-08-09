@@ -36,10 +36,9 @@
     <script src="{{ asset('js/total_bill.js') }}"></script>
     <script src="{{ asset('js/total_bill_at.js') }}"></script>
     <script src="{{ asset('js/rent_date.js') }}"></script>
+    {{-- <script src="{{ asset('js/status.js') }}"></script> --}}
 
-
-    {{-- <script src="{{ asset('js/status.js') }}"></script>
-    <script src="{{ asset('js/confirm.js') }}"></script> --}}
+    {{-- <script src="{{ asset('js/confirm.js') }}"></script> --}}
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
@@ -171,7 +170,7 @@
 
                         <li class="nav-item">
                             <a class="nav-link {{ request()->is('maintenance') ? 'active' : null }}"
-                                href="{{ url('maintenance') }}">
+                                href="{{ url('/maintenance') }}">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
                                     fill="currentColor" class="bi bi-gear" viewBox="0 0 16 16">
                                     <path

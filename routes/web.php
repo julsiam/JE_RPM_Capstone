@@ -87,6 +87,9 @@ Route::middleware(['auth', 'user-access:business_owner'])->group(function () {
 
     Route::get('/maintenance', [MaintenanceController::class, 'getMaintenances'])->name('maintenance');
 
+    Route::get('/getMaintenanceDetails', [MaintenanceController::class, 'getMaintenance']);
+
+    Route::post('/update-maintenance-status', [MaintenanceController::class, 'editMaintenanceStatus'])->name('tenant.editMaintenanceStatus');
 
     // Route::get('/maintenance', function () {
     //     return view('./business_owner/maintenance');

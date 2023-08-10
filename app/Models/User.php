@@ -78,6 +78,6 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     public function maintenance(){
-        return $this->hasMany(User::class);
+        return $this->hasMany(Maintenance::class);
     }
 }

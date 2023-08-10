@@ -29,4 +29,9 @@ class Property extends Model
     {
         return $this->hasOne(Rental::class, 'property_id');
     }
+
+    // public function maintenance()
+    // {
+    //     return $this->hasMany(Maintenance::class);
+    // }
 }

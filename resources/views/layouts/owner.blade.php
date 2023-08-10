@@ -36,6 +36,7 @@
     <script src="{{ asset('js/total_bill.js') }}"></script>
     <script src="{{ asset('js/total_bill_at.js') }}"></script>
     <script src="{{ asset('js/rent_date.js') }}"></script>
+    <script src="{{ asset('js/maintenance.js') }}"></script>
     {{-- <script src="{{ asset('js/status.js') }}"></script> --}}
 
     {{-- <script src="{{ asset('js/confirm.js') }}"></script> --}}

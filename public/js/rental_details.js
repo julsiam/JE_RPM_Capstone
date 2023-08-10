@@ -1,4 +1,4 @@
-$(document).ready(function () {
+$(document).ready(function () { //SA RENTAL SECTION IN ADD TENANT FORM
     // Function to update the rental information fields with the data from the other sections
     function updateRentalInfo() {
         // Personal Information Section
@@ -17,7 +17,7 @@ $(document).ready(function () {
        // $('#room_fee_display').val(roomFee);
        // $('#property_id').val(location + ' - ' + roomUnit);
 
-    } 
+    }
 
     // Add event listeners to update the rental information section on input change in other sections
     $('#first_name').on('input', updateRentalInfo);

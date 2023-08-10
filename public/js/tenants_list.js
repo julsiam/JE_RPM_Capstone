@@ -25,7 +25,7 @@ function fetchTenantsList() {
     });
 }
 
-function selectTenant(id, name, email) {
+function selectTenant(id, name, email) { //retrieve data and display to the edit page
     // Do something with the selected tenant (e.g., update the form fields)
     $("#tenant_id").val(id);
     $("#tenant_name").val(name);
@@ -46,15 +46,15 @@ function selectTenant(id, name, email) {
             $("#gender").val(data.gender);
             $("#occupation").val(data.occupation);
 
-            const rentalData = data.rental;
+            const rentalData = data.rental; //rental data to display in table in edit page
 
             if (rentalData) {
                 $("#rental_id").val(rentalData.id);
                 $("#location").val(rentalData.property.location);
-                 $("#room_unit").val(rentalData.property.room_unit);
+                $("#room_unit").val(rentalData.property.room_unit);
                 $("#rent_started").val(rentalData.rent_started);
                 $("#room_rent").val(rentalData.property.room_fee);
-               $("#water_bill").val(rentalData.water_bill);
+                $("#water_bill").val(rentalData.water_bill);
                 $("#electric_bill").val(rentalData.electric_bill);
                 $("#total_bill").val(rentalData.total_bill);
                 $("#due_date").val(rentalData.due_date);

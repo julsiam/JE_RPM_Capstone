@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Rental;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 
 class RentalController extends Controller
 {
@@ -40,14 +39,8 @@ class RentalController extends Controller
                 ->withInput();
         }
 
-        Log::info('Edit Rental Details method called.');
-
-
         $rentalId = $request->input('rental_id');
         $rental = Rental::find($rentalId);
-
-        Log::info('Rental: ' . print_r($rental, true));
-
 
         if (!$rental) {
             return redirect()->back()->withErrors('Rental not found.');

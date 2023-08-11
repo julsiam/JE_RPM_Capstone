@@ -26,4 +26,15 @@ class AnnouncementController extends Controller
 
         return view('business_owner.announcement', compact('announcements'));
     }
+
+    public function search(Request $request)
+    {
+        $keyword = $request->input('keyword');
+
+        $announcements = Announcement::where('subject', 'like', '%' . $keyword . '%')
+            ->orWhere('details', 'like', '%' . $keyword . '%')
+            ->get();
+
+        return view('business_owner.announcement', compact('announcements'));
+    }
 }

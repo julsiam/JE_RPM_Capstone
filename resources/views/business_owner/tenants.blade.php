@@ -54,20 +54,20 @@
         <div class="row mt-4">
             <div class="col-md-6 justify-content-start">
                 <div class="input-group" style="width:30%">
-                    <input id="search" type="text" class="form-control form-control-sm" placeholder="Search tenant">
+                    <input id="search" name="search" type="text" class="form-control form-control-sm"
+                        placeholder="Search tenant">
                     <button class="btn btn-primary btn-sm" type="button">Search</button>
                 </div>
             </div>
 
             <div class="col-md-6 d-flex justify-content-end mt-2 mt-md-0">
-
                 <div class="input-group" style="width:30%">
                     <div class="input-group-prepend">
                         <label class="input-group-text" for="sort-by">Sort by:</label>
                     </div>
 
                     <select id="sort-by" class="form-select form-select-sm">
-                        <option value="status"></option>
+                        <option value=""></option>
                         <option value="location">Location</option>
                         <option value="dues">Monthly Dues</option>
                     </select>
@@ -131,6 +131,11 @@
 
 
             <div class="col-xl-12">
+{{--
+                <div class="d-flex justify-content-between">
+                    <div class="col-form-label">Total Tenants: {{ $totalTenants }}</div>
+                    <div>{{ $tenants->links() }}</div>
+                </div> --}}
                 <div class="row" style=" float:left;">
                     <label class="col-form-label">Total Tenants</label>
                     <input style="width: 50%" type="text" class="form-control" id="totalTenants" disabled

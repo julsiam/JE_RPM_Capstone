@@ -47,6 +47,6 @@ class PropertyController extends Controller
             'status'=>$request->input('status')
         ]);
 
-        return redirect()->route('properties');
+        return redirect()->route('properties')->with('success', 'Property Added Successfully!');
     }
 }

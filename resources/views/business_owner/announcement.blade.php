@@ -4,14 +4,10 @@
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div style="margin-top:5%;" class="col-md-10">
-                {{-- <form action="{{ route('announcements.search') }}" method="GET" class="mb-3"> --}}
-
-
                 <div class="card mt-5">
-                    <form action="#" method="#" class="mb-3 p-4">
-
+                    <form action="{{ route('announcements.search') }}" method="GET" class="mb-3 p-4">
                         <div class="input-group">
-                            <input type="text" name="keyword" class="form-control" placeholder="Search by subject or details">
+                            <input type="text"id="keyword" name="keyword" class="form-control" placeholder="Search by subject or details">
                             <button type="submit" class="btn btn-primary">Search</button>
                         </div>
                     </form>

@@ -61,11 +61,11 @@ Route::middleware(['auth', 'user-access:business_owner'])->group(function () {
 
     Route::post('/add_tenant', [UserController::class, 'addTenant'])->name('tenant.addTenant');
 
-    Route::get('/edit_tenant', function () {
-        return view('./business_owner/edit_tenant');
-    });
+    Route::get('/edit_tenant', function () { return view('./business_owner/edit_tenant'); });
 
     Route::get('/tenants', [UserController::class, 'tenantsList'])->name('tenants'); //SHOW ALL TENANTS
+
+    //Route::get('/tenants_location', [UserController::class, 'sortByLocation']); //SHOW ALL TENANTS
 
     Route::get('/tenants-list', [UserController::class, 'getTenantsList']); //MODAL LIST OF TENANTS IN EDIT TENANT
 
@@ -81,15 +81,11 @@ Route::middleware(['auth', 'user-access:business_owner'])->group(function () {
 
     Route::post('/add_property', [PropertyController::class, 'addProperty'])->name('property.addProperty');
 
-    // Route::get('/maintenance', function(){
-    //     return view('./business_owner/maintenance');
-    // });
-
     Route::get('/maintenance', [MaintenanceController::class, 'getMaintenances'])->name('maintenance');
 
     Route::get('/getMaintenanceDetails', [MaintenanceController::class, 'getMaintenance']);
 
-    Route::post('/update-maintenance-status', [MaintenanceController::class, 'editMaintenanceStatus'])->name('tenant.editMaintenanceStatus');
+    Route::post('/update-maintenance-status', [MaintenanceController::class, 'editMaintenanceStatus'])->name('maintenance.editMaintenanceStatus');
 
     // Route::get('/maintenance', function () {
     //     return view('./business_owner/maintenance');

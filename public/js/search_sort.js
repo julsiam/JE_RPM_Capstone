@@ -1,0 +1,46 @@
+// JavaScript code for search functionality
+$(document).ready(function () {
+    $('#search').on('keyup', function () {
+        var searchText = $(this).val().toLowerCase();
+        $('#tenantsData tbody tr').filter(function () {
+            $(this).toggle($(this).text().toLowerCase().indexOf(searchText) > -1);
+        });
+    });
+});
+
+
+// JavaScript code for sort functionality
+$(document).ready(function () {
+    $('#sort-by').on('change', function () {
+        var sortBy = $(this).val();
+        if (sortBy === 'location') {
+            sortTableByColumn(3); // Location column index
+        } else if (sortBy === 'dues') {
+            sortTableByColumn(5); // Dues column index
+        }
+    });
+
+    function sortTableByColumn(columnIndex) {
+        var table, rows, switching, i, x, y, shouldSwitch;
+        table = document.getElementById('tenantsData');
+        switching = true;
+        while (switching) {
+            switching = false;
+            rows = table.rows;
+            for (i = 1; i < (rows.length - 1); i++) {
+                shouldSwitch = false;
+                x = rows[i].getElementsByTagName('TD')[columnIndex];
+                y = rows[i + 1].getElementsByTagName('TD')[columnIndex];
+                if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                    shouldSwitch = true;
+                    break;
+                }
+            }
+            if (shouldSwitch) {
+                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                switching = true;
+            }
+        }
+    }
+});
+

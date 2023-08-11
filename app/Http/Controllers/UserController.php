@@ -151,18 +151,36 @@ class UserController extends Controller
 
 
 
-//SHOW ALL TENANTS
+    //SHOW ALL TENANTS
 
     public function tenantsList()
     {
-        $tenants = User::where('type', 0)->get();
-        $totalTenants = $tenants->count();
+        $tenants = User::where('type', 0)
+            ->get();
+        // ->paginate(10);
+
+        $totalTenants = User::where('type', 0)->count();
 
         return view('business_owner.tenants', compact('tenants', 'totalTenants'));
     }
 
 
-   //SHOW ALL TENANTS AND DISPLAY IN MODAL
+    public function sortByLocation()
+    {
+        $sortedByLocation = User::where('type', 0)
+            ->with(['property' => function ($query) {
+                $query->orderBy('location', 'asc');
+            }])
+            ->get();
+
+        return view('business_owner.tenants', ['tenants' => $sortedByLocation]);
+    }
+
+
+
+
+
+    //SHOW ALL TENANTS AND DISPLAY IN MODAL
     public function getTenantsList()
     {
         $tenants = User::where('type', 0)->select('id', 'first_name', 'last_name', 'email')->get();

@@ -45,7 +45,7 @@ function selectTenant(id, name, email) { //retrieve data and display to the edit
             $("#age").val(data.age);
             $("#gender").val(data.gender);
             $("#occupation").val(data.occupation);
-
+ 
             const rentalData = data.rental; //rental data to display in table in edit page
 
             if (rentalData) {

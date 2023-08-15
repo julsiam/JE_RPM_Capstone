@@ -156,8 +156,8 @@ class UserController extends Controller
     public function tenantsList()
     {
         $tenants = User::where('type', 0)
-            ->get();
-        // ->paginate(10);
+            // ->get();
+            ->paginate(10);
 
         $totalTenants = User::where('type', 0)->count();
 
@@ -165,18 +165,16 @@ class UserController extends Controller
     }
 
 
-    public function sortByLocation()
-    {
-        $sortedByLocation = User::where('type', 0)
-            ->with(['property' => function ($query) {
-                $query->orderBy('location', 'asc');
-            }])
-            ->get();
+    // public function sortByLocation()
+    // {
+    //     $sortedByLocation = User::where('type', 0)
+    //         ->with(['property' => function ($query) {
+    //             $query->orderBy('location', 'asc');
+    //         }])
+    //         ->get();
 
-        return view('business_owner.tenants', ['tenants' => $sortedByLocation]);
-    }
-
-
+    //     return view('business_owner.tenants', ['tenants' => $sortedByLocation]);
+    // }
 
 
 

@@ -32,12 +32,15 @@ Auth::routes([ //for email verify
 Auth::routes();
 
 Route::middleware(['auth', 'user-access:tenant'])->group(function () {
-    Route::get('/home', [HomeController::class, 'index'])->name('tenants.home')->middleware('verified');
+    Route::get('/home', [HomeController::class, 'getAnnouncements'])->name('tenants.home')->middleware('verified');
+
+    Route::get('/request', [MaintenanceController::class, 'getMyMaintenance'])->name('my_request');
+
+    
     // Route::get('/search', [AnnouncementController::class, 'search_tenant'])->name('announcements.search_tenant');
 
-
-    // Route::get('/profile', function () {
-    //     return view('./tenants/profile');
+    // Route::get('/request', function () {
+    //     return view('./tenants/maintenance');
     // });
 });
 
@@ -49,7 +52,7 @@ Route::middleware(['auth', 'user-access:business_owner'])->group(function () {
 
     Route::get('/announcements', [AnnouncementController::class, 'getAnnouncements'])->name('announcements');
 
-    Route::get('/business_owner/announcement', [AnnouncementController::class, 'index'])->name('announcement');
+    Route::get('/business_owner/announcement', [AnnouncementController::class, 'getAnnouncements'])->name('announcement');
 
     Route::get('/announcements/search', [AnnouncementController::class, 'search'])->name('announcements.search');
 

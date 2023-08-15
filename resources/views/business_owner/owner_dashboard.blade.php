@@ -38,7 +38,7 @@
                     <div class="card border-primary mb-3" style="max-width: 18rem; margin-right: 10px;">
                         <div class="card-header">Dues</div>
                         <div class="card-body text-primary">
-                            <h1 class="card-title text-center">50</h1>
+                            <h1 class="card-title text-center"></h1>
                             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                         </div>
                     </div>

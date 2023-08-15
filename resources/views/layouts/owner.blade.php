@@ -37,9 +37,9 @@
     <script src="{{ asset('js/total_bill_at.js') }}"></script>
     <script src="{{ asset('js/rent_date.js') }}"></script>
     <script src="{{ asset('js/maintenance.js') }}"></script>
-    <script src="{{ asset('js/search_tenant.js') }}"></script>
     <script src="{{ asset('js/search_sort.js') }}"></script>
-
+{{--
+    <script src="{{ asset('js/search_tenant.js') }}"></script> --}}
     {{-- <script src="{{ asset('js/confirm.js') }}"></script> --}}
 
     <!-- Scripts -->

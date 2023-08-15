@@ -3,8 +3,8 @@
 @section('content')
     <div class="container-fluid">
         <div class="row justify-content-center">
-            <div style="margin-top:5%;" class="col-md-10">
-                <div class="card mt-5">
+            <div style="margin-top:8%;" class="col-md-10">
+                <div class="card">
                     <form action="{{ route('announcements.search') }}" method="GET" class="mb-3 p-4">
                         <div class="input-group">
                             <input type="text"id="keyword" name="keyword" class="form-control" placeholder="Search by subject or details">

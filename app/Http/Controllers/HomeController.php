@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Announcement;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -22,11 +23,11 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
 
-    public function index()
+    public function getAnnouncements()
     {
-        return view('tenants.home');
-        // $announcements = Announcement::orderBy('created_at', 'desc')->get();// Retrieve all announcements from the database
-        // return view('tenants.home', compact ('announcements'));
+        //return view('tenants.home');
+        $announcements = Announcement::orderBy('created_at', 'desc')->get();// Retrieve all announcements from the database
+        return view('tenants.home', compact ('announcements'));
     }
 
     public function ownerDashboard()

@@ -5,10 +5,76 @@ namespace App\Http\Controllers;
 use App\Models\Maintenance;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class MaintenanceController extends Controller
 {
-    public function getMaintenances(Request $request)
+    //FOR TENANTS
+
+    public function validator(array $data)
+    {
+        return Validator::make($data, [
+            'request_type' => ['required', 'string'],
+            'priority' => ['string', 'in:High, Medium,Low'],
+            'description' => ['required', 'string']
+        ]);
+    }
+
+    public function showAddRequestModal()
+    {
+        return view('tenants.maintenance', compact('user'));
+    }
+
+
+
+    public function addMaintenanceRequest(Request $request) //add maintenance for tenant
+    {
+        $validator = $this->validator($request->all());
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $user = Auth::user();
+        dd($user);
+
+        $maintenance = Maintenance::create([
+            'user_id' => $user->id,
+            'date_requested' => now(),
+            'request_type' => $request->input('request_type'),
+            'priority' => $request->input('request_priority'),
+            'description' => $request->input('request_description'),
+            'status' => 'Pending'
+        ]);
+
+        return redirect()->route('my_request')->with('success', 'Request submitted successfully!');
+    }
+
+
+    public function getMyMaintenance() //my own request display in table
+    {
+        $user = Auth::user();
+        $maintenanceRequests = $user->maintenance;
+        $totalRequests = $maintenanceRequests->count();
+
+        return view('tenants.maintenance', compact('maintenanceRequests', 'totalRequests'));
+    }
+
+    public function getRequestDetails(Request $request) //my own request display in modal, one by one
+    {
+        $requestId = $request->input('data-request-id');
+        $maintenance = Maintenance::with('user.property')->findOrFail($requestId);
+
+        return response()->json($maintenance);
+    }
+
+
+
+    //FOR BUSINESS OWNER
+
+    public function getMaintenances(Request $request) // get all maintenances for business owner
     {
 
         $maintenance = Maintenance::with('user')->get(); //get ALL
@@ -17,7 +83,7 @@ class MaintenanceController extends Controller
         return view('business_owner.maintenance', compact('maintenance', 'totalMaintenance'));
     }
 
-    public function getMaintenance(Request $request) //get ONE
+    public function getMaintenance(Request $request) //get ONE for business owner ig click sa specific row
     {
         $maintenanceId = $request->input('data-maintenance-id'); //from the ID built sa button
         $maintenance = Maintenance::with('user.property')->findOrFail($maintenanceId);
@@ -25,16 +91,7 @@ class MaintenanceController extends Controller
         return response()->json($maintenance);
     }
 
-    public function getMyMaintenance() //my own request
-    {
-        $user = Auth::user()->maintenance->first();
-        $maintenanceRequest = $user->maintenances;
-        $totalRequest = $maintenanceRequest->count();
-
-        return view('tenants.maintenance', compact('maintenanceRequest', 'totalRequest'));
-    }
-
-    public function editMaintenanceStatus(Request $request)
+    public function editMaintenanceStatus(Request $request) //for business owner STATUS UPDATE
     {
         $maintenanceId = $request->input('modal_id'); //from the hidden field of id
         $maintenance = Maintenance::find($maintenanceId);
@@ -43,10 +100,5 @@ class MaintenanceController extends Controller
 
         $maintenance->update();
         return redirect()->route('maintenance')->with('status', 'Status updated!');
-    }
-
-    public function addMaintenanceRequest()
-    {
-
     }
 }

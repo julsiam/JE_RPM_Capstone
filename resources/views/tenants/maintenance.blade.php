@@ -17,7 +17,7 @@
                         </div>
                         <div class="col-6 text-end">
                             <a href="#" class="btn btn-success me-2" data-bs-toggle="modal"
-                                data-bs-target="#maintenanceModal">
+                                data-bs-target="#addRequestModal">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                     class="bi bi-calendar2-plus" viewBox="0 0 16 16">
                                     <path
@@ -35,37 +35,23 @@
                                         <th>Date Created</th>
                                         <th>Type</th>
                                         <th>Priority</th>
-                                        <th>Author</th>
                                         <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
 
                                 <tbody>
-                                    <tr>
-                                        <td>Date Created</td>
-                                        <td>Type</td>
-                                        <td>Priority</td>
-                                        <td>Author</td>
-                                        <td>Status</td>
-                                        <td>
-                                            <button class="btn btn-primary btn-sm maintenance-details-button"
-                                                data-bs-toggle="modal"
-                                                data-bs-target="#maintenanceModal">Details</button>
-                                        </td>
-                                    </tr>
-                                    @foreach ($maintenanceRequest as $maintenance)
+                                    @foreach ($maintenanceRequests as $maintenance)
                                         <tr>
-                                            <td>{{ $maintenance->created_at }}</td>
+                                            <td>{{ $maintenance->created_at->format('F d, Y| g:i A') }}</td>
                                             <td>{{ $maintenance->request_type }}</td>
                                             <td>{{ $maintenance->priority }}</td>
-                                            <td>{{ $maintenance->user->first_name }} {{ $maintenance->user->last_name }}
                                             </td>
                                             <td>{{ $maintenance->status }}</td>
                                             <td>
-                                                <button class="btn btn-primary btn-sm maintenance-details-button"
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#maintenanceModal">Details</button>
+                                                <button class="btn btn-primary btn-sm detailsBtn" data-bs-toggle="modal"
+                                                    data-bs-target="#detailsModal"
+                                                    data-request-id='{{ $maintenance->id }}'>Details</button>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -75,19 +61,19 @@
                         </div>
 
                         <div class="d-flex justify-content-between">
-                            <div class="col-form-label">Total Requests: </div>
+                            <div class="col-form-label">Total Requests: {{ $totalRequests }}</div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Modal -->
-            <div class="modal fade" id="maintenanceModal" tabindex="-1" aria-labelledby="maintenanceModalLabel"
+            <!--Details Modal -->
+            <div class="modal fade" id="detailsModal" tabindex="-1" aria-labelledby="maintenanceModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-xl">
                     <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="maintenanceModalLabel">Create Maintenance Request</h5>
+                        <div style="background-color:rgba(255, 166, 0, 0.357)" class="modal-header">
+                            <h5 class="modal-title" id="maintenanceModalLabel">Maintenance Request Details</h5>
 
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
@@ -96,24 +82,136 @@
                                 @csrf
 
                                 <div class="p-2">
-                                    <input id="modal_id" required style="border-color: rgb(166, 166, 166)" type="hidden"
-                                        class="form-control" name="modal_id" value="" readonly>
-                                    <h6 id="modal_author_header" class="card-title"></h6>
+                                    <input id="details_id" required style="border-color: rgb(166, 166, 166)" type="hidden"
+                                        class="form-control" name="details_id" value="" readonly>
                                 </div>
 
                                 <div class="card p-4">
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label style="color: rgb(128, 128, 128); font-size:18px">Author:</label>
-                                                <span id="modal_author"
+                                                <label style="color: rgb(128, 128, 128); font-size:18px">Location: </label>
+
+                                                <span id="details_location"
                                                     style="border-color: rgb(166, 166, 166); font-size:18px"
                                                     class="form-control-static"></span>
+                                            </div>
+
+                                            <div class="form-group mt-2">
+                                                <label style="color: rgb(128, 128, 128); font-size:18px">Room Unit: </label>
+                                                <span id="details_room_unit"
+                                                    style="border-color: rgb(166, 166, 166); font-size:18px"
+                                                    class="form-control-static"></span>
+                                            </div>
+
+                                            <div class="form-group mt-2">
+                                                <label style="color: rgb(128, 128, 128); font-size:18px">Request Type:
+                                                </label>
+
+                                                <span id="details_request_type"
+                                                    style="border-color: rgb(166, 166, 166); font-size:18px"
+                                                    class="form-control-static"></span>
+
+                                                <span id="details_request_type"
+                                                    style="border-color: rgb(166, 166, 166); font-size:18px"
+                                                    class="form-control-static"></span>
+                                            </div>
+
+                                            <div class="form-group mt-2">
+                                                <label style="color: rgb(128, 128, 128); font-size:18px">Status: </label>
+                                                <span id="details_status"
+                                                    style="border-color: rgb(166, 166, 166); font-size:18px"
+                                                    class="form-control-static"></span>
+                                            </div>
+
+                                        </div>
+
+                                        <!-- Right Column -->
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label style="color: rgb(128, 128, 128); font-size:18px">Author: </label>
+                                                <span id="details_author"
+                                                    style="border-color: rgb(166, 166, 166); font-size:18px"
+                                                    class="form-control-static"></span>
+                                            </div>
+
+                                            <div class="form-group mt-2">
+                                                <label style="color: rgb(128, 128, 128); font-size:18px">Date
+                                                    Requested: </label>
+                                                <span id="details_date_requested"
+                                                    style="border-color: rgb(166, 166, 166); font-size:18px"
+                                                    class="form-control-static"></span>
+                                            </div>
+
+                                            <div class="form-group mt-2">
+                                                <label style="color: rgb(128, 128, 128); font-size:18px">
+                                                    Priority: </label>
+                                                <span id="details_priority"
+                                                    style="border-color: rgb(166, 166, 166); font-size:18px"
+                                                    class="form-control-static"></span>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-group mt-2">
+                                            <label style="color: rgb(128, 128, 128); font-size:18px">Description:
+                                            </label> <br>
+
+                                            <span id="details_description"
+                                                style="border-color: rgb(166, 166, 166); font-size:15px"
+                                                class="form-control-static"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="modal-footer">
+
+                                    <button id="followUpBtn" type="submit" class="btn btn-primary">Follow Up
+                                    </button>
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Close</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Add Request Modal -->
+            <div class="modal fade" id="addRequestModal" tabindex="-1" aria-labelledby="maintenanceModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="maintenanceModalLabel">Create Maintenance Request</h5>
+
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="{{ route('maintenance.addRequest') }}" method="POST">
+                                @csrf
+                                <div class="card p-4">
+                                    <div class="row">
+
+                                        {{-- <div class="p-2">
+                                            <input id="request_id" required style="border-color: rgb(166, 166, 166)"
+                                                class="form-control" name="request_id" value="{{ Auth::check() ? Auth::user()->id : '' }}" readonly>
+                                        </div> --}}
+
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label style="color: rgb(128, 128, 128); font-size:18px">Author:</label>
+                                                <span id="request_author"
+                                                    style="border-color: rgb(166, 166, 166); font-size:18px"
+                                                    class="form-control-static">{{ Auth::check() ? Auth::user()->first_name : '' }}
+                                                    {{ Auth::check() ? Auth::user()->last_name : '' }}</span>
                                             </div>
                                             <div class="form-group mt-2">
                                                 <label style="color: rgb(128, 128, 128); font-size:18px">Date
                                                     Requested:</label>
-                                                <span id="modal_date_requested"
+                                                <span id="request_date_requested"
                                                     style="border-color: rgb(166, 166, 166); font-size:18px"
                                                     class="form-control-static"></span>
                                             </div>
@@ -121,18 +219,18 @@
 
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label style="color: rgb(128, 128, 128); font-size:18px">Location:</label>
+                                                <label style="color: rgb(128, 128, 128); font-size:18px">Location: </label>
 
-                                                <span id="modal_location"
+                                                <span id="request_location"
                                                     style="border-color: rgb(166, 166, 166); font-size:18px"
-                                                    class="form-control-static"></span>
+                                                    class="form-control-static">{{ Auth::check() ? Auth::user()->property->location : '' }}</span>
                                             </div>
 
                                             <div class="form-group mt-2">
                                                 <label style="color: rgb(128, 128, 128); font-size:18px">Room Unit:</label>
-                                                <span id="modal_room_unit"
+                                                <span id="request_room_unit"
                                                     style="border-color: rgb(166, 166, 166); font-size:18px"
-                                                    class="form-control-static"></span>
+                                                    class="form-control-static">{{ Auth::check() ? Auth::user()->property->room_unit : '' }}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -140,32 +238,49 @@
                                     <div class="mt-4">
                                         <div class="form-group px-0">
                                             <label style="color: rgb(128, 128, 128)">Request Type:</label>
-                                            <input id="request_type" style="border-color: rgb(166, 166, 166)" type="text"
-                                                class="form-control" name="priority" value="">
+                                            <input id="request_type" style="border-color: rgb(166, 166, 166)"
+                                                type="text" class="form-control" name="priority" value="">
+
+                                            @error('request_type')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
                                         </div>
 
-                                        <div class="form-group px-0">
-                                            <label style="color: rgb(128, 128, 128)">Priority:</label>
-                                            <input id="modal_priority" style="border-color: rgb(166, 166, 166)"
-                                                type="text" class="form-control" name="priority" value="">
+                                        <div class="form-group mt-2">
+                                            <label style="color: rgb(128, 128, 128); font-size:15px"
+                                                for="status">Priority:
+                                                &nbsp;</label>
+                                            <select name="request_priority" id="request_priority"
+                                                class="form-select form-select-md">
+                                                <option value=""></option>
+                                                <option value="High">High</option>
+                                                <option value="Medium">Medium</option>
+                                                <option value="Low">Low</option>
+                                            </select>
+
+                                            @error('request_priority')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
                                         </div>
 
                                         <div class="row card-body">
                                             <label style="color: rgb(128, 128, 128)">Description:</label>
-                                            <textarea id="modal_description" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                            <textarea id="request_description" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                            @error('request_description')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="modal-footer">
-                                    <a href="" class="btn btn btn-outline-danger me-2"><svg
-                                            xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                            fill="currentColor" class="bi bi-filetype-pdf" viewBox="0 0 16 16">
-                                            <path fill-rule="evenodd"
-                                                d="M14 4.5V14a2 2 0 0 1-2 2h-1v-1h1a1 1 0 0 0 1-1V4.5h-2A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v9H2V2a2 2 0 0 1 2-2h5.5L14 4.5ZM1.6 11.85H0v3.999h.791v-1.342h.803c.287 0 .531-.057.732-.173.203-.117.358-.275.463-.474a1.42 1.42 0 0 0 .161-.677c0-.25-.053-.476-.158-.677a1.176 1.176 0 0 0-.46-.477c-.2-.12-.443-.179-.732-.179Zm.545 1.333a.795.795 0 0 1-.085.38.574.574 0 0 1-.238.241.794.794 0 0 1-.375.082H.788V12.48h.66c.218 0 .389.06.512.181.123.122.185.296.185.522Zm1.217-1.333v3.999h1.46c.401 0 .734-.08.998-.237a1.45 1.45 0 0 0 .595-.689c.13-.3.196-.662.196-1.084 0-.42-.065-.778-.196-1.075a1.426 1.426 0 0 0-.589-.68c-.264-.156-.599-.234-1.005-.234H3.362Zm.791.645h.563c.248 0 .45.05.609.152a.89.89 0 0 1 .354.454c.079.201.118.452.118.753a2.3 2.3 0 0 1-.068.592 1.14 1.14 0 0 1-.196.422.8.8 0 0 1-.334.252 1.298 1.298 0 0 1-.483.082h-.563v-2.707Zm3.743 1.763v1.591h-.79V11.85h2.548v.653H7.896v1.117h1.606v.638H7.896Z" />
-                                        </svg>
-                                    </a>
-                                    <button id="updateRequestButton" type="submit" class="btn btn-primary">Submit
+                                    <button type="submit" class="btn btn-primary">Submit
                                         Request</button>
                                     <button type="button" class="btn btn-secondary"
                                         data-bs-dismiss="modal">Close</button>

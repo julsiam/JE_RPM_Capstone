@@ -36,7 +36,13 @@ Route::middleware(['auth', 'user-access:tenant'])->group(function () {
 
     Route::get('/request', [MaintenanceController::class, 'getMyMaintenance'])->name('my_request');
 
-    
+    Route::get('/getReqDetails', [MaintenanceController::class, 'getRequestDetails']);
+
+    Route::get('/showAddRequestModal', [MaintenanceController::class, 'showAddRequestModal'])->name('maintenance.showAddRequestModal');
+
+    Route::post('/addRequest', [MaintenanceController::class, 'addMaintenanceRequest'])->name('maintenance.addRequest');
+
+
     // Route::get('/search', [AnnouncementController::class, 'search_tenant'])->name('announcements.search_tenant');
 
     // Route::get('/request', function () {

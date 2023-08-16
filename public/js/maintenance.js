@@ -37,9 +37,14 @@ $(document).ready(function () {
     });
 });
 
+
+
+
+
+
 // $(document).ready(function () {
 //     $(document).on('click', '.detailsButton', function () {
-//         var maintenanceId = $(this).val();
+//         var requestId = $(this).val();
 //         $('#maintenanceModal').modal('show');
 
 //         $.ajax({

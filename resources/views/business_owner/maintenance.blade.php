@@ -126,11 +126,6 @@
                                             <label style="color: rgb(128, 128, 128); font-size:18px" for="status">Status:
                                                 &nbsp;</label>
                                             <div class="input-group">
-
-                                                {{-- <input id="modal_maintenance_status" required
-                                                    style="border-color: rgb(166, 166, 166)" type="text"
-                                                    class="form-control" name="request_type"> --}}
-
                                                 <select id="modal_maintenance_status" name="modal_maintenance_status"
                                                     class="form-select form-select-sm">
                                                     <option value="Pending">PENDING</option>

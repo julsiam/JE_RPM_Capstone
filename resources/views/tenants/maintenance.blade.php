@@ -18,6 +18,7 @@
                         <div class="col-6 text-end">
                             <a href="#" class="btn btn-success me-2" data-bs-toggle="modal"
                                 data-bs-target="#addRequestModal">
+                            {{-- <a href="{{url('req ')}}" class="btn btn-success me-2"> --}}
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                     class="bi bi-calendar2-plus" viewBox="0 0 16 16">
                                     <path
@@ -43,7 +44,7 @@
                                 <tbody>
                                     @foreach ($maintenanceRequests as $maintenance)
                                         <tr>
-                                            <td>{{ $maintenance->created_at->format('F d, Y| g:i A') }}</td>
+                                            <td>{{ $maintenance->date_requested->format('F d, Y | g:i A') }}</td>
                                             <td>{{ $maintenance->request_type }}</td>
                                             <td>{{ $maintenance->priority }}</td>
                                             </td>
@@ -189,17 +190,12 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                 aria-label="Close"></button>
                         </div>
+
                         <div class="modal-body">
-                            <form action="{{ route('maintenance.addRequest') }}" method="POST">
+                            <form action="{{ route('maintenance.submit') }}" method="POST">
                                 @csrf
                                 <div class="card p-4">
                                     <div class="row">
-
-                                        {{-- <div class="p-2">
-                                            <input id="request_id" required style="border-color: rgb(166, 166, 166)"
-                                                class="form-control" name="request_id" value="{{ Auth::check() ? Auth::user()->id : '' }}" readonly>
-                                        </div> --}}
-
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label style="color: rgb(128, 128, 128); font-size:18px">Author:</label>
@@ -239,7 +235,7 @@
                                         <div class="form-group px-0">
                                             <label style="color: rgb(128, 128, 128)">Request Type:</label>
                                             <input id="request_type" style="border-color: rgb(166, 166, 166)"
-                                                type="text" class="form-control" name="priority" value="">
+                                                type="text" class="form-control" name="request_type" value="{{old('request_type')}}" required>
 
                                             @error('request_type')
                                                 <span class="invalid-feedback" role="alert">
@@ -252,7 +248,7 @@
                                             <label style="color: rgb(128, 128, 128); font-size:15px"
                                                 for="status">Priority:
                                                 &nbsp;</label>
-                                            <select name="request_priority" id="request_priority"
+                                            <select name="request_priority" id="request_priority" required
                                                 class="form-select form-select-md">
                                                 <option value=""></option>
                                                 <option value="High">High</option>
@@ -269,7 +265,9 @@
 
                                         <div class="row card-body">
                                             <label style="color: rgb(128, 128, 128)">Description:</label>
-                                            <textarea id="request_description" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                            <textarea id="request_description" name="request_description" class="form-control" id="exampleFormControlTextarea1"
+                                                rows="3" required></textarea>
+
                                             @error('request_description')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -282,6 +280,7 @@
                                 <div class="modal-footer">
                                     <button type="submit" class="btn btn-primary">Submit
                                         Request</button>
+
                                     <button type="button" class="btn btn-secondary"
                                         data-bs-dismiss="modal">Close</button>
                                 </div>

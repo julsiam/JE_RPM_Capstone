@@ -93,7 +93,7 @@
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ url('home') }}">{{ __('Rental') }}</a>
+                                <a class="nav-link" href="{{ url('rental') }}">{{ __('Rental') }}</a>
                             </li>
 
                             <li class="nav-item">

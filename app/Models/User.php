@@ -60,7 +60,7 @@ class User extends Authenticatable implements MustVerifyEmail
     protected function type(): Attribute
     {
         return new Attribute(
-            get: fn ($value) =>  ["tenant", "business_owner"][$value],
+            get: fn ($value) =>  ['tenant', 'business_owner'][$value],
         );
     }
 

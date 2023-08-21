@@ -47,7 +47,7 @@
                                     </div>
 
                                     <div class="form-group col-md-5">
-                                        <a style="cursor: pointer; margin-top:20px; width: 75px;color:#fff;" 
+                                        <a style="cursor: pointer; margin-top:20px; width: 75px;color:#fff;"
                                             class="btn btn-success me-2" class="btn btn-success me-2"
                                             onclick="fetchTenantsList()">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -162,21 +162,24 @@
                                 <table id="rentalTable" class="table">
                                     <thead class="thead-dark ">
                                         <tr>
-                                            <th>ID</th>
+                                            <th hidden>ID</th>
                                             <th>LOCATION</th>
                                             <th>ROOM UNIT</th>
-                                            <th>RENT STARTED</th>
+                                            {{-- <th>RENT STARTED</th> --}}
                                             <th>ROOM RENT</th>
                                             <th>WATER BILL</th>
                                             <th>ELECTRIC BILL</th>
                                             <th>TOTAL RENT</th>
+                                            <th>RENT FROM</th>
                                             <th>DUES</th>
+                                            <th>AMOUNT PAID</th>
+                                            <th>BALANCE</th>
                                             <th>STATUS</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>
+                                            <td hidden>
                                                 <input id="rental_id" type="text"
                                                     class="form-control @error('rental_id') is-invalid @enderror"
                                                     name="rental_id" value="" required autocomplete="rental_id"
@@ -194,12 +197,12 @@
                                                     name="room_unit" value="" required autocomplete="room_unit"
                                                     autofocus readonly>
                                             </td>
-                                            <td>
+                                            {{-- <td>
                                                 <input id="rent_started" type="text"
                                                     class="form-control @error('rent_started') is-invalid @enderror"
                                                     name="rent_started" value="" required
                                                     autocomplete="rent_started" autofocus readonly>
-                                            </td>
+                                            </td> --}}
                                             <td>
                                                 <input id="room_rent" type="text"
                                                     class="form-control @error('room_rent') is-invalid @enderror"
@@ -212,24 +215,50 @@
                                                     name="water_bill" value="" required autocomplete="water_bill"
                                                     autofocus oninput="calculateTotalBill()">
                                             </td>
+
                                             <td>
                                                 <input id="electric_bill" type="text"
                                                     class="form-control @error('electric_bill') is-invalid @enderror"
                                                     name="electric_bill" value="" required
                                                     autocomplete="electric_bill" autofocus oninput="calculateTotalBill()">
                                             </td>
+
                                             <td>
                                                 <input id="total_bill" type="text"
                                                     class="form-control @error('total_bill') is-invalid @enderror"
                                                     name="total_bill" value="" required autocomplete="total_bill"
                                                     autofocus readonly>
                                             </td>
+
+                                                {{-- RENT FROM --}}
+                                            <td>
+                                                <input id="rent_from" type="date"
+                                                    class="form-control @error('rent_from') is-invalid @enderror"
+                                                    name="rent_from" value="" required autocomplete="rent_from"
+                                                    autofocus readonly>
+                                            </td>
+
                                             <td>
                                                 <input id="due_date" type="date"
                                                     class="form-control @error('due_date') is-invalid @enderror"
                                                     name="due_date" value="" required autocomplete="due_date"
                                                     autofocus>
                                             </td>
+
+                                            <td>
+                                                <input id="amount_paid" type="text"
+                                                    class="form-control @error('amount_paid') is-invalid @enderror"
+                                                    name="amount_paid" value="" required
+                                                    autocomplete="amount_paid" autofocus oninput="calculateBalance()">
+                                            </td>
+
+                                            <td>
+                                                <input id="balance" type="text"
+                                                    class="form-control @error('balance') is-invalid @enderror"
+                                                    name="balance" value="" required
+                                                    autocomplete="balance" autofocus readonly>
+                                            </td>
+
                                             <td>
                                                 <select id="status" name="status" class="form-select">
                                                     <option value=""></option>

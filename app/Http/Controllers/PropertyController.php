@@ -39,7 +39,7 @@ class PropertyController extends Controller
                 ->withInput();
         }
 
-        $property = Property::create([
+        Property::create([
             'location' => $request->input('location'),
             'room_unit'=> $request->input('room_unit'),
             'inclusion'=>$request->input('inclusion'),

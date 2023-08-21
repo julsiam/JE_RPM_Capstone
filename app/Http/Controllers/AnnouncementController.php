@@ -10,6 +10,7 @@ class AnnouncementController extends Controller
 {
     public function addAnnouncement(Request $request)
     {
+
         $user = Auth::user(); // Retrieve the authenticated user
         $announcement = new Announcement();
         $announcement->user_id = $user->id; // Assign the user's ID to the user_id field

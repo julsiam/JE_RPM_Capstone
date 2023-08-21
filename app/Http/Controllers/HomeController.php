@@ -26,12 +26,14 @@ class HomeController extends Controller
     public function getAnnouncements()
     {
         //return view('tenants.home');
+
         $announcements = Announcement::orderBy('created_at', 'desc')->get();// Retrieve all announcements from the database
         return view('tenants.home', compact ('announcements'));
     }
 
     public function ownerDashboard()
     {
+
         return view('business_owner.owner_dashboard');
     }
 }

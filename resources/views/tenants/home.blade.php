@@ -26,10 +26,10 @@
 
                             <div class="card-footer text-muted">
                                 <div class="row align-items-center">
-                                    <div class="col-auto">
+                                    {{-- <div class="col-auto">
                                         <img style="width: 75px" src="{{ asset('image/gwapo1.jpg') }}" alt=""
                                             class="rounded-circle">
-                                    </div>
+                                    </div> --}}
                                     <div class="col">
                                         <h5 class="card-title">{{ $announcement->user->first_name }} {{ $announcement->user->last_name }}</h5>
                                         <p style="font-size: 14px">J and E Rentals and Property Owner</p>

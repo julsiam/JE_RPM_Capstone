@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('maintenances', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->timestamp('date_requested');
+            $table->dateTime('date_requested');
             $table->string('request_type');
             $table->string('priority');
             $table->string('description');

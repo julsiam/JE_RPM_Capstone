@@ -31,28 +31,28 @@ Auth::routes([ //for email verify
 
 Auth::routes();
 
-Route::middleware(['auth', 'user-access:tenant'])->group(function () {
-    Route::get('/home', [HomeController::class, 'getAnnouncements'])->name('tenants.home')->middleware('verified');
-
-    Route::get('/request', [MaintenanceController::class, 'getMyMaintenance'])->name('my_request');
-
-    Route::get('/getReqDetails', [MaintenanceController::class, 'getRequestDetails']);
-
-    Route::get('/showAddRequestModal', [MaintenanceController::class, 'showAddRequestModal'])->name('maintenance.showAddRequestModal');
-
-    Route::post('/addRequest', [MaintenanceController::class, 'addMaintenanceRequest'])->name('maintenance.addRequest');
-
+Route::middleware(['auth', 'user-access:tenant', 'verified'])->group(function () {
+    Route::get('/home', [HomeController::class, 'getAnnouncements'])->name('tenants.home');
 
     // Route::get('/search', [AnnouncementController::class, 'search_tenant'])->name('announcements.search_tenant');
 
-    // Route::get('/request', function () {
-    //     return view('./tenants/maintenance');
-    // });
+    Route::get('/request', [MaintenanceController::class, 'getMyMaintenance'])->name('my_request');
+
+    Route::get('/getReqDetails', [MaintenanceController::class, 'getRequestDetails']); //modal details
+
+    Route::post('/submit-request', [MaintenanceController::class, 'addMaintenanceRequest'])->name('maintenance.submit');
+
+    // Route::get('/showAddRequestModal', [MaintenanceController::class, 'showAddRequestModal'])->name('maintenance.showAddRequestModal');
+
+
+    Route::get('/rental', function () {
+        return view('./tenants/rental');
+    });
 });
 
 
 Route::middleware(['auth', 'user-access:business_owner'])->group(function () {
-    Route::get('/owner_dashboard', [HomeController::class, 'ownerDashboard'])->name('business_owner.owner_dashboard')->middleware('verified');
+    Route::get('/owner_dashboard', [HomeController::class, 'ownerDashboard'])->name('business_owner.owner_dashboard');
 
     Route::post('/add_announcement', [AnnouncementController::class, 'addAnnouncement'])->name('announcement.addAnnouncement');
 
@@ -70,7 +70,9 @@ Route::middleware(['auth', 'user-access:business_owner'])->group(function () {
 
     Route::post('/add_tenant', [UserController::class, 'addTenant'])->name('tenant.addTenant');
 
-    Route::get('/edit_tenant', function () { return view('./business_owner/edit_tenant'); });
+    Route::get('/edit_tenant', function () {
+        return view('./business_owner/edit_tenant');
+    });
 
     Route::get('/tenants', [UserController::class, 'tenantsList'])->name('tenants'); //SHOW ALL TENANTS
 

@@ -140,7 +140,7 @@
                                         @endif
                                     </td>
                                     <td class="text-center">
-                                        <button class="btn btn-primary btn-sm">Profile</button>
+                                        <a href="#" class="">Details</a>
                                         {{-- <button class="btn btn-primary btn-sm">Rental</button> --}}
                                     </td>
                                 </tr>

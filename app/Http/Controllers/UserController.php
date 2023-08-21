@@ -86,7 +86,7 @@ class UserController extends Controller
 
         ]);
 
-        $rental = Rental::create([
+        Rental::create([
             'user_id' => $user->id,
             'property_id' => $propertyId,
             'rent_started' => $request->input('rent_started'),
@@ -104,7 +104,7 @@ class UserController extends Controller
         //FOR MODAL
         // session()->flash('tenant_added', true);
 
-        return redirect()->route('tenants');
+        return redirect()->route('tenants')->with('success', 'Tenant added successfully!');
     }
 
 

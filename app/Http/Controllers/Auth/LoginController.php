@@ -39,6 +39,15 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
+    // protected function authenticated(Request $request, $user)
+    // {
+    //     if ($user->type == 'tenant') {
+    //         return redirect()->route('tenants.home');
+    //     } elseif ($user->type == 'business_owner') {
+    //         return redirect()->route('business_owner.owner_dashboard');
+    //     }
+    // }
+
     public function login(Request $request)
     {
         $input = $request->all();
@@ -52,12 +61,12 @@ class LoginController extends Controller
         {
             if (auth()->user()->type == 'business_owner') {
                 return redirect()->route('business_owner.owner_dashboard');
+
             }else{
                 return redirect()->route('tenants.home');
             }
         }else{
             return redirect()->route('login')->with('error', 'Invalid Credentials! Try again');
-
         }
 
     }

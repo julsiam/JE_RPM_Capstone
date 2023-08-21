@@ -12,4 +12,15 @@ function calculateTotalBill() {
 }
 
 
+//calculate for balance
+function calculateBalance(){
+    const totalBill = parseFLoat(document.getElementById('total_bill').value);
+    const amountPaid = parseFloat(document.getElementById('amount_paid').value);
+
+    const balance = totalBill - amountPaid;
+
+    document.getElementById('balance').value=balance.toFixed(2);
+}
+
+
 

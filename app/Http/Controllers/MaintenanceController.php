@@ -15,16 +15,10 @@ class MaintenanceController extends Controller
     {
         return Validator::make($data, [
             'request_type' => ['required', 'string'],
-            'priority' => ['string', 'in:High, Medium,Low'],
-            'description' => ['required', 'string']
+            'request_priority' => ['string', 'in:High, Medium,Low'],
+            'request_description' => ['required', 'string']
         ]);
     }
-
-    public function showAddRequestModal()
-    {
-        return view('tenants.maintenance', compact('user'));
-    }
-
 
 
     public function addMaintenanceRequest(Request $request) //add maintenance for tenant
@@ -38,19 +32,21 @@ class MaintenanceController extends Controller
         }
 
         $user = Auth::user();
-        dd($user);
 
-        $maintenance = Maintenance::create([
+        Maintenance::create([
             'user_id' => $user->id,
-            'date_requested' => now(),
+            // 'date_requested' => $request-> input('request_date'),
             'request_type' => $request->input('request_type'),
             'priority' => $request->input('request_priority'),
             'description' => $request->input('request_description'),
-            'status' => 'Pending'
+            'status' => 'Pending',
         ]);
 
         return redirect()->route('my_request')->with('success', 'Request submitted successfully!');
     }
+
+
+
 
 
     public function getMyMaintenance() //my own request display in table
@@ -77,7 +73,7 @@ class MaintenanceController extends Controller
     public function getMaintenances(Request $request) // get all maintenances for business owner
     {
 
-        $maintenance = Maintenance::with('user')->get(); //get ALL
+        $maintenance = Maintenance::orderBy('date_requested', 'asc')->with('user')->get(); //get ALL
         $totalMaintenance = $maintenance->count();
 
         return view('business_owner.maintenance', compact('maintenance', 'totalMaintenance'));

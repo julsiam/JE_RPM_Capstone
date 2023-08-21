@@ -23,7 +23,7 @@
                                 <select id="sort-by" class="form-select form-select-sm">
                                     <option value=""></option>
                                     <option value="status">Status</option>
-                                    <option value="location">Priority</option>
+                                    <option value="priority">Priority</option>
                                     <option value="date">Date</option>
                                 </select>
                             </div>
@@ -46,7 +46,7 @@
                             <tbody>
                                 @foreach ($maintenance as $maintenance)
                                     <tr>
-                                        <td scope="row">{{ $maintenance->created_at->format('F d, Y | g:i A') }}</td>
+                                        <td scope="row">{{ $maintenance->date_requested->format('F d, Y | g:i A') }}</td>
                                         <td>{{ $maintenance->request_type }}</td>
                                         <td>{{ $maintenance->priority }}</td>
                                         <td>

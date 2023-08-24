@@ -16,31 +16,7 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
-        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.9.2/parsley.min.js"
-        integrity="sha512-eyHL1atYNycXNXZMDndxrDhNAegH2BDWt1TmkXJPoGf1WLlNYt08CSjkqF5lnCRmdm3IrkHid8s2jOUY4NIZVQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-    <script src="{{ asset('js/tenant_form.js') }}"></script>
-    <script src="{{ asset('js/bday_input.js') }}"></script>
-    <script src="{{ asset('js/bday.js') }}" defer></script>
-    <script src="{{ asset('js/room_unit.js') }}"></script>
-    <script src="{{ asset('js/rental_details.js') }}"></script>
-    <script src="{{ asset('js/tenants_list.js') }}"></script>
-    <script src="{{ asset('js/success_add_Modal.js') }}"></script>
-    <script src="{{ asset('js/total_bill.js') }}"></script>
-    <script src="{{ asset('js/total_bill_at.js') }}"></script>
-    <script src="{{ asset('js/rent_date.js') }}"></script>
-    <script src="{{ asset('js/maintenance.js') }}"></script>
-    <script src="{{ asset('js/search_sort.js') }}"></script>
-{{--
-    <script src="{{ asset('js/search_tenant.js') }}"></script> --}}
-    {{-- <script src="{{ asset('js/confirm.js') }}"></script> --}}
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css" />
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
@@ -92,7 +68,7 @@
                             </a>
                         </li>
 
-                        {{-- <li class="nav-item">
+                        <li class="nav-item">
                             <a class="nav-link {{ request()->is('tenants') ? 'active' : null }}" aria-current="page"
                                 href="{{ url('/tenants') }}">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
@@ -102,9 +78,9 @@
                                 </svg>
                                 Tenants
                             </a>
-                        </li> --}}
+                        </li>
 
-                        <li class="nav-item dropdown">
+                        {{-- <li class="nav-item dropdown">
                             <a id="navbarDropdown"
                                 class="nav-link dropdown-toggle {{ request()->is('tenants') ? 'active' : null }}"
                                 aria-current="page" href="#" role="button" data-bs-toggle="dropdown"
@@ -154,9 +130,7 @@
                                 </a>
 
                             </div>
-                        </li>
-
-
+                        </li> --}}
 
                         <li class="nav-item">
                             <a class="nav-link {{ request()->is('properties') ? 'active' : null }}"
@@ -279,6 +253,34 @@
         </main>
 
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.9.2/parsley.min.js"
+        integrity="sha512-eyHL1atYNycXNXZMDndxrDhNAegH2BDWt1TmkXJPoGf1WLlNYt08CSjkqF5lnCRmdm3IrkHid8s2jOUY4NIZVQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>
+
+    <script src="{{ asset('js/tenant_form.js') }}"></script>
+    <script src="{{ asset('js/bday_input.js') }}"></script>
+    <script src="{{ asset('js/bday.js') }}" defer></script>
+    <script src="{{ asset('js/room_unit.js') }}"></script>
+    <script src="{{ asset('js/rental_details.js') }}"></script>
+    <script src="{{ asset('js/tenants_list.js') }}"></script>
+    <script src="{{ asset('js/success_add_Modal.js') }}"></script>
+    <script src="{{ asset('js/total_bill.js') }}"></script>
+    <script src="{{ asset('js/total_bill_at.js') }}"></script>
+    <script src="{{ asset('js/rent_date.js') }}"></script>
+    <script src="{{ asset('js/maintenance.js') }}"></script>
+    <script src="{{ asset('js/search_sort.js') }}"></script>
+    <script src="{{ asset('js/announcement.js') }}"></script>
+    <script src="{{ asset('js/delete_confirm.js') }}"></script>
+    <script src="{{ asset('js/data_tables.js') }}"></script>
 
 </body>
 

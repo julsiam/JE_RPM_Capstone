@@ -13,6 +13,7 @@ class Announcement extends Model
     protected $fillable = [
         'subject',
         'details',
+        'location',
         'date_created'
     ];
 

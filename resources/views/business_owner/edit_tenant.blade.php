@@ -165,13 +165,12 @@
                                             <th hidden>ID</th>
                                             <th>LOCATION</th>
                                             <th>ROOM UNIT</th>
-                                            {{-- <th>RENT STARTED</th> --}}
+                                            <th>RENT FROM</th>
+                                            <th>DUES</th>
                                             <th>ROOM RENT</th>
                                             <th>WATER BILL</th>
                                             <th>ELECTRIC BILL</th>
                                             <th>TOTAL RENT</th>
-                                            <th>RENT FROM</th>
-                                            <th>DUES</th>
                                             <th>AMOUNT PAID</th>
                                             <th>BALANCE</th>
                                             <th>STATUS</th>
@@ -197,6 +196,23 @@
                                                     name="room_unit" value="" required autocomplete="room_unit"
                                                     autofocus readonly>
                                             </td>
+
+                                            {{-- RENT FROM --}}
+                                            <td>
+                                                <input id="rent_from" type="date"
+                                                    class="form-control @error('rent_from') is-invalid @enderror"
+                                                    name="rent_from" value="" required autocomplete="rent_from"
+                                                    autofocus readonly>
+                                            </td>
+
+                                            <td>
+                                                <input id="due_date" type="date"
+                                                    class="form-control @error('due_date') is-invalid @enderror"
+                                                    name="due_date" value="" required autocomplete="due_date"
+                                                    autofocus>
+                                            </td>
+
+
                                             {{-- <td>
                                                 <input id="rent_started" type="text"
                                                     class="form-control @error('rent_started') is-invalid @enderror"
@@ -230,33 +246,20 @@
                                                     autofocus readonly>
                                             </td>
 
-                                                {{-- RENT FROM --}}
-                                            <td>
-                                                <input id="rent_from" type="date"
-                                                    class="form-control @error('rent_from') is-invalid @enderror"
-                                                    name="rent_from" value="" required autocomplete="rent_from"
-                                                    autofocus readonly>
-                                            </td>
 
-                                            <td>
-                                                <input id="due_date" type="date"
-                                                    class="form-control @error('due_date') is-invalid @enderror"
-                                                    name="due_date" value="" required autocomplete="due_date"
-                                                    autofocus>
-                                            </td>
 
                                             <td>
                                                 <input id="amount_paid" type="text"
                                                     class="form-control @error('amount_paid') is-invalid @enderror"
-                                                    name="amount_paid" value="" required
-                                                    autocomplete="amount_paid" autofocus oninput="calculateBalance()">
+                                                    name="amount_paid" value="" required autocomplete="amount_paid"
+                                                    autofocus oninput="calculateBalance()">
                                             </td>
 
                                             <td>
                                                 <input id="balance" type="text"
                                                     class="form-control @error('balance') is-invalid @enderror"
-                                                    name="balance" value="" required
-                                                    autocomplete="balance" autofocus readonly>
+                                                    name="balance" value="" required autocomplete="balance"
+                                                    autofocus readonly>
                                             </td>
 
                                             <td>

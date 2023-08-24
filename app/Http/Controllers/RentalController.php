@@ -20,10 +20,12 @@ class RentalController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
+            'due_date' => ['required', 'date_format:Y-m-d', 'after:today'],
             'water_bill' => ['required', 'numeric'],
             'electric_bill' => ['required', 'numeric'],
             'total_bill' => ['required', 'numeric'],
-            'due_date' => ['required', 'date_format:Y-m-d', 'after:today'],
+            'amount_paid' => ['required', 'numeric'],
+            'balance' => ['required', 'numeric'],
             'status' => ['string', 'in:On Going,Not Yet Paid,Paid,Not Fully Paid'],
         ]);
     }
@@ -47,10 +49,12 @@ class RentalController extends Controller
         }
 
         // Update the rental details with the new values
+        $rental->due_date = $request->input('due_date');
         $rental->water_bill = $request->input('water_bill');
         $rental->electric_bill = $request->input('electric_bill');
         $rental->total_bill = $request->input('total_bill');
-        $rental->due_date = $request->input('due_date');
+        $rental->amount_paid = $request->input('amount_paid');
+        $rental->balance = $request->input('balance');
         $rental->status = $request->input('status');
         $rental->save();
 

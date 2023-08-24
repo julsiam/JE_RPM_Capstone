@@ -45,19 +45,21 @@ function selectTenant(id, name, email) { //retrieve data and display to the edit
             $("#age").val(data.age);
             $("#gender").val(data.gender);
             $("#occupation").val(data.occupation);
- 
+
             const rentalData = data.rental; //rental data to display in table in edit page
 
             if (rentalData) {
                 $("#rental_id").val(rentalData.id);
                 $("#location").val(rentalData.property.location);
                 $("#room_unit").val(rentalData.property.room_unit);
-                $("#rent_started").val(rentalData.rent_started);
+                $("#rent_from").val(rentalData.rent_from);
+                $("#due_date").val(rentalData.due_date);
                 $("#room_rent").val(rentalData.property.room_fee);
                 $("#water_bill").val(rentalData.water_bill);
                 $("#electric_bill").val(rentalData.electric_bill);
                 $("#total_bill").val(rentalData.total_bill);
-                $("#due_date").val(rentalData.due_date);
+                $("#amount_paid").val(rentalData.amount_paid);
+                $("#balance").val(rentalData.balance);
                 $("#status").val(rentalData.status);
             }
         },

@@ -52,14 +52,16 @@
                         </svg>
                     </a>
 
-                    {{-- <a  class="btn btn-success me-2"
-                    class="btn btn-success me-2" onclick="fetchTenantsList()">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                        class="bi bi-search" viewBox="0 0 16 16">
-                        <path
-                            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-                    </svg>
-                </a> --}}
+                    {{-- EDIT TENANT --}}
+                    <a href="{{url('edit_tenant')}}" class="btn btn-dark me-2" class="btn btn-success me-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-pencil-square" viewBox="0 0 16 16">
+                            <path
+                                d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                            <path fill-rule="evenodd"
+                                d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                        </svg>
+                    </a>
 
                     {{-- BACK --}}
                     <a onclick="history.back()" class="btn btn-danger me-2"><svg xmlns="http://www.w3.org/2000/svg"
@@ -71,7 +73,7 @@
                 </div>
             </div>
 
-            <div class="row mt-4">
+            {{-- <div class="row mt-4">
                 <div class="col-md-6 justify-content-start">
                     <div class="input-group" style="width:30%">
                         <input id="search" name="search" type="text" class="form-control form-control-sm"
@@ -94,15 +96,15 @@
                     </div>
                 </div>
             </div>
+ --}}
 
 
-
-            <div class="container-fluid body-content mt-4">
-                <div class="table-responsive">
-                    <table id="tenantsData" class="table table-bordered">
-                        <thead class="thead-dark ">
+            <div class="container-fluid body-content">
+                <div class="">
+                    <table id="tenantsData" class="table table-hover">
+                        <thead class="thead-dark">
                             <tr>
-                                <th class="text-start">ID</th>
+                                <th hidden class="text-start">ID</th>
                                 <th class="text-start">NAME</th>
                                 <th class="text-start">EMAIL</th>
                                 <th class="text-start">LOCATION</th>
@@ -115,7 +117,7 @@
 
                             @foreach ($tenants as $tenant)
                                 <tr>
-                                    <td class="text-start" scope="row">{{ $tenant->id }}</td>
+                                    <td hidden class="text-start" scope="row">{{ $tenant->id }}</td>
                                     <td class="text-start">{{ $tenant->first_name }} {{ $tenant->last_name }}</td>
                                     <td class="text-start">{{ $tenant->email }}</td>
                                     <td class="text-start">
@@ -147,10 +149,10 @@
                             @endforeach
                         </tbody>
                     </table>
-                    <div class="d-flex justify-content-between">
+                    {{-- <div class="d-flex justify-content-between">
                         <div class="col-form-label">Total Tenants: {{ $totalTenants }}</div>
                         <div>{{ $tenants->links() }}</div>
-                    </div>
+                    </div> --}}
                 </div>
 
 

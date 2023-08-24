@@ -25,10 +25,14 @@ class HomeController extends Controller
 
     public function getAnnouncements()
     {
-        //return view('tenants.home');
+        $propertyLocation = auth()->user()->property->location;
 
-        $announcements = Announcement::orderBy('created_at', 'desc')->get();// Retrieve all announcements from the database
-        return view('tenants.home', compact ('announcements'));
+        $announcements = Announcement::where(function ($query) use ($propertyLocation) {
+            $query->where('location', $propertyLocation)
+                ->orWhere('location', 'ALL');
+        })->orderBy('created_at', 'desc')->get();
+
+        return view('tenants.home', compact('announcements'));
     }
 
     public function ownerDashboard()

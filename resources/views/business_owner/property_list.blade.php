@@ -61,11 +61,11 @@
             </div>
 
 
-            <div>
-                <table class="table">
+            <div class="">
+                <table id="propertyTable" class="table">
                     <thead>
                         <tr>
-                            <th scope="col">ID</th>
+                            <th hidden scope="col">ID</th>
                             <th scope="col">Location</th>
                             <th scope="col">Room Unit</th>
                             <th scope="col">Room Fee</th>
@@ -78,7 +78,7 @@
                     <tbody id="tenantListBody">
                         @foreach ($properties as $property)
                             <tr>
-                                <th>{{ $property->id }}</th>
+                                <th hidden>{{ $property->id }}</th>
                                 <td>{{ $property->location }}</td>
                                 <td>{{ $property->room_unit }}</td>
                                 <td>{{ $property->room_fee }}</td>

@@ -14,10 +14,13 @@ class Rental extends Model
         'user_id',
         'property_id',
         'rent_started',
+        'rent_from',
+        'due_date',
         'water_bill',
         'electric_bill',
         'total_bill',
-        'due_date',
+        'amount_paid',
+        'balance',
         'status'
     ];
 

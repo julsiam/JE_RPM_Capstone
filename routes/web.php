@@ -54,11 +54,14 @@ Route::middleware(['auth', 'user-access:tenant', 'verified'])->group(function ()
 Route::middleware(['auth', 'user-access:business_owner'])->group(function () {
     Route::get('/owner_dashboard', [HomeController::class, 'ownerDashboard'])->name('business_owner.owner_dashboard');
 
+    Route::get('/get_announcement_locations', [AnnouncementController::class, 'getAnnouncementLocations']);
+
     Route::post('/add_announcement', [AnnouncementController::class, 'addAnnouncement'])->name('announcement.addAnnouncement');
 
     Route::get('/announcements', [AnnouncementController::class, 'getAnnouncements'])->name('announcements');
 
-    Route::get('/business_owner/announcement', [AnnouncementController::class, 'getAnnouncements'])->name('announcement');
+    // Route::delete('/announcements/{announcement}', [AnnouncementController::class, 'deleteAnnouncement'])->name('announcement.delete');
+    Route::post('/delete_announcement', [AnnouncementController::class, 'deleteAnnouncement'])->name('announcement.delete');
 
     Route::get('/announcements/search', [AnnouncementController::class, 'search'])->name('announcements.search');
 

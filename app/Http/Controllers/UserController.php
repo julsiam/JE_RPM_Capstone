@@ -90,10 +90,13 @@ class UserController extends Controller
             'user_id' => $user->id,
             'property_id' => $propertyId,
             'rent_started' => $request->input('rent_started'),
+            'rent_from' => $request->input('rent_from'),
             'due_date' => $request->input('due_date'),
             'water_bill' => $request->input('water_bill'),
             'electric_bill' => $request->input('electric_bill'),
             'total_bill' => $request->input('total_bill'),
+            'amount_paid' => $request->input('amount_paid'),
+            'balance' => $request->input('balance'),
             'status' => $request->input('rentalStatus'),
         ]);
 
@@ -156,8 +159,8 @@ class UserController extends Controller
     public function tenantsList()
     {
         $tenants = User::where('type', 0)
-            // ->get();
-            ->paginate(10);
+            ->get();
+            // ->paginate(10);
 
         $totalTenants = User::where('type', 0)->count();
 

@@ -14,20 +14,20 @@ class UserSeeder extends Seeder
     public function run()
     {
         $users = [
-            [
-                'first_name' => 'Juls',
-                'last_name' => 'Estorco',
-                'phone_number' => 9514791515,
-                'email' => 'julsestorco031602@gmail.com',
-                'age' => 21,
-                'birthdate' => '2002-03-16',
-                'gender' => 'Male',
-                'address' => 'Cebu City, Cebu',
-                'occupation' => 'IT Professional',
-                'work_address' => "Cebu City",
-                'password' => bcrypt('juls12345'),
-                'type' => 0
-            ],
+            // [
+            //     'first_name' => 'Juls',
+            //     'last_name' => 'Estorco',
+            //     'phone_number' => 9514791515,
+            //     'email' => 'julsestorco031602@gmail.com',
+            //     'age' => 21,
+            //     'birthdate' => '2002-03-16',
+            //     'gender' => 'Male',
+            //     'address' => 'Cebu City, Cebu',
+            //     'occupation' => 'IT Professional',
+            //     'work_address' => "Cebu City",
+            //     'password' => bcrypt('juls12345'),
+            //     'type' => 0
+            // ],
             [
                 'first_name' => 'Christine',
                 'last_name' => 'Toledo',

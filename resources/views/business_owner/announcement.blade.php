@@ -136,11 +136,11 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="location"
+                            <label for="visibleLocation"
                                 class="form-label">{{ __('Choose LOCATION announcement is visible to:') }}</label>
                             <div class="col-md-6">
-                                <select id="location" class="form-select @error('location') is-invalid @enderror"
-                                    name="location" autocomplete="location">
+                                <select id="visibleLocation" class="form-select @error('visibleLocation') is-invalid @enderror"
+                                    name="visibleLocation" autocomplete="visibleLocation">
                                     @foreach ($availableLocations as $location)
                                         <option value="{{ $location }}">{{ $location }}</option>
                                     @endforeach

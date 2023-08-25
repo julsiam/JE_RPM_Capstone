@@ -41,7 +41,7 @@ class AnnouncementController extends Controller
         $announcement->user_id = $user->id; // Assign the user's ID to the user_id field
         $announcement->subject = $request->input('subject');
         $announcement->details = $request->input('details');
-        $announcement->location = $request->input('location');
+        $announcement->location = $request->input('visibleLocation');
         $announcement->save();
 
         return redirect()->route('announcements')->with('success', "Successly posted an announcement!"); // Redirect to the announcement view page

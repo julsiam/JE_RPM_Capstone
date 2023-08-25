@@ -2,7 +2,7 @@
 $(document).ready(function () {
     $('#search').on('keyup', function () {
         var searchText = $(this).val().toLowerCase();
-        $('#tenantsData tbody tr').filter(function () {
+        $('#announcementData .card').filter(function () {
             $(this).toggle($(this).text().toLowerCase().indexOf(searchText) > -1);
         });
     });

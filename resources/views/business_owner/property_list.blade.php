@@ -1,16 +1,16 @@
 @extends('layouts.owner')
 
 @section('content')
-    <div class="container">
-        @if (session('status'))
+    <div class="container" style="margin-top: 7%">
+        @if (session('success'))
             <div class="alert alert-success" role="alert">
-                {{ session('status') }}
+                {{ session('success') }}
             </div>
         @endif
 
-        <div class="card p-2" style="margin-top:8%">
+        <div class="card p-2 mt-5">
             <div class="row justify-content-center">
-                <div class="col-md-6 p-2">
+                <div class="col-md-6 p-4">
                     <h2>J and E Rental Properties</h2>
                 </div>
 
@@ -105,9 +105,9 @@
                 </div>
             </div> --}}
 
-            <div class="d-flex justify-content-between">
+            {{-- <div class="d-flex justify-content-between">
                 <div class="col-form-label">Total Properties: {{ $totalProperties }}</div>
-            </div>
+            </div> --}}
         </div>
     </div>
 @endsection

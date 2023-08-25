@@ -33,7 +33,7 @@
                         style="border: 0.5px solid #ced4da60; border-radius: 5px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); padding:5px">
                         @csrf
                         <div>
-                            <h3>EDIT TENANT</h3>
+                            <h3>EDIT RENTAL</h3>
                         </div>
 
                         <div class="col-md-8 p-2">

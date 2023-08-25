@@ -2,19 +2,19 @@
 
 @section('content')
     <div class="container">
-        @if (session('status'))
+        {{-- @if (session('success'))
             <div class="alert alert-success" role="alert">
-                {{ session('status') }}
+                {{ session('success') }}
             </div>
-        @endif
+        @endif --}}
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div style="margin-top:10%" class="card">
                     <div class="text-center col-md-12 p-4">
                         <h2>J and E Rental</h2>
                     </div>
-                    
-                    <form action="{{route('property.addProperty')}}" method="POST">
+
+                    <form action="{{ route('property.addProperty') }}" method="POST">
                         @csrf
                         <div class="form-section">
                             <div class="row mb-3">

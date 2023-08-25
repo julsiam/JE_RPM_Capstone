@@ -2,17 +2,16 @@
 
 
 @section('content')
-    <div class="container">
-        @if (session('status'))
-            <div class="alert alert-success" role="alert">
-                {{ session('status') }}
-            </div>
-        @endif
+    @if (session('success'))
+        <div class="alert alert-success" role="alert">
+            {{ session('success') }}
+        </div>
+    @endif
 
-
-        <div class="card p-2" style="margin-top:8%">
+    <div class="container" style="margin-top: 7%">
+        <div class="card p-2 mt-5">
             <div class="row justify-content-center">
-                <div class="col-md-6 p-2">
+                <div class="col-md-6 p-4">
                     <h2>J and E Rental Tenants</h2>
                 </div>
 
@@ -53,7 +52,7 @@
                     </a>
 
                     {{-- EDIT TENANT --}}
-                    <a href="{{url('edit_tenant')}}" class="btn btn-dark me-2" class="btn btn-success me-2">
+                    <a href="{{ url('edit_tenant') }}" class="btn btn-dark me-2" class="btn btn-success me-2">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="bi bi-pencil-square" viewBox="0 0 16 16">
                             <path

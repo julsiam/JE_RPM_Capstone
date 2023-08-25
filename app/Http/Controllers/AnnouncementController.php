@@ -44,7 +44,7 @@ class AnnouncementController extends Controller
         $announcement->location = $request->input('location');
         $announcement->save();
 
-        return redirect()->route('announcements'); // Redirect to the announcement view page
+        return redirect()->route('announcements')->with('success', "Successly posted an announcement!"); // Redirect to the announcement view page
     }
 
     public function getAnnouncements()
@@ -56,23 +56,23 @@ class AnnouncementController extends Controller
         return view('business_owner.announcement', compact('announcements', 'availableLocations'));
     }
 
-    public function search(Request $request)
-    {
-        $keyword = $request->input('keyword');
+    // public function search(Request $request)
+    // {
+    //     $keyword = $request->input('keyword');
 
-        $announcements = Announcement::where('subject', 'like', '%' . $keyword . '%')
-            ->orWhere('details', 'like', '%' . $keyword . '%')
-            ->get();
+    //     $announcements = Announcement::where('subject', 'like', '%' . $keyword . '%')
+    //         ->orWhere('details', 'like', '%' . $keyword . '%')
+    //         ->get();
 
-        return view('business_owner.announcement', compact('announcements'));
-    }
+    //     return view('business_owner.announcement', compact('announcements'));
+    // }
 
     public function deleteAnnouncement(Request $request){
 
         $announcement = Announcement::find($request->announcement_delete_id);
         $announcement->delete();
 
-        return redirect()->route('announcements')->with('message', 'Deleted Successfully!');
+        return redirect()->route('announcements')->with('delete', 'Deleted Successfully!');
     }
 
 

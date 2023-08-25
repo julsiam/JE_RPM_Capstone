@@ -101,9 +101,9 @@ Route::middleware(['auth', 'user-access:business_owner'])->group(function () {
 
     Route::post('/update-maintenance-status', [MaintenanceController::class, 'editMaintenanceStatus'])->name('maintenance.editMaintenanceStatus');
 
-    // Route::get('/maintenance', function () {
-    //     return view('./business_owner/maintenance');
-    // });
+    Route::get('/payment_records', function () {
+        return view('./business_owner/payment_records');
+    });
     // Route::get('/maintenance_details', function () {
     //     return view('./business_owner/show_maintenance');
     // });

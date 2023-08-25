@@ -15,7 +15,7 @@ class PropertyController extends Controller
 
         $totalProperties = $properties->count();
 
-       return view ('business_owner.property_list', compact('properties', "totalProperties"));
+       return view ('business_owner.property_list', compact('properties', 'totalProperties'));
     }
 
     protected function validator(array $data)

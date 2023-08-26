@@ -48,8 +48,7 @@
 
                                     <div class="form-group col-md-5">
                                         <a style="cursor: pointer; margin-top:20px; width: 75px;color:#fff;"
-                                            class="btn btn-success me-2" class="btn btn-success me-2"
-                                            onclick="fetchTenantsList()">
+                                            class="btn btn-success me-2" onclick="fetchTenantsList()">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                 fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                                                 <path

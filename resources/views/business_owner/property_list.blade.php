@@ -61,8 +61,8 @@
             </div>
 
 
-            <div class="">
-                <table id="propertyTable" class="table">
+            <div class="card p-2">
+                <table id="propertyTable" class="table table-hover">
                     <thead>
                         <tr>
                             <th hidden scope="col">ID</th>

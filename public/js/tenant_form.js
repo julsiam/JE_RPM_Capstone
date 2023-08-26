@@ -12,7 +12,7 @@ $(function () {
 
 
         const step = document.querySelector('.step' + index);
-        step.style.backgroundColor = "rgb(255, 162, 0)";
+        step.style.backgroundColor = "#008000";
         step.style.color = "white";
 
 

@@ -98,64 +98,63 @@
  --}}
 
 
-            <div class="container-fluid body-content">
-                <div class="">
-                    <table id="tenantsData" class="table table-hover">
-                        <thead class="thead-dark">
-                            <tr>
-                                <th hidden class="text-start">ID</th>
-                                <th class="text-start">NAME</th>
-                                <th class="text-start">EMAIL</th>
-                                <th class="text-start">LOCATION</th>
-                                <th class="text-start">ROOM UNIT</th>
-                                <th class="text-center">DUES</th>
-                                <th class="text-center">ACTION</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+            <div class="card p-2">
+                <table id="tenantsData" class="table table-hover">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th hidden class="text-start">ID</th>
+                            <th class="text-start">NAME</th>
+                            <th class="text-start">EMAIL</th>
+                            <th class="text-start">LOCATION</th>
+                            <th class="text-start">ROOM UNIT</th>
+                            <th class="text-center">DUES</th>
+                            <th class="text-center">ACTION</th>
+                        </tr>
+                    </thead>
+                    <tbody>
 
-                            @foreach ($tenants as $tenant)
-                                <tr>
-                                    <td hidden class="text-start" scope="row">{{ $tenant->id }}</td>
-                                    <td class="text-start">{{ $tenant->first_name }} {{ $tenant->last_name }}</td>
-                                    <td class="text-start">{{ $tenant->email }}</td>
-                                    <td class="text-start">
-                                        @if ($tenant->property)
-                                            {{ $tenant->property->location }}
-                                        @else
-                                            N/A
-                                        @endif
-                                    </td>
-                                    <td class="text-start">
-                                        @if ($tenant->property)
-                                            {{ $tenant->property->room_unit }}
-                                        @else
-                                            N/A
-                                        @endif
-                                    </td>
-                                    <td class="text-center">
-                                        @if ($tenant->rental)
-                                            {{ $tenant->rental->due_date }}
-                                        @else
-                                            N/A
-                                        @endif
-                                    </td>
-                                    <td class="text-center">
-                                        <a href="#" class="">Details</a>
-                                        {{-- <button class="btn btn-primary btn-sm">Rental</button> --}}
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                    {{-- <div class="d-flex justify-content-between">
+                        @foreach ($tenants as $tenant)
+                            <tr>
+                                <td hidden class="text-start" scope="row">{{ $tenant->id }}</td>
+                                <td class="text-start">{{ $tenant->first_name }} {{ $tenant->last_name }}</td>
+                                <td class="text-start">{{ $tenant->email }}</td>
+                                <td class="text-start">
+                                    @if ($tenant->property)
+                                        {{ $tenant->property->location }}
+                                    @else
+                                        N/A
+                                    @endif
+                                </td>
+                                <td class="text-start">
+                                    @if ($tenant->property)
+                                        {{ $tenant->property->room_unit }}
+                                    @else
+                                        N/A
+                                    @endif
+                                </td>
+                                <td class="text-center">
+                                    @if ($tenant->rental)
+                                        {{ $tenant->rental->due_date }}
+                                    @else
+                                        N/A
+                                    @endif
+                                </td>
+                                <td class="text-center">
+                                    <a href="#" class="">Details</a>
+                                    {{-- <button class="btn btn-primary btn-sm">Rental</button> --}}
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+                {{-- <div class="d-flex justify-content-between">
                         <div class="col-form-label">Total Tenants: {{ $totalTenants }}</div>
                         <div>{{ $tenants->links() }}</div>
                     </div> --}}
-                </div>
+            </div>
 
 
-                {{-- <div class="col-xl-12">
+            {{-- <div class="col-xl-12">
                 <div class="row" style=" float:left;">
                     <label class="col-form-label">Total Tenants</label>
                     <input style="width: 50%" type="text" class="form-control" id="totalTenants" disabled
@@ -182,7 +181,6 @@
                 </div>
 
             </div> --}}
-            </div>
         </div>
     </div>
 @endsection

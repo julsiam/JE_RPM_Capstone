@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('location');
             $table->string('room_unit');
             $table->decimal('room_fee');//this is amount
+            $table->string('inclusion');
             $table->string('status'); //0 - available 1 - not available
             $table->timestamps();
 

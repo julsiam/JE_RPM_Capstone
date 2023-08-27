@@ -39,13 +39,19 @@ $(document).ready(function () {
 });
 
 
-$(document).ready(function(){
+$(document).ready(function () {
     $('#addRequestModal').on('shown.bs.modal', function () {
         var currentDate = new Date().toLocaleDateString('en-US', {
             year: 'numeric',
             month: 'long',
-            day: 'numeric'
+            day: 'numeric',
+            // hour: 'numeric',
+            // minute: 'numeric',
+            // hour12: true
+
         });
+        $('#hidden_request_date_requested').val(currentDate);
+        
         document.getElementById('request_date_requested').textContent = currentDate;
     });
 });

@@ -35,7 +35,7 @@ class MaintenanceController extends Controller
 
         Maintenance::create([
             'user_id' => $user->id,
-            // 'date_requested' => $request-> input('request_date'),
+            'date_requested' => $request-> input('request_date_requested'),
             'request_type' => $request->input('request_type'),
             'priority' => $request->input('request_priority'),
             'description' => $request->input('request_description'),

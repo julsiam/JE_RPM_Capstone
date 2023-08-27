@@ -210,6 +210,8 @@
                                                 <span id="request_date_requested"
                                                     style="border-color: rgb(166, 166, 166); font-size:18px"
                                                     class="form-control-static"></span>
+                                                    <input type="hidden" name="request_date_requested" id="hidden_request_date_requested">
+
                                             </div>
                                         </div>
 

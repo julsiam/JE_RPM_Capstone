@@ -25,6 +25,9 @@
     .logo {
         width: 75px;
     }
+    .svg-cont{
+        color: #FFA500;
+    }
 </style>
 
 <body>

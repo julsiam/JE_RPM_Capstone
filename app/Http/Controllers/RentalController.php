@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Property;
 use App\Models\Rental;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class RentalController extends Controller
 {
@@ -62,4 +64,85 @@ class RentalController extends Controller
 
         return redirect()->route('tenants');
     }
+
+    //FETCH LOCATIONS IN RECORDS
+    public function getLocations()
+    {
+        $availableLocations = Property::pluck('location')->unique(); // Retrieve unique property locations
+
+        return response()->json($availableLocations);
+    }
+
+
+    public function paidRecord()
+    {
+        $availableLocations = $this->getLocations();
+
+        return view('business_owner.paid_records', compact('availableLocations'));
+    }
+
+    public function getAvailLocations()
+    {
+        $availableLocations = Property::pluck('location')->unique(); // Retrieve unique property locations
+
+        return response()->json($availableLocations);
+    }
+
+    public function notYetPaidRecord()
+    {
+        $availableLocations = $this->getAvailLocations();
+        // dd($availableLocations);
+
+        return view('business_owner.notyetpaid_records', compact('availableLocations'));
+    }
+
+
+    //GET PAID RECORDS
+    public function getPaidRecords(Request $request)
+    {
+        $location = $request->input('location');
+        $year = $request->input('year');
+        $month = $request->input('month');
+
+        $query = Rental::with(['user', 'property'])
+            ->whereYear('date_paid', $year)
+            ->whereMonth('date_paid', $month)
+            ->where('amount_paid', '>', 0);
+
+            if ($location !== 'ALL'){
+                $query->whereHas('property', function ($query) use ($location) {
+                    $query->where('location', $location);
+                });
+            }
+
+            $records = $query->get();
+            $totalIncome = $records->sum('amount_paid');
+
+
+        return response()->json([
+            'records' => $records,
+            'totalIncome' => $totalIncome
+        ]);
+    }
+
+
+    // public function getPaidRecords(Request $request)
+    // {
+    //     $location = $request->input('paidLocations');
+    //     $month = $request->input('month');
+    //     $year = $request->input('year');
+
+    //     $paidRecords = Rental::whereHas('user.property', function ($query) use ($location) {
+    //         if ($location !== 'ALL') {
+    //             $query->where('location', $location);
+    //         }
+    //     })
+    //         ->whereMonth('due_date', $month)
+    //         ->whereYear('due_date', $year)
+    //         ->where('status', 'Paid')
+    //         ->get();
+    //     dd($paidRecords);
+
+    //     return response()->json($paidRecords);
+    // }
 }

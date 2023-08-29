@@ -124,37 +124,6 @@
                             </div>
                         </div>
 
-                        {{-- <div class="div">
-                            <h5>PERSONAL INFORMATION</h5>
-                            <div class="table-responsive">
-                                <table id="InventoryData" class="table">
-                                    <thead class="thead-dark ">
-                                        <tr>
-                                            <th>ID</th>
-                                            <th>NAME</th>
-                                            <th>EMAIL</th>
-                                            <th>ADDRESS</th>
-                                            <th>ROOM UNIT</th>
-                                            <th>DETAILS</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <th scope="row">01</th>
-                                            <td>First Name + Last Name</td>
-                                            <td>juls@gmail.com</td>
-                                            <td>Cebu City</td>
-                                            <td>RJAE001</td>
-                                            <td>
-                                                <button class="btn btn-primary btn-sm">Details</button>
-                                            </td>
-                                        </tr>
-
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div> --}}
-
                         <div class="div mt-5">
                             <h5>RENTAL INFORMATION</h5>
                             <div class="table-responsive mt-4">
@@ -164,15 +133,16 @@
                                             <th hidden>ID</th>
                                             <th>LOCATION</th>
                                             <th>ROOM UNIT</th>
+                                            <th>RENT STARTED</th>
                                             <th>RENT FROM</th>
                                             <th>DUES</th>
-                                            <th>ROOM RENT</th>
+                                            {{-- <th>ROOM RENT</th>
                                             <th>WATER BILL</th>
                                             <th>ELECTRIC BILL</th>
                                             <th>TOTAL RENT</th>
                                             <th>AMOUNT PAID</th>
                                             <th>BALANCE</th>
-                                            <th>STATUS</th>
+                                            <th>STATUS</th> --}}
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -196,6 +166,13 @@
                                                     autofocus readonly>
                                             </td>
 
+                                            <td>
+                                                <input id="rent_started" type="text"
+                                                    class="form-control @error('rent_started') is-invalid @enderror"
+                                                    name="rent_started" value="" required autocomplete="rent_started"
+                                                    autofocus readonly>
+                                            </td>
+
                                             {{-- RENT FROM --}}
                                             <td>
                                                 <input id="rent_from" type="date"
@@ -211,13 +188,73 @@
                                                     autofocus>
                                             </td>
 
-
                                             {{-- <td>
-                                                <input id="rent_started" type="text"
-                                                    class="form-control @error('rent_started') is-invalid @enderror"
-                                                    name="rent_started" value="" required
-                                                    autocomplete="rent_started" autofocus readonly>
+                                                <input id="room_rent" type="text"
+                                                    class="form-control @error('room_rent') is-invalid @enderror"
+                                                    name="room_rent" value="" required autocomplete="room_rent"
+                                                    autofocus readonly oninput="calculateTotalBill()">
+                                            </td>
+                                            <td>
+                                                <input id="water_bill" type="text"
+                                                    class="form-control @error('water_bill') is-invalid @enderror"
+                                                    name="water_bill" value="" required autocomplete="water_bill"
+                                                    autofocus oninput="calculateTotalBill()">
+                                            </td>
+
+                                            <td>
+                                                <input id="electric_bill" type="text"
+                                                    class="form-control @error('electric_bill') is-invalid @enderror"
+                                                    name="electric_bill" value="" required
+                                                    autocomplete="electric_bill" autofocus oninput="calculateTotalBill()">
+                                            </td>
+
+                                            <td>
+                                                <input id="total_bill" type="text"
+                                                    class="form-control @error('total_bill') is-invalid @enderror"
+                                                    name="total_bill" value="" required autocomplete="total_bill"
+                                                    autofocus readonly>
+                                            </td>
+
+                                            <td>
+                                                <input id="amount_paid" type="text"
+                                                    class="form-control @error('amount_paid') is-invalid @enderror"
+                                                    name="amount_paid" value="" required autocomplete="amount_paid"
+                                                    autofocus oninput="calculateBalance()">
+                                            </td>
+
+                                            <td>
+                                                <input id="balance" type="text"
+                                                    class="form-control @error('balance') is-invalid @enderror"
+                                                    name="balance" value="" required autocomplete="balance"
+                                                    autofocus readonly>
+                                            </td>
+
+                                            <td>
+                                                <select id="status" name="status" class="form-select">
+                                                    <option value=""></option>
+                                                    <option value="On Going">On Going</option>
+                                                    <option value="Not Yet Paid">Not Yet Paid</option>
+                                                    <option value="Paid">Paid</option>
+                                                    <option value="Not Fully Paid">Not Fully Paid</option>
+                                                </select>
                                             </td> --}}
+
+                                        </tr>
+                                    </tbody>
+
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th>ROOM RENT</th>
+                                            <th>WATER BILL</th>
+                                            <th>ELECTRIC BILL</th>
+                                            <th>TOTAL RENT</th>
+                                            <th>AMOUNT PAID</th>
+                                            <th>BALANCE</th>
+                                            <th>STATUS</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
                                             <td>
                                                 <input id="room_rent" type="text"
                                                     class="form-control @error('room_rent') is-invalid @enderror"

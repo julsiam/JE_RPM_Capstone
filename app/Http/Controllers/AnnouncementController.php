@@ -17,22 +17,6 @@ class AnnouncementController extends Controller
         return response()->json($availableLocations);
     }
 
-    // public function showLocations()
-    // {
-    //     $availableLocations = $this->getAnnouncementLocations();
-    //     return view('business_owner.announcement', compact('availableLocations'));
-    // }
-
-    // public function getAnnouncementLocations()
-    // {
-    //     $availableLocations = Property::select('location')->distinct()->get(); // Retrieve unique property locations
-
-    //     return response()->json($availableLocations);
-    // }
-
-
-
-
     public function addAnnouncement(Request $request)
     {
 
@@ -55,17 +39,6 @@ class AnnouncementController extends Controller
 
         return view('business_owner.announcement', compact('announcements', 'availableLocations'));
     }
-
-    // public function search(Request $request)
-    // {
-    //     $keyword = $request->input('keyword');
-
-    //     $announcements = Announcement::where('subject', 'like', '%' . $keyword . '%')
-    //         ->orWhere('details', 'like', '%' . $keyword . '%')
-    //         ->get();
-
-    //     return view('business_owner.announcement', compact('announcements'));
-    // }
 
     public function deleteAnnouncement(Request $request){
 

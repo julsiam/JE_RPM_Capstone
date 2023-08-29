@@ -50,8 +50,9 @@ $(document).ready(function () {
             // hour12: true
 
         });
-        $('#hidden_request_date_requested').val(currentDate);
         
+        $('#hidden_request_date_requested').val(currentDate);
+
         document.getElementById('request_date_requested').textContent = currentDate;
     });
 });

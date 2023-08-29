@@ -18,7 +18,7 @@
                         <div class="col-6 text-end">
                             <a href="#" class="btn btn-success me-2" data-bs-toggle="modal"
                                 data-bs-target="#addRequestModal">
-                            {{-- <a href="{{url('req ')}}" class="btn btn-success me-2"> --}}
+                                {{-- <a href="{{url('req ')}}" class="btn btn-success me-2"> --}}
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                     class="bi bi-calendar2-plus" viewBox="0 0 16 16">
                                     <path
@@ -207,10 +207,12 @@
                                             <div class="form-group mt-2">
                                                 <label style="color: rgb(128, 128, 128); font-size:18px">Date
                                                     Requested:</label>
+                                                <input type="hidden" name="request_date_requested"
+                                                    id="hidden_request_date_requested">
                                                 <span id="request_date_requested"
                                                     style="border-color: rgb(166, 166, 166); font-size:18px"
-                                                    class="form-control-static"></span>
-                                                    <input type="hidden" name="request_date_requested" id="hidden_request_date_requested">
+                                                    class="form-control-static">
+                                                </span>
 
                                             </div>
                                         </div>
@@ -237,7 +239,8 @@
                                         <div class="form-group px-0">
                                             <label style="color: rgb(128, 128, 128)">Request Type:</label>
                                             <input id="request_type" style="border-color: rgb(166, 166, 166)"
-                                                type="text" class="form-control" name="request_type" value="{{old('request_type')}}" required>
+                                                type="text" class="form-control" name="request_type"
+                                                value="{{ old('request_type') }}" required>
 
                                             @error('request_type')
                                                 <span class="invalid-feedback" role="alert">

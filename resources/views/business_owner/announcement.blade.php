@@ -141,9 +141,9 @@
                             <div class="col-md-6">
                                 <select id="visibleLocation" class="form-select @error('visibleLocation') is-invalid @enderror"
                                     name="visibleLocation" autocomplete="visibleLocation">
-                                    @foreach ($availableLocations as $location)
+                                    {{-- @foreach ($availableLocations as $location)
                                         <option value="{{ $location }}">{{ $location }}</option>
-                                    @endforeach
+                                    @endforeach --}}
                                 </select>
 
                                 @error('location')

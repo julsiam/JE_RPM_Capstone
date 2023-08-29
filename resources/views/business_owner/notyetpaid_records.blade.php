@@ -21,9 +21,23 @@
                     <div class="container mt-4">
                         <div class="row justify-content-md-center">
                             <div class="col col-lg-2">
-                                <label style="color: rgb(128, 128, 128)">Select Month</label>
-                                <select id="sort-by" class="form-select form-select-sm">
-                                    <option value=""></option>
+                                <label style="color: rgb(128, 128, 128)">Select Location</label>
+
+                                <select id="dataLocation" class="form-select form-select-sm"
+                                    @error('dataLocation') is-invalid @enderror name="dataLocation"
+                                    autocomplete="dataLocation">
+                                </select>
+
+                                @error('dataLocation')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+
+                            </div>
+                            <div class="col col-lg-2">
+                                <label style="color: rgb(128, 128, 128)">Select Month:</label>
+                                <select id="recordMonth" name="recordMonth" class="form-select form-select-sm">
                                     <option value="January">January</option>
                                     <option value="February">February</option>
                                     <option value="March">March</option>
@@ -39,9 +53,13 @@
                                 </select>
                             </div>
                             <div class="col col-lg-2">
-                                <label style="color: rgb(128, 128, 128)">Year</label>
-                                <select id="year" name="year" class="form-select form-select-sm">
-                                    <option value="">2023</option>
+                                <label style="color: rgb(128, 128, 128)">Year:</label>
+                                <select id="recordYear" name="recordYear" class="form-select form-select-sm">
+                                    <option value="2024">2022</option>
+                                    <option value="2023">2023</option>
+                                    <option value="2024">2024</option>
+                                    <option value="2024">2025</option>
+                                    <option value="2024">2026</option>
                                 </select>
                             </div>
                             <div class="col col-lg-2 mt-3">

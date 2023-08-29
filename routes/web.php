@@ -101,14 +101,23 @@ Route::middleware(['auth', 'user-access:business_owner'])->group(function () {
 
     Route::post('/update-maintenance-status', [MaintenanceController::class, 'editMaintenanceStatus'])->name('maintenance.editMaintenanceStatus');
 
-    Route::get('/paid_records', function () {
-        return view('./business_owner/paid_records');
-    });
-
-    Route::get('/notyetpaid_records', function () {
-        return view('./business_owner/notyetpaid_records');
-    });
-    // Route::get('/maintenance_details', function () {
-    //     return view('./business_owner/show_maintenance');
+    // Route::get('/paid_records', function () {
+    //     return view('./business_owner/paid_records');
     // });
+
+
+    //TO GET THE LOCATIONS FOR PAYMENT RECORDS IN JSON FORMAT AND PASS IT TO AJAX
+    Route::get('/get_locations', [RentalController::class, 'getLocations']);
+
+    //TO DISPLAY LOCATIONS IN VIEW
+    Route::get('/paid_records', [RentalController::class, 'paidRecord'])->name('paid_records');
+
+    //TO GET THE PAID RECORDS WITH THE FILTERED DETAILS
+    Route::get('/get_paid_records', [RentalController::class, 'getPaidRecords']);
+
+    Route::get('/get_avail_locations', [RentalController::class, 'getAvailLocations']);
+
+    //TO DISPLAY LOCATIONS IN VIEW
+    Route::get('/notyetpaid_records', [RentalController::class, 'notYetPaidRecord'])->name('notyetpaid_records');
+
 });

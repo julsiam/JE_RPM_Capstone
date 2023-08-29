@@ -51,6 +51,7 @@ function selectTenant(id, name, email) { //retrieve data and display to the edit
             if (rentalData) {
                 $("#rental_id").val(rentalData.id);
                 $("#location").val(rentalData.property.location);
+                $("#rent_started").val(rentalData.rent_started);
                 $("#room_unit").val(rentalData.property.room_unit);
                 $("#rent_from").val(rentalData.rent_from);
                 $("#due_date").val(rentalData.due_date);

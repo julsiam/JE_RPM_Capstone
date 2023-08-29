@@ -12,8 +12,9 @@
 
                         <div class="col-md-4 text-end btn-group btn-group-sm" role="group"
                             aria-label="Basic mixed styles example">
-                            <a href="{{url('/paid_records')}}" class="btn btn-outline-success active" aria-current="page">Paid</a>
-                            <a href="{{url('/notyetpaid_records')}}" class="btn btn-outline-warning"> Not Yet Paid</a>
+                            <a href="{{ url('/paid_records') }}" class="btn btn-outline-success active"
+                                aria-current="page">Paid</a>
+                            <a href="{{ url('/notyetpaid_records') }}" class="btn btn-outline-warning"> Not Yet Paid</a>
                             <a href="#" class="btn btn-outline-primary"> Not Fully Paid</a>
                         </div>
                     </div>
@@ -21,24 +22,40 @@
                     <div class="container mt-4">
                         <div class="row justify-content-md-center">
                             <div class="col col-lg-2">
-                                <label style="color: rgb(128, 128, 128)">Select Month</label>
+                                <label style="color: rgb(128, 128, 128)">Select Location:</label>
+
+                                <select id="paidLocation" class="form-select form-select-sm"
+                                    @error('paidLocation') is-invalid @enderror name="paidLocation"
+                                    autocomplete="paidLocation">
+                                   
+                                </select>
+
+                                @error('paidLocation')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+
+                            </div>
+                            <div class="col col-lg-2">
+                                <label style="color: rgb(128, 128, 128)">Select Month:</label>
                                 <select id="month" name="month" class="form-select form-select-sm">
-                                    <option value="1">January</option>
-                                    <option value="2">February</option>
-                                    <option value="3">March</option>
-                                    <option value="4">April</option>
-                                    <option value="5">May</option>
-                                    <option value="6">June</option>
-                                    <option value="7">July</option>
-                                    <option value="8">August</option>
-                                    <option value="9">September</option>
-                                    <option value="10">October</option>
-                                    <option value="11">November</option>
-                                    <option value="12">December</option>
+                                    <option value="January">January</option>
+                                    <option value="February">February</option>
+                                    <option value="March">March</option>
+                                    <option value="April">April</option>
+                                    <option value="May">May</option>
+                                    <option value="June">June</option>
+                                    <option value="July">July</option>
+                                    <option value="August">August</option>
+                                    <option value="September">September</option>
+                                    <option value="October">October</option>
+                                    <option value="November">November</option>
+                                    <option value="December">December</option>
                                 </select>
                             </div>
                             <div class="col col-lg-2">
-                                <label style="color: rgb(128, 128, 128)">Year</label>
+                                <label style="color: rgb(128, 128, 128)">Year:</label>
                                 <select id="year" name="year" class="form-select form-select-sm">
                                     <option value="2024">2022</option>
                                     <option value="2023">2023</option>
@@ -58,10 +75,6 @@
                             </div>
                         </div>
 
-                        <div class="container">
-
-                        </div>
-
                         <div class="card mt-5 p-2 mb-2">
                             <table id="paidRecordsTable" class="table">
                                 <thead>
@@ -71,8 +84,8 @@
                                         <th scope="col">Location</th>
                                         <th scope="col">Room Unit</th>
                                         <th scope="col">Total Rent</th>
-                                        <th scope="col">Amount Paid</th>
                                         <th scope="col">Date Paid</th>
+                                        <th scope="col">Amount Paid</th>
                                     </tr>
                                 </thead>
 
@@ -81,6 +94,10 @@
                             </table>
                         </div>
 
+                    </div>
+
+                    <div class="container text-end">
+                        <span class="total-income">Total Income: </span>
                     </div>
                 </div>
             </div>

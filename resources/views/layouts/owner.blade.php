@@ -353,6 +353,7 @@
     <script src="{{ asset('js/announcement.js') }}"></script>
     <script src="{{ asset('js/delete_confirm.js') }}"></script>
     <script src="{{ asset('js/data_tables.js') }}"></script>
+    <script src="{{ asset('js/payment_filter.js') }}"></script>
     <script src="{{ asset('js/paid_records.js') }}"></script>
 
 </body>

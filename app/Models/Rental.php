@@ -20,11 +20,12 @@ class Rental extends Model
         'electric_bill',
         'total_bill',
         'amount_paid',
+        'date_paid',
         'balance',
         'status'
     ];
 
-    public function tenant(){
+    public function user(){
         return $this->belongsTo(User::class, 'user_id');
     }
 

@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    
     const locationSelect = $('#visibleLocation')
 
     function populateLocationOptions(locations) {

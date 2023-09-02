@@ -225,7 +225,20 @@
 
                         </li> --}}
 
-
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('paid_reports') }}">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
+                                    fill="currentColor" class="bi bi-journal-text" viewBox="0 0 16 16">
+                                    <path
+                                        d="M5 10.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5zm0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z" />
+                                    <path
+                                        d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z" />
+                                    <path
+                                        d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z" />
+                                </svg>
+                               Payment
+                            </a>
+                        </li>
 
 
 
@@ -339,8 +352,8 @@
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>
 
     <script src="{{ asset('js/tenant_form.js') }}"></script>
-    <script src="{{ asset('js/bday_input.js') }}"></script>
     <script src="{{ asset('js/bday.js') }}" defer></script>
+    <script src="{{ asset('js/bday_input.js') }}"></script>
     <script src="{{ asset('js/room_unit.js') }}"></script>
     <script src="{{ asset('js/rental_details.js') }}"></script>
     <script src="{{ asset('js/tenants_list.js') }}"></script>
@@ -353,8 +366,12 @@
     <script src="{{ asset('js/announcement.js') }}"></script>
     <script src="{{ asset('js/delete_confirm.js') }}"></script>
     <script src="{{ asset('js/data_tables.js') }}"></script>
-    <script src="{{ asset('js/payment_filter.js') }}"></script>
     <script src="{{ asset('js/paid_records.js') }}"></script>
+    <script src="{{ asset('js/unpaid_records.js') }}"></script>
+    <script src="{{ asset('js/notfullypaid_records.js') }}"></script>
+    <script src="{{ asset('js/paid_report.js') }}"></script>
+    <script src="{{ asset('js/unpaid_report.js') }}"></script>
+
 
 </body>
 

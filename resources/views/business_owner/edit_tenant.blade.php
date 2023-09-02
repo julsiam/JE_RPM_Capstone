@@ -133,9 +133,10 @@
                                             <th hidden>ID</th>
                                             <th>LOCATION</th>
                                             <th>ROOM UNIT</th>
-                                            <th>RENT STARTED</th>
+                                            <th>MOVE IN DATE</th>
                                             <th>RENT FROM</th>
                                             <th>DUES</th>
+                                            <th>DATE PAID</th>
                                             {{-- <th>ROOM RENT</th>
                                             <th>WATER BILL</th>
                                             <th>ELECTRIC BILL</th>
@@ -169,8 +170,8 @@
                                             <td>
                                                 <input id="rent_started" type="text"
                                                     class="form-control @error('rent_started') is-invalid @enderror"
-                                                    name="rent_started" value="" required autocomplete="rent_started"
-                                                    autofocus readonly>
+                                                    name="rent_started" value="" required
+                                                    autocomplete="rent_started" autofocus readonly>
                                             </td>
 
                                             {{-- RENT FROM --}}
@@ -178,7 +179,13 @@
                                                 <input id="rent_from" type="date"
                                                     class="form-control @error('rent_from') is-invalid @enderror"
                                                     name="rent_from" value="" required autocomplete="rent_from"
-                                                    autofocus readonly>
+                                                    autofocus>
+
+                                                @error('rent_from')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
                                             </td>
 
                                             <td>
@@ -186,6 +193,25 @@
                                                     class="form-control @error('due_date') is-invalid @enderror"
                                                     name="due_date" value="" required autocomplete="due_date"
                                                     autofocus>
+
+                                                @error('due_date')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </td>
+
+                                            <td>
+                                                <input id="date_updated" type="date"
+                                                    class="form-control @error('due_date') is-invalid @enderror"
+                                                    name="date_updated" value="{{ old('date_updated', date('Y-m-d')) }}" required autocomplete="date_updated"
+                                                    autofocus readonly>
+
+                                                @error('date_updated')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
                                             </td>
 
                                             {{-- <td>
@@ -260,12 +286,19 @@
                                                     class="form-control @error('room_rent') is-invalid @enderror"
                                                     name="room_rent" value="" required autocomplete="room_rent"
                                                     autofocus readonly oninput="calculateTotalBill()">
+
                                             </td>
                                             <td>
                                                 <input id="water_bill" type="text"
                                                     class="form-control @error('water_bill') is-invalid @enderror"
                                                     name="water_bill" value="" required autocomplete="water_bill"
                                                     autofocus oninput="calculateTotalBill()">
+
+                                                @error('water_bill')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
                                             </td>
 
                                             <td>
@@ -273,6 +306,12 @@
                                                     class="form-control @error('electric_bill') is-invalid @enderror"
                                                     name="electric_bill" value="" required
                                                     autocomplete="electric_bill" autofocus oninput="calculateTotalBill()">
+
+                                                @error('electric_bill')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
                                             </td>
 
                                             <td>
@@ -289,6 +328,12 @@
                                                     class="form-control @error('amount_paid') is-invalid @enderror"
                                                     name="amount_paid" value="" required autocomplete="amount_paid"
                                                     autofocus oninput="calculateBalance()">
+
+                                                    @error('amount_paid')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
                                             </td>
 
                                             <td>
@@ -306,6 +351,12 @@
                                                     <option value="Paid">Paid</option>
                                                     <option value="Not Fully Paid">Not Fully Paid</option>
                                                 </select>
+
+                                                @error('status')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
                                             </td>
 
                                         </tr>

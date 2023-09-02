@@ -1,40 +1,41 @@
-const paidLocations = $('#paidLocation');
-const monthSelect = $('#month');
-const yearSelect = $('#year');
+const dataLocations = $('#dataLocation');
+const recordMonthSelect = $('#recordMonth');
+const recordYearSelect = $('#recordYear');
 
-function paymentLocations(locations) {
-    paidLocations.empty();
+function displayLocations(availableLocations) {
+    dataLocations.empty();
 
     const nullOption = $('<option>', {
         value: '',
         text: 'Select Location'
     });
-    paidLocations.append(nullOption);
+    dataLocations.append(nullOption);
 
     const allOption = $('<option>', {
         value: 'ALL',
         text: 'ALL'
     });
-    paidLocations.append(allOption);
+    dataLocations.append(allOption);
 
 
-    for (const key in locations) {
-        if (locations.hasOwnProperty(key)) {
+    for (const key in availableLocations) {
+        if (availableLocations.hasOwnProperty(key)) {
             const option = $('<option>', {
-                value: locations[key],
-                text: locations[key]
+                value: availableLocations[key],
+                text: availableLocations[key]
             });
 
-            paidLocations.append(option);
+            dataLocations.append(option);
         }
     }
 }
 
-function fetchPaymentLocations() {
+function getLocations() {
     fetch('/get_locations')
         .then(response => response.json())
-        .then(locations => {
-            paymentLocations(locations);
+        .then(availableLocations => {
+            // console.log(availableLocations)
+            displayLocations(availableLocations);
         })
         .catch(error => console.error('Error fetching locations:', error));
 }
@@ -58,10 +59,9 @@ function getMonthNumber(monthName) {
     return months[monthName];
 }
 
-
 $(document).ready(function () {
 
-    fetchPaymentLocations();
+    getLocations();
 
     const currentMonth = new Date().getMonth() + 1;
     const currentYear = new Date().getFullYear();
@@ -71,45 +71,45 @@ $(document).ready(function () {
         "July", "August", "September", "October", "November", "December"
     ];
 
-    monthSelect.val(monthNames[currentMonth - 1]);
-    yearSelect.val(currentYear);
+    recordMonthSelect.val(monthNames[currentMonth - 1]);
+    recordYearSelect.val(currentYear);
 
 });
 
 
-$('#searchBtn').click(function () {
-    var location = paidLocations.val();
-    var year = yearSelect.val();
-    var month = getMonthNumber(monthSelect.val());
+$('#searchButton').click(function () {
+    var selectedLocation = dataLocations.val();
+    var selectedYear = recordYearSelect.val();
+    var selectedMonth = getMonthNumber(recordMonthSelect.val());
 
     $.ajax({
-        url: '/get_paid_records',
+        url: '/get_notpaid_records',
         method: 'GET',
         data: {
-            location: location,
-            month: month,
-            year: year,
+            location: selectedLocation, //location key should be the same in the controller input key
+            month: selectedMonth,
+            year: selectedYear,
         },
         success: function (data) {
-
             if (data.records.length == 0) {
-                $('#noDataModal').modal('show');
+                $('#notYetPaidModal').modal('show');
             } else {
-                populatePaidRecordsTable(data.records);
-                displayTotalIncome(data.totalIncome);
+                populateNotPaidRecordsTable(data.records);
+                displayTotalNotPaid(data.totalUnpaid);
             }
 
         },
+
         error: function (error) {
             console.error('Error fetching paid records:', error);
         }
     });
 });
 
-function populatePaidRecordsTable(data) {
+function populateNotPaidRecordsTable(data) {
 
-    var paidRecordsTable = $('#paidRecordsTable tbody');
-    paidRecordsTable.empty();
+    var notPaidRecordsTable = $('#notPaidRecordsTable tbody');
+    notPaidRecordsTable.empty();
 
     for (var i = 0; i < data.length; i++) {
         var record = data[i];
@@ -119,21 +119,19 @@ function populatePaidRecordsTable(data) {
         row.append($('<td>').text(record.property.location));
         row.append($('<td>').text(record.property.room_unit));
         row.append($('<td>').text(record.total_bill));
-        row.append($('<td>').text(record.date_paid));
-        row.append($('<td>').text(record.amount_paid));
+        row.append($('<td>').text(record.due_date));
 
-        paidRecordsTable.append(row);
+        notPaidRecordsTable.append(row);
     }
 }
 
-function displayTotalIncome(totalIncome){
-    const totalIncomeSpan = $('.total-income');
-    totalIncomeSpan.text('Total Income: ' + totalIncome + '.00')
+function displayTotalNotPaid(totalUnpaid) {
+    const totalUnpaidSpan = $('.total-notpaid');
+    totalUnpaidSpan.text('Total Not Yet Paid: ' + totalUnpaid + '.00')
 }
 
 
-$('#noDataModal').on('hidden.bs.modal', function () {
+$('#notYetPaidModal').on('hidden.bs.modal', function () {
     // This event handler will be triggered when the modal is closed
     // You can add any necessary code here if needed
 });
-

@@ -15,7 +15,7 @@
                             <a href="{{ url('/paid_records') }}" class="btn btn-outline-success active"
                                 aria-current="page">Paid</a>
                             <a href="{{ url('/notyetpaid_records') }}" class="btn btn-outline-warning"> Not Yet Paid</a>
-                            <a href="#" class="btn btn-outline-primary"> Not Fully Paid</a>
+                            <a href="{{url('/notfullypaid_records')}}" class="btn btn-outline-primary"> Not Fully Paid</a>
                         </div>
                     </div>
 
@@ -27,7 +27,7 @@
                                 <select id="paidLocation" class="form-select form-select-sm"
                                     @error('paidLocation') is-invalid @enderror name="paidLocation"
                                     autocomplete="paidLocation">
-                                   
+
                                 </select>
 
                                 @error('paidLocation')
@@ -93,13 +93,31 @@
                                 </tbody>
                             </table>
                         </div>
-
                     </div>
 
                     <div class="container text-end">
-                        <span class="total-income">Total Income: </span>
+                        <span class="total-income">Total Income: 0.00</span>
                     </div>
                 </div>
+
+                <div class="modal fade" id="noDataModal" tabindex="-1" aria-labelledby="noDataModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="noDataModalLabel">No Data Found</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                No records were found based on filtered details!
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
             </div>
         </div>
 

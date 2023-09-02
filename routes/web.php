@@ -101,10 +101,6 @@ Route::middleware(['auth', 'user-access:business_owner'])->group(function () {
 
     Route::post('/update-maintenance-status', [MaintenanceController::class, 'editMaintenanceStatus'])->name('maintenance.editMaintenanceStatus');
 
-    // Route::get('/paid_records', function () {
-    //     return view('./business_owner/paid_records');
-    // });
-
 
     //TO GET THE LOCATIONS FOR PAYMENT RECORDS IN JSON FORMAT AND PASS IT TO AJAX
     Route::get('/get_locations', [RentalController::class, 'getLocations']);
@@ -115,9 +111,32 @@ Route::middleware(['auth', 'user-access:business_owner'])->group(function () {
     //TO GET THE PAID RECORDS WITH THE FILTERED DETAILS
     Route::get('/get_paid_records', [RentalController::class, 'getPaidRecords']);
 
-    Route::get('/get_avail_locations', [RentalController::class, 'getAvailLocations']);
-
     //TO DISPLAY LOCATIONS IN VIEW
     Route::get('/notyetpaid_records', [RentalController::class, 'notYetPaidRecord'])->name('notyetpaid_records');
 
+    //TO GET THE NOT PAID RECORDS WITH THE FILTERED DETAILS
+    Route::get('/get_notpaid_records', [RentalController::class, 'getNotPaidRecords']);
+
+    //TO DISPLAY LOCATIONS IN VIEW
+    Route::get('/notfullypaid_records', [RentalController::class, 'notFullyPaidRecord'])->name('notfullypaid_records');
+
+    //TO DISPLAY LOCATIONS IN VIEW
+    Route::get('/get_notfullypaid_records', [RentalController::class, 'getNotFullyPaidRecords'])->name('notfullypaid_records');
+
+    // Route::get('/unpaid_reports', function () {
+    //     return view('./business_owner/unpaid_reports');
+    // });
+
+    //TO DISPLAY LOCATIONS IN VIEW
+    Route::get('/paid_reports', [RentalController::class, 'paidReport'])->name('paid_reports');
+
+    //TO DISPLAY LOCATIONS IN VIEW
+    Route::get('/get_paid_reports', [RentalController::class, 'getPaidReports'])->name('get_paid_reports');
+
+
+    //TO DISPLAY LOCATIONS IN VIEW
+    Route::get('/unpaid_reports', [RentalController::class, 'unPaidReport'])->name('unpaid_reports');
+
+     //TO DISPLAY LOCATIONS IN VIEW
+     Route::get('/get_unpaid_reports', [RentalController::class, 'getUnPaidReports'])->name('get_unpaid_reports');
 });

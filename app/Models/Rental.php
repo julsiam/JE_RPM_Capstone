@@ -32,4 +32,8 @@ class Rental extends Model
     public function property(){
         return $this->belongsTo(Property::class, 'property_id');
     }
+
+    public function rentalHistory(){
+        return $this->hasMany(RentalHistory::class, 'rental_id');
+    }
 }

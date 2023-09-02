@@ -7,15 +7,15 @@
                 <div class="card mt-5">
                     <div class="row justify-content-center p-4">
                         <div class="col-md-8 text-start">
-                            <h2>J and E Payment Records: NOT YET PAID RECORDS</h2>
+                            <h2>J and E Payment Records: NOT FULLY PAID</h2>
                         </div>
 
                         <div class="col-md-4 text-end btn-group btn-group-sm" role="group"
                             aria-label="Basic mixed styles example">
                             <a href="{{ url('/paid_records') }}" class="btn btn-outline-success">Paid</a>
-                            <a href="{{ url('/notyetpaid_records') }}" class="btn btn-outline-warning active"
+                            <a href="{{ url('/notyetpaid_records') }}" class="btn btn-outline-warning"
                                 aria-current="page"> Not Yet Paid</a>
-                            <a href="{{url('/notfullypaid_records')}}" class="btn btn-outline-primary"> Not Fully Paid</a>
+                            <a href="{{url('/notfullypaid_records')}}" class="btn btn-outline-primary active"> Not Fully Paid</a>
                         </div>
                     </div>
 
@@ -24,12 +24,12 @@
                             <div class="col col-lg-2">
                                 <label style="color: rgb(128, 128, 128)">Select Location</label>
 
-                                <select id="dataLocation" class="form-select form-select-sm"
-                                    @error('dataLocation') is-invalid @enderror name="dataLocation"
-                                    autocomplete="dataLocation">
+                                <select id="nfpLocation" class="form-select form-select-sm"
+                                    @error('nfpLocation') is-invalid @enderror name="nfpLocation"
+                                    autocomplete="nfpLocation">
                                 </select>
 
-                                @error('dataLocation')
+                                @error('nfpLocation')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -38,7 +38,7 @@
                             </div>
                             <div class="col col-lg-2">
                                 <label style="color: rgb(128, 128, 128)">Select Month:</label>
-                                <select id="recordMonth" name="recordMonth" class="form-select form-select-sm">
+                                <select id="nfpMonth" name="recordMonth" class="form-select form-select-sm">
                                     <option value="January">January</option>
                                     <option value="February">February</option>
                                     <option value="March">March</option>
@@ -55,7 +55,7 @@
                             </div>
                             <div class="col col-lg-2">
                                 <label style="color: rgb(128, 128, 128)">Year:</label>
-                                <select id="recordYear" name="recordYear" class="form-select form-select-sm">
+                                <select id="nfpYear" name="recordYear" class="form-select form-select-sm">
                                     <option value="2024">2022</option>
                                     <option value="2023">2023</option>
                                     <option value="2024">2024</option>
@@ -64,7 +64,7 @@
                                 </select>
                             </div>
                             <div class="col col-lg-2 mt-3">
-                                <a type="btn" id="searchButton" class="btn btn-outline-success me-2 searchBtn">
+                                <a type="btn" id="searchIcon" class="btn btn-outline-success me-2 searchBtn">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                         fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                                         <path
@@ -75,7 +75,7 @@
                         </div>
 
                         <div class="card mt-5 p-2 mb-2">
-                            <table id="notPaidRecordsTable" class="table">
+                            <table id="notFullyPaidTable" class="table">
                                 <thead>
                                     <tr>
                                         <th hidden scope="col">ID</th>
@@ -83,23 +83,29 @@
                                         <th scope="col">Location</th>
                                         <th scope="col">Room Unit</th>
                                         <th scope="col">Total Rent</th>
+                                        <th scope="col">Amount Paid</th>
+                                        <th scope="col">Balance</th>
+                                        <th scope="col">Date Paid</th>
                                         <th scope="col">Due Date</th>
+
                                     </tr>
                                 </thead>
 
-                                <tbody>
+                                <tbody id="paidRecord">
                                 </tbody>
                             </table>
                         </div>
                     </div>
 
                     <div class="container text-end">
-                        <span class="total-notpaid">Total Income: 0.00</span>
+                        <span class="total-balance">Total Balance: 0.00 </span> <br>
+                        <span class="total-initialPayment">Total Initial Payment:</span>
                     </div>
+
 
                 </div>
 
-                <div class="modal fade" id="notYetPaidModal" tabindex="-1" aria-labelledby="noDataModalLabel" aria-hidden="true">
+                <div class="modal fade" id="nfpModal" tabindex="-1" aria-labelledby="noDataModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">

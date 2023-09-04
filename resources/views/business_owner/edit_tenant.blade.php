@@ -136,7 +136,7 @@
                                             <th>MOVE IN DATE</th>
                                             <th>RENT FROM</th>
                                             <th>DUES</th>
-                                            <th>DATE PAID</th>
+                                            <th>DATE UPDATED</th>
                                             {{-- <th>ROOM RENT</th>
                                             <th>WATER BILL</th>
                                             <th>ELECTRIC BILL</th>
@@ -204,8 +204,8 @@
                                             <td>
                                                 <input id="date_updated" type="date"
                                                     class="form-control @error('due_date') is-invalid @enderror"
-                                                    name="date_updated" value="{{ old('date_updated', date('Y-m-d')) }}" required autocomplete="date_updated"
-                                                    autofocus readonly>
+                                                    name="date_updated" value="{{ old('date_updated', date('Y-m-d')) }}"
+                                                    required autocomplete="date_updated" autofocus readonly>
 
                                                 @error('date_updated')
                                                     <span class="invalid-feedback" role="alert">
@@ -329,7 +329,7 @@
                                                     name="amount_paid" value="" required autocomplete="amount_paid"
                                                     autofocus oninput="calculateBalance()">
 
-                                                    @error('amount_paid')
+                                                @error('amount_paid')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
                                                     </span>
@@ -353,10 +353,10 @@
                                                 </select>
 
                                                 @error('status')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
                                             </td>
 
                                         </tr>

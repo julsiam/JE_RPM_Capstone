@@ -35,18 +35,15 @@ class MaintenanceController extends Controller
 
         Maintenance::create([
             'user_id' => $user->id,
-            'date_requested' => $request-> input('request_date_requested'),
+            'date_requested' => $request->input('request_date_requested'),
             'request_type' => $request->input('request_type'),
             'priority' => $request->input('request_priority'),
             'description' => $request->input('request_description'),
             'status' => 'Pending',
         ]);
 
-        return redirect()->route('my_request')->with('success', 'Request submitted successfully!');
+        return redirect()->route('my_request');
     }
-
-
-
 
 
     public function getMyMaintenance() //my own request display in table
@@ -65,7 +62,6 @@ class MaintenanceController extends Controller
 
         return response()->json($maintenance);
     }
-
 
 
     //FOR BUSINESS OWNER

@@ -116,14 +116,26 @@ function showUnpaidData(data) {
 
     for (var i = 0; i < data.length; i++) {
         var record = data[i];
-        
         var row = $('<tr>');
+
+        var due_date = new Date(record.end_date);
+        var options = {
+            timeZone: 'UTC', // Use UTC or your desired timezone
+            month: 'long',
+            day: 'numeric',
+            year: 'numeric',
+            // hour: 'numeric',
+            // minute: 'numeric',
+            // hour12: true
+        };
+        var formattedDueDate = due_date.toLocaleString('en-US', options);
+
 
         row.append($('<td>').text(record.rental.user.first_name + ' ' + record.rental.user.last_name));
         row.append($('<td>').text(record.rental.property.location));
         row.append($('<td>').text(record.rental.property.room_unit));
         row.append($('<td>').text(record.total_rent));
-        row.append($('<td>').text(record.end_date));
+        row.append($('<td>').text(formattedDueDate));
 
         unpaidDataTbl.append(row);
     }

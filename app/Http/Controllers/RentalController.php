@@ -67,15 +67,30 @@ class RentalController extends Controller
         $rental->status = $request->input('status');
         $rental->save();
 
+        // Find the corresponding RentalHistory record
+        $existingRentalHistory = RentalHistory::where('rental_id', $rental->id)
+            ->where('start_date', $rental->rent_from)
+            ->where('end_date', $rental->due_date)
+            ->where('status', 'Not yet paid') // Only update if status is "Not yet paid"
+            ->first();
 
-        RentalHistory::create([
-            'rental_id' => $rental->id,
-            'start_date' => $rental->rent_from,
-            'end_date' => $rental->due_date,
-            'total_rent'=>$rental->total_bill,
-            'initial_paid_amount' => $rental->amount_paid,
-            'status' => $rental->status
-        ]);
+        if ($existingRentalHistory) {
+            // Update the existing RentalHistory record
+            $existingRentalHistory->total_rent = $rental->total_bill;
+            $existingRentalHistory->initial_paid_amount = $rental->amount_paid;
+            $existingRentalHistory->status = $rental->status;
+            $existingRentalHistory->save();
+        } else {
+            // Create a new RentalHistory record for the new month journey
+            RentalHistory::create([
+                'rental_id' => $rental->id,
+                'start_date' => $rental->rent_from,
+                'end_date' => $rental->due_date,
+                'total_rent' => $rental->total_bill,
+                'initial_paid_amount' => $rental->amount_paid,
+                'status' => $rental->status,
+            ]);
+        }
 
         return redirect()->route('tenants');
     }
@@ -217,36 +232,6 @@ class RentalController extends Controller
     }
 
     //GET PAID REPORTS
-    // public function getPaidReports(Request $request)
-    // {
-    //     $location = $request->input('location');
-    //     $start_month = $request->input('start_month');
-    //     $end_month = $request->input('end_month');
-    //     $year = $request->input('year');
-
-    //     $query = RentalHistory::with(['rental.user', 'rental.property'])
-    //         ->whereYear('start_date', $year)
-    //         ->whereMonth('start_date', '>=', $start_month)
-    //         ->whereMonth('end_date', '<=', $end_month)
-    //         ->where('status', 'Paid');
-
-    //     if ($location !== 'ALL') {
-    //         $query->whereHas('rental.property', function ($query) use ($location) {
-    //             $query->where('location', $location);
-    //         });
-    //     }
-
-    //     $records = $query->get();
-    //     $totalPayment = $records->sum('initial_paid_amount');
-
-    //     return response()->json([
-    //         'records' => $records,
-    //         'totalPayment' => $totalPayment
-    //     ]);
-    // }
-
-
-    //GET PAID REPORTS
     public function getPaidReports(Request $request)
     {
         $location = $request->input('location');
@@ -254,14 +239,7 @@ class RentalController extends Controller
         $end_month = $request->input('end_month');
         $year = $request->input('year');
 
-        $subquery = DB::table('rental_histories')
-            ->select(DB::raw('MAX(created_at) as latest_update'), 'rental_id')
-            ->groupBy('rental_id');
-
         $query = RentalHistory::with(['rental.user', 'rental.property'])
-            ->joinSub($subquery, 'latest_updates', function ($join) {
-                $join->on('rental_histories.rental_id', '=', 'latest_updates.rental_id');
-            })
             ->whereYear('start_date', $year)
             ->whereMonth('start_date', '>=', $start_month)
             ->whereMonth('end_date', '<=', $end_month)
@@ -283,49 +261,46 @@ class RentalController extends Controller
     }
 
 
+    //UNPAID REPORTS
 
-     //WITH START MONTH AND END MONTH
+    public function unPaidReport()
+    {
+        $locations = $this->getLocations();
 
-     public function unPaidReport()
-     {
-         $locations = $this->getLocations();
-
-         return view('business_owner.unpaid_reports', compact('locations'));
-     }
+        return view('business_owner.unpaid_reports', compact('locations'));
+    }
 
 
-    //GET NOT YET PAID REPORTS
-    public function getUnPaidReports(Request $request)
+
+    //ALL THE RECORDS FROM PREVIOUS
+    public function getUnpaidReports(Request $request)
     {
         $location = $request->input('location');
         $start_month = $request->input('start_month');
         $end_month = $request->input('end_month');
         $year = $request->input('year');
 
-        $subquery = DB::table('rental_histories')
-            ->select(DB::raw('MAX(created_at) as latest_update'), 'rental_id')
-            ->groupBy('rental_id');
-
-        $query = RentalHistory::with(['rental.user', 'rental.property'])
-            ->joinSub($subquery, 'latest_updates', function ($join) {
-                $join->on('rental_histories.rental_id', '=', 'latest_updates.rental_id');
-            })
+        // Query rental histories with "Not yet paid" status within the specified date range
+        $unpaidRecords = RentalHistory::where('status', 'Not yet paid')
             ->whereYear('start_date', $year)
             ->whereMonth('start_date', '>=', $start_month)
-            ->whereMonth('end_date', '<=', $end_month)
-            ->where('status', 'Not Yet Paid');
+            ->whereMonth('end_date', '<=', $end_month);
 
+        // Optionally filter by location if it's not "ALL"
         if ($location !== 'ALL') {
-            $query->whereHas('rental.property', function ($query) use ($location) {
+            $unpaidRecords->whereHas('rental.property', function ($query) use ($location) {
                 $query->where('location', $location);
             });
         }
 
-        $records = $query->get();
-        $totalUnpaid = $records->sum('total_rent');
+        // Fetch the records and related rental and property data
+        $unpaidRecords = $unpaidRecords->with(['rental.user', 'rental.property'])->get();
+
+        // Calculate the total unpaid amount
+        $totalUnpaid = $unpaidRecords->sum('total_rent');
 
         return response()->json([
-            'records' => $records,
+            'records' => $unpaidRecords,
             'totalUnpaid' => $totalUnpaid
         ]);
     }

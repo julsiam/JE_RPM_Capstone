@@ -103,6 +103,7 @@
                                         <th scope="col">Location</th>
                                         <th scope="col">Room Unit</th>
                                         <th scope="col">Total Rent</th>
+                                        <th scope="col">Due Date</th>
                                         <th scope="col">Date Paid</th>
                                         <th scope="col">Amount Paid</th>
                                     </tr>

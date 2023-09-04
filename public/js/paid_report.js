@@ -116,19 +116,25 @@ function populatePaidReportTable(data) {
 
     for (var i = 0; i < data.length; i++) {
         var record = data[i];
-        console.log(record.rental.user.first_name + ' ' + record.rental.user.last_name);
-        console.log(record.rental.property.location)
-        console.log(record.rental.property.room_unit)
-        console.log(record.initial_paid_amount)
-        console.log(record.updated_at)
-        console.log(record.initial_paid_amount)
         var row = $('<tr>');
+
+        var dueDate = new Date(record.end_date);
+        var datePaid = new Date(record.created_at);
+        var options = {
+            timeZone: 'UTC', // Use UTC or your desired timezone
+            month: 'long',
+            day: 'numeric',
+            year: 'numeric',
+        };
+        var formattedDueDate= dueDate.toLocaleString('en-US', options);
+        var formattedDatePaid= datePaid.toLocaleString('en-US', options);
 
         row.append($('<td>').text(record.rental.user.first_name + ' ' + record.rental.user.last_name));
         row.append($('<td>').text(record.rental.property.location));
         row.append($('<td>').text(record.rental.property.room_unit));
         row.append($('<td>').text(record.initial_paid_amount));
-        row.append($('<td>').text(record.updated_at));
+        row.append($('<td>').text(formattedDueDate));
+        row.append($('<td>').text(formattedDatePaid));
         row.append($('<td>').text(record.initial_paid_amount));
 
         paidHistoryTable.append(row);

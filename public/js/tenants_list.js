@@ -49,10 +49,24 @@ function selectTenant(id, name, email) { //retrieve data and display to the edit
             const rentalData = data.rental; //rental data to display in table in edit page
 
             if (rentalData) {
+                var rentStarted = new Date(rentalData.rent_started);
+                console.log(rentalData.rent_from)
+                var options = {
+                    timeZone: 'UTC', // Use UTC or your desired timezone
+                    month: 'long',
+                    day: 'numeric',
+                    year: 'numeric',
+                    // hour: 'numeric',
+                    // minute: 'numeric',
+                    // hour12: true
+                };
+                var formattedRentStarted = rentStarted.toLocaleString('en-US', options);
+
+
                 $("#rental_id").val(rentalData.id);
                 $("#location").val(rentalData.property.location);
-                $("#rent_started").val(rentalData.rent_started);
                 $("#room_unit").val(rentalData.property.room_unit);
+                $("#rent_started").val(formattedRentStarted);
                 $("#rent_from").val(rentalData.rent_from);
                 $("#due_date").val(rentalData.due_date);
                 $("#room_rent").val(rentalData.property.room_fee);

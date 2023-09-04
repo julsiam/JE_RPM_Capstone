@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Property;
 use App\Models\Rental;
+use App\Models\RentalHistory;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -86,7 +87,7 @@ class UserController extends Controller
 
         ]);
 
-        Rental::create([
+        $rental = Rental::create([
             'user_id' => $user->id,
             'property_id' => $propertyId,
             'rent_started' => $request->input('rent_started'),
@@ -99,6 +100,16 @@ class UserController extends Controller
             'balance' => $request->input('balance'),
             'status' => $request->input('rentalStatus'),
         ]);
+
+        RentalHistory::create([
+            'rental_id' => $rental->id,
+            'start_date' => $request->input('rent_from'),
+            'end_date' => $request->input('due_date'),
+            'total_rent' => $request->input('total_bill'),
+            'initial_paid_amount' => $request->input('amount_paid'),
+            'status' => $request->input('rentalStatus'),
+        ]);
+
 
         $property->user_id = $user->id; // Update the user_id
         $property->status = 'Occupied'; // Update the status to Occupied

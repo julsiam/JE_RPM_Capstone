@@ -11,7 +11,7 @@
                 @endif
 
                 <div class="card-group row d-flex align-items-center justify-content-center gap-3 mx-2">
-                    <div class="card border-light mb-3 shadow-sm p-3 mb-5 bg-light rounded col-12 col-md-4 mb-4">
+                    <div class="card border-light mb-3 shadow-sm p-3 mb-5 bg-primary rounded col-12 col-md-4 mb-4">
                         <div class="card-body text-black">
                             <div class="svg-cont d-flex justify-content-md-end">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
@@ -25,7 +25,7 @@
                         </div>
                     </div>
 
-                    <div class="card border-light mb-3 shadow-sm p-3 mb-5 bg-light rounded col-12 col-md-4 mb-4">
+                    <div class="card border-light mb-3 shadow-sm p-3 mb-5 bg-secondary rounded col-12 col-md-4 mb-4">
                         <div class="card-body text-black">
                             <div class="svg-cont d-flex justify-content-md-end">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
@@ -39,7 +39,7 @@
                         </div>
                     </div>
 
-                    <div class="card border-light mb-3 shadow-sm p-3 mb-5 bg-light rounded col-12 col-md-4 mb-4">
+                    <div class="card border-light mb-3 shadow-sm p-3 mb-5 bg-warning rounded col-12 col-md-4 mb-4">
                         <div class="card-body text-black">
                             <div class="svg-cont d-flex justify-content-md-end">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-wrench-adjustable-circle" viewBox="0 0 16 16">
@@ -52,7 +52,7 @@
                         </div>
                     </div>
 
-                    <div class="card border-light mb-3 shadow-sm p-3 mb-5 bg-light rounded col-12 col-md-4 mb-4">
+                    <div class="card border-light mb-3 shadow-sm p-3 mb-5 bg-success rounded col-12 col-md-4 mb-4">
                         <div class="card-body text-black">
                             <div class="svg-cont d-flex justify-content-md-end">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-calendar3" viewBox="0 0 16 16">
@@ -74,7 +74,7 @@
             <div class="card-body">
                 <div class="card-header bg-light">
                     <div class="card-title">
-                        <h5>Total Earnings for Rentals</h5> 
+                        <h5>Total Earnings for Rentals</h5>
                     </div>
                 </div>
                 <div class="class-description m-2">
@@ -93,12 +93,12 @@
             <div class="card-body">
                 <div class="card-header bg-light">
                     <div class="card-title">
-                        <h5>Upcoming Birthdays</h5> 
+                        <h5>Upcoming Birthdays</h5>
                     </div>
-                </div> 
+                </div>
                 <div class="class-description m-2">
                     <h6 style="color: #FFA500">Month of </h6>
-                </div>                
+                </div>
             </div>
         </div>
 
@@ -106,7 +106,7 @@
             <div class="card-body">
                 <div class="card-header bg-light">
                     <div class="card-title">
-                        <h5>Rooms Available</h5> 
+                        <h5>Rooms Available</h5>
                     </div>
                 </div>
                 <div class="class-description m-2">

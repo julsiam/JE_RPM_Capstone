@@ -44,10 +44,9 @@
                                 <tbody>
                                     @foreach ($maintenanceRequests as $maintenance)
                                         <tr>
-                                            <td>{{ $maintenance->date_requested->format('F d, Y | g:i A') }}</td>
+                                            <td>{{ $maintenance->date_requested->format('F d, Y') }}</td>
                                             <td>{{ $maintenance->request_type }}</td>
                                             <td>{{ $maintenance->priority }}</td>
-                                            </td>
                                             <td>{{ $maintenance->status }}</td>
                                             <td>
                                                 <button class="btn btn-primary btn-sm detailsBtn" data-bs-toggle="modal"
@@ -207,7 +206,7 @@
                                             <div class="form-group mt-2">
                                                 <label style="color: rgb(128, 128, 128); font-size:18px">Date
                                                     Requested:</label>
-                                                <input type="hidden" name="request_date_requested"
+                                                <input type="hidden" name="hidden_request_date_requested"
                                                     id="hidden_request_date_requested">
                                                 <span id="request_date_requested"
                                                     style="border-color: rgb(166, 166, 166); font-size:18px"

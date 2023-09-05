@@ -46,7 +46,7 @@
                             <tbody>
                                 @foreach ($maintenance as $maintenance)
                                     <tr>
-                                        <td scope="row">{{ $maintenance->date_requested->format('F d, Y | g:i A') }}</td>
+                                        <td scope="row">{{ $maintenance->date_requested->format('F d, Y') }}</td>
                                         <td>{{ $maintenance->request_type }}</td>
                                         <td>{{ $maintenance->priority }}</td>
                                         <td>

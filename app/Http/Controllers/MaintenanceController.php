@@ -33,14 +33,16 @@ class MaintenanceController extends Controller
 
         $user = Auth::user();
 
-        Maintenance::create([
+        $maintenance = Maintenance::create([
             'user_id' => $user->id,
-            'date_requested' => $request->input('request_date_requested'),
+            'date_requested' => $request->input('hidden_request_date_requested'),
             'request_type' => $request->input('request_type'),
             'priority' => $request->input('request_priority'),
             'description' => $request->input('request_description'),
             'status' => 'Pending',
         ]);
+
+        // dd($maintenance);
 
         return redirect()->route('my_request');
     }

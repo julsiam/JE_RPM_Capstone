@@ -1,21 +1,4 @@
 @extends('layouts.owner')
-{{-- <style>
-    /* Remove default input styling */
-    input.form-control {
-        border: none;
-        box-shadow: none;
-        background-color: transparent;
-    }
-
-    /* Custom table row styles */
-    #rentalTable tbody tr {
-        background-color: #f8f9fa; /* Set the background color of table rows */
-    }
-
-    #rentalTable tbody tr:nth-child(even) {
-        background-color: #e9ecef; /* Set the background color of even rows (alternate row colors) */
-    }
-</style> --}}
 
 @section('content')
     <div class="container-fluid">
@@ -155,33 +138,33 @@
                                                     autofocus readonly>
                                             </td>
                                             <td>
-                                                <input id="location" type="text"
-                                                    class="form-control @error('location') is-invalid @enderror"
-                                                    name="location" value="" required autocomplete="location"
+                                                <input id="edit_location" type="text"
+                                                    class="form-control @error('edit_location') is-invalid @enderror"
+                                                    name="edit_location" value="" required autocomplete="edit_location"
                                                     autofocus readonly>
                                             </td>
                                             <td>
-                                                <input id="room_unit" type="text"
-                                                    class="form-control @error('room_unit') is-invalid @enderror"
-                                                    name="room_unit" value="" required autocomplete="room_unit"
+                                                <input id="edit_room_unit" type="text"
+                                                    class="form-control @error('edit_room_unit') is-invalid @enderror"
+                                                    name="edit_room_unit" value="" required autocomplete="edit_room_unit"
                                                     autofocus readonly>
                                             </td>
 
                                             <td>
-                                                <input id="rent_started" type="text"
-                                                    class="form-control @error('rent_started') is-invalid @enderror"
-                                                    name="rent_started" value="" required
-                                                    autocomplete="rent_started" autofocus readonly>
+                                                <input id="edit_rent_started" type="text"
+                                                    class="form-control @error('edit_rent_started') is-invalid @enderror"
+                                                    name="edit_rent_started" value="" required
+                                                    autocomplete="edit_rent_started" autofocus readonly>
                                             </td>
 
                                             {{-- RENT FROM --}}
                                             <td>
-                                                <input id="rent_from" type="date"
-                                                    class="form-control @error('rent_from') is-invalid @enderror"
-                                                    name="rent_from" value="" required autocomplete="rent_from"
+                                                <input id="edit_rent_from" type="date"
+                                                    class="form-control @error('edit_rent_from') is-invalid @enderror"
+                                                    name="edit_rent_from" value="" required autocomplete="edit_rent_from"
                                                     autofocus>
 
-                                                @error('rent_from')
+                                                @error('edit_rent_from')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
                                                     </span>
@@ -189,12 +172,12 @@
                                             </td>
 
                                             <td>
-                                                <input id="due_date" type="date"
-                                                    class="form-control @error('due_date') is-invalid @enderror"
-                                                    name="due_date" value="" required autocomplete="due_date"
+                                                <input id="edit_due_date" type="date"
+                                                    class="form-control @error('edit_due_date') is-invalid @enderror"
+                                                    name="edit_due_date" value="" required autocomplete="edit_due_date"
                                                     autofocus>
 
-                                                @error('due_date')
+                                                @error('edit_due_date')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
                                                     </span>
@@ -202,12 +185,12 @@
                                             </td>
 
                                             <td>
-                                                <input id="date_updated" type="date"
+                                                <input id="edit_date_updated" type="date"
                                                     class="form-control @error('due_date') is-invalid @enderror"
-                                                    name="date_updated" value="{{ old('date_updated', date('Y-m-d')) }}"
-                                                    required autocomplete="date_updated" autofocus readonly>
+                                                    name="edit_date_updated" value="{{ old('edit_date_updated', date('Y-m-d')) }}"
+                                                    required autocomplete="edit_date_updated" autofocus readonly>
 
-                                                @error('date_updated')
+                                                @error('edit_date_updated')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
                                                     </span>
@@ -282,19 +265,19 @@
                                     <tbody>
                                         <tr>
                                             <td>
-                                                <input id="room_rent" type="text"
-                                                    class="form-control @error('room_rent') is-invalid @enderror"
-                                                    name="room_rent" value="" required autocomplete="room_rent"
-                                                    autofocus readonly oninput="calculateTotalBill()">
+                                                <input id="edit_room_rent" type="text" name="edit_room_rent"
+                                                    class="form-control @error('edit_room_rent') is-invalid @enderror"
+                                                    name="edit_room_rent" value="" required autocomplete="edit_room_rent"
+                                                    autofocus readonly>
 
                                             </td>
                                             <td>
-                                                <input id="water_bill" type="text"
-                                                    class="form-control @error('water_bill') is-invalid @enderror"
-                                                    name="water_bill" value="" required autocomplete="water_bill"
-                                                    autofocus oninput="calculateTotalBill()">
+                                                <input id="edit_water_bill" type="text"
+                                                    class="form-control @error('edit_water_bill') is-invalid @enderror"
+                                                    name="edit_water_bill" value="" required autocomplete="edit_water_bill"
+                                                    autofocus>
 
-                                                @error('water_bill')
+                                                @error('edit_water_bill')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
                                                     </span>
@@ -302,12 +285,12 @@
                                             </td>
 
                                             <td>
-                                                <input id="electric_bill" type="text"
-                                                    class="form-control @error('electric_bill') is-invalid @enderror"
-                                                    name="electric_bill" value="" required
-                                                    autocomplete="electric_bill" autofocus oninput="calculateTotalBill()">
+                                                <input id="edit_electric_bill" type="text" name="edit_electric_bill"
+                                                    class="form-control @error('edit_electric_bill') is-invalid @enderror"
+                                                    name="edit_electric_bill" value="" required
+                                                    autocomplete="edit_electric_bill" autofocus>
 
-                                                @error('electric_bill')
+                                                @error('edit_electric_bill')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
                                                     </span>
@@ -315,21 +298,21 @@
                                             </td>
 
                                             <td>
-                                                <input id="total_bill" type="text"
-                                                    class="form-control @error('total_bill') is-invalid @enderror"
-                                                    name="total_bill" value="" required autocomplete="total_bill"
+                                                <input id="edit_total_bill" type="text" name="edit_total_bill"
+                                                    class="form-control @error('edit_total_bill') is-invalid @enderror"
+                                                    name="edit_total_bill" value="" required autocomplete="edit_total_bill"
                                                     autofocus readonly>
                                             </td>
 
 
 
                                             <td>
-                                                <input id="amount_paid" type="text"
-                                                    class="form-control @error('amount_paid') is-invalid @enderror"
-                                                    name="amount_paid" value="" required autocomplete="amount_paid"
-                                                    autofocus oninput="calculateBalance()">
+                                                <input id="edit_amount_paid" type="text"
+                                                    class="form-control @error('edit_amount_paid') is-invalid @enderror"
+                                                    name="edit_amount_paid" value="" required autocomplete="edit_amount_paid"
+                                                    autofocus oninput="calculateEditTotalBillAndStatus()">
 
-                                                @error('amount_paid')
+                                                @error('edit_amount_paid')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
                                                     </span>
@@ -337,22 +320,26 @@
                                             </td>
 
                                             <td>
-                                                <input id="balance" type="text"
-                                                    class="form-control @error('balance') is-invalid @enderror"
-                                                    name="balance" value="" required autocomplete="balance"
-                                                    autofocus readonly>
+                                                <input id="edit_balance" type="text"
+                                                    class="form-control @error('edit_balance') is-invalid @enderror"
+                                                    name="edit_balance" value="" required autocomplete="edit_balance"
+                                                    autofocus readonly oninput="calculateEditTotalBillAndStatus()">
                                             </td>
 
                                             <td>
-                                                <select id="status" name="status" class="form-select">
+                                                <input id="edit_status" type="text"
+                                                    class="form-control @error('edit_status') is-invalid @enderror"
+                                                    name="edit_status" value="" required autocomplete="edit_status"
+                                                    autofocus readonly>
+                                                {{-- <select id="edit_status" name="edit_status" class="form-select">
                                                     <option value=""></option>
                                                     <option value="On Going">On Going</option>
                                                     <option value="Not Yet Paid">Not Yet Paid</option>
                                                     <option value="Paid">Paid</option>
                                                     <option value="Not Fully Paid">Not Fully Paid</option>
-                                                </select>
+                                                </select> --}}
 
-                                                @error('status')
+                                                @error('edit_status')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
                                                     </span>

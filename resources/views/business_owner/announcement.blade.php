@@ -17,13 +17,16 @@
                         <h2>{{ __('Announcement') }}</h2>
 
 
-                            <div class="input-group" style="width:30%">
-                                <input id="search" name="search" type="text" class="form-control form-control-sm"
-                                    placeholder="Search announcement">
-                                <button class="btn btn-primary btn-sm" type="button"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-                                  </svg></button>
-                            </div>
+                        <div class="input-group" style="width:30%">
+                            <input id="search" name="search" type="text" class="form-control form-control-sm"
+                                placeholder="Search announcement">
+                            <button class="btn btn-primary btn-sm" type="button"><svg xmlns="http://www.w3.org/2000/svg"
+                                    width="16" height="16" fill="currentColor" class="bi bi-search"
+                                    viewBox="0 0 16 16">
+                                    <path
+                                        d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                                </svg></button>
+                        </div>
 
                         <button type="button" class="btn btn-success" data-bs-toggle="modal"
                             data-bs-target="#addAnnouncementModal"><svg xmlns="http://www.w3.org/2000/svg" width="16"
@@ -42,29 +45,24 @@
 
                         @foreach ($announcements as $announcement)
                             <div class="card mb-4">
-                                <div class="card-header d-flex justify-content-between">
-                                    <h4 class="card-title">{{ $announcement->subject }}</h4>
-                                    {{-- <form action="{{ route('announcement.delete', $announcement) }}" method="post">
-                                        @csrf
-                                        @method('DELETE') --}}
-
-                                    {{-- <button type="submit" class="btn btn-outline-danger" data-bs-toggle="modal"
-                                            data-bs-target="#confirmDeleteModal"
-                                            data-action="{{ route('announcement.delete', ['announcement'=>$announcement->id]) }}"><svg
-                                                xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
-                                                <path
-                                                    d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" />
-                                            </svg>
-                                        </button> --}}
-                                    {{-- </form> --}}
-
+                                <div class="card-header d-flex">
+                                    <h4 class="card-title">{{ $announcement->subject }}</h4> &nbsp; &nbsp; &nbsp;
                                     <button type="button" class="btn btn-outline-danger deleteBtn"
                                         value="{{ $announcement->id }}"><svg xmlns="http://www.w3.org/2000/svg"
                                             width="16" height="16" fill="currentColor" class="bi bi-trash3-fill"
                                             viewBox="0 0 16 16">
                                             <path
                                                 d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" />
+                                        </svg>
+                                    </button> &nbsp; &nbsp;  
+                                    <button type="button" class="btn btn-outline-dark deleteBtn"
+                                        value="{{ $announcement->id }}"><svg xmlns="http://www.w3.org/2000/svg"
+                                            width="16" height="16" fill="currentColor" class="bi bi-pencil-square"
+                                            viewBox="0 0 16 16">
+                                            <path
+                                                d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                            <path fill-rule="evenodd"
+                                                d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
                                         </svg>
                                     </button>
                                 </div>
@@ -116,8 +114,9 @@
                         @csrf
                         <div class="mb-3">
                             <label for="subject" class="form-label">{{ __('Subject') }}</label>
-                            <input id="subject" type="text" class="form-control @error('subject') is-invalid @enderror"
-                                name="subject" value="{{ old('subject') }}" required autofocus>
+                            <input id="subject" type="text"
+                                class="form-control @error('subject') is-invalid @enderror" name="subject"
+                                value="{{ old('subject') }}" required autofocus>
                             @error('subject')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -139,7 +138,8 @@
                             <label for="visibleLocation"
                                 class="form-label">{{ __('Choose LOCATION announcement is visible to:') }}</label>
                             <div class="col-md-6">
-                                <select id="visibleLocation" class="form-select @error('visibleLocation') is-invalid @enderror"
+                                <select id="visibleLocation"
+                                    class="form-select @error('visibleLocation') is-invalid @enderror"
                                     name="visibleLocation" autocomplete="visibleLocation">
                                     {{-- @foreach ($availableLocations as $location)
                                         <option value="{{ $location }}">{{ $location }}</option>

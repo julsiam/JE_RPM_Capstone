@@ -64,18 +64,18 @@ function selectTenant(id, name, email) { //retrieve data and display to the edit
 
 
                 $("#rental_id").val(rentalData.id);
-                $("#location").val(rentalData.property.location);
-                $("#room_unit").val(rentalData.property.room_unit);
-                $("#rent_started").val(formattedRentStarted);
-                $("#rent_from").val(rentalData.rent_from);
-                $("#due_date").val(rentalData.due_date);
-                $("#room_rent").val(rentalData.property.room_fee);
-                $("#water_bill").val(rentalData.water_bill);
-                $("#electric_bill").val(rentalData.electric_bill);
-                $("#total_bill").val(rentalData.total_bill);
-                $("#amount_paid").val(rentalData.amount_paid);
-                $("#balance").val(rentalData.balance);
-                $("#status").val(rentalData.status);
+                $("#edit_location").val(rentalData.property.location);
+                $("#edit_room_unit").val(rentalData.property.room_unit);
+                $("#edit_rent_started").val(formattedRentStarted);
+                $("#edit_rent_from").val(rentalData.rent_from);
+                $("#edit_due_date").val(rentalData.due_date);
+                $("#edit_room_rent").val(rentalData.property.room_fee);
+                $("#edit_water_bill").val(rentalData.water_bill);
+                $("#edit_electric_bill").val(rentalData.electric_bill);
+                $("#edit_total_bill").val(rentalData.total_bill);
+                $("#edit_amount_paid").val(rentalData.amount_paid);
+                $("#edit_balance").val(rentalData.balance);
+                $("#edit_status").val(rentalData.status);
             }
         },
 

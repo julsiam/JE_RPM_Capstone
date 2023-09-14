@@ -2,7 +2,6 @@ $(document).ready(function () {
     // Get the location and room unit dropdown elements
     const locationDropdown = $('#location');
     const roomUnitDropdown = $('#room_unit');
-    const inclusionsField = $('#inclusions');
     const roomFeeField = $('#room_fee');
     const roomFeeDisplayField = $('#room_fee_display'); // Assuming this is the field in Rental Information section
     const propertyIdField = $('#property_id');
@@ -16,13 +15,7 @@ $(document).ready(function () {
             data: { location: location },
             dataType: 'json',
             success: function (data) {
-                console.log(data); // Add this line to check the retrieved data
-                // Clear the current options in the room unit dropdown
                 roomUnitDropdown.empty();
-                // inclusionsField.val(data.inclusions);
-                // roomFeeField.val(data.room_fee);
-
-                // Add the new room unit options based on the retrieved data
 
                 roomUnitDropdown.append($('<option>', {
                     value: '',
@@ -49,8 +42,6 @@ $(document).ready(function () {
             data: { location: location, room_unit: roomUnit },
             dataType: 'json',
             success: function (data) {
-                console.log(data); 
-                inclusionsField.val(data.inclusions);
                 roomFeeField.val(data.room_fee);
                 roomFeeDisplayField.val(data.room_fee); // Set the room fee in the Rental Information section
                 propertyIdField.val(data.id);

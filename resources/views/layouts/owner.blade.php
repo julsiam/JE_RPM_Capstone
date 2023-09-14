@@ -34,7 +34,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm fixed-top">
             <div class="container-fluid">
-                <a class="navbar-brand" href="{{ url('/owner_dashboard') }}">
+                <a class="navbar-brand" href="{{ url('/') }}">
                     <img class="logo" src="{{ asset('image/logo.png') }}" alt="logo">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -352,14 +352,14 @@
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>
 
     <script src="{{ asset('js/tenant_form.js') }}"></script>
+    <script src="{{ asset('js/rental_status.js') }}"></script>
     <script src="{{ asset('js/bday.js') }}" defer></script>
     <script src="{{ asset('js/bday_input.js') }}"></script>
     <script src="{{ asset('js/room_unit.js') }}"></script>
     <script src="{{ asset('js/rental_details.js') }}"></script>
-    <script src="{{ asset('js/tenants_list.js') }}"></script>
+    <script src="{{ asset('js/edit_tenant.js') }}"></script>
     <script src="{{ asset('js/success_add_Modal.js') }}"></script>
-    <script src="{{ asset('js/total_bill.js') }}"></script>
-    <script src="{{ asset('js/total_bill_at.js') }}"></script>
+    <script src="{{ asset('js/bill_status_calculate.js') }}"></script>
     <script src="{{ asset('js/rent_date.js') }}"></script>
     <script src="{{ asset('js/maintenance.js') }}"></script>
     <script src="{{ asset('js/search_sort.js') }}"></script>
@@ -371,6 +371,7 @@
     <script src="{{ asset('js/notfullypaid_records.js') }}"></script>
     <script src="{{ asset('js/paid_report.js') }}"></script>
     <script src="{{ asset('js/unpaid_report.js') }}"></script>
+
 
 
 </body>

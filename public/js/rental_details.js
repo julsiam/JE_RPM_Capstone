@@ -14,7 +14,7 @@ $(document).ready(function () { //SA RENTAL SECTION IN ADD TENANT FORM
         $('#name').val(firstName + ' ' + lastName);
         $('#propLocation').val(location);
         $('#room_unit_display').val(roomUnit);
-       // $('#room_fee_display').val(roomFee);
+        // $('#room_fee_display').val(roomFee);
        // $('#property_id').val(location + ' - ' + roomUnit);
 
     }

@@ -22,7 +22,7 @@ use App\Http\Controllers\UserController;
 */
 
 Route::get('/', function () {
-    return view('./auth/login');
+    return view('welcome');
 });
 
 Auth::routes([ //for email verify

@@ -27,14 +27,14 @@ class RentalController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'rent_from' => ['required', 'date_format:Y-m-d'],
-            'due_date' => ['required', 'date_format:Y-m-d'],
-            'water_bill' => ['required', 'numeric'],
-            'electric_bill' => ['required', 'numeric'],
-            'total_bill' => ['required', 'numeric'],
-            'amount_paid' => ['required', 'numeric'],
-            'balance' => ['required', 'numeric'],
-            'status' => ['string', 'in:On Going,Not Yet Paid,Paid,Not Fully Paid'],
+            'edit_rent_from' => ['required', 'date_format:Y-m-d'],
+            'edit_due_date' => ['required', 'date_format:Y-m-d'],
+            'edit_water_bill' => ['required', 'numeric'],
+            'edit_electric_bill' => ['required', 'numeric'],
+            'edit_total_bill' => ['required', 'numeric'],
+            'edit_amount_paid' => ['required', 'numeric'],
+            'edit_balance' => ['required', 'numeric'],
+            'edit_status' => ['string', 'in:On Going,Not Yet Paid,Paid,Not Fully Paid'],
         ]);
     }
 
@@ -57,14 +57,14 @@ class RentalController extends Controller
         }
 
         // Update the rental details with the new values
-        $rental->rent_from = $request->input('rent_from');
-        $rental->due_date = $request->input('due_date');
-        $rental->water_bill = $request->input('water_bill');
-        $rental->electric_bill = $request->input('electric_bill');
-        $rental->total_bill = $request->input('total_bill');
-        $rental->amount_paid = $request->input('amount_paid');
-        $rental->balance = $request->input('balance');
-        $rental->status = $request->input('status');
+        $rental->rent_from = $request->input('edit_rent_from');
+        $rental->due_date = $request->input('edit_due_date');
+        $rental->water_bill = $request->input('edit_water_bill');
+        $rental->electric_bill = $request->input('edit_electric_bill');
+        $rental->total_bill = $request->input('edit_total_bill');
+        $rental->amount_paid = $request->input('edit_amount_paid');
+        $rental->balance = $request->input('edit_balance');
+        $rental->status = $request->input('edit_status');
         $rental->save();
 
         // Find the corresponding RentalHistory record

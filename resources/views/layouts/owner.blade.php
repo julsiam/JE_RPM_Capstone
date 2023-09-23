@@ -18,6 +18,10 @@
 
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css" />
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.css" />
+    {{-- <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.css" /> --}}
+
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
@@ -25,7 +29,8 @@
     .logo {
         width: 75px;
     }
-    .svg-cont{
+
+    .svg-cont {
         color: #FFA500;
     }
 </style>
@@ -161,7 +166,8 @@
                             </a>
                         </li>
 
-                        <li class="nav-item">
+                        {{-- Route for only month and year rental payment selection --}}
+                        {{-- <li class="nav-item">
                             <a class="nav-link" href="{{ url('paid_records') }}">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-credit-card-2-front" viewBox="0 0 16 16">
                                     <path d="M14 3a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h12zM2 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H2z"/>
@@ -169,7 +175,7 @@
                                   </svg>
                                 Payment Records
                             </a>
-                        </li>
+                        </li> --}}
 
 
                         {{-- <li class="nav-item dropdown">
@@ -236,7 +242,7 @@
                                     <path
                                         d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z" />
                                 </svg>
-                               Payment
+                                Payment Records
                             </a>
                         </li>
 
@@ -254,7 +260,7 @@
                                     <path
                                         d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z" />
                                 </svg>
-                               Reports
+                                Reports
                             </a>
                         </li>
                     </ul>
@@ -341,15 +347,26 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"
+        integrity="sha256-lSjKY0/srUM9BE3dPm+c4fBo1dky2v27Gdjm2uoZaL0=" crossorigin="anonymous"></script>
+
+    {{--
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
         integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.9.2/parsley.min.js"
         integrity="sha512-eyHL1atYNycXNXZMDndxrDhNAegH2BDWt1TmkXJPoGf1WLlNYt08CSjkqF5lnCRmdm3IrkHid8s2jOUY4NIZVQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js'></script>
+
 
     <script src="{{ asset('js/tenant_form.js') }}"></script>
     <script src="{{ asset('js/rental_status.js') }}"></script>
@@ -371,6 +388,8 @@
     <script src="{{ asset('js/notfullypaid_records.js') }}"></script>
     <script src="{{ asset('js/paid_report.js') }}"></script>
     <script src="{{ asset('js/unpaid_report.js') }}"></script>
+    <script src="{{ asset('js/calendar.js') }}"></script>
+
 
 
 
@@ -379,53 +398,55 @@
 </html>
 
 {{-- <script>
-        $(function() {
-            var $sections = $('.form-section');
+    $(document).ready(function () {
+    var calendar = $('#calendar').fullCalendar({
+        editable: true,
+        height: 600,
+        width: '65%',
+        header: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'month,agendaWeek,agendaDay'
+        },
+        selectable: true,
+        selectHelper: true,
 
-            function navigateTo(index) {
-
-                $sections.removeClass('current').eq(index).addClass('current');
-
-                $('.form-navigation .previous').toggle(index > 0);
-                var atTheEnd = index >= $sections.length - 1;
-                $('.form-navigation .next').toggle(!atTheEnd);
-                $('.form-navigation [Type=submit]').toggle(atTheEnd);
-
-
-                const step = document.querySelector('.step' + index);
-                step.style.backgroundColor = "#17a2b8";
-                step.style.color = "white";
-
-
-
+        eventRender: function (event, element) {
+            if(event.status === 'Not Yet Paid'){
+                element.popover({
+                    title: 'Today\s Due Date',
+                    content: event.description,
+                    trigger: 'hover',
+                    placement: 'right',
+                    container: 'body',
+                    html: true
+                })
+                return true;
+            }else {
+                return false;
             }
+        },
 
-            function curIndex() {
+       // events: '/calendar',
 
-                return $sections.index($sections.filter('.current'));
-            }
+        events: {
+            url: '/calendar',
+            method: 'GET',
+            failure: function () {
+                alert('there was an error while fetching events!');
+            },
+        },
 
-            $('.form-navigation .previous').click(function() {
-                navigateTo(curIndex() - 1);
-            });
+        // eventRender: function (event, element){
+        //     if(event.status === 'Not Yet Paid'){
+        //         return true;
+        //     }else {
+        //         return false;
+        //     }
+        // },
 
-            $('.form-navigation .next').click(function() {
-                $('.tenant_form').parsley().whenValidate({
-                    group: 'block-' + curIndex()
-                }).done(function() {
-                    navigateTo(curIndex() + 1);
-                });
+        eventStartEditable: false
+    });
+});
 
-            });
-
-            $sections.each(function(index, section) {
-                $(section).find(':input').attr('data-parsley-group', 'block-' + index);
-            });
-
-
-            navigateTo(0);
-
-
-
-        });
-    </script> --}}
+</script> --}}

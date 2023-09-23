@@ -24,6 +24,9 @@ use App\Http\Controllers\UserController;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/properties', [PropertyController::class, 'getProperties'])->name('properties');
+
+
 
 Auth::routes([ //for email verify
     'verify' => true
@@ -91,7 +94,7 @@ Route::middleware(['auth', 'user-access:business_owner'])->group(function () {
         return view('./business_owner/add_property');
     });
 
-    Route::get('/properties', [PropertyController::class, 'getProperties'])->name('properties');
+    // Route::get('/properties', [PropertyController::class, 'getProperties'])->name('properties');
 
     Route::post('/add_property', [PropertyController::class, 'addProperty'])->name('property.addProperty');
 
@@ -138,5 +141,8 @@ Route::middleware(['auth', 'user-access:business_owner'])->group(function () {
     Route::get('/unpaid_reports', [RentalController::class, 'unPaidReport'])->name('unpaid_reports');
 
      //TO DISPLAY LOCATIONS IN VIEW
-     Route::get('/get_unpaid_reports', [RentalController::class, 'getUnPaidReports'])->name('get_unpaid_reports');
+    Route::get('/get_unpaid_reports', [RentalController::class, 'getUnPaidReports'])->name('get_unpaid_reports');
+
+    Route::get('/calendar', [RentalController::class, 'getTodaysDue'])->name('calendar');
+
 });

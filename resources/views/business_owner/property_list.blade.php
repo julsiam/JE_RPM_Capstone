@@ -60,6 +60,17 @@
                 </div>
             </div>
 
+            <div class="d-flex justify-content-between" style="font-size: 110%">
+                <div class="col-form-label">Total Properties: {{ $totalProperties }}</div>
+            </div>
+
+            <div class="d-flex justify-content-between" style="font-size: 110%">
+                <div class="col-form-label">Total OCCUPIED Properties: {{ $totalOccupiedProperties }}</div>
+            </div>
+
+            <div class="d-flex justify-content-between" style="font-size: 110%">
+                <div class="col-form-label">Total AVAILABLE Properties: {{$totalAvailProperties }}</div>
+            </div>
 
             <div class="card p-2">
                 <table id="propertyTable" class="table table-hover">
@@ -96,6 +107,8 @@
                     </tbody>
                 </table>
             </div>
+
+
             {{-- <div class="col-md-12">
                 <div class="row" style=" float:left;">
                     <label class="col-form-label">Total Property</label>

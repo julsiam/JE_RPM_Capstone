@@ -55,7 +55,17 @@ Route::middleware(['auth', 'user-access:tenant', 'verified'])->group(function ()
 
 
 Route::middleware(['auth', 'user-access:business_owner'])->group(function () {
+
+    Route::get('/get_locs', [HomeController::class, 'getLocs']);
+
     Route::get('/owner_dashboard', [HomeController::class, 'ownerDashboard'])->name('business_owner.owner_dashboard');
+
+    Route::get('/get_tenant_count_by_location', [HomeController::class, 'getTenantCountByLocation']);
+
+    Route::get('/get_property_count_by_location', [HomeController::class, 'getPropertiesCountByLocation']);
+
+
+
 
     Route::get('/get_announcement_locations', [AnnouncementController::class, 'getAnnouncementLocations']);
 
@@ -140,9 +150,8 @@ Route::middleware(['auth', 'user-access:business_owner'])->group(function () {
     //TO DISPLAY LOCATIONS IN VIEW
     Route::get('/unpaid_reports', [RentalController::class, 'unPaidReport'])->name('unpaid_reports');
 
-     //TO DISPLAY LOCATIONS IN VIEW
+    //TO DISPLAY LOCATIONS IN VIEW
     Route::get('/get_unpaid_reports', [RentalController::class, 'getUnPaidReports'])->name('get_unpaid_reports');
 
     Route::get('/calendar', [RentalController::class, 'getTodaysDue'])->name('calendar');
-
 });

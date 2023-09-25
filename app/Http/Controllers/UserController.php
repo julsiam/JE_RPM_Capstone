@@ -171,7 +171,7 @@ class UserController extends Controller
     {
         $tenants = User::where('type', 0)
             ->get();
-            // ->paginate(10);
+        // ->paginate(10);
 
         $totalTenants = User::where('type', 0)->count();
 

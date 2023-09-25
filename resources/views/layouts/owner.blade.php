@@ -368,6 +368,9 @@
     <script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js'></script>
 
 
+    <script src="{{ asset('js/tenants_counts.js') }}"></script>
+    <script src="{{ asset('js/property_counts.js') }}"></script>
+
     <script src="{{ asset('js/tenant_form.js') }}"></script>
     <script src="{{ asset('js/rental_status.js') }}"></script>
     <script src="{{ asset('js/bday.js') }}" defer></script>

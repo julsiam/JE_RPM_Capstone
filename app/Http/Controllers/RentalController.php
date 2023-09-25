@@ -257,7 +257,7 @@ class RentalController extends Controller
     }
 
 
-    //UNPAID REPORTS
+    //UNPAID REPORTS //ROUTE TO GO TO THE PAGE
 
     public function unPaidReport()
     {

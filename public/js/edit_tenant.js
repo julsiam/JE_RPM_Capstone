@@ -1,15 +1,13 @@
 function fetchTenantsList() {
-    // Use AJAX to fetch the list of tenants
     $.ajax({
         url: "/tenants-list",
         method: 'GET',
         success: function (data) {
-            // Populate the table with the fetched data
             const tableBody = $("#tenantTable tbody");
-            tableBody.empty(); // Clear existing rows
+            tableBody.empty();
             data.forEach(function (tenant) {
                 const row = $("<tr>");
-                row.append($("<td>").text(tenant.id));
+                row.append($("<td hidden>").text(tenant.id));
                 row.append($("<td>").text(tenant.first_name + " " + tenant.last_name));
                 row.append($("<td>").text(tenant.email));
                 row.append($("<td>").html(`<button class="btn btn-primary btn-sm" onclick="selectTenant('${tenant.id}', '${tenant.first_name}', '${tenant.last_name}', '${tenant.email}')">Select</button>`));
@@ -26,7 +24,7 @@ function fetchTenantsList() {
 }
 
 function selectTenant(id, name, email) { //retrieve data and display to the edit page
-    // Do something with the selected tenant (e.g., update the form fields)
+
     $("#tenant_id").val(id);
     $("#tenant_name").val(name);
     $("#tenant_email").val(email);

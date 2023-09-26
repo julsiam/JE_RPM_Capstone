@@ -45,7 +45,7 @@ $(document).ready(function(){
                 const totalAvailable = data.totalAvailable;
                 const totalOccupied = data.totalOccupied;
 
-                $('#propertyCount').html(`Rooms: ${total_properties}`);
+                $('#propertyCount').html(`Properties: ${total_properties}`);
                 $('#availPropertyCount').html(`Available: ${totalAvailable}`);
                 $('#occupiedPropertyCount').html(`Occupied: ${totalOccupied}`);
             },

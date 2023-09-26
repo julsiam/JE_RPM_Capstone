@@ -2,12 +2,13 @@ $(document).ready(function () {
     $('.maintenance-details-button').click(function () {
         var maintenanceId = $(this).data('maintenance-id');
         $.ajax({
-            url: '/getMaintenanceDetails/', // Replace with your route
+            url: '/getMaintenanceDetails/',
             type: 'GET',
             data: { 'data-maintenance-id': maintenanceId },
 
             success: function (data) {
                 $('#modal_id').val(data.id);
+                console.log(data.schedule)
                 $('#modal_author_header').text('Requested By: ' + data.user.first_name + ' ' + data.user.last_name);
                 $('#modal_location').text(data.user.property.location);
                 $('#modal_room_unit').text(data.user.property.room_unit);
@@ -25,9 +26,11 @@ $(document).ready(function () {
                 };
                 var formattedDate = dateRequested.toLocaleString('en-US', options);
                 $('#modal_date_requested').text(formattedDate);
-                $('#modal_request_type').val(data.request_type);
+                $('#modal_category').val(data.category);
                 $('#modal_priority').val(data.priority);
                 $('#modal_description').text(data.description);
+                $('#modal_schedule').val(data.schedule);
+
             },
 
             error: function (xhr, status, error) {

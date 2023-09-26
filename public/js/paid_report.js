@@ -14,7 +14,7 @@ function locationSelection(rentLocations) {
 
     const allOption = $('<option>', {
         value: 'ALL',
-        text: 'TANAN'
+        text: 'ALL'
     });
     locationSelect.append(allOption);
 
@@ -151,3 +151,76 @@ $('#noReportModal').on('hidden.bs.modal', function () {
     // This event handler will be triggered when the modal is closed
     // You can add any necessary code here if needed
 });
+
+
+// $('#searchIcon').click(function () {
+//     var selectedLocation = nfpLocation.val();
+//     var selectedYear = nfpYear.val();
+//     var selectedMonth = getMonthNumber(nfpMonth.val());
+
+//     $.ajax({
+//         url: '/get_notfullypaid_records',
+//         method: 'GET',
+//         data: {
+//             location: selectedLocation, //location key should be the same in the controller input key
+//             month: selectedMonth,
+//             year: selectedYear,
+//         },
+//         success: function (data) {
+//             console.log(data)
+
+//             if (data.records.length == 0) {
+//                 console.log('No records found');
+//                 $('#nfpModal').modal('show');
+//             } else {
+//                 console.log('Records found:', data.records);
+//                 populateNotFullyPaidRecordsTable(data.records);
+//                 displayTotalBalance(data.totalBalance);
+//                 displayTotalInitialPayment(data.totalInitialPayment);
+//             }
+
+//         },
+
+//         error: function (error) {
+//             console.error('Error fetching paid records:', error);
+//         }
+//     });
+// });
+
+// function populateNotFullyPaidRecordsTable(data) {
+
+//     var notFullyPaidRecordsTable = $('#notFullyPaidTable tbody');
+//     notFullyPaidRecordsTable.empty();
+
+//     for (var i = 0; i < data.length; i++) {
+//         var record = data[i];
+//         var row = $('<tr>');
+
+//         row.append($('<td>').text(record.user.first_name + ' ' + record.user.last_name));
+//         row.append($('<td>').text(record.property.location));
+//         row.append($('<td>').text(record.property.room_unit));
+//         row.append($('<td>').text(record.total_bill));
+//         row.append($('<td>').text(record.amount_paid));
+//         row.append($('<td>').text(record.balance));
+//         row.append($('<td>').text(record.date_paid));
+//         row.append($('<td>').text(record.due_date));
+
+//         notFullyPaidRecordsTable.append(row);
+//     }
+// }
+
+// function displayTotalBalance(totalBalance) {
+//     const totalBalanceSpan = $('.total-balance');
+//     totalBalanceSpan.text('Total Balance: ' + totalBalance + '.00')
+// }
+
+// function displayTotalInitialPayment(totalInitialPayment) {
+//     const totalInitialPaymentSpan = $('.total-initialPayment');
+//     totalInitialPaymentSpan.text('Total Initial Payment: ' + totalInitialPayment + '.00')
+// }
+
+
+// $('#nfpModal').on('hidden.bs.modal', function () {
+//     // This event handler will be triggered when the modal is closed
+//     // You can add any necessary code here if needed
+// });

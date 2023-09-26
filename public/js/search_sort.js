@@ -6,11 +6,16 @@ $(document).ready(function () {
             $(this).toggle($(this).text().toLowerCase().indexOf(searchText) > -1);
         });
     });
-});
+
+    $('#searchTenant').on('keyup', function () {
+        var search_text = $(this).val().toLowerCase();
+        $('#tenantTable tbody tr').filter(function () {
+            var row_text = $(this).text().toLowerCase();
+            $(this).toggle(row_text.indexOf(search_text) > -1);
+        });
+    });
 
 
-// JavaScript code for sort functionality
-$(document).ready(function () {
     $('#sort-by').on('change', function () {
         var sortBy = $(this).val();
         if (sortBy === 'location') {
@@ -42,9 +47,7 @@ $(document).ready(function () {
             }
         }
     }
-});
 
-$(document).ready(function () {
     $('#sort-by').on('change', function () {
         var sortBy = $(this).val();
         if (sortBy === 'status') {

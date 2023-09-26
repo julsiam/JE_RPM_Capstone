@@ -16,7 +16,7 @@
                                 aria-current="page">Paid</a>
                             <a href="{{ url('/unpaid_reports') }}" class="btn btn-outline-warning"
                                 aria-current="page"> Not Yet Paid</a>
-                            {{-- <a href="{{ url('/notfullypaid_records') }}" class="btn btn-outline-primary"> Not Fully Paid</a> --}}
+                            <a href="{{ url('/notfullypaid_reports') }}" class="btn btn-outline-primary"> Not Fully Paid</a>
                         </div>
                     </div>
 

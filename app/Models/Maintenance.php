@@ -12,10 +12,11 @@ class Maintenance extends Model
     protected $fillable = [
         'user_id',
         'date_requested',
-        'request_type',
+        'category',
         'priority',
         'description',
-        'status',
+        'schedule',
+        'status'
     ];
 
     protected $casts = [
@@ -25,8 +26,4 @@ class Maintenance extends Model
     public function user(){
         return $this->belongsTo(User::class);
     }
-
-    // public function property(){
-    //     return $this->belongsTo(Property::class);
-    // }
 }

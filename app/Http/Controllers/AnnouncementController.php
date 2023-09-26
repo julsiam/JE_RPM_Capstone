@@ -40,18 +40,34 @@ class AnnouncementController extends Controller
         return view('business_owner.announcement', compact('announcements', 'availableLocations'));
     }
 
-    public function deleteAnnouncement(Request $request){
+    public function getAnnouncement(Request $request)
+    {
+        $announcementId = $request->input('data-announcement-id');
+        $announcement = Announcement::findOrFail($announcementId);
+
+        return response()->json($announcement);
+    }
+
+    public function editAnnouncement(Request $request) //for business owner STATUS UPDATE
+    {
+        $announcementId = $request->input('edit_announcement_id'); //from the hidden field of id
+        $announcement = Announcement::find($announcementId);
+
+        $announcement->subject = $request->input('edit_subject');
+        $announcement->details = $request->input('edit_details');
+        $announcement->location = $request->input('editLocation');
+
+        $announcement->update();
+        return redirect()->route('announcements')->with('success', 'Announcement updated!');
+    }
+
+
+    public function deleteAnnouncement(Request $request)
+    {
 
         $announcement = Announcement::find($request->announcement_delete_id);
         $announcement->delete();
 
         return redirect()->route('announcements')->with('delete', 'Deleted Successfully!');
     }
-
-
-    // public function deleteAnnouncement(Announcement $announcement){
-    //     $announcement->delete();
-
-    //     return redirect()->route('announcements')->with('success', 'Deleted Successfully!');
-    // }
 }

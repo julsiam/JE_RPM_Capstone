@@ -370,6 +370,8 @@
 
     <script src="{{ asset('js/tenants_counts.js') }}"></script>
     <script src="{{ asset('js/property_counts.js') }}"></script>
+    <script src="{{ asset('js/income_count.js') }}"></script>
+
 
     <script src="{{ asset('js/tenant_form.js') }}"></script>
     <script src="{{ asset('js/rental_status.js') }}"></script>

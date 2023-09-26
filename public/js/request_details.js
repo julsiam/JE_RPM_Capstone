@@ -26,7 +26,7 @@ $(document).ready(function () {
                 };
                 var formattedDate = dateRequested.toLocaleString('en-US', options);
                 $('#details_date_requested').text(formattedDate);
-                $('#details_request_type').text(data.request_type);
+                $('#details_category').text(data.category);
                 $('#details_priority').text(data.priority);
                 $('#details_description').text(data.description);
             },

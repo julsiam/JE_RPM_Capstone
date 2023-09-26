@@ -22,7 +22,7 @@ use App\Http\Controllers\UserController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view ('welcome');
 });
 Route::get('/properties', [PropertyController::class, 'getProperties'])->name('properties');
 
@@ -64,8 +64,7 @@ Route::middleware(['auth', 'user-access:business_owner'])->group(function () {
 
     Route::get('/get_property_count_by_location', [HomeController::class, 'getPropertiesCountByLocation']);
 
-
-
+    Route::get('/get_total_income_per_month', [HomeController::class, 'getTotalIncome']);
 
     Route::get('/get_announcement_locations', [AnnouncementController::class, 'getAnnouncementLocations']);
 
@@ -73,7 +72,12 @@ Route::middleware(['auth', 'user-access:business_owner'])->group(function () {
 
     Route::get('/announcements', [AnnouncementController::class, 'getAnnouncements'])->name('announcements');
 
-    // Route::delete('/announcements/{announcement}', [AnnouncementController::class, 'deleteAnnouncement'])->name('announcement.delete');
+    Route::get('/getAnnouncementDetails', [AnnouncementController::class, 'getAnnouncement']);
+
+    Route::post('/editAnnouncement', [AnnouncementController::class, 'editAnnouncement'])->name('editAnnouncement');
+
+
+
     Route::post('/delete_announcement', [AnnouncementController::class, 'deleteAnnouncement'])->name('announcement.delete');
 
     Route::get('/announcements/search', [AnnouncementController::class, 'search'])->name('announcements.search');
@@ -131,13 +135,13 @@ Route::middleware(['auth', 'user-access:business_owner'])->group(function () {
     Route::get('/get_notpaid_records', [RentalController::class, 'getNotPaidRecords']);
 
     //TO DISPLAY LOCATIONS IN VIEW
-    Route::get('/notfullypaid_records', [RentalController::class, 'notFullyPaidRecord'])->name('notfullypaid_records');
+     Route::get('/notfullypaid_reports', [RentalController::class, 'notFullyPaidReport'])->name('notfullypaid_reports');
 
-    //TO DISPLAY LOCATIONS IN VIEW
-    Route::get('/get_notfullypaid_records', [RentalController::class, 'getNotFullyPaidRecords'])->name('notfullypaid_records');
+    //TO GET NOT FULLY PAID RECORDS
+     Route::get('/get_notfullypaid_reports', [RentalController::class, 'getNotFullyPaidRecords'])->name('get_notfullypaid_reports');
 
-    // Route::get('/unpaid_reports', function () {
-    //     return view('./business_owner/unpaid_reports');
+    // Route::get('/notfullypaid_records', function () {
+    //     return view('./business_owner/notfullypaid_records');
     // });
 
     //TO DISPLAY LOCATIONS IN VIEW

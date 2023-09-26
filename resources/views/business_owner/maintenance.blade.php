@@ -35,9 +35,10 @@
                             <thead>
                                 <tr>
                                     <th>Date Created</th>
-                                    <th>Type</th>
+                                    <th>Category</th>
                                     <th>Priority</th>
                                     <th>Author</th>
+                                    <th>Schedule</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>
@@ -47,19 +48,21 @@
                                 @foreach ($maintenance as $maintenance)
                                     <tr>
                                         <td scope="row">{{ $maintenance->date_requested->format('F d, Y') }}</td>
-                                        <td>{{ $maintenance->request_type }}</td>
+                                        <td>{{ $maintenance->category }}</td>
                                         <td>{{ $maintenance->priority }}</td>
+                                        <td> {{ $maintenance->user->first_name }} {{ $maintenance->user->last_name }} </td>
                                         <td>
-                                            @if ($maintenance->user)
-                                                {{ $maintenance->user->first_name }} {{ $maintenance->user->last_name }}
+                                            @if ($maintenance->schedule)
+                                                {{ $maintenance->schedule }}
                                             @else
-                                                No Tenant
+                                               Not Yet Scheduled
                                             @endif
                                         </td>
                                         <td>{{ $maintenance->status }}</td>
                                         <td>
-                                            <button class="btn btn-primary btn-sm maintenance-details-button" data-maintenance-id ='{{ $maintenance->id }}' data-bs-toggle="modal"
-                                            data-bs-target="#maintenanceModal">Details</button>
+                                            <button class="btn btn-primary btn-sm maintenance-details-button"
+                                                data-maintenance-id='{{ $maintenance->id }}' data-bs-toggle="modal"
+                                                data-bs-target="#maintenanceModal">Details</button>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -123,17 +126,10 @@
                                         </div>
 
                                         <div class="form-group mt-2">
-                                            <label style="color: rgb(128, 128, 128); font-size:18px" for="status">Status:
-                                                &nbsp;</label>
-                                            <div class="input-group">
-                                                <select id="modal_maintenance_status" name="modal_maintenance_status"
-                                                    class="form-select form-select-sm">
-                                                    <option value="Pending">PENDING</option>
-                                                    <option value="On Going">ON GOING</option>
-                                                    <option value="Done">DONE</option>
-                                                    <option value="Disapproved">DISAPPROVED</option>
-                                                </select>
-                                            </div>
+                                            <label style="color: rgb(128, 128, 128)">Category: </label>
+                                            <input id="modal_category" required style="border-color: rgb(166, 166, 166)"
+                                                type="text" class="form-control" name="category" value=""
+                                                readonly>
                                         </div>
                                     </div>
 
@@ -150,27 +146,46 @@
                                                 style="border-color: rgb(166, 166, 166); font-size:18px"
                                                 class="form-control-static"></span>
                                         </div>
+
+                                        <div class="form-group mt-2">
+                                            <label style="color: rgb(128, 128, 128)">Priority</label>
+                                            <input id="modal_priority" style="border-color: rgb(166, 166, 166)"
+                                                type="text" class="form-control" name="priority" value="" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group mt-2">
+                                    <label style="color: rgb(128, 128, 128)">Description</label>
+                                    <p id="modal_description" class="card-text"></p>
+                                </div>
+
+
+                                <div class="form-group mt-5">
+                                    <label for="status">Status:
+                                        &nbsp;</label>
+                                    <div class="input-group">
+                                        <select id="modal_maintenance_status" name="modal_maintenance_status"
+                                            class="form-select form-select-sm">
+                                            <option value="Pending">PENDING</option>
+                                            <option value="On Going">ON GOING</option>
+                                            <option value="Done">DONE</option>
+                                            <option value="Disapproved">DISAPPROVED</option>
+                                        </select>
                                     </div>
                                 </div>
 
 
-
-                                <div class="row card-body">
-                                    <label style="color: rgb(128, 128, 128)">Request Type</label>
-                                    <input id="modal_request_type" required style="border-color: rgb(166, 166, 166)"
-                                        type="text" class="form-control" name="request_type" value="" readonly>
+                                <div class="form-group mt-2">
+                                    <label for="schedule">Schedule:
+                                        &nbsp;</label>
+                                    <div class="input-group">
+                                        <input id="modal_schedule" style="border-color: rgb(166, 166, 166)" type="datetime-local"
+                                            class="form-control" name="modal_schedule" value="">
+                                    </div>
                                 </div>
 
-                                <div class="form-group px-0">
-                                    <label style="color: rgb(128, 128, 128)">Priority</label>
-                                    <input id="modal_priority" style="border-color: rgb(166, 166, 166)" type="text"
-                                        class="form-control" name="priority" value="" readonly>
-                                </div>
 
-                                <div class="row card-body">
-                                    <label style="color: rgb(128, 128, 128)">Description</label>
-                                    <p id="modal_description" class="card-text"></p>
-                                </div>
                             </div>
 
                             <div class="modal-footer">

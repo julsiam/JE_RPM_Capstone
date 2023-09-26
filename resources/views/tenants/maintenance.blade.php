@@ -34,7 +34,7 @@
                                 <thead>
                                     <tr>
                                         <th>Date Created</th>
-                                        <th>Type</th>
+                                        <th>Category</th>
                                         <th>Priority</th>
                                         <th>Status</th>
                                         <th>Action</th>
@@ -45,7 +45,7 @@
                                     @foreach ($maintenanceRequests as $maintenance)
                                         <tr>
                                             <td>{{ $maintenance->date_requested->format('F d, Y') }}</td>
-                                            <td>{{ $maintenance->request_type }}</td>
+                                            <td>{{ $maintenance->category }}</td>
                                             <td>{{ $maintenance->priority }}</td>
                                             <td>{{ $maintenance->status }}</td>
                                             <td>
@@ -105,14 +105,10 @@
                                             </div>
 
                                             <div class="form-group mt-2">
-                                                <label style="color: rgb(128, 128, 128); font-size:18px">Request Type:
+                                                <label style="color: rgb(128, 128, 128); font-size:18px">Category:
                                                 </label>
 
-                                                <span id="details_request_type"
-                                                    style="border-color: rgb(166, 166, 166); font-size:18px"
-                                                    class="form-control-static"></span>
-
-                                                <span id="details_request_type"
+                                                <span id="details_category"
                                                     style="border-color: rgb(166, 166, 166); font-size:18px"
                                                     class="form-control-static"></span>
                                             </div>
@@ -236,12 +232,25 @@
 
                                     <div class="mt-4">
                                         <div class="form-group px-0">
-                                            <label style="color: rgb(128, 128, 128)">Request Type:</label>
-                                            <input id="request_type" style="border-color: rgb(166, 166, 166)"
+                                            <label style="color: rgb(128, 128, 128)">Category: If others...Pakidescribe lang tarung sa desciption below!</label>
+                                            {{-- <input id="request_type" style="border-color: rgb(166, 166, 166)"
                                                 type="text" class="form-control" name="request_type"
-                                                value="{{ old('request_type') }}" required>
+                                                value="{{ old('request_type') }}" required> --}}
 
-                                            @error('request_type')
+                                            <select id="request_category" name="request_category"
+                                                class="form-select form-select-sm" required>
+                                                <option value="">Select category...</option>
+                                                <option value="Water">Water</option>
+                                                <option value="CR">CR</option>
+                                                <option value="Roof">Roof</option>
+                                                <option value="Door">Door</option>
+                                                <option value="Windows">Windows</option>
+                                                <option value="Electricity">Electricity</option>
+                                                <option value="Drainage">Drainage</option>
+                                                <option value="Other">Other</option>
+                                            </select>
+
+                                            @error('request_category')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
@@ -268,7 +277,7 @@
                                         </div>
 
                                         <div class="row card-body">
-                                            <label style="color: rgb(128, 128, 128)">Description:</label>
+                                            <label style="color: rgb(128, 128, 128)">Description: Please describe the issue well</label>
                                             <textarea id="request_description" name="request_description" class="form-control" id="exampleFormControlTextarea1"
                                                 rows="3" required></textarea>
 

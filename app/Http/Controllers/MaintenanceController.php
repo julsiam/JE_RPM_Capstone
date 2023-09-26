@@ -13,11 +13,11 @@ class MaintenanceController extends Controller
 
     public function validator(array $data)
     {
-        return Validator::make($data, [
-            'request_type' => ['required', 'string'],
-            'request_priority' => ['string', 'in:High, Medium,Low'],
-            'request_description' => ['required', 'string']
-        ]);
+        // return Validator::make($data, [
+        //     'category' => ['required', 'string'],
+        //     'request_priority' => ['string', 'in:High,Medium,Low'],
+        //     'request_description' => ['required', 'string']
+        // ]);
     }
 
 
@@ -25,24 +25,22 @@ class MaintenanceController extends Controller
     {
         $validator = $this->validator($request->all());
 
-        if ($validator->fails()) {
-            return redirect()->back()
-                ->withErrors($validator)
-                ->withInput();
-        }
+        // if ($validator->fails()) {
+        //     return redirect()->back()
+        //         ->withErrors($validator)
+        //         ->withInput();
+        // }
 
         $user = Auth::user();
 
-        $maintenance = Maintenance::create([
+        Maintenance::create([
             'user_id' => $user->id,
             'date_requested' => $request->input('hidden_request_date_requested'),
-            'request_type' => $request->input('request_type'),
+            'category' => $request->input('request_category'),
             'priority' => $request->input('request_priority'),
             'description' => $request->input('request_description'),
             'status' => 'Pending',
         ]);
-
-        // dd($maintenance);
 
         return redirect()->route('my_request');
     }
@@ -91,6 +89,8 @@ class MaintenanceController extends Controller
         $maintenance = Maintenance::find($maintenanceId);
 
         $maintenance->status = $request->input('modal_maintenance_status');
+        $maintenance->schedule = $request->input('modal_schedule');
+
 
         $maintenance->update();
         return redirect()->route('maintenance')->with('status', 'Status updated!');

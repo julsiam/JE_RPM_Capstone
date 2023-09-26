@@ -11,15 +11,6 @@ use Illuminate\Support\Facades\Log;
 
 class RentalController extends Controller
 {
-
-    // public function getRentalDetails(Request $request)
-    // {
-    //     $id = $request->input('id');
-    //     $rentals = Rental::where('user_id', $id)->with('property')->get();
-
-    //     return response()->json($rentals);
-    // }
-
     protected function validator(array $data)
     {
         return Validator::make($data, [
@@ -67,7 +58,10 @@ class RentalController extends Controller
         $existingRentalHistory = RentalHistory::where('rental_id', $rental->id)
             ->where('start_date', $rental->rent_from)
             ->where('end_date', $rental->due_date)
-            ->where('status', 'Not yet paid') // Only update if status is "Not yet paid"
+            ->where(function($query){
+                $query->where('status', 'Not Yet Paid')
+                ->orWhere('status', 'Not Fully Paid');
+            })
             ->first();
 
         if ($existingRentalHistory) {
@@ -91,8 +85,6 @@ class RentalController extends Controller
         return redirect()->route('tenants');
     }
 
-
-
     // FETCH LOCATIONS IN RECORDS
     public function getLocations()
     {
@@ -101,121 +93,34 @@ class RentalController extends Controller
         return response()->json($availableLocations);
     }
 
-
-    // public function paidRecord()
-    // {
-    //     $availableLocations = $this->getLocations();
-
-    //     return view('business_owner.paid_records', compact('availableLocations'));
-    // }
-
-
     //GET PAID RECORDS
-    // public function getPaidRecords(Request $request)
-    // {
-    //     $location = $request->input('location');
-    //     $year = $request->input('year');
-    //     $month = $request->input('month');
+    public function getPaidRecords(Request $request)
+    {
+        $location = $request->input('location');
+        $year = $request->input('year');
+        $month = $request->input('month');
 
-    //     $query = Rental::with(['user', 'property'])
-    //         ->whereYear('date_paid', $year)
-    //         ->whereMonth('date_paid', $month)
-    //         ->where('amount_paid', '>', 0)
-    //         ->where('status', '=', 'Paid');
+        $query = Rental::with(['user', 'property'])
+            ->whereYear('date_paid', $year)
+            ->whereMonth('date_paid', $month)
+            ->where('amount_paid', '>', 0)
+            ->where('status', '=', 'Paid');
 
-    //     if ($location !== 'ALL') {
-    //         $query->whereHas('property', function ($query) use ($location) {
-    //             $query->where('location', $location);
-    //         });
-    //     }
+        if ($location !== 'ALL') {
+            $query->whereHas('property', function ($query) use ($location) {
+                $query->where('location', $location);
+            });
+        }
 
-    //     $records = $query->get();
-    //     $totalIncome = $records->sum('amount_paid');
-
-
-    //     return response()->json([
-    //         'records' => $records,
-    //         'totalIncome' => $totalIncome
-    //     ]);
-    // }
+        $records = $query->get();
+        $totalIncome = $records->sum('amount_paid');
 
 
-
-    // public function notYetPaidRecord()
-    // {
-    //     $availableLocations = $this->getLocations();
-
-    //     return view('business_owner.notyetpaid_records', compact('availableLocations'));
-    // }
-
-    //GET NOT YET PAID RECORDS
-    // public function getNotPaidRecords(Request $request)
-    // {
-    //     $selectedLocation = $request->input('location');
-    //     $selectedMonth = $request->input('month');
-    //     $selectedYear = $request->input('year');
-
-    //     $query = Rental::with(['user', 'property'])
-    //         ->whereYear('due_date', $selectedYear)
-    //         ->whereMonth('due_date', $selectedMonth)
-    //         ->where('amount_paid', 0)
-    //         ->where('status', '=', 'Not Yet Paid');
-
-    //     if ($selectedLocation !== 'ALL') {
-    //         $query->whereHas('property', function ($query) use ($selectedLocation) {
-    //             $query->where('location', $selectedLocation);
-    //         });
-    //     }
-
-
-    //     $records = $query->get();
-    //     $totalUnpaid = $records->sum('total_bill');
-
-    //     return response()->json([
-    //         'records' => $records,
-    //         'totalUnpaid' => $totalUnpaid
-    //     ]);
-    // }
-
-
-    // public function notFullyPaidRecord()
-    // {
-    //     $availableLocations = $this->getLocations();
-
-    //     return view('business_owner.notfullypaid_records', compact('availableLocations'));
-    // }
-
-    //GET NOT FULLY PAID RECORDS
-    // public function getNotFullyPaidRecords(Request $request)
-    // {
-    //     $selectedLocation = $request->input('location');
-    //     $selectedMonth = $request->input('month');
-    //     $selectedYear = $request->input('year');
-
-    //     $query = Rental::with(['user', 'property'])
-    //         ->whereYear('due_date', $selectedYear)
-    //         ->whereMonth('due_date', $selectedMonth)
-    //         ->where('balance', '>', 0)
-    //         ->where('status', '=', 'Not Fully Paid');
-
-    //     if ($selectedLocation !== 'ALL') {
-    //         $query->whereHas('property', function ($query) use ($selectedLocation) {
-    //             $query->where('location', $selectedLocation);
-    //         });
-    //     }
-
-
-    //     $records = $query->get();
-    //     $totalBalance = $records->sum('balance');
-    //     $totalInitialPayment = $records->sum('amount_paid');
-
-    //     // dd($records);
-    //     return response()->json([
-    //         'records' => $records,
-    //         'totalBalance' => $totalBalance,
-    //         'totalInitialPayment' => $totalInitialPayment
-    //     ]);
-    // }
+        return response()->json([
+            'records' => $records,
+            'totalIncome' => $totalIncome
+        ]);
+    }
 
 
     //WITH START MONTH AND END MONTH
@@ -300,6 +205,54 @@ class RentalController extends Controller
             'totalUnpaid' => $totalUnpaid
         ]);
     }
+
+
+    public function notFullyPaidReport()
+    {
+        $locations = $this->getLocations();
+
+        return view('business_owner.notfullypaid_records', compact('locations'));
+    }
+
+    //GET NOT FULLY PAID RECORDS
+
+    public function getNotFullyPaidRecords(Request $request)
+    {
+        $_location = $request->input('_location');
+        $start_month = $request->input('start_month');
+        $end_month = $request->input('end_month');
+        $_year = $request->input('year');
+
+        $notFullRecords = RentalHistory::where('status', 'Not Fully Paid')
+            // ->whereYear('start_date', $_year)
+            ->whereMonth('start_date', '>=', $start_month)
+            ->whereMonth('end_date', '<=', $end_month);
+
+        if ($_location !== 'ALL') {
+            $notFullRecords->whereHas('rental.property', function ($query) use ($_location) {
+                $query->where('location', $_location);
+            });
+        }
+
+        $notFullRecords = $notFullRecords->with(['rental.user', 'rental.property'])->get();
+        $totalBalance = 0;
+
+        foreach ($notFullRecords as $record) {
+            $balance = $record->total_rent - $record->initial_paid_amount;
+            $totalBalance += $balance;
+        }
+
+        // $totalBalance = $notFullRecords->sum('balance');
+
+        // dd($notFullRecords);
+        return response()->json([
+            'notFullRecords' => $notFullRecords,
+            'totalBalance' => $totalBalance,
+        ]);
+    }
+
+
+
 
     public function getTodaysDue()
     {

@@ -1,13 +1,14 @@
 const nfpLocation = $('#nfpLocation');
-const nfpMonth = $('#nfpMonth');
+const nfpStartMonth = $('#nfpStartMonth');
+const nfpEndMonth = $('#nfpEndMonth');
 const nfpYear = $('#nfpYear');
 
-function dispLocations(availLocations) {
+function display_locations(availLocations) {
     nfpLocation.empty();
 
     const nullOption = $('<option>', {
         value: '',
-        text: 'Select Location'
+        text: 'Selectaaa'
     });
     nfpLocation.append(nullOption);
 
@@ -34,12 +35,12 @@ function getNfpLocations() {
     fetch('/get_locations')
         .then(response => response.json())
         .then(availLocations => {
-            dispLocations(availLocations);
+            display_locations(availLocations);
         })
         .catch(error => console.error('Error fetching locations:', error));
 }
 
-function getMonthNumber(monthName) {
+function get_month_number(monthName) {
     const months = {
         January: 1,
         February: 2,
@@ -63,6 +64,7 @@ $(document).ready(function () {
     getNfpLocations();
 
     const currentMonth = new Date().getMonth() + 1;
+    const monthAfter = (new Date().getMonth() + 2) % 12;
     const currentYear = new Date().getFullYear();
 
     const monthNames = [
@@ -70,65 +72,76 @@ $(document).ready(function () {
         "July", "August", "September", "October", "November", "December"
     ];
 
-    nfpMonth.val(monthNames[currentMonth - 1]);
+    nfpStartMonth.val(monthNames[currentMonth - 1]);
+    nfpEndMonth.val(monthNames[monthAfter - 1]);
     nfpYear.val(currentYear);
 
 });
 
 
 $('#searchIcon').click(function () {
-    var selectedLocation = nfpLocation.val();
+    var selectedlocation = nfpLocation.val();
+    var selectedStartMonth = get_month_number(nfpStartMonth.val());
+    var selectedEndMonth = get_month_number(nfpEndMonth.val());
     var selectedYear = nfpYear.val();
-    var selectedMonth = getMonthNumber(nfpMonth.val());
+
 
     $.ajax({
-        url: '/get_notfullypaid_records',
+        url: '/get_notfullypaid_reports',
         method: 'GET',
         data: {
-            location: selectedLocation, //location key should be the same in the controller input key
-            month: selectedMonth,
-            year: selectedYear,
+            _location: selectedlocation,
+            start_month: selectedStartMonth,
+            end_month: selectedEndMonth,
+            _year: selectedYear,
         },
         success: function (data) {
-            console.log(data)
-
-            if (data.records.length == 0) {
-                console.log('No records found');
+            console.log(data);
+            if (data.notFullRecords.length == 0) {
                 $('#nfpModal').modal('show');
             } else {
-                console.log('Records found:', data.records);
-                populateNotFullyPaidRecordsTable(data.records);
+                populateNotFullyPaidReportTable(data.notFullRecords);
                 displayTotalBalance(data.totalBalance);
-                displayTotalInitialPayment(data.totalInitialPayment);
             }
-
         },
-
         error: function (error) {
             console.error('Error fetching paid records:', error);
         }
     });
 });
 
-function populateNotFullyPaidRecordsTable(data) {
+function populateNotFullyPaidReportTable(data) {
 
-    var notFullyPaidRecordsTable = $('#notFullyPaidTable tbody');
-    notFullyPaidRecordsTable.empty();
+    var notFullyPaidTable = $('#notFullyPaidTable tbody'); //id of the table not the tbody
+    notFullyPaidTable.empty();
 
     for (var i = 0; i < data.length; i++) {
         var record = data[i];
         var row = $('<tr>');
 
-        row.append($('<td>').text(record.user.first_name + ' ' + record.user.last_name));
-        row.append($('<td>').text(record.property.location));
-        row.append($('<td>').text(record.property.room_unit));
-        row.append($('<td>').text(record.total_bill));
-        row.append($('<td>').text(record.amount_paid));
-        row.append($('<td>').text(record.balance));
-        row.append($('<td>').text(record.date_paid));
-        row.append($('<td>').text(record.due_date));
+        var dueDate = new Date(record.end_date);
+        var datePaid = new Date(record.created_at);
+        var options = {
+            timeZone: 'UTC', // Use UTC or your desired timezone
+            month: 'long',
+            day: 'numeric',
+            year: 'numeric',
+        };
+        var formattedDueDate= dueDate.toLocaleString('en-US', options);
+        var formattedDatePaid= datePaid.toLocaleString('en-US', options);
 
-        notFullyPaidRecordsTable.append(row);
+        var balance = record.total_rent - record.initial_paid_amount;
+
+        row.append($('<td>').text(record.rental.user.first_name + ' ' + record.rental.user.last_name));
+        row.append($('<td>').text(record.rental.property.location));
+        row.append($('<td>').text(record.rental.property.room_unit));
+        row.append($('<td>').text(record.total_rent));
+        row.append($('<td>').text(record.initial_paid_amount));
+        row.append($('<td>').text(balance));
+        row.append($('<td>').text(formattedDatePaid));
+        row.append($('<td>').text(formattedDueDate));
+
+        notFullyPaidTable.append(row);
     }
 }
 
@@ -137,13 +150,14 @@ function displayTotalBalance(totalBalance) {
     totalBalanceSpan.text('Total Balance: ' + totalBalance + '.00')
 }
 
-function displayTotalInitialPayment(totalInitialPayment) {
-    const totalInitialPaymentSpan = $('.total-initialPayment');
-    totalInitialPaymentSpan.text('Total Initial Payment: ' + totalInitialPayment + '.00')
-}
+// function displayTotalInitialPayment(totalInitialPayment) {
+//     const totalInitialPaymentSpan = $('.total-initialPayment');
+//     totalInitialPaymentSpan.text('Total Initial Payment: ' + totalInitialPayment + '.00')
+// }
 
 
 $('#nfpModal').on('hidden.bs.modal', function () {
     // This event handler will be triggered when the modal is closed
     // You can add any necessary code here if needed
 });
+

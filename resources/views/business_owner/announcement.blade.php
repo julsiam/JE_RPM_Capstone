@@ -48,17 +48,19 @@
                                 <div class="card-header d-flex">
                                     <h4 class="card-title">{{ $announcement->subject }}</h4> &nbsp; &nbsp; &nbsp;
                                     <button type="button" class="btn btn-outline-danger deleteBtn"
-                                        value="{{ $announcement->id }}"><svg xmlns="http://www.w3.org/2000/svg"
-                                            width="16" height="16" fill="currentColor" class="bi bi-trash3-fill"
-                                            viewBox="0 0 16 16">
+                                        value="{{ $announcement->id }}">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
                                             <path
                                                 d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" />
                                         </svg>
-                                    </button> &nbsp; &nbsp;  
-                                    <button type="button" class="btn btn-outline-dark deleteBtn"
-                                        value="{{ $announcement->id }}"><svg xmlns="http://www.w3.org/2000/svg"
-                                            width="16" height="16" fill="currentColor" class="bi bi-pencil-square"
-                                            viewBox="0 0 16 16">
+                                    </button> &nbsp; &nbsp;
+
+                                    <button type="button" class="btn btn-outline-dark announcement_edit_btn"
+                                        data-announcement-id='{{ $announcement->id }}' data-bs-toggle="modal"
+                                        data-bs-target="#editAnnouncementModal">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                                             <path
                                                 d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
                                             <path fill-rule="evenodd"
@@ -102,7 +104,7 @@
 
     <div class="modal fade" id="addAnnouncementModal" tabindex="-1" aria-labelledby="addAnnouncementModalLabel"
         aria-hidden="true">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="addAnnouncementModalLabel">{{ __('Add Announcement') }}</h5>
@@ -164,6 +166,78 @@
             </div>
         </div>
     </div>
+
+    {{-- EDIT ANNOUNCEMENT --}}
+
+    <div class="modal fade" id="editAnnouncementModal" tabindex="-1" aria-labelledby="editAnnouncementModal"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addAnnouncementModalLabel">{{ __('Edit Announcement') }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="{{ route('editAnnouncement') }}">
+                        @csrf
+
+                        <div class="mb-3">
+                            <div class="p-2">
+                                <input id="edit_announcement_id" required style="border-color: rgb(166, 166, 166)"
+                                    type="hidden" class="form-control" name="edit_announcement_id" value=""
+                                    readonly>
+                            </div>
+
+                            <label for="edit_subject" class="form-label">{{ __('Subject') }}</label>
+                            <input id="edit_subject" name="edit_subject" type="text"
+                                class="form-control @error('edit_subject') is-invalid @enderror"
+                                value="{{ old('edit_subject') }}" required autofocus>
+                            @error('edit_subject')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="edit_details" class="form-label">{{ __('Details') }}</label>
+                            <textarea id="edit_details" class="form-control @error('edit_details') is-invalid @enderror" name="edit_details"
+                                rows="4" required>{{ old('edit_details') }}</textarea>
+                            @error('edit_details')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="editVisibleLocation"
+                                class="form-label">{{ __('Choose LOCATION announcement is visible to:') }}</label>
+
+                            <div class="col-md-6">
+                                <select id="editLocation" class="form-select @error('editLocation') is-invalid @enderror"
+                                    name="editLocation" autocomplete="editLocation">
+                                </select>
+
+                                @error('editLocation')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary"
+                                data-bs-dismiss="modal">{{ __('Cancel') }}</button>
+                            <button type="submit" class="btn btn-primary">{{ __('Update') }}</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 
     {{-- DELETE CONFIRMATION MODAL --}}

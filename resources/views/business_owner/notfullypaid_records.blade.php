@@ -12,10 +12,10 @@
 
                         <div class="col-md-4 text-end btn-group btn-group-sm" role="group"
                             aria-label="Basic mixed styles example">
-                            <a href="{{ url('/paid_records') }}" class="btn btn-outline-success">Paid</a>
-                            <a href="{{ url('/notyetpaid_records') }}" class="btn btn-outline-warning"
+                            <a href="{{ url('/paid_reports') }}" class="btn btn-outline-success">Paid</a>
+                            <a href="{{ url('/unpaid_reports') }}" class="btn btn-outline-warning"
                                 aria-current="page"> Not Yet Paid</a>
-                            <a href="{{url('/notfullypaid_records')}}" class="btn btn-outline-primary active"> Not Fully Paid</a>
+                            <a href="{{url('/notfullypaid_reports')}}" class="btn btn-outline-primary active"> Not Fully Paid</a>
                         </div>
                     </div>
 
@@ -26,7 +26,7 @@
 
                                 <select id="nfpLocation" class="form-select form-select-sm"
                                     @error('nfpLocation') is-invalid @enderror name="nfpLocation"
-                                    autocomplete="nfpLocation">
+                                    autocomplete="nfpLocation" required>
                                 </select>
 
                                 @error('nfpLocation')
@@ -38,7 +38,7 @@
                             </div>
                             <div class="col col-lg-2">
                                 <label style="color: rgb(128, 128, 128)">Select Month:</label>
-                                <select id="nfpMonth" name="recordMonth" class="form-select form-select-sm">
+                                <select id="nfpStartMonth" name="nfpStartMonth" class="form-select form-select-sm">
                                     <option value="January">January</option>
                                     <option value="February">February</option>
                                     <option value="March">March</option>
@@ -53,6 +53,25 @@
                                     <option value="December">December</option>
                                 </select>
                             </div>
+
+                            <div class="col col-lg-2">
+                                <label style="color: rgb(128, 128, 128)">Select End Month:</label>
+                                <select id="nfpEndMonth" name="nfpEndMonth" class="form-select form-select-sm">
+                                    <option value="January">January</option>
+                                    <option value="February">February</option>
+                                    <option value="March">March</option>
+                                    <option value="April">April</option>
+                                    <option value="May">May</option>
+                                    <option value="June">June</option>
+                                    <option value="July">July</option>
+                                    <option value="August">August</option>
+                                    <option value="September">September</option>
+                                    <option value="October">October</option>
+                                    <option value="November">November</option>
+                                    <option value="December">December</option>
+                                </select>
+                            </div>
+
                             <div class="col col-lg-2">
                                 <label style="color: rgb(128, 128, 128)">Year:</label>
                                 <select id="nfpYear" name="recordYear" class="form-select form-select-sm">
@@ -64,7 +83,7 @@
                                 </select>
                             </div>
                             <div class="col col-lg-2 mt-3">
-                                <a type="btn" id="searchIcon" class="btn btn-outline-success me-2 searchBtn">
+                                <a type="btn" id="searchIcon" class="btn btn-outline-success me-2 searchIcon">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                         fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                                         <path
@@ -91,7 +110,7 @@
                                     </tr>
                                 </thead>
 
-                                <tbody id="paidRecord">
+                                <tbody>
                                 </tbody>
                             </table>
                         </div>
@@ -99,7 +118,7 @@
 
                     <div class="container text-end">
                         <span class="total-balance">Total Balance: 0.00 </span> <br>
-                        <span class="total-initialPayment">Total Initial Payment:</span>
+                        {{-- <span class="total-initialPayment">Total Initial Payment:</span> --}}
                     </div>
 
 

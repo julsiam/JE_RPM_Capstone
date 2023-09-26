@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Announcement;
 use App\Models\Maintenance;
 use App\Models\Property;
+use App\Models\Rental;
+use App\Models\RentalHistory;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -48,6 +51,8 @@ class HomeController extends Controller
 
     public function ownerDashboard(Request $request)
     {
+        $currentMonth = Carbon::now()->month;
+
         $avail_locs = $this->getLocs();
 
         $selectedLocation = $request->input('locs');
@@ -61,12 +66,17 @@ class HomeController extends Controller
 
         $availProperties = Property::where('status', 'Available')->count();
 
-        $totalMaintenance = Maintenance::count();
+        $totalMaintenance = Maintenance::where('status', 'Pending')
+            ->count();
 
+        $totalMonthIncome = RentalHistory::whereMonth('end_date', $currentMonth) //current month
+            ->where('initial_paid_amount', '>', 0)
+            ->where('status', 'Paid')
+            ->sum('initial_paid_amount');
 
         return view(
             'business_owner.owner_dashboard',
-            compact('totalTenants', 'totalProperties', 'occupiedProperties', 'availProperties', 'totalMaintenance', 'avail_locs')
+            compact('totalTenants', 'totalProperties', 'occupiedProperties', 'availProperties', 'totalMaintenance', 'avail_locs', 'totalMonthIncome')
         );
     }
 
@@ -122,5 +132,17 @@ class HomeController extends Controller
             'totalOccupied' => $totalOccupied,
             'totalAvailable' => $totalAvailable
         ]);
+    }
+
+    public function getTotalIncome(Request $request)
+    {
+        $month = $request->input('month');
+
+        $totalIncome = RentalHistory::whereMonth('end_date', $month) //current month
+            ->where('initial_paid_amount', '>', 0)
+            ->where('status', 'Paid')
+            ->sum('initial_paid_amount');
+
+        return response()->json(['totalIncome' => $totalIncome]);
     }
 }

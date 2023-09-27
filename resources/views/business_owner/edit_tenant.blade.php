@@ -96,13 +96,13 @@
                                 <div class="col-md-10 p-2">
                                     <div class="row">
                                         PHOTO
+                                        <div class="col-auto">
+                                            <img style="width: 200px;" id="idPhoto" src="{{asset('image/default_photo.png')}}" alt="ID Photo">
+                                        </div>
                                     </div>
-                                    {{-- <div class="col-auto">
-                                        <img style="width: 175px;" src="{{ asset('image/gwapo1.jpg') }}" alt="">
-                                    </div> --}}
-                                    {{-- <div class="mt-2">
-                                        <input class="form-control form-control-sm" id="formFileSm" type="file">
-                                    </div> --}}
+                                    <div class="row">
+                                        <a href="" id="contractLink" target="_blank">Contract of Agreement</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>

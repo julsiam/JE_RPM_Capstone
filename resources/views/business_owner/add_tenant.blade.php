@@ -26,134 +26,14 @@
                         </div>
                     @endif
 
-                    {{-- <div class="row mb-3">
-                        <label for="room_fee_display"
-                            class="col-md-4 col-form-label text-md-end">{{ __('Room Fee') }}</label>
-                        <div class="col-md-6">
-                            <input id="room_fee_display" type="text"
-                                class="form-control @error('room_fee_display') is-invalid @enderror"
-                                name="room_fee_display" value="{{ old('room_fee_display') }}" required
-                                autocomplete="room_fee_display" autofocus
-                                oninput="calculateTotalBillAndStatus()">
-                            @error('room_fee_display')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="row mb-3">
-                        <label for="water_bill"
-                            class="col-md-4 col-form-label text-md-end">{{ __('Water Bill') }}</label>
-                        <div class="col-md-6">
-                            <input id="water_bill" type="text"
-                                class="form-control @error('water_bill') is-invalid @enderror"
-                                name="water_bill" value="{{ old('water_bill') }}" required
-                                autocomplete="water_bill" autofocus oninput="calculateTotalBillAndStatus()">
-                            @error('water_bill')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="row mb-3">
-                        <label for="electric_bill"
-                            class="col-md-4 col-form-label text-md-end">{{ __('Electric Bill') }}</label>
-                        <div class="col-md-6">
-                            <input id="electric_bill" type="text"
-                                class="form-control @error('electric_bill') is-invalid @enderror"
-                                name="electric_bill" value="{{ old('electric_bill') }}" required
-                                autocomplete="electric_bill" autofocus oninput="calculateTotalBillAndStatus()">
-                            @error('electric_bill')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="row mb-3">
-                        <label for="total_bill"
-                            class="col-md-4 col-form-label text-md-end">{{ __('Total Bill') }}</label>
-                        <div class="col-md-6">
-                            <input id="total_bill" type="text"
-                                class="form-control @error('total_bill') is-invalid @enderror"
-                                name="total_bill" value="{{ old('total_bill') }}" required
-                                autocomplete="total_bill" autofocus readonly oninput="calculateTotalBillAndStatus()">
-                            @error('total_bill')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="row mb-3">
-                        <label for="amount_paid"
-                            class="col-md-4 col-form-label text-md-end">{{ __('Amount Paid') }}</label>
-                        <div class="col-md-6">
-                            <input id="amount_paid" type="text"
-                                class="form-control @error('amount_paid') is-invalid @enderror"
-                                name="amount_paid" value="{{ old('amount_paid') }}" required
-                                autocomplete="amount_paid" autofocus oninput="calculateTotalBillAndStatus()">
-                            @error('amount_paid')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                    </div>
-
-
-                    <div class="row mb-3">
-                        <label for="balance"
-                            class="col-md-4 col-form-label text-md-end">{{ __('Balance') }}</label>
-                        <div class="col-md-6">
-                            <input id="balance" type="text"
-                                class="form-control @error('balance') is-invalid @enderror" name="balance"
-                                value="{{ old('balance') }}" required autocomplete="balance" autofocus
-                                readonly oninput="calculateTotalBillAndStatus()">
-                            @error('balance')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="row mb-3">
-                        <label for="rentalStatus"
-                            class="col-md-4 col-form-label text-md-end">{{ __('Rental Status') }}</label>
-
-                        <div class="col-md-6">
-                            <input id="rentalStatus" type="text"
-                                class="form-control @error('rentalStatus') is-invalid @enderror" name="rentalStatus"
-                                value="{{ old('rentalStatus') }}" required autocomplete="rentalStatus" autofocus
-                               oninput="statusDisplay()" readonly>
-
-                            @error('rentalStatus')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                    </div> --}}
-
-
-
-
                     <div class="card-body">
                         <div class="nav nav-fill my-3">
                             <label class="nav-link shadow-sm step0    border ml-2 ">Personal Information</label>
                             <label class="nav-link shadow-sm step1   border ml-2 ">Accomodation Information</label>
                             <label class="nav-link shadow-sm step2   border ml-2 ">Rental Information</label>
+                            <label class="nav-link shadow-sm step3   border ml-2 ">Other Information</label>
                         </div>
-                        <form method="POST" action="{{ route('tenant.addTenant') }}" class="tenant_form">
-
-                            {{-- <form method="POST" action="" class="tenant_form"> --}}
+                        <form method="POST" action="{{ route('tenant.addTenant') }}" class="tenant_form" enctype="multipart/form-data">
                             @csrf
                             <div class="form-section">
                                 <div class="row mb-3">
@@ -393,24 +273,6 @@
                                     </div>
                                 </div>
 
-                                {{-- <div class="row mb-3">
-                                    <label for="room_fee"
-                                        class="col-md-4 col-form-label text-md-end">{{ __('Room Fee') }}</label>
-
-                                    <div class="col-md-6">
-                                        <input id="room_fee" type="text"
-                                            class="form-control @error('room_fee') is-invalid @enderror" name="room_fee"
-                                            value="{{ old('room_fee') }}" required autocomplete="room_fee" autofocus
-                                            data-readonly readonly>
-
-                                        @error('room_fee')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div> --}}
-
                                 <div class="row mb-3">
                                     <label for="room_fee"
                                         class="col-md-4 col-form-label text-md-end">{{ __('Room Fee') }}</label>
@@ -433,9 +295,6 @@
 
                             <div class="form-section">
                                 <div class="row mb-3">
-                                    {{-- <label for="property_id"
-                                        class="col-md-4 col-form-label text-md-end">{{ __('Room ID') }}</label> --}}
-
                                     <div class="col-md-6">
                                         <input id="property_id" type="hidden"
                                             class="form-control @error('property_id') is-invalid @enderror"
@@ -566,8 +425,7 @@
                                         <input id="room_fee_display" type="text"
                                             class="form-control @error('room_fee_display') is-invalid @enderror"
                                             name="room_fee_display" value="" required
-                                            autocomplete="room_fee_display" autofocus readonly
-                                        >
+                                            autocomplete="room_fee_display" autofocus readonly>
                                         @error('room_fee_display')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -582,8 +440,8 @@
                                     <div class="col-md-6">
                                         <input id="water_bill" type="text"
                                             class="form-control @error('water_bill') is-invalid @enderror"
-                                            name="water_bill" value="0.00" required
-                                            autocomplete="water_bill" autofocus>
+                                            name="water_bill" value="0.00" required autocomplete="water_bill"
+                                            autofocus>
                                         @error('water_bill')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -598,8 +456,8 @@
                                     <div class="col-md-6">
                                         <input id="electric_bill" type="text"
                                             class="form-control @error('electric_bill') is-invalid @enderror"
-                                            name="electric_bill" value="0.00" required
-                                            autocomplete="electric_bill" autofocus>
+                                            name="electric_bill" value="0.00" required autocomplete="electric_bill"
+                                            autofocus>
                                         @error('electric_bill')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -614,8 +472,7 @@
                                     <div class="col-md-6">
                                         <input id="total_bill" type="text"
                                             class="form-control @error('total_bill') is-invalid @enderror"
-                                            name="total_bill"  required
-                                            autocomplete="total_bill" autofocus readonly>
+                                            name="total_bill" required autocomplete="total_bill" autofocus readonly>
                                         @error('total_bill')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -664,9 +521,9 @@
 
                                     <div class="col-md-6">
                                         <input id="rentalStatus" type="text" name="rentalStatus"
-                                            class="form-control @error('rentalStatus') is-invalid @enderror" name="rentalStatus"
-                                            value="{{ old('rentalStatus') }}" required autocomplete="rentalStatus" autofocus
-                                         readonly>
+                                            class="form-control @error('rentalStatus') is-invalid @enderror"
+                                            name="rentalStatus" value="{{ old('rentalStatus') }}" required
+                                            autocomplete="rentalStatus" autofocus readonly>
 
                                         @error('rentalStatus')
                                             <span class="invalid-feedback" role="alert">
@@ -676,31 +533,59 @@
                                     </div>
 
                                 </div>
+                            </div>
 
-                                {{-- <div class="row mb-3">
-                                    <label for="rentalStatus"
-                                        class="col-md-4 col-form-label text-md-end">{{ __('Rental Status') }}</label>
+
+                            {{-- FILE UPLOAD --}}
+
+                            <div class="form-section">
+                                <div class="row mb-3">
+                                    <label for="id_photo"
+                                        class="col-md-4 col-form-label text-md-end">{{ __('ID Photo') }}</label>
 
                                     <div class="col-md-6">
-                                        <select id="rentalStatus"
-                                            class="form-select @error('rentalStatus') is-invalid @enderror"
-                                            name="rentalStatus" required autocomplete="rentalStatus">
-                                            <option value="" selected>Choose rental status</option>
-                                            <option value="On Going">Wala pay total bill</option>
-                                            <option value="Not Yet Paid">Wa pa kabayad</option>
-                                            <option value="Paid">Paid</option>
-                                            <option value="Not Fully Paid">Naa pay balance</option>
-                                        </select>
+                                        <input id="id_photo" type="file" name="id_photo"
+                                            class="form-control @error('id_photo') is-invalid @enderror"
+                                            value="{{ old('id_photo') }}" required autocomplete="id_photo">
 
-                                        @error('rentalStatus')
+                                        <!-- Hidden input to specify the file type -->
+                                        <input type="hidden" name="id_photo_file_type" value="id_photo">
+                                        <!-- Specify the type of the file -->
+
+                                        @error('id_photo')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
                                     </div>
+                                </div>
 
-                                </div> --}}
+                                <div class="row mb-3">
+                                    <label for="contract_pdf"
+                                        class="col-md-4 col-form-label text-md-end">{{ __('Contract/MOA') }}</label>
+
+                                    <div class="col-md-6">
+                                        <input id="contract_pdf" type="file"
+                                            class="form-control @error('contract_pdf') is-invalid @enderror"
+                                            name="contract_pdf" value="{{ old('contract_pdf') }}" required
+                                            autocomplete="contract_pdf" placeholder="Year-Month-Day">
+
+                                        <!-- Hidden input to specify the file type -->
+                                        <input type="hidden" name="contract_file_type" value="contract_pdf">
+                                        <!-- Specify the type of the file -->
+
+                                        @error('contract_pdf')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
                             </div>
+
+
+
+
 
                             <div class="row mb-0 form form-navigation">
                                 <div class="col-md-8 offset-md-4">

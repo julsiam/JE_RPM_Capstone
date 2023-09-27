@@ -25,15 +25,16 @@ function fetchTenantsList() {
 
 function selectTenant(id, name, email) { //retrieve data and display to the edit page
 
-    $("#tenant_id").val(id);
-    $("#tenant_name").val(name);
-    $("#tenant_email").val(email);
+    // $("#tenant_id").val(id);
+    // $("#tenant_name").val(name);
+    // $("#tenant_email").val(email);
 
     $.ajax({
         url: '/get-tenant-details',
         method: 'GET',
         data: { id: id },
         success: function (data) {
+            console.log(data)
             $('#email').val(data.email);
             $('#phone_number').val(data.phone_number);
             $("#address").val(data.address);
@@ -60,7 +61,6 @@ function selectTenant(id, name, email) { //retrieve data and display to the edit
                 };
                 var formattedRentStarted = rentStarted.toLocaleString('en-US', options);
 
-
                 $("#rental_id").val(rentalData.id);
                 $("#edit_location").val(rentalData.property.location);
                 $("#edit_room_unit").val(rentalData.property.room_unit);
@@ -74,6 +74,27 @@ function selectTenant(id, name, email) { //retrieve data and display to the edit
                 $("#edit_amount_paid").val(rentalData.amount_paid);
                 $("#edit_balance").val(rentalData.balance);
                 $("#edit_status").val(rentalData.status);
+
+                // Update the img src and link href based on the data
+                if (data.file.length > 0) {
+                    var defaultPhotoUrl = "{{ asset('image/default_photo.png') }}";
+
+                    var idPhotoPath = data.file.find(file => file.type === 'id_photo');
+                    var contractPath = data.file.find(file => file.type === 'contract_pdf');
+
+                    if (idPhotoPath) {
+                        $('#idPhoto').attr('src', idPhotoPath.file_path);
+                    } else {
+                        $('#idPhoto').attr('src', defaultPhotoUrl); // No ID photo available
+                    }
+
+                    if (contractPath) {
+                        $('#contractLink').attr('href', contractPath.file_path);
+                    } else {
+                        $('#contractLink').attr('href', ' '); // No contract available
+                    }
+                }
+
             }
         },
 

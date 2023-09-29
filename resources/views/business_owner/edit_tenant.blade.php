@@ -95,9 +95,9 @@
                             <div>
                                 <div class="col-md-10 p-2">
                                     <div class="row">
-                                        PHOTO
                                         <div class="col-auto">
-                                            <img style="width: 200px;" id="idPhoto" src="{{asset('image/default_photo.png')}}" alt="ID Photo">
+                                            <img style="width: 200px;" id="idPhoto"
+                                                src="{{ asset('image/default_photo.png') }}" alt="ID Photo">
                                         </div>
                                     </div>
                                     <div class="row">

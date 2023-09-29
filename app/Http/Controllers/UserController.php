@@ -8,12 +8,10 @@ use App\Models\Rental;
 use App\Models\RentalHistory;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
-
-
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -82,6 +80,8 @@ class UserController extends Controller
             'password' => ['required', 'string', 'min:8'],
             'type' => ['integer'], // add integer rule for type field
 
+            'profile_picture' => 'required|mimes:jpg,png, jpeg|max:2048',
+
             'water_bill' => ['required', 'numeric'],
             'electric_bill' => ['required', 'numeric'],
             'total_bill' => ['required', 'numeric'],
@@ -91,6 +91,8 @@ class UserController extends Controller
 
             'id_photo' => 'required|mimes:jpg,png|max:2048', // Validate id_photo file
             'contract_pdf' => 'required|mimes:pdf|max:2048',
+
+
         ]);
     }
 
@@ -116,6 +118,7 @@ class UserController extends Controller
             return redirect()->back()->with('error', 'Selected property is not available or does not exist.');
         }
 
+        $defaultImagePath = 'image/default_photo.png'; // Provide the correct path to your default image
 
         $user = User::create([
             'first_name' => $request->input('first_name'),
@@ -131,7 +134,10 @@ class UserController extends Controller
             'type' => 0,
             'property_id' => $propertyId,
             'password' => Hash::make($request->input('password')),
+
+            'profile_picture' => $defaultImagePath,
         ]);
+
 
         $rental = Rental::create([
             'user_id' => $user->id,
@@ -231,12 +237,44 @@ class UserController extends Controller
     public function getTenantDetails(Request $request)
     {
         $id = $request->input('id');
-        $tenant = User::with(['rental.property', 'file'=>function($query){
+        $tenant = User::with(['rental.property', 'file' => function ($query) {
             $query->whereIn('type', ['id_photo', 'contract_pdf']);
         }])->findOrFail($id);
 
         // dd($tenant);
 
         return response()->json($tenant);
+    }
+
+
+    public function getTenant(Request $request)
+    {
+        $tenantId = $request->input('data-tenant-id');
+        $tenant = User::with(['rental.property', 'rental.rentalHistory', 'file' => function ($query) {
+            $query->whereIn('type', ['id_photo', 'contract_pdf']);
+        }])->findOrFail($tenantId);
+
+        return response()->json($tenant);
+    }
+
+
+    public function editProfile(Request $request)
+    {
+        $user = Auth::user();
+
+        $validator = $this->validator($request->all());
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $profilePicturePath = $request->file('profile_picture')->store('profile_pictures');
+
+        $user->profile_picture = $profilePicturePath;
+        $user->save();
+
+        return response()->json(['profile_picture' => asset('storage/' . $profilePicturePath)]);
     }
 }

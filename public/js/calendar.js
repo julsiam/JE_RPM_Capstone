@@ -12,7 +12,7 @@ $(document).ready(function () {
         selectHelper: true,
 
         eventRender: function (event, element) {
-            if (event.status === 'Unpaid' || event.amount_paid === 0.00) {
+            if (event.status === 'Not Yet Paid' || event.amount_paid === 0.00) {
                 element.popover({
                     title: 'Today\s Due Date',
                     content: event.description,

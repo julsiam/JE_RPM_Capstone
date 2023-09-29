@@ -102,6 +102,9 @@ Route::middleware(['auth', 'user-access:business_owner'])->group(function () {
 
     Route::get('/get-tenant-details', [UserController::class, 'getTenantDetails']); //INDIVIDUAL
 
+    Route::get('/tenant-details', [UserController::class, 'getTenant']);
+
+
     Route::post('/update-rental-details', [RentalController::class, 'editRentalDetails'])->name('tenant.editTenant');
 
     Route::get('/add_property_form', function () {
@@ -158,4 +161,10 @@ Route::middleware(['auth', 'user-access:business_owner'])->group(function () {
     Route::get('/get_unpaid_reports', [RentalController::class, 'getUnPaidReports'])->name('get_unpaid_reports');
 
     Route::get('/calendar', [RentalController::class, 'getTodaysDue'])->name('calendar');
+
+    Route::get('/profile', function(){
+        return view('business_owner.profile');
+    });
+
+    Route::post('/edit_profile', [UserController::class, 'editProfile'])->name('edit_profile');
 });

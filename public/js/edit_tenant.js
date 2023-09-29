@@ -34,7 +34,6 @@ function selectTenant(id, name, email) { //retrieve data and display to the edit
         method: 'GET',
         data: { id: id },
         success: function (data) {
-            console.log(data)
             $('#email').val(data.email);
             $('#phone_number').val(data.phone_number);
             $("#address").val(data.address);
@@ -45,56 +44,50 @@ function selectTenant(id, name, email) { //retrieve data and display to the edit
             $("#gender").val(data.gender);
             $("#occupation").val(data.occupation);
 
-            const rentalData = data.rental; //rental data to display in table in edit page
+            var rentStarted = new Date(data.rental.rent_started);
+            var options = {
+                timeZone: 'UTC', // Use UTC or your desired timezone
+                month: 'long',
+                day: 'numeric',
+                year: 'numeric',
+                // hour: 'numeric',
+                // minute: 'numeric',
+                // hour12: true
+            };
+            var formattedRentStarted = rentStarted.toLocaleString('en-US', options);
 
-            if (rentalData) {
-                var rentStarted = new Date(rentalData.rent_started);
-                console.log(rentalData.rent_from)
-                var options = {
-                    timeZone: 'UTC', // Use UTC or your desired timezone
-                    month: 'long',
-                    day: 'numeric',
-                    year: 'numeric',
-                    // hour: 'numeric',
-                    // minute: 'numeric',
-                    // hour12: true
-                };
-                var formattedRentStarted = rentStarted.toLocaleString('en-US', options);
 
-                $("#rental_id").val(rentalData.id);
-                $("#edit_location").val(rentalData.property.location);
-                $("#edit_room_unit").val(rentalData.property.room_unit);
-                $("#edit_rent_started").val(formattedRentStarted);
-                $("#edit_rent_from").val(rentalData.rent_from);
-                $("#edit_due_date").val(rentalData.due_date);
-                $("#edit_room_rent").val(rentalData.property.room_fee);
-                $("#edit_water_bill").val(rentalData.water_bill);
-                $("#edit_electric_bill").val(rentalData.electric_bill);
-                $("#edit_total_bill").val(rentalData.total_bill);
-                $("#edit_amount_paid").val(rentalData.amount_paid);
-                $("#edit_balance").val(rentalData.balance);
-                $("#edit_status").val(rentalData.status);
+            $("#rental_id").val(data.rental.id);
+            $("#edit_location").val(data.rental.property.location);
+            $("#edit_room_unit").val(data.rental.property.room_unit);
+            $("#edit_rent_started").val(formattedRentStarted);
+            $("#edit_rent_from").val(data.rental.rent_from);
+            $("#edit_due_date").val(data.rental.due_date);
+            $("#edit_room_rent").val(data.rental.property.room_fee);
+            $("#edit_water_bill").val(data.rental.water_bill);
+            $("#edit_electric_bill").val(data.rental.electric_bill);
+            $("#edit_total_bill").val(data.rental.total_bill);
+            $("#edit_amount_paid").val(data.rental.amount_paid);
+            $("#edit_balance").val(data.rental.balance);
+            $("#edit_status").val(data.rental.status);
 
-                // Update the img src and link href based on the data
-                if (data.file.length > 0) {
-                    var defaultPhotoUrl = "{{ asset('image/default_photo.png') }}";
+            if (data.file.length > 0) {
+                var defaultPhotoUrl = "{{ asset('image/default_photo.png') }}";
 
-                    var idPhotoPath = data.file.find(file => file.type === 'id_photo');
-                    var contractPath = data.file.find(file => file.type === 'contract_pdf');
+                var idPhotoPath = data.file.find(file => file.type === 'id_photo');
+                var contractPath = data.file.find(file => file.type === 'contract_pdf');
 
-                    if (idPhotoPath) {
-                        $('#idPhoto').attr('src', idPhotoPath.file_path);
-                    } else {
-                        $('#idPhoto').attr('src', defaultPhotoUrl); // No ID photo available
-                    }
-
-                    if (contractPath) {
-                        $('#contractLink').attr('href', contractPath.file_path);
-                    } else {
-                        $('#contractLink').attr('href', ' '); // No contract available
-                    }
+                if (idPhotoPath) {
+                    $('#idPhoto').attr('src', idPhotoPath.file_path);
+                } else {
+                    $('#idPhoto').attr('src', defaultPhotoUrl); // No ID photo available
                 }
 
+                if (contractPath) {
+                    $('#contractLink').attr('href', contractPath.file_path);
+                } else {
+                    $('#contractLink').attr('href', ' '); // No contract available
+                }
             }
         },
 

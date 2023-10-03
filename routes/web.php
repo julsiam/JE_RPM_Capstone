@@ -165,6 +165,10 @@ Route::middleware(['auth', 'user-access:business_owner'])->group(function () {
     Route::get('/profile', function(){
         return view('business_owner.profile');
     });
+    Route::get('/get_profile_details', [UserController::class, 'getProfileDetails']);
+
+    Route::post('/edit_profile_pic', [UserController::class, 'editProfilePicture'])->name('edit_profile_pic');
 
     Route::post('/edit_profile', [UserController::class, 'editProfile'])->name('edit_profile');
+
 });

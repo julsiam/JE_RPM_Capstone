@@ -3,23 +3,32 @@
 @section('content')
     <section style="background-color: #eee; margin-top: 5%">
         <div class="container py-5 mt-5">
+            @if (session('success'))
+                <div class="alert alert-success" role="alert">
+                    {{ session('success') }}
+                </div>
+            @endif
             <div class="row">
                 <div class="col-lg-4">
                     <div class="card mb-4">
                         <div class="card-body text-center">
-                            <img id="profile_pic" src="{{Auth::user()->profile_picture}}"
-                                alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
-                            <h5 class="my-3">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</h5>
-                            <p class="text-muted mb-1">J and E RPM Business Owner</p>
-                            <p class="text-muted mb-4">{{ Auth::user()->address }}</p>
-                            <form action="{{ route('edit_profile') }}" method="POST" enctype="multipart/form-data">
-                                @csrf 
+                            <form method="POST" action="{{ route('edit_profile_pic') }}" enctype="multipart/form-data">
+                                @csrf
+                                <img id="profilePicturePreview" src="{{ Auth::user()->profile_picture }}" alt="avatar"
+                                    class="rounded-circle img-fluid" style="width: 150px;">
+                                <h5 class="my-3">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</h5>
+                                <p class="text-muted mb-1">J and E RPM Business Owner</p>
+                                <p class="text-muted mb-4">{{ Auth::user()->address }}</p>
+
                                 <div class="d-flex justify-content-center mb-2">
                                     <label for="profilePictureInput" class="btn btn-outline-primary ms-1">
                                         Edit Profile Picture
                                     </label>
-                                    <input type="file" id="profilePictureInput" name="profile_picture" style="display: none;">
-                                    <input type="submit" style="display: none;"> <!-- Submit button to trigger the form submission -->
+                                    <input type="file" id="profilePictureInput" name="profilePictureInput"
+                                        style="display: none;">
+
+                                    <button class="btn btn-outline-primary ms-1" type="submit" id="saveButton"
+                                        style="display: none;">Save</button>
                                 </div>
                             </form>
                         </div>
@@ -35,7 +44,9 @@
                                     <p class="mb-0">Full Name</p>
                                 </div>
                                 <div class="col-sm-9">
-                                    <p class="text-muted mb-0">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</p>
+                                    <p id="first_name" class="text-muted mb-0">{{ Auth::user()->first_name }}
+                                        {{ Auth::user()->last_name }}
+                                    </p>
                                 </div>
                             </div>
                             <hr>
@@ -62,7 +73,7 @@
                                     <p class="mb-0">Birthdate</p>
                                 </div>
                                 <div class="col-sm-9">
-                                    <p class="text-muted mb-0">{{ Auth::user()->birthdate->format('F d, Y')}}</p>
+                                    <p class="text-muted mb-0">{{ Auth::user()->birthdate->format('F d, Y') }}</p>
                                 </div>
                             </div>
                             <hr>
@@ -71,7 +82,7 @@
                                     <p class="mb-0">Age</p>
                                 </div>
                                 <div class="col-sm-9">
-                                    <p class="text-muted mb-0">{{ Auth::user()->age}}</p>
+                                    <p class="text-muted mb-0">{{ Auth::user()->age }}</p>
                                 </div>
                             </div>
 
@@ -81,104 +92,123 @@
                                     <p class="mb-0">Address</p>
                                 </div>
                                 <div class="col-sm-9">
-                                    <p class="text-muted mb-0">{{ Auth::user()->address}}</p>
+                                    <p class="text-muted mb-0">{{ Auth::user()->address }}</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    {{-- <div class="row">
-                        <div class="col-md-6">
-                            <div class="card mb-4 mb-md-0">
-                                <div class="card-body">
-                                    <p class="mb-4"><span class="text-primary font-italic me-1">assigment</span> Project
-                                        Status
-                                    </p>
-                                    <p class="mb-1" style="font-size: .77rem;">Web Design</p>
-                                    <div class="progress rounded" style="height: 5px;">
-                                        <div class="progress-bar" role="progressbar" style="width: 80%" aria-valuenow="80"
-                                            aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <p class="mt-4 mb-1" style="font-size: .77rem;">Website Markup</p>
-                                    <div class="progress rounded" style="height: 5px;">
-                                        <div class="progress-bar" role="progressbar" style="width: 72%"
-                                            aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <p class="mt-4 mb-1" style="font-size: .77rem;">One Page</p>
-                                    <div class="progress rounded" style="height: 5px;">
-                                        <div class="progress-bar" role="progressbar" style="width: 89%"
-                                            aria-valuenow="89" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <p class="mt-4 mb-1" style="font-size: .77rem;">Mobile Template</p>
-                                    <div class="progress rounded" style="height: 5px;">
-                                        <div class="progress-bar" role="progressbar" style="width: 55%"
-                                            aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <p class="mt-4 mb-1" style="font-size: .77rem;">Backend API</p>
-                                    <div class="progress rounded mb-2" style="height: 5px;">
-                                        <div class="progress-bar" role="progressbar" style="width: 66%"
-                                            aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> --}}
-                        {{-- <div class="col-md-6">
-                            <div class="card mb-4 mb-md-0">
-                                <div class="card-body">
-                                    <p class="mb-4"><span class="text-primary font-italic me-1">assigment</span> Project
-                                        Status
-                                    </p>
-                                    <p class="mb-1" style="font-size: .77rem;">Web Design</p>
-                                    <div class="progress rounded" style="height: 5px;">
-                                        <div class="progress-bar" role="progressbar" style="width: 80%"
-                                            aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <p class="mt-4 mb-1" style="font-size: .77rem;">Website Markup</p>
-                                    <div class="progress rounded" style="height: 5px;">
-                                        <div class="progress-bar" role="progressbar" style="width: 72%"
-                                            aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <p class="mt-4 mb-1" style="font-size: .77rem;">One Page</p>
-                                    <div class="progress rounded" style="height: 5px;">
-                                        <div class="progress-bar" role="progressbar" style="width: 89%"
-                                            aria-valuenow="89" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <p class="mt-4 mb-1" style="font-size: .77rem;">Mobile Template</p>
-                                    <div class="progress rounded" style="height: 5px;">
-                                        <div class="progress-bar" role="progressbar" style="width: 55%"
-                                            aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <p class="mt-4 mb-1" style="font-size: .77rem;">Backend API</p>
-                                    <div class="progress rounded mb-2" style="height: 5px;">
-                                        <div class="progress-bar" role="progressbar" style="width: 66%"
-                                            aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>--}}
+
+                    <button type="button" class="btn btn-outline-dark profile_edit_btn"
+                        data-profile-id='{{ Auth::user()->id }}' data-bs-toggle="modal" data-bs-target="#editProfile">Edit
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-pencil-square" viewBox="0 0 16 16">
+                            <path
+                                d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                            <path fill-rule="evenodd"
+                                d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                        </svg>
+                    </button>
                 </div>
 
-                <div class="card mb-4 mb-lg-0">
-                    <div class="card-body p-0">
-                        <ul class="list-group list-group-flush rounded-3">
-                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                <i class="fas fa-globe fa-lg text-warning"></i>
-                                <p class="mb-0">https://mdbootstrap.com</p>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                <i class="fab fa-github fa-lg" style="color: #333333;"></i>
-                                <p class="mb-0">mdbootstrap</p>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                <i class="fab fa-twitter fa-lg" style="color: #55acee;"></i>
-                                <p class="mb-0">@mdbootstrap</p>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                <i class="fab fa-instagram fa-lg" style="color: #ac2bac;"></i>
-                                <p class="mb-0">mdbootstrap</p>
-                            </li>
+                {{-- EDIT PROFILE --}}
 
-                        </ul>
+                <div class="modal fade" id="editProfile" tabindex="-1" aria-labelledby="editProfileModal"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="addAnnouncementModalLabel">{{ __('Edit Profile') }}</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form method="POST" action="{{ route('edit_profile') }}">
+                                    @csrf
+                                    <div class="mb-3">
+                                        <div class="p-2">
+                                            <input id="edit_profile_id" required style="border-color: rgb(166, 166, 166)"
+                                                type="hidden" class="form-control" name="edit_profile_id" value=""
+                                                readonly>
+                                        </div>
+
+                                        <label for="edit_firstname" class="form-label">{{ __('First Name') }}</label>
+                                        <input id="edit_firstname" name="edit_firstname" type="text"
+                                            class="form-control @error('edit_firstname') is-invalid @enderror"
+                                            value="{{ Auth::user()->first_name }}" required autofocus>
+                                        @error('edit_firstname')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+
+                                        <label for="edit_lastname" class="form-label">{{ __('Last Name') }}</label>
+                                        <input id="edit_lastname" name="edit_lastname" type="text"
+                                            class="form-control @error('edit_lastname') is-invalid @enderror"
+                                            value="{{ Auth::user()->last_name }}" required autofocus>
+                                        @error('edit_lastname')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+
+                                        <label for="edit_email" class="form-label">{{ __('Email') }}</label>
+                                        <input id="edit_email" name="edit_email" type="text"
+                                            class="form-control @error('edit_email') is-invalid @enderror"
+                                            value="{{ Auth::user()->email }}" required autofocus>
+                                        @error('edit_email')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+
+                                        <label for="edit_phone" class="form-label">{{ __('Phone Number') }}</label>
+                                        <input id="edit_phone" name="edit_phone" type="text"
+                                            class="form-control @error('edit_phone') is-invalid @enderror"
+                                            value="{{ Auth::user()->phone_number }}" required autofocus>
+                                        @error('edit_phone')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+
+                                        <label for="edit_birthdate" class="form-label">{{ __('Birthdate') }}</label>
+                                        <input id="edit_birthdate" name="edit_birthdate" type="date"
+                                            class="form-control @error('edit_birthdate') is-invalid @enderror"
+                                            value="{{ Auth::user()->birthdate }}" required autofocus>
+                                        @error('edit_birthdate')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+
+                                        <label for="edit_age" class="form-label">{{ __('Age') }}</label>
+                                        <input id="edit_age" name="edit_age" type="text"
+                                            class="form-control @error('edit_age') is-invalid @enderror"
+                                            value="{{ Auth::user()->age }}" required autofocus readonly>
+                                        @error('edit_age')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+
+                                        <label for="edit_address" class="form-label">{{ __('Address') }}</label>
+                                        <input id="edit_address" name="edit_address" type="text"
+                                            class="form-control @error('edit_address') is-invalid @enderror"
+                                            value="{{ Auth::user()->address }}" required autofocus>
+                                        @error('edit_address')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">{{ __('Cancel') }}</button>
+                                        <button type="submit" class="btn btn-primary">{{ __('Update') }}</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

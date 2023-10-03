@@ -78,8 +78,8 @@
                                 <div class="card-footer text-muted">
                                     <div class="row align-items-center">
                                         <div class="col-auto">
-                                            <img style="width: 75px" src="{{ asset('image/gwapo1.jpg') }}" alt=""
-                                                class="rounded-circle">
+                                            <img style="width: 75px" src="{{ Auth::user()->profile_picture }}"
+                                                alt="" class="rounded-circle">
                                         </div>
                                         <div class="col">
                                             <h5 class="card-title">{{ $announcement->user->first_name }}

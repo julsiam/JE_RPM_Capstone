@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -80,7 +81,7 @@ class UserController extends Controller
             'password' => ['required', 'string', 'min:8'],
             'type' => ['integer'], // add integer rule for type field
 
-            'profile_picture' => 'required|mimes:jpg,png, jpeg|max:2048',
+            // 'profilePictureInput' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
 
             'water_bill' => ['required', 'numeric'],
             'electric_bill' => ['required', 'numeric'],
@@ -257,12 +258,29 @@ class UserController extends Controller
         return response()->json($tenant);
     }
 
+    public function getProfileDetails()
+    {
+        $user = Auth::user();
+
+        return view('business_owner.profile', compact('user'));
+
+        // return response()->json($user);
+    }
+
 
     public function editProfile(Request $request)
     {
         $user = Auth::user();
 
-        $validator = $this->validator($request->all());
+        $validator = Validator::make($request->all(), [
+            'edit_firstname' => ['required', 'string', 'max:255'],
+            'edit_lastname' => ['required', 'string', 'max:255'],
+            'edit_email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . $user->id], // Include the user's ID to exclude their current email
+            'edit_phone' => ['required', 'numeric', 'digits_between:10,11'], // change to numeric and add digits_between rule
+            'edit_birthdate' => ['required', 'date_format:Y-m-d', 'before_or_equal:today'], // add before_or_equal rule to ensure the birthdate is not in the future
+            'edit_age' => ['required', 'integer', 'min:2'], // add integer and min rule
+            'edit_address' => ['required', 'string', 'max:255'],
+        ]);
 
         if ($validator->fails()) {
             return redirect()->back()
@@ -270,11 +288,52 @@ class UserController extends Controller
                 ->withInput();
         }
 
-        $profilePicturePath = $request->file('profile_picture')->store('profile_pictures');
+        // Update the user's details based on the validated input
+        $user->first_name = $request->input('edit_firstname');
+        $user->last_name = $request->input('edit_lastname');
+        $user->email = $request->input('edit_email');
+        $user->phone_number = $request->input('edit_phone');
+        $user->age = $request->input('edit_age');
+        $user->birthdate = $request->input('edit_birthdate');
+        $user->address = $request->input('edit_address');
 
-        $user->profile_picture = $profilePicturePath;
+        // Save the changes to the user's profile
         $user->save();
 
-        return response()->json(['profile_picture' => asset('storage/' . $profilePicturePath)]);
+        return redirect()->back()->with('success', 'Profile details updated successfully!');
+    }
+
+
+    public function editProfilePicture(Request $request)
+    {
+        $user = Auth::user();
+
+        $validator = Validator::make($request->all(), [
+            'profilePictureInput' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust the file types and size as needed
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        if ($request->hasFile('profilePictureInput')) {
+            $image = $request->file('profilePictureInput');
+            $imageName = time() . '_' . $image->getClientOriginalName();
+            $folder = 'profile';
+            $imagePath = $image->storeAs($folder, $imageName, 'public');
+
+            if ($user->profile_picture !== 'image/default_photo.png') {
+                Storage::delete('public/' . $user->profile_picture);
+            }
+            $user->profile_picture = '/storage/' . $imagePath;
+
+            $user->save();
+
+            return redirect()->back()->with('success', 'Profile picture updated successfully!');
+        }
+
+        return redirect()->back()->with('error', 'No image selected.');
     }
 }

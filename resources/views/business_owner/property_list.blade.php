@@ -16,14 +16,14 @@
 
                 <div class="col-md-6 text-end">
                     {{-- PDF --}}
-                    <a href="" class="btn btn btn-outline-danger me-2"><svg xmlns="http://www.w3.org/2000/svg"
+                    {{-- <a href="" class="btn btn btn-outline-danger me-2"><svg xmlns="http://www.w3.org/2000/svg"
                             width="16" height="16" fill="currentColor" class="bi bi-file type-pdf"
                             viewBox="0 0 16 16">
                             <path fill-rule="evenodd"
                                 d="M14 4.5V14a2 2 0 0 1-2 2h-1v-1h1a1 1 0 0 0 1-1V4.5h-2A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v9H2V2a2 2 0 0 1 2-2h5.5L14 4.5ZM1.6 11.85H0v3.999h.791v-1.342h.803c.287 0 .531-.057.732-.173.203-.117.358-.275.463-.474a1.42 1.42 0 0 0 .161-.677c0-.25-.053-.476-.158-.677a1.176 1.176 0 0 0-.46-.477c-.2-.12-.443-.179-.732-.179Zm.545 1.333a.795.795 0 0 1-.085.38.574.574 0 0 1-.238.241.794.794 0 0 1-.375.082H.788V12.48h.66c.218 0 .389.06.512.181.123.122.185.296.185.522Zm1.217-1.333v3.999h1.46c.401 0 .734-.08.998-.237a1.45 1.45 0 0 0 .595-.689c.13-.3.196-.662.196-1.084 0-.42-.065-.778-.196-1.075a1.426 1.426 0 0 0-.589-.68c-.264-.156-.599-.234-1.005-.234H3.362Zm.791.645h.563c.248 0 .45.05.609.152a.89.89 0 0 1 .354.454c.079.201.118.452.118.753a2.3 2.3 0 0 1-.068.592 1.14 1.14 0 0 1-.196.422.8.8 0 0 1-.334.252 1.298 1.298 0 0 1-.483.082h-.563v-2.707Zm3.743 1.763v1.591h-.79V11.85h2.548v.653H7.896v1.117h1.606v.638H7.896Z" />
-                        </svg></a>
+                        </svg></a> --}}
                     {{-- SHEET --}}
-                    <a href="" class="btn btn-outline-success me-2"><svg xmlns="http://www.w3.org/2000/svg"
+                    <a href="{{route('properties_export')}}" class="btn btn-outline-success me-2"><svg xmlns="http://www.w3.org/2000/svg"
                             width="16" height="16" fill="currentColor" class="bi bi-filetype-xls"
                             viewBox="0 0 16 16">
                             <path fill-rule="evenodd"
@@ -69,7 +69,7 @@
             </div>
 
             <div class="d-flex justify-content-between" style="font-size: 110%">
-                <div class="col-form-label">Total AVAILABLE Properties: {{$totalAvailProperties }}</div>
+                <div class="col-form-label">Total AVAILABLE Properties: {{ $totalAvailProperties }}</div>
             </div>
 
             <div class="card p-2">
@@ -83,6 +83,8 @@
                             <th scope="col">Inclusions</th>
                             <th scope="col">Status</th>
                             <th scope="col">Occupant</th>
+                            <th scope="col">Details</th>
+
                         </tr>
                     </thead>
 
@@ -102,25 +104,107 @@
                                         No Tenant
                                     @endif
                                 </td>
+                                <td> <button class="btn btn-primary btn-sm propertyDetailsBtn"
+                                        data-property-id='{{ $property->id }}' data-bs-toggle='modal'
+                                        data-bs-target='#propertyModal'>Details</button></td>
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
             </div>
 
+            {{-- EDIT PROPERTY --}}
 
-            {{-- <div class="col-md-12">
-                <div class="row" style=" float:left;">
-                    <label class="col-form-label">Total Property</label>
-                    <input style="width: 25%" type="text" class="form-control" id="totalProperties" disabled
-                        value="{{ $totalProperties }}">
+            <div class="modal fade" id="propertyModal" tabindex="-1" aria-labelledby="editProfileModal" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="addAnnouncementModalLabel">{{ __('Edit Property') }}</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form method="POST" action="{{ route('edit_property') }}">
+                                @csrf
+                                <div class="mb-3">
+                                    <div class="p-2">
+                                        <input id="edit_property_id" required style="border-color: rgb(166, 166, 166)"
+                                            type="hidden" class="form-control" name="edit_property_id" value=""
+                                            readonly>
+                                    </div>
 
+                                    <label for="edit_location" class="form-label">{{ __('Location') }}</label>
+                                    <input id="edit_location" name="edit_location" type="text"
+                                        class="form-control @error('edit_location') is-invalid @enderror"
+                                        value="{{ old('edit_location') }}" required autofocus>
+                                    @error('edit_location')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+
+
+                                    <label for="edit_room_unit" class="form-label">{{ __('Room Unit') }}</label>
+                                    <input id="edit_room_unit" name="edit_room_unit" type="text"
+                                        class="form-control @error('edit_room_unit') is-invalid @enderror"
+                                        value="{{ old('edit_room_unit') }}" required autofocus>
+                                    @error('edit_room_unit')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+
+                                    <label for="edit_room_fee" class="form-label">{{ __('Room Fee') }}</label>
+                                    <input id="edit_room_fee" name="edit_room_fee" type="text"
+                                        class="form-control @error('edit_room_fee') is-invalid @enderror"
+                                        value="{{ old('edit_room_fee') }}" required autofocus>
+                                    @error('edit_room_fee')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+
+                                    <label for="edit_inclusions" class="form-label">{{ __('Inclusions') }}</label>
+                                    <input id="edit_inclusions" name="edit_inclusions" type="text"
+                                        class="form-control @error('edit_inclusions') is-invalid @enderror"
+                                        value="{{ old('edit_inclusions') }}" required autofocus>
+                                    @error('edit_inclusions')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+
+                                    <label for="edit_occupant" class="form-label">{{ __('Occupant') }}</label>
+                                    <input id="edit_occupant" name="edit_occupant" type="text"
+                                        class="form-control @error('edit_occupant') is-invalid @enderror"
+                                        value="" required autofocus readonly>
+                                    @error('edit_occupant')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+
+                                    <label for="edit_status" class="form-label">{{ __('Status') }}</label>
+                                    <input id="edit_status" name="edit_status" type="text"
+                                        class="form-control @error('edit_status') is-invalid @enderror"
+                                        value="{{old('edit_status')}}" required autofocus readonly>
+                                    @error('edit_status')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">{{ __('Cancel') }}</button>
+                                    <button type="submit" class="btn btn-primary">{{ __('Update') }}</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
-            </div> --}}
-
-            {{-- <div class="d-flex justify-content-between">
-                <div class="col-form-label">Total Properties: {{ $totalProperties }}</div>
-            </div> --}}
+            </div>
         </div>
     </div>
 @endsection

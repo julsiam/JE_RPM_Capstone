@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\PropertyExport;
 use App\Models\Property;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
-
+use Maatwebsite\Excel\Facades\Excel;
+use Symfony\Component\HttpFoundation\Test\Constraint\ResponseFormatSame;
 
 class PropertyController extends Controller
 {
@@ -21,12 +23,18 @@ class PropertyController extends Controller
         $totalOccupiedProperties = $occupiedProperties->count();
 
         $availProperties = Property::with('user')
-        ->where('status', 'Available');
+            ->where('status', 'Available');
 
         $totalAvailProperties = $availProperties->count();
 
-        return view('business_owner.property_list', compact('properties','totalProperties', 'totalOccupiedProperties', 'totalAvailProperties'));
+        return view('business_owner.property_list', compact('properties', 'totalProperties', 'totalOccupiedProperties', 'totalAvailProperties'));
     }
+
+    public function exportPropertyExcel()
+    {
+        return Excel::download(new PropertyExport, 'property_list.xlsx');
+    }
+
 
     protected function validator(array $data)
     {
@@ -59,5 +67,45 @@ class PropertyController extends Controller
         ]);
 
         return redirect()->route('properties')->with('success', 'Property Added Successfully!');
+    }
+
+
+    public function getPropertyDetails(Request $request)
+    {
+        $propertyId = $request->input('data-property-id');
+        $property = Property::with('user')
+            ->findOrFail($propertyId);
+
+        return response()->json($property);
+    }
+
+    public function editProperty(Request $request)
+
+    {
+        $propertyId = $request->input('edit_property_id');
+        $property = Property::find($propertyId);
+
+        $validator = Validator::make($request->all(), [
+            'edit_location' => ['required', 'string', 'max:255'],
+            'edit_room_unit' => ['required', 'string', 'max:255', 'unique:properties,room_unit,' . $property->id],
+            'edit_inclusions' => ['required', 'string', 'max:255'],
+            'edit_room_fee' => ['required', 'numeric'],
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+
+        $property->location = $request->input('edit_location');
+        $property->room_unit = $request->input('edit_room_unit');
+        $property->room_fee = $request->input('edit_room_fee');
+        $property->inclusion = $request->input('edit_inclusions');
+
+        $property->save();
+
+        return redirect()->back()->with('success', 'Property Edited Succesfully');
     }
 }

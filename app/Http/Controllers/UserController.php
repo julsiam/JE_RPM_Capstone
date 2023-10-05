@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\TenantsExport;
 use App\Models\File;
 use App\Models\Property;
 use App\Models\Rental;
@@ -12,7 +13,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
+use Maatwebsite\Excel\Facades\Excel;
 
 class UserController extends Controller
 {
@@ -217,13 +220,21 @@ class UserController extends Controller
 
     public function tenantsList()
     {
-        $tenants = User::where('type', 0)
+        $tenants = User::with('property')
+            ->where('type', 0)
             ->get();
 
-        $totalTenants = User::where('type', 0)->count();
+        // $totalTenants = User::where('type', 0)->count();
 
-        return view('business_owner.tenants', compact('tenants', 'totalTenants'));
+        return view('business_owner.tenants', compact('tenants'));
     }
+
+    //EXPORT TENANTS IN EXCEL FORMAT
+    public function exportTenantExcel()
+    {
+        return Excel::download(new TenantsExport, 'tenants_list.xlsx');
+    }
+
 
 
     //SHOW ALL TENANTS AND DISPLAY IN MODAL

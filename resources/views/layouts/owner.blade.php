@@ -260,6 +260,8 @@
     <script src="{{ asset('js/calendar.js') }}"></script>
     <script src="{{ asset('js/tenants_details.js') }}"></script>
     <script src="{{ asset('js/profile.js') }}"></script>
+    <script src="{{ asset('js/property.js') }}"></script>
+
 
 </body>
 

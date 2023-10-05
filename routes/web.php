@@ -24,7 +24,6 @@ use App\Http\Controllers\UserController;
 Route::get('/', function () {
     return view ('welcome');
 });
-Route::get('/properties', [PropertyController::class, 'getProperties'])->name('properties');
 
 
 
@@ -96,7 +95,8 @@ Route::middleware(['auth', 'user-access:business_owner'])->group(function () {
 
     Route::get('/tenants', [UserController::class, 'tenantsList'])->name('tenants'); //SHOW ALL TENANTS
 
-    //Route::get('/tenants_location', [UserController::class, 'sortByLocation']); //SHOW ALL TENANTS
+    Route::get('/tenants_export', [UserController::class, 'exportTenantExcel'])->name('tenants_export'); //SHOW ALL TENANTS
+
 
     Route::get('/tenants-list', [UserController::class, 'getTenantsList']); //MODAL LIST OF TENANTS IN EDIT TENANT
 
@@ -111,9 +111,19 @@ Route::middleware(['auth', 'user-access:business_owner'])->group(function () {
         return view('./business_owner/add_property');
     });
 
-    // Route::get('/properties', [PropertyController::class, 'getProperties'])->name('properties');
 
     Route::post('/add_property', [PropertyController::class, 'addProperty'])->name('property.addProperty');
+
+    Route::get('/properties', [PropertyController::class, 'getProperties'])->name('properties');
+
+    Route::get('/get_property_details', [PropertyController::class, 'getPropertyDetails']);
+
+    Route::post('/edit_property', [PropertyController::class, 'editProperty'])->name('edit_property');
+
+    Route::get('/properties_export', [PropertyController::class, 'exportPropertyExcel'])->name('properties_export'); //SHOW ALL TENANTS
+
+
+
 
     Route::get('/maintenance', [MaintenanceController::class, 'getMaintenances'])->name('maintenance');
 
@@ -170,5 +180,6 @@ Route::middleware(['auth', 'user-access:business_owner'])->group(function () {
     Route::post('/edit_profile_pic', [UserController::class, 'editProfilePicture'])->name('edit_profile_pic');
 
     Route::post('/edit_profile', [UserController::class, 'editProfile'])->name('edit_profile');
+
 
 });

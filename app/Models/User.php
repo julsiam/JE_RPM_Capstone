@@ -86,4 +86,8 @@ class User extends Authenticatable implements MustVerifyEmail
     public function file(){
         return $this->hasMany(File::class);
     }
+
+    public function notification(){
+        return $this->hasMany(Notification::class);
+    }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Announcement;
+use App\Models\Notification;
 use App\Models\Property;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -37,7 +38,20 @@ class AnnouncementController extends Controller
 
         $availableLocations = $this->getAnnouncementLocations();
 
-        return view('business_owner.announcement', compact('announcements', 'availableLocations'));
+        $currentDate = date('Y-m-d');
+
+        $notifications = Notification::with('user')
+            ->whereDate('created_at', $currentDate)
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        $newNotification = Notification::with('rental.user')
+            ->whereDate('created_at', $currentDate)
+            ->where('seen', 0)
+            ->count();
+
+
+        return view('business_owner.announcement', compact('announcements', 'notifications','newNotification', 'availableLocations'));
     }
 
     public function getAnnouncement(Request $request)

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Maintenance;
+use App\Models\Notification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -72,7 +73,19 @@ class MaintenanceController extends Controller
         $maintenance = Maintenance::orderBy('date_requested', 'asc')->with('user')->get(); //get ALL
         $totalMaintenance = $maintenance->count();
 
-        return view('business_owner.maintenance', compact('maintenance', 'totalMaintenance'));
+        $currentDate = date('Y-m-d');
+
+        $notifications = Notification::with('user')
+            ->whereDate('created_at', $currentDate)
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        $newNotification = Notification::with('rental.user')
+            ->whereDate('created_at', $currentDate)
+            ->where('seen', 0)
+            ->count();
+
+        return view('business_owner.maintenance', compact('notifications', 'newNotification', 'maintenance', 'totalMaintenance'));
     }
 
     public function getMaintenance(Request $request) //get ONE for business owner ig click sa specific row

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exports\PropertyExport;
+use App\Models\Notification;
 use App\Models\Property;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
@@ -27,7 +28,20 @@ class PropertyController extends Controller
 
         $totalAvailProperties = $availProperties->count();
 
-        return view('business_owner.property_list', compact('properties', 'totalProperties', 'totalOccupiedProperties', 'totalAvailProperties'));
+        $currentDate = date('Y-m-d');
+
+        $notifications = Notification::with('user')
+            ->whereDate('created_at', $currentDate)
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        $newNotification = Notification::with('rental.user')
+            ->whereDate('created_at', $currentDate)
+            ->where('seen', 0)
+            ->count();
+
+
+        return view('business_owner.property_list', compact('notifications', 'newNotification','properties', 'totalProperties', 'totalOccupiedProperties', 'totalAvailProperties'));
     }
 
     public function exportPropertyExcel()
@@ -46,6 +60,26 @@ class PropertyController extends Controller
             'status' => ['required'],
         ]);
     }
+
+
+    public function addPropertyForm()
+    {
+        $currentDate = date('Y-m-d');
+
+        $notifications = Notification::with('user')
+            ->whereDate('created_at', $currentDate)
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        $newNotification = Notification::with('rental.user')
+            ->whereDate('created_at', $currentDate)
+            ->where('seen', 0)
+            ->count();
+
+
+        return view('business_owner.add_property', compact('notifications', 'newNotification',));
+    }
+
 
     public function addProperty(Request $request)
     {

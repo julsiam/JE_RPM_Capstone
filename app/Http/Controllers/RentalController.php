@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Notification;
 use App\Models\Property;
 use App\Models\Rental;
 use App\Models\RentalHistory;
@@ -129,7 +130,19 @@ class RentalController extends Controller
     {
         $rentLocations = $this->getLocations();
 
-        return view('business_owner.paid_reports', compact('rentLocations'));
+        $currentDate = date('Y-m-d');
+
+        $notifications = Notification::with('user')
+            ->whereDate('created_at', $currentDate)
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        $newNotification = Notification::with('rental.user')
+            ->whereDate('created_at', $currentDate)
+            ->where('seen', 0)
+            ->count();
+
+        return view('business_owner.paid_reports', compact('notifications', 'newNotification','rentLocations'));
     }
 
     //GET PAID REPORTS
@@ -168,7 +181,19 @@ class RentalController extends Controller
     {
         $locations = $this->getLocations();
 
-        return view('business_owner.unpaid_reports', compact('locations'));
+        $currentDate = date('Y-m-d');
+
+        $notifications = Notification::with('user')
+            ->whereDate('created_at', $currentDate)
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        $newNotification = Notification::with('rental.user')
+            ->whereDate('created_at', $currentDate)
+            ->where('seen', 0)
+            ->count();
+
+        return view('business_owner.unpaid_reports', compact('notifications', 'newNotification','locations'));
     }
 
 
@@ -211,7 +236,19 @@ class RentalController extends Controller
     {
         $locations = $this->getLocations();
 
-        return view('business_owner.notfullypaid_records', compact('locations'));
+        $currentDate = date('Y-m-d');
+
+        $notifications = Notification::with('user')
+            ->whereDate('created_at', $currentDate)
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        $newNotification = Notification::with('rental.user')
+            ->whereDate('created_at', $currentDate)
+            ->where('seen', 0)
+            ->count();
+
+        return view('business_owner.notfullypaid_records', compact('notifications', 'newNotification','locations'));
     }
 
     //GET NOT FULLY PAID RECORDS

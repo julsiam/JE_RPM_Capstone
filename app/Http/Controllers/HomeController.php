@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Announcement;
 use App\Models\Maintenance;
+use App\Models\Notification;
 use App\Models\Property;
 use App\Models\Rental;
 use App\Models\RentalHistory;
@@ -69,6 +70,19 @@ class HomeController extends Controller
         $totalMaintenance = Maintenance::where('status', 'Pending')
             ->count();
 
+        $currentDate = date('Y-m-d');
+
+        $notifications = Notification::with('user')
+            ->whereDate('created_at', $currentDate)
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        $newNotification = Notification::with('rental.user')
+            ->whereDate('created_at', $currentDate)
+            ->where('seen', 0)
+            ->count();
+
+
         $totalMonthIncome = RentalHistory::whereMonth('end_date', $currentMonth) //current month
             ->where('initial_paid_amount', '>', 0)
             ->where('status', 'Paid')
@@ -76,7 +90,7 @@ class HomeController extends Controller
 
         return view(
             'business_owner.owner_dashboard',
-            compact('totalTenants', 'totalProperties', 'occupiedProperties', 'availProperties', 'totalMaintenance', 'avail_locs', 'totalMonthIncome')
+            compact('notifications', 'newNotification', 'totalTenants', 'totalProperties', 'occupiedProperties', 'availProperties', 'totalMaintenance', 'avail_locs', 'totalMonthIncome')
         );
     }
 

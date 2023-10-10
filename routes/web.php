@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MaintenanceController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\RentalController;
 use App\Http\Controllers\UserController;
@@ -22,7 +23,7 @@ use App\Http\Controllers\UserController;
 */
 
 Route::get('/', function () {
-    return view ('welcome');
+    return view('welcome');
 });
 
 
@@ -89,9 +90,7 @@ Route::middleware(['auth', 'user-access:business_owner'])->group(function () {
 
     Route::post('/add_tenant', [UserController::class, 'addTenant'])->name('tenant.addTenant');
 
-    Route::get('/edit_tenant', function () {
-        return view('./business_owner/edit_tenant');
-    });
+    Route::get('/edit_tenant', [UserController::class, 'editTenantForm']);
 
     Route::get('/tenants', [UserController::class, 'tenantsList'])->name('tenants'); //SHOW ALL TENANTS
 
@@ -107,9 +106,7 @@ Route::middleware(['auth', 'user-access:business_owner'])->group(function () {
 
     Route::post('/update-rental-details', [RentalController::class, 'editRentalDetails'])->name('tenant.editTenant');
 
-    Route::get('/add_property_form', function () {
-        return view('./business_owner/add_property');
-    });
+    Route::get('/add_property_form', [PropertyController::class, 'addPropertyForm']);
 
 
     Route::post('/add_property', [PropertyController::class, 'addProperty'])->name('property.addProperty');
@@ -148,10 +145,10 @@ Route::middleware(['auth', 'user-access:business_owner'])->group(function () {
     Route::get('/get_notpaid_records', [RentalController::class, 'getNotPaidRecords']);
 
     //TO DISPLAY LOCATIONS IN VIEW
-     Route::get('/notfullypaid_reports', [RentalController::class, 'notFullyPaidReport'])->name('notfullypaid_reports');
+    Route::get('/notfullypaid_reports', [RentalController::class, 'notFullyPaidReport'])->name('notfullypaid_reports');
 
     //TO GET NOT FULLY PAID RECORDS
-     Route::get('/get_notfullypaid_reports', [RentalController::class, 'getNotFullyPaidRecords'])->name('get_notfullypaid_reports');
+    Route::get('/get_notfullypaid_reports', [RentalController::class, 'getNotFullyPaidRecords'])->name('get_notfullypaid_reports');
 
     // Route::get('/notfullypaid_records', function () {
     //     return view('./business_owner/notfullypaid_records');
@@ -172,7 +169,7 @@ Route::middleware(['auth', 'user-access:business_owner'])->group(function () {
 
     Route::get('/calendar', [RentalController::class, 'getTodaysDue'])->name('calendar');
 
-    Route::get('/profile', function(){
+    Route::get('/profile', function () {
         return view('business_owner.profile');
     });
     Route::get('/get_profile_details', [UserController::class, 'getProfileDetails']);
@@ -182,4 +179,7 @@ Route::middleware(['auth', 'user-access:business_owner'])->group(function () {
     Route::post('/edit_profile', [UserController::class, 'editProfile'])->name('edit_profile');
 
 
+    Route::get('/total_notification', [NotificationController::class, 'totalNotification']);
+
+    // Route::get('/get_notification', [NotificationController::class, 'showNotification']);
 });

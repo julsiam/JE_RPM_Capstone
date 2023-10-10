@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exports\TenantsExport;
 use App\Models\File;
+use App\Models\Notification;
 use App\Models\Property;
 use App\Models\Rental;
 use App\Models\RentalHistory;
@@ -32,7 +33,21 @@ class UserController extends Controller
     public function showAddTenantForm()
     {
         $locations = $this->getLocationOptions();
-        return view('business_owner.add_tenant', compact('locations'));
+
+        $currentDate = date('Y-m-d');
+
+        $notifications = Notification::with('user')
+            ->whereDate('created_at', $currentDate)
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        $newNotification = Notification::with('rental.user')
+            ->whereDate('created_at', $currentDate)
+            ->where('seen', 0)
+            ->count();
+
+
+        return view('business_owner.add_tenant', compact('notifications', 'newNotification', 'locations'));
     }
 
     public function getLocationOptions()
@@ -214,6 +229,24 @@ class UserController extends Controller
         return redirect()->route('tenants')->with('success', 'Tenant added successfully!');
     }
 
+    public function editTenantForm()
+    {
+        $currentDate = date('Y-m-d');
+
+        $notifications = Notification::with('user')
+            ->whereDate('created_at', $currentDate)
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        $newNotification = Notification::with('rental.user')
+            ->whereDate('created_at', $currentDate)
+            ->where('seen', 0)
+            ->count();
+
+
+        return view('business_owner.edit_tenant', compact('notifications', 'newNotification',));
+    }
+
 
 
     //SHOW ALL TENANTS
@@ -224,9 +257,22 @@ class UserController extends Controller
             ->where('type', 0)
             ->get();
 
+        $currentDate = date('Y-m-d');
+
+        $notifications = Notification::with('user')
+            ->whereDate('created_at', $currentDate)
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        $newNotification = Notification::with('rental.user')
+            ->whereDate('created_at', $currentDate)
+            ->where('seen', 0)
+            ->count();
+
+
         // $totalTenants = User::where('type', 0)->count();
 
-        return view('business_owner.tenants', compact('tenants'));
+        return view('business_owner.tenants', compact('notifications', 'newNotification', 'tenants'));
     }
 
     //EXPORT TENANTS IN EXCEL FORMAT
@@ -337,6 +383,7 @@ class UserController extends Controller
 
             if ($user->profile_picture !== 'image/default_photo.png') {
                 Storage::delete('public/' . $user->profile_picture);
+                // Storage::delete('public/storage/profile' . $user->profile_picture);
             }
             $user->profile_picture = '/storage/' . $imagePath;
 

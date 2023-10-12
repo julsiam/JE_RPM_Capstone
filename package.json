@@ -6,9 +6,9 @@
         "build": "vite build",
         "start": "php artisan serve",
         "migrate": "php artisan migrate",
+        "seed": "php artisan db:seed",
         "optimize": "php artisan optimize:clear",
-        "storage:link": "php artisan storage:link",
-        "seed": "php artisan db:seed --class=UserSeeder"
+        "storage:link": "php artisan storage:link"
     },
 
     "devDependencies": {

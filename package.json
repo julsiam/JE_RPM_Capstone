@@ -7,7 +7,8 @@
         "start": "php artisan serve",
         "migrate": "php artisan migrate",
         "optimize": "php artisan optimize:clear",
-        "storage:link": "php artisan storage:link"
+        "storage:link": "php artisan storage:link",
+        "seed": "php artisan db:seed --class=UserSeeder"
     },
 
     "devDependencies": {

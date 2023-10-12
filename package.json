@@ -2,8 +2,14 @@
     "private": true,
     "type": "module",
     "scripts": {
-        "build": "npm run production"
+        "dev": "vite",
+        "build": "vite build",
+        "start": "php artisan serve",
+        "migrate": "php artisan migrate",
+        "optimize": "php artisan optimize:clear",
+        "storage:link": "php artisan storage:link"
     },
+
     "devDependencies": {
         "@popperjs/core": "^2.11.6",
         "axios": "^1.1.2",

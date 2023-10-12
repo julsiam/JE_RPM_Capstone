@@ -169,9 +169,8 @@ Route::middleware(['auth', 'user-access:business_owner'])->group(function () {
 
     Route::get('/calendar', [RentalController::class, 'getTodaysDue'])->name('calendar');
 
-    Route::get('/profile', function () {
-        return view('business_owner.profile');
-    });
+    Route::get('/profile', [UserController::class, 'profilePage']);
+    
     Route::get('/get_profile_details', [UserController::class, 'getProfileDetails']);
 
     Route::post('/edit_profile_pic', [UserController::class, 'editProfilePicture'])->name('edit_profile_pic');

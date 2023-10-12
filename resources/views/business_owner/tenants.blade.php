@@ -311,7 +311,7 @@
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary"
                                 data-bs-dismiss="modal">{{ __('Cancel') }}</button>
-                            <button type="submit" class="btn btn-primary">{{ __('Update') }}</button>
+                            <a href="{{url('edit_tenant')}}" type="button" class="btn btn-primary">{{ __('Update') }}</a>
                         </div>
                     </div>
                 </div>

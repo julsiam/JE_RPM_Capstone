@@ -100,7 +100,7 @@ class PropertyController extends Controller
             'status' => $request->input('status')
         ]);
 
-        return redirect()->route('properties')->with('success', 'Property Added Successfully!');
+        return redirect()->route('properties')->with('message', 'Property Added Successfully!');
     }
 
 

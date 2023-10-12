@@ -216,7 +216,7 @@
                                                 {{ $notification->user->last_name }} {{ $notification->message }}</a>
                                             <br>
                                             <br>
-                                            <span>{{ $notification->created_at->format('F d, Y | g:i A') }}</span>
+                                            <span>{{ $notification->created_at->format('F d, Y') }}</span>
                                             <br>
                                             <div class="clearfix"></div>
                                         </li>

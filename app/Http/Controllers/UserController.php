@@ -324,6 +324,26 @@ class UserController extends Controller
         // return response()->json($user);
     }
 
+    public function profilePage(){
+        $tenants = User::with('property')
+            ->where('type', 0)
+            ->get();
+
+        $currentDate = date('Y-m-d');
+
+        $notifications = Notification::with('user')
+            ->whereDate('created_at', $currentDate)
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        $newNotification = Notification::with('rental.user')
+            ->whereDate('created_at', $currentDate)
+            ->where('seen', 0)
+            ->count();
+
+            return view('business_owner.profile', compact('notifications', 'newNotification'));
+    }
+
 
     public function editProfile(Request $request)
     {

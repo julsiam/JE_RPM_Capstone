@@ -34,12 +34,21 @@ function selectTenant(id, name, email) { //retrieve data and display to the edit
         method: 'GET',
         data: { id: id },
         success: function (data) {
+            var bday = new Date(data.birthdate);
+            var options = {
+                timeZone: 'UTC', // Use UTC or your desired timezone
+                month: 'long',
+                day: 'numeric',
+                year: 'numeric',
+            };
+            var bdate = bday.toLocaleString('en-US', options);
+
             $('#email').val(data.email);
             $('#phone_number').val(data.phone_number);
             $("#address").val(data.address);
             $("#first_name").val(data.first_name);
             $("#last_name").val(data.last_name);
-            $("#birthdate").val(data.birthdate);
+            $("#birthdate").val(bdate);
             $("#age").val(data.age);
             $("#gender").val(data.gender);
             $("#occupation").val(data.occupation);
@@ -50,9 +59,6 @@ function selectTenant(id, name, email) { //retrieve data and display to the edit
                 month: 'long',
                 day: 'numeric',
                 year: 'numeric',
-                // hour: 'numeric',
-                // minute: 'numeric',
-                // hour12: true
             };
             var formattedRentStarted = rentStarted.toLocaleString('en-US', options);
 

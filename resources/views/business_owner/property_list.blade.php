@@ -2,10 +2,13 @@
 
 @section('content')
     <div class="container" style="margin-top: 7%">
-        @if (session('success'))
-            <div class="alert alert-success" role="alert">
-                {{ session('success') }}
-            </div>
+        @if (Session::has('message'))
+            <script>
+               swal("Message", "{{ Session::get('message') }}", 'success' ,{
+                    button:true,
+                    button: 'OK'
+               });
+            </script>
         @endif
 
         <div class="card p-2 mt-5">

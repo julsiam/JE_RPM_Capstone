@@ -1,8 +1,10 @@
 {
     "private": true,
     "scripts": {
-        "dev": "mix",
-        "build": "mix build",
+        "dev": "npm run development",
+        "development": "mix",
+        "build": "npm run production",
+        "production": "mix --production",
         "watch":"mix watch",
         "start": "php artisan serve",
         "migrate": "php artisan migrate",

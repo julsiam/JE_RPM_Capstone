@@ -78,7 +78,11 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm fixed-top">
             <div class="container-fluid">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    <img class="logo" src="{{ secure_asset('image/logo.png') }}" alt="logo">
+                    @if (env('APP_ENV') === 'local')
+                        <img class="logo" src="{{ asset('image/logo.png') }}" alt="logo">
+                    @else
+                        <img class="logo" src="{{ secure_asset('image/logo.png') }}" alt="logo">
+                    @endif
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -307,38 +311,70 @@
 
     <script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js'></script>
 
+    @if (env('APP_ENV') === 'local')
+        <script src="{{ asset('js/tenants_counts.js') }}"></script>
+        <script src="{{ asset('js/tenants_counts.js') }}"></script>
+        <script src="{{ asset('js/property_counts.js') }}"></script>
+        <script src="{{ asset('js/income_count.js') }}"></script>
 
-    <script src="{{ secure_asset('js/tenants_counts.js') }}"></script>
-    <script src="{{ secure_asset('js/property_counts.js') }}"></script>
-    <script src="{{ secure_asset('js/income_count.js') }}"></script>
+
+        <script src="{{ asset('js/tenant_form.js') }}"></script>
+        <script src="{{ asset('js/rental_status.js') }}"></script>
+        <script src="{{ asset('js/bday.js') }}" defer></script>
+        <script src="{{ asset('js/bday_input.js') }}"></script>
+        <script src="{{ asset('js/room_unit.js') }}"></script>
+        <script src="{{ asset('js/rental_details.js') }}"></script>
+        <script src="{{ asset('js/edit_tenant.js') }}"></script>
+        <script src="{{ asset('js/success_add_Modal.js') }}"></script>
+        <script src="{{ asset('js/bill_status_calculate.js') }}"></script>
+        <script src="{{ asset('js/rent_date.js') }}"></script>
+        <script src="{{ asset('js/maintenance.js') }}"></script>
+        <script src="{{ asset('js/search_sort.js') }}"></script>
+        <script src="{{ asset('js/announcement.js') }}"></script>
+        <script src="{{ asset('js/delete_confirm.js') }}"></script>
+        <script src="{{ asset('js/data_tables.js') }}"></script>
+        <script src="{{ asset('js/paid_records.js') }}"></script>
+        <script src="{{ asset('js/unpaid_records.js') }}"></script>
+        <script src="{{ asset('js/notfullypaid_records.js') }}"></script>
+        <script src="{{ asset('js/paid_report.js') }}"></script>
+        <script src="{{ asset('js/unpaid_report.js') }}"></script>
+        <script src="{{ asset('js/calendar.js') }}"></script>
+        <script src="{{ asset('js/tenants_details.js') }}"></script>
+        <script src="{{ asset('js/profile.js') }}"></script>
+        <script src="{{ asset('js/property.js') }}"></script>
+        <script src="{{ asset('js/notification.js') }}"></script>
+    @else
+        <script src="{{ secure_asset('js/tenants_counts.js') }}"></script>
+        <script src="{{ secure_asset('js/property_counts.js') }}"></script>
+        <script src="{{ secure_asset('js/income_count.js') }}"></script>
 
 
-    <script src="{{ secure_asset('js/tenant_form.js') }}"></script>
-    <script src="{{ secure_asset('js/rental_status.js') }}"></script>
-    <script src="{{ secure_asset('js/bday.js') }}" defer></script>
-    <script src="{{ secure_asset('js/bday_input.js') }}"></script>
-    <script src="{{ secure_asset('js/room_unit.js') }}"></script>
-    <script src="{{ secure_asset('js/rental_details.js') }}"></script>
-    <script src="{{ secure_asset('js/edit_tenant.js') }}"></script>
-    <script src="{{ secure_asset('js/success_add_Modal.js') }}"></script>
-    <script src="{{ secure_asset('js/bill_status_calculate.js') }}"></script>
-    <script src="{{ secure_asset('js/rent_date.js') }}"></script>
-    <script src="{{ secure_asset('js/maintenance.js') }}"></script>
-    <script src="{{ secure_asset('js/search_sort.js') }}"></script>
-    <script src="{{ secure_asset('js/announcement.js') }}"></script>
-    <script src="{{ secure_asset('js/delete_confirm.js') }}"></script>
-    <script src="{{ secure_asset('js/data_tables.js') }}"></script>
-    <script src="{{ secure_asset('js/paid_records.js') }}"></script>
-    <script src="{{ secure_asset('js/unpaid_records.js') }}"></script>
-    <script src="{{ secure_asset('js/notfullypaid_records.js') }}"></script>
-    <script src="{{ secure_asset('js/paid_report.js') }}"></script>
-    <script src="{{ secure_asset('js/unpaid_report.js') }}"></script>
-    <script src="{{ secure_asset('js/calendar.js') }}"></script>
-    <script src="{{ secure_asset('js/tenants_details.js') }}"></script>
-    <script src="{{ secure_asset('js/profile.js') }}"></script>
-    <script src="{{ secure_asset('js/property.js') }}"></script>
-    <script src="{{ secure_asset('js/notification.js') }}"></script>
-
+        <script src="{{ secure_asset('js/tenant_form.js') }}"></script>
+        <script src="{{ secure_asset('js/rental_status.js') }}"></script>
+        <script src="{{ secure_asset('js/bday.js') }}" defer></script>
+        <script src="{{ secure_asset('js/bday_input.js') }}"></script>
+        <script src="{{ secure_asset('js/room_unit.js') }}"></script>
+        <script src="{{ secure_asset('js/rental_details.js') }}"></script>
+        <script src="{{ secure_asset('js/edit_tenant.js') }}"></script>
+        <script src="{{ secure_asset('js/success_add_Modal.js') }}"></script>
+        <script src="{{ secure_asset('js/bill_status_calculate.js') }}"></script>
+        <script src="{{ secure_asset('js/rent_date.js') }}"></script>
+        <script src="{{ secure_asset('js/maintenance.js') }}"></script>
+        <script src="{{ secure_asset('js/search_sort.js') }}"></script>
+        <script src="{{ secure_asset('js/announcement.js') }}"></script>
+        <script src="{{ secure_asset('js/delete_confirm.js') }}"></script>
+        <script src="{{ secure_asset('js/data_tables.js') }}"></script>
+        <script src="{{ secure_asset('js/paid_records.js') }}"></script>
+        <script src="{{ secure_asset('js/unpaid_records.js') }}"></script>
+        <script src="{{ secure_asset('js/notfullypaid_records.js') }}"></script>
+        <script src="{{ secure_asset('js/paid_report.js') }}"></script>
+        <script src="{{ secure_asset('js/unpaid_report.js') }}"></script>
+        <script src="{{ secure_asset('js/calendar.js') }}"></script>
+        <script src="{{ secure_asset('js/tenants_details.js') }}"></script>
+        <script src="{{ secure_asset('js/profile.js') }}"></script>
+        <script src="{{ secure_asset('js/property.js') }}"></script>
+        <script src="{{ secure_asset('js/notification.js') }}"></script>
+    @endif
 
 </body>
 

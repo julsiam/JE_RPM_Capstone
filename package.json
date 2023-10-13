@@ -2,7 +2,7 @@
     "private": true,
     "scripts": {
         "dev": "mix",
-        "build": "npm run prod",
+        "build": "mix build",
         "watch":"mix watch",
         "start": "php artisan serve",
         "migrate": "php artisan migrate",

@@ -5,7 +5,7 @@
 .loginpic {
     margin-left: 4em;
     margin-top: 2em;
-    
+
 }
 
 .card {
@@ -65,10 +65,8 @@ hr {
     text-align: center;
     letter-spacing: 3.6px;
     width: 7em;
- 
+
 }
-
-
 
 </style>
 
@@ -148,7 +146,7 @@ hr {
                                 <button type="submit" class="btn btn-primary">
                                   <strong>  {{ __('Login') }} </strong>
                                 </button>
-                            
+
                                 @if (Route::has('password.request'))
                                 <a class="btn btn-link" href="{{ route('password.request') }}">
                                     {{ __('Forgot Your Password?') }}

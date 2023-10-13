@@ -29,8 +29,8 @@
 
     <script src="{{ asset('js/request_details.js') }}"></script>
     <!-- Scripts -->
-    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
-</head>
+    <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+    <script src="{{ mix('js/app.js') }}"></script></head>
 <style>
     .logo {
         width: 75px;

@@ -1,8 +1,9 @@
 {
     "private": true,
     "scripts": {
-        "dev": "vite",
-        "build": "npm run production",
+        "dev": "npm run dev",
+        "build": "npm run prod",
+        "watch":"npm run watch",
         "start": "php artisan serve",
         "migrate": "php artisan migrate",
         "seed": "php artisan db:seed --class=UserSeeder",

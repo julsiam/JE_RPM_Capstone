@@ -8,7 +8,7 @@
         </div>
     @endif
 
-    <div class="container" style="margin-top: 7%">
+    <div class="container" style="margin-top: 10%">
         <div class="card p-2 mt-5">
             <div class="row justify-content-center">
                 <div class="col-md-6 p-4">
@@ -305,9 +305,6 @@
                                 </div>
                             </div>
                         </div>
-
-
-
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary"
                                 data-bs-dismiss="modal">{{ __('Cancel') }}</button>

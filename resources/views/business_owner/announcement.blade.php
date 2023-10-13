@@ -1,6 +1,44 @@
 @extends('layouts.owner')
 
 @section('content')
+<style>
+    .alert{
+        border-radius: 34px;
+background: #A9CCE8;
+    }
+    .annoucement_text{
+        color: #003057;
+    font-weight: 700;
+    padding-top: inherit;
+    }
+    .card{
+        background-color: #edf2fb;
+        color:  #DC582A;
+    }
+    .card-title{
+        color: #ee7600;
+       font-weight: 700;
+    }
+    .announcement-card{
+        background-color: #ede3da;
+
+    }
+    .card-header{
+        background-color: #e7d9cd;
+        letter-spacing: 2px;
+    }
+    .modal-header{
+        background-color: #e7d9cd;
+    }
+    .form-label{
+        color: #003057;
+       font-weight: 700;
+       letter-spacing: 2px;
+    }
+    .option{
+        background: #A9CCE8;
+    }
+</style>
     <div class="container-fluid">
 
         @if (session('success'))
@@ -8,13 +46,13 @@
                 {{ session('success') }}
             </div>
         @endif
-
+<div class="announcement-card">
         <div class="row justify-content-center">
             <div style="margin-top:8%;" class="col-md-10">
                 <div class="card">
 
                     <div class="card-header d-flex justify-content-between align-items">
-                        <h2>{{ __('Announcement') }}</h2>
+                        <h2 class="annoucement_text">{{ __('Announcement') }}</h2>
 
 
                         <div class="input-group" style="width:30%">
@@ -48,14 +86,13 @@
                                 <div class="card-header d-flex">
                                     <h4 class="card-title">{{ $announcement->subject }}</h4> &nbsp; &nbsp; &nbsp;
                                     <button type="button" class="btn btn-outline-danger deleteBtn"
-                                        value="{{ $announcement->id }}">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                            fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                                        value="{{ $announcement->id }}"><svg xmlns="http://www.w3.org/2000/svg"
+                                            width="16" height="16" fill="currentColor" class="bi bi-trash3-fill"
+                                            viewBox="0 0 16 16">
                                             <path
                                                 d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" />
                                         </svg>
-                                    </button> &nbsp; &nbsp;
-
+                                    </button> &nbsp; &nbsp;  
                                     <button type="button" class="btn btn-outline-dark announcement_edit_btn"
                                         data-announcement-id='{{ $announcement->id }}' data-bs-toggle="modal"
                                         data-bs-target="#editAnnouncementModal">
@@ -78,8 +115,8 @@
                                 <div class="card-footer text-muted">
                                     <div class="row align-items-center">
                                         <div class="col-auto">
-                                            <img style="width: 75px" src="{{ Auth::user()->profile_picture }}"
-                                                alt="" class="rounded-circle">
+                                            <img style="width: 75px" src="{{ asset('image/gwapo1.jpg') }}" alt=""
+                                                class="rounded-circle">
                                         </div>
                                         <div class="col">
                                             <h5 class="card-title">{{ $announcement->user->first_name }}
@@ -98,7 +135,7 @@
             </div>
         </div>
     </div>
-
+</div>
 
     <!-- Add Announcement Modal -->
 

@@ -1,7 +1,10 @@
 @extends('layouts.owner')
 
 @section('content')
-    <div class="container" style="margin-top: 7%">
+    <div class="container" style="margin-top: 10%">
+            <div class="card p-2 mt-5"><div class=" col-6 p-4">Note: Add the properties first before adding any tenants.</div>
+    </div>
+    <div class="container" style="margin-top: 10px">
         @if (Session::has('message'))
             <script>
                swal("Message", "{{ Session::get('message') }}", 'success' ,{
@@ -11,7 +14,7 @@
             </script>
         @endif
 
-        <div class="card p-2 mt-5">
+        <div class="card p-2 mt-2 mb-3">
             <div class="row justify-content-center">
                 <div class="col-md-6 p-4">
                     <h2>J and E Rental Properties</h2>
@@ -63,16 +66,40 @@
                 </div>
             </div>
 
+            <!-- <div class="card-group row d-flex align-items-center justify-content-center gap-2 mb-2" style="margin-top: 4vh;">
+                <h4 class="row d-flex align-items-center justify-content-center"> Total</h4>
+                <div class="card border-primary mb-3 shadow-sm p-3 mb-5 rounded col-6 col-md-4" style="max-width: 15rem;">
+                    <div class="card-body text-black">
+                        <h4>Properties</h4>
+                        <h4>{{ $totalProperties }}</h4>
+                    </div>
+                </div>
+
+                <div class="card border-primary mb-3 shadow-sm p-3 mb-5 rounded col-6 col-md-4" style="max-width: 15rem;">
+                    <div class="card-body text-black">
+                        <h4>Occupied</h4>
+                        <h4>{{ $totalOccupiedProperties }}</h4>
+                    </div>
+                </div>
+
+                <div class="card border-primary mb-3 shadow-sm p-3 mb-5 rounded col-6 col-md-4" style="max-width: 15rem;">
+                    <div class="card-body text-black">
+                        <h4>Available</h4>
+                        <h4>{{ $totalAvailProperties }}</h4>
+                    </div>
+                </div>
+            </div> -->
+
             <div class="d-flex justify-content-between" style="font-size: 110%">
                 <div class="col-form-label">Total Properties: {{ $totalProperties }}</div>
             </div>
 
             <div class="d-flex justify-content-between" style="font-size: 110%">
-                <div class="col-form-label">Total OCCUPIED Properties: {{ $totalOccupiedProperties }}</div>
+                <div class="col-form-label">Total <span class="text-black bg-warning p-1">Occupied:</span> {{ $totalOccupiedProperties }}</div>
             </div>
 
             <div class="d-flex justify-content-between" style="font-size: 110%">
-                <div class="col-form-label">Total AVAILABLE Properties: {{ $totalAvailProperties }}</div>
+                <div class="col-form-label">Total <span class="text-white bg-success p-1">Available:</span> {{ $totalAvailProperties }}</div>
             </div>
 
             <div class="card p-2">
@@ -86,7 +113,7 @@
                             <th scope="col">Inclusions</th>
                             <th scope="col">Status</th>
                             <th scope="col">Occupant</th>
-                            <th scope="col">Details</th>
+                            <th scope="col">Edit</th>
 
                         </tr>
                     </thead>
@@ -99,7 +126,16 @@
                                 <td>{{ $property->room_unit }}</td>
                                 <td>{{ $property->room_fee }}</td>
                                 <td>{{ $property->inclusion }}</td>
-                                <td>{{ $property->status }}</td>
+                                <td>
+                                    <!--change color when prompted-->
+                                @if ($property->status == 'Occupied')
+                                    <span class="text-black bg-warning p-1">Occupied</span>
+                                @elseif ($property->status == 'Available')
+                                    <span class="text-white bg-success p-1">Available</span>
+                                @else
+                                    {{ $property->status }}
+                                @endif
+                                </td>
                                 <td>
                                     @if ($property->user)
                                         {{ $property->user->first_name }} {{ $property->user->last_name }}
@@ -109,7 +145,10 @@
                                 </td>
                                 <td> <button class="btn btn-primary btn-sm propertyDetailsBtn"
                                         data-property-id='{{ $property->id }}' data-bs-toggle='modal'
-                                        data-bs-target='#propertyModal'>Details</button></td>
+                                        data-bs-target='#propertyModal'>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                                            <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                                        </svg></button></td>
                             </tr>
                         @endforeach
                     </tbody>
@@ -134,73 +173,83 @@
                                             type="hidden" class="form-control" name="edit_property_id" value=""
                                             readonly>
                                     </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <!--Left column-->
+                                                <label for="edit_location" class="form-label">{{ __('Location') }}</label>
+                                                <input id="edit_location" name="edit_location" type="text"
+                                                    class="form-control @error('edit_location') is-invalid @enderror"
+                                                    value="{{ old('edit_location') }}" required autofocus>
+                                                @error('edit_location')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
 
-                                    <label for="edit_location" class="form-label">{{ __('Location') }}</label>
-                                    <input id="edit_location" name="edit_location" type="text"
-                                        class="form-control @error('edit_location') is-invalid @enderror"
-                                        value="{{ old('edit_location') }}" required autofocus>
-                                    @error('edit_location')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
 
+                                                <label for="edit_room_unit" class="form-label">{{ __('Room Unit') }}</label>
+                                                <input id="edit_room_unit" name="edit_room_unit" type="text"
+                                                    class="form-control @error('edit_room_unit') is-invalid @enderror"
+                                                    value="{{ old('edit_room_unit') }}" required autofocus>
+                                                @error('edit_room_unit')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
 
-                                    <label for="edit_room_unit" class="form-label">{{ __('Room Unit') }}</label>
-                                    <input id="edit_room_unit" name="edit_room_unit" type="text"
-                                        class="form-control @error('edit_room_unit') is-invalid @enderror"
-                                        value="{{ old('edit_room_unit') }}" required autofocus>
-                                    @error('edit_room_unit')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
+                                                <label for="edit_room_fee" class="form-label">{{ __('Room Fee') }}</label>
+                                                <input id="edit_room_fee" name="edit_room_fee" type="text"
+                                                    class="form-control @error('edit_room_fee') is-invalid @enderror"
+                                                    value="{{ old('edit_room_fee') }}" required autofocus>
+                                                @error('edit_room_fee')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                    <!--Right Column-->
+                                                    <label for="edit_inclusions" class="form-label">{{ __('Inclusions') }}</label>
+                                                    <input id="edit_inclusions" name="edit_inclusions" type="text"
+                                                        class="form-control @error('edit_inclusions') is-invalid @enderror"
+                                                        value="{{ old('edit_inclusions') }}" required autofocus>
+                                                    @error('edit_inclusions')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
 
-                                    <label for="edit_room_fee" class="form-label">{{ __('Room Fee') }}</label>
-                                    <input id="edit_room_fee" name="edit_room_fee" type="text"
-                                        class="form-control @error('edit_room_fee') is-invalid @enderror"
-                                        value="{{ old('edit_room_fee') }}" required autofocus>
-                                    @error('edit_room_fee')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
+                                                    <label for="edit_occupant" class="form-label">{{ __('Occupant') }}</label>
+                                                    <input id="edit_occupant" name="edit_occupant" type="text"
+                                                        class="form-control @error('edit_occupant') is-invalid @enderror"
+                                                        value="" required autofocus readonly>
+                                                    @error('edit_occupant')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
 
-                                    <label for="edit_inclusions" class="form-label">{{ __('Inclusions') }}</label>
-                                    <input id="edit_inclusions" name="edit_inclusions" type="text"
-                                        class="form-control @error('edit_inclusions') is-invalid @enderror"
-                                        value="{{ old('edit_inclusions') }}" required autofocus>
-                                    @error('edit_inclusions')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-
-                                    <label for="edit_occupant" class="form-label">{{ __('Occupant') }}</label>
-                                    <input id="edit_occupant" name="edit_occupant" type="text"
-                                        class="form-control @error('edit_occupant') is-invalid @enderror"
-                                        value="" required autofocus readonly>
-                                    @error('edit_occupant')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-
-                                    <label for="edit_status" class="form-label">{{ __('Status') }}</label>
-                                    <input id="edit_status" name="edit_status" type="text"
-                                        class="form-control @error('edit_status') is-invalid @enderror"
-                                        value="{{old('edit_status')}}" required autofocus readonly>
-                                    @error('edit_status')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-
+                                                    <label for="edit_status" class="form-label">{{ __('Status') }}</label>
+                                                    <input id="edit_status" name="edit_status" type="text"
+                                                        class="form-control @error('edit_status') is-invalid @enderror"
+                                                        value="{{old('edit_status')}}" required autofocus readonly>
+                                                    @error('edit_status')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
                                 </div>
 
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary"
-                                        data-bs-dismiss="modal">{{ __('Cancel') }}</button>
+                                    <!-- <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">{{ __('Cancel') }}</button> -->
                                     <button type="submit" class="btn btn-primary">{{ __('Update') }}</button>
                                 </div>
                             </form>

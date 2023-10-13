@@ -9,7 +9,7 @@
     <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-md-12 mt-4">
-                <div class="card mt-5">
+                <div class="card p-2 mt-5">
                     <div class="text-center col-md-12 p-2">
                         <h2>J and E Rental Maintenance</h2>
                     </div>

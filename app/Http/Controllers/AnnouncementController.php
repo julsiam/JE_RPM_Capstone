@@ -20,12 +20,16 @@ class AnnouncementController extends Controller
 
     public function addAnnouncement(Request $request)
     {
+        date_default_timezone_set('America/New_York');
+        
+        $currentDate = date('Y-m-d H:i');
 
-        $user = Auth::user(); // Retrieve the authenticated user
+        $user = Auth::user();
         $announcement = new Announcement();
         $announcement->user_id = $user->id; // Assign the user's ID to the user_id field
         $announcement->subject = $request->input('subject');
         $announcement->details = $request->input('details');
+        $announcement->date_created = $currentDate;
         $announcement->location = $request->input('visibleLocation');
         $announcement->save();
 

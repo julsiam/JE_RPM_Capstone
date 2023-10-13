@@ -1,8 +1,7 @@
 {
     "private": true,
     "scripts": {
-        "dev": "npm run development",
-        "development": "mix",
+        "dev": "vite",
         "build": "npm run production",
         "start": "php artisan serve",
         "migrate": "php artisan migrate",

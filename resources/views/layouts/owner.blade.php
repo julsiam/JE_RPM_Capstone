@@ -327,7 +327,7 @@
     <script src="{{ secure_asset('js/search_sort.js') }}"></script>
     <script src="{{ secure_asset('js/announcement.js') }}"></script>
     <script src="{{ secure_asset('js/delete_confirm.js') }}"></script>
-    <script src="{{ secure_secure('js/data_tables.js') }}"></script>
+    <script src="{{ secure_asset('js/data_tables.js') }}"></script>
     <script src="{{ secure_asset('js/paid_records.js') }}"></script>
     <script src="{{ secure_asset('js/unpaid_records.js') }}"></script>
     <script src="{{ secure_asset('js/notfullypaid_records.js') }}"></script>

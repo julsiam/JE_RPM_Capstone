@@ -8,9 +8,11 @@
         "watch":"mix watch",
         "start": "php artisan serve",
         "migrate": "php artisan migrate",
-        "seed": "php artisan db:seed",
+        "notification": "php artisan notification:create",
+        "seed": "php artisan db:seed --class=UserSeeder",
         "optimize": "php artisan optimize:clear",
-        "storage:link": "php artisan storage:link"
+        "storage:link": "php artisan storage:link",
+        "sms": "php artisan sms:send-due-date-notifications"
     },
     "devDependencies": {
         "@popperjs/core": "^2.11.6",

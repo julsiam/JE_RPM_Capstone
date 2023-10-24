@@ -25,6 +25,13 @@ class Rental extends Model
         'status'
     ];
 
+    protected $casts = [
+        // 'rent_from' => 'datetime',
+        // 'due_date' => 'datetime',
+        // 'date_paid' => 'datetime',
+
+    ];
+
     public function user(){
         return $this->belongsTo(User::class, 'user_id');
     }

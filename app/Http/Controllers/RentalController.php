@@ -9,6 +9,8 @@ use App\Models\RentalHistory;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Mail;
+use App\Mail\SendReceiptEmail;
 
 class RentalController extends Controller
 {
@@ -53,15 +55,40 @@ class RentalController extends Controller
         $rental->amount_paid = $request->input('edit_amount_paid');
         $rental->balance = $request->input('edit_balance');
         $rental->status = $request->input('edit_status');
+        $rental->date_paid = $request->input('edit_date_updated');
         $rental->save();
+
+        $email = $request->input('email');
+
+        if ($request->input('edit_status') === 'Paid') {
+            $mailData = [
+                'date_paid' => $rental->date_paid, //or $request->input('edit_water_bill'),
+                'first_name' => $rental->user->first_name, // or   'tenant_name' =>$request->input('first_name'),
+                'last_name' => $rental->user->last_name,
+                'rent_from' => $rental->rent_from,
+                'due_date' => $rental->due_date,
+
+                'location' => $rental->property->location,
+                'room_unit' => $rental->property->room_unit,
+                'room_rent' => $rental->property->room_fee,
+                'water_bill' => $request->input('edit_water_bill'),
+                'electric_bill' => $request->input('edit_electric_bill'),
+                'amount_paid' => $request->input('edit_amount_paid'),
+                'total_bill' => $request->input('edit_total_bill'),
+
+            ];
+
+            Mail::to($email)->send(new SendReceiptEmail($mailData));
+        }
+
 
         // Find the corresponding RentalHistory record
         $existingRentalHistory = RentalHistory::where('rental_id', $rental->id)
             ->where('start_date', $rental->rent_from)
             ->where('end_date', $rental->due_date)
-            ->where(function($query){
+            ->where(function ($query) {
                 $query->where('status', 'Not Yet Paid')
-                ->orWhere('status', 'Not Fully Paid');
+                    ->orWhere('status', 'Not Fully Paid');
             })
             ->first();
 
@@ -142,7 +169,7 @@ class RentalController extends Controller
             ->where('seen', 0)
             ->count();
 
-        return view('business_owner.paid_reports', compact('notifications', 'newNotification','rentLocations'));
+        return view('business_owner.paid_reports', compact('notifications', 'newNotification', 'rentLocations'));
     }
 
     //GET PAID REPORTS
@@ -193,7 +220,7 @@ class RentalController extends Controller
             ->where('seen', 0)
             ->count();
 
-        return view('business_owner.unpaid_reports', compact('notifications', 'newNotification','locations'));
+        return view('business_owner.unpaid_reports', compact('notifications', 'newNotification', 'locations'));
     }
 
 
@@ -248,7 +275,7 @@ class RentalController extends Controller
             ->where('seen', 0)
             ->count();
 
-        return view('business_owner.notfullypaid_records', compact('notifications', 'newNotification','locations'));
+        return view('business_owner.notfullypaid_records', compact('notifications', 'newNotification', 'locations'));
     }
 
     //GET NOT FULLY PAID RECORDS
@@ -296,11 +323,11 @@ class RentalController extends Controller
         $currentDate = date('Y-m-d');
 
         $tenantsWithDues = Rental::with('user', 'property')
-            //->where('status', 'Not Yet Paid')
+            // ->where('status', 'Not Yet Paid')
             ->whereDate('due_date', $currentDate)
             // ->where(function ($query) {
-            //     $query->where('status', 'Unpaid')
-            //         ->orWhere('amount_paid', 0);
+            //     $query->where('status', 'Not Yet Paid')
+            //         ->orWhere('amount_paid', 0.00);
             // })
             ->get();
 

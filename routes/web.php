@@ -4,10 +4,12 @@ use App\Http\Controllers\AnnouncementController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MailController;
 use App\Http\Controllers\MaintenanceController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\RentalController;
+use App\Http\Controllers\SmsController;
 use App\Http\Controllers\UserController;
 
 
@@ -24,6 +26,10 @@ use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('/mail', function () {
+    return view('email.receipt_mail');
 });
 
 
@@ -170,7 +176,7 @@ Route::middleware(['auth', 'user-access:business_owner'])->group(function () {
     Route::get('/calendar', [RentalController::class, 'getTodaysDue'])->name('calendar');
 
     Route::get('/profile', [UserController::class, 'profilePage']);
-    
+
     Route::get('/get_profile_details', [UserController::class, 'getProfileDetails']);
 
     Route::post('/edit_profile_pic', [UserController::class, 'editProfilePicture'])->name('edit_profile_pic');
@@ -180,5 +186,8 @@ Route::middleware(['auth', 'user-access:business_owner'])->group(function () {
 
     Route::get('/total_notification', [NotificationController::class, 'totalNotification']);
 
-    // Route::get('/get_notification', [NotificationController::class, 'showNotification']);
+    Route::get('/sms', [SmsController::class, 'sendsms']);
+
+    Route::get('email', [MailController::class, 'sendReceiptEmail']);
+
 });

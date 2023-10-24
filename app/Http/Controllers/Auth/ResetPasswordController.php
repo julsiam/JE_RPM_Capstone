@@ -26,5 +26,14 @@ class ResetPasswordController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
-}
+    protected function redirectTo()
+    {
+        $userType = auth()->user()->type;
+
+        if ($userType === 'tenant') {
+            return RouteServiceProvider::HOME; // Redirect tenants to their home page
+        } elseif ($userType === 'business_owner') {
+            return RouteServiceProvider::DASHBOARD; // Redirect business owners to their dashboard
+        }
+    }
+    }

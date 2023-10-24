@@ -347,7 +347,8 @@ class UserController extends Controller
 
     public function editProfile(Request $request)
     {
-        $user = Auth::user();
+        // $user = Auth::user();
+        $user = User::find(Auth::user()->id);
 
         $validator = Validator::make($request->all(), [
             'edit_firstname' => ['required', 'string', 'max:255'],
@@ -383,7 +384,7 @@ class UserController extends Controller
 
     public function editProfilePicture(Request $request)
     {
-        $user = Auth::user();
+        $user = User::find(Auth::user()->id);
 
         $validator = Validator::make($request->all(), [
             'profilePictureInput' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust the file types and size as needed

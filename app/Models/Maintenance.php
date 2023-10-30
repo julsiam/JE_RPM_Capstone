@@ -21,6 +21,7 @@ class Maintenance extends Model
 
     protected $casts = [
         'date_requested' => 'datetime',
+        'schedule' => 'datetime',
     ];
 
     public function user(){

@@ -1,13 +1,13 @@
-const tenant_locs = $('#locs');
+const tenant_locations = $('#locs');
 
 function loc_selection(avail_locs) {
-    tenant_locs.empty();
+    tenant_locations.empty();
 
     const allOption = $('<option>', {
         value: 'ALL',
         text: 'ALL'
     });
-    tenant_locs.append(allOption);
+    tenant_locations.append(allOption);
 
 
     for (const key in avail_locs) {
@@ -16,7 +16,7 @@ function loc_selection(avail_locs) {
                 value: avail_locs[key],
                 text: avail_locs[key]
             })
-            tenant_locs.append(option);
+            tenant_locations.append(option);
         }
     }
 }

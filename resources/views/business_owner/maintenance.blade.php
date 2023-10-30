@@ -34,11 +34,11 @@
                         <table id="maintenanceData" class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th>Date Created</th>
+                                    <th>Schedule</th>
                                     <th>Category</th>
                                     <th>Priority</th>
                                     <th>Author</th>
-                                    <th>Schedule</th>
+                                    <th>Date Created</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>
@@ -47,17 +47,18 @@
                             <tbody>
                                 @foreach ($maintenance as $maintenance)
                                     <tr>
-                                        <td scope="row">{{ $maintenance->date_requested->format('F d, Y') }}</td>
-                                        <td>{{ $maintenance->category }}</td>
-                                        <td>{{ $maintenance->priority }}</td>
-                                        <td> {{ $maintenance->user->first_name }} {{ $maintenance->user->last_name }} </td>
                                         <td>
                                             @if ($maintenance->schedule)
-                                                {{ $maintenance->schedule }}
+                                                {{ $maintenance->schedule->format('F d, Y | g:i A') }}
                                             @else
                                                Not Yet Scheduled
                                             @endif
                                         </td>
+                                        <td>{{ $maintenance->category }}</td>
+                                        <td>{{ $maintenance->priority }}</td>
+                                        <td> {{ $maintenance->user->first_name }} {{ $maintenance->user->last_name }} </td>
+                                        <td scope="row">{{ $maintenance->date_requested->format('F d, Y') }}</td>
+
                                         <td>{{ $maintenance->status }}</td>
                                         <td>
                                             <button class="btn btn-primary btn-sm maintenance-details-button"

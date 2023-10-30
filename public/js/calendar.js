@@ -11,6 +11,19 @@ $(document).ready(function () {
         selectable: true,
         selectHelper: true,
 
+        events: {
+            url: '/calendar',
+            method: 'GET',
+            failure: function () {
+                alert('there was an error while fetching events!');
+            },
+            success: function (data) {
+                console.log(data); // Log the data received from the server
+            },
+            color: 'green',   // a non-ajax option
+            textColor: 'white'
+        },
+
         eventRender: function (event, element) {
             if (event.status === 'Not Yet Paid' || event.amount_paid === 0.00) {
                 element.popover({
@@ -25,17 +38,6 @@ $(document).ready(function () {
 
             } else {
                 return false;
-            }
-        },
-
-        events: {
-            url: '/calendar',
-            method: 'GET',
-            failure: function () {
-                alert('there was an error while fetching events!');
-            },
-            success: function (data) {
-                console.log(data); // Log the data received from the server
             }
         },
 

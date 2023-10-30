@@ -1,5 +1,23 @@
 @extends('layouts.owner')
 
+<style>
+.card-title{
+    color: #003057;
+    font-weight: 600;
+}
+
+option{
+    color: #003057;
+    font-weight: 600;
+}
+.card-name{
+    color: #003057;
+    font-weight: 700;
+}
+
+
+</style>
+
 @section('content')
 <div class="container-fluid"> <div class="row justify-content-center"> <div style="margin-top:7%;" class="col-md-12">
     @if (session('status'))
@@ -8,9 +26,8 @@
     </div>
     @endif
 
-    <div class="card-group row d-flex align-items-center justify-content-center gap-3 mx-2" style="
-    padding-top: 50px;">
-    <div class="card border-primary mb-3 shadow-sm p-1 mb-3 rounded col-12 col-md-4" style="height: 170px;" >
+    <div class="card-group row d-flex align-items-center justify-content-center gap-3 mx-2" style="padding-top: 50px;">
+    <div class="card border-primary mb-3 shadow-sm p-1 mb-3 rounded col-12 col-md-4" style="height: 170px;border-style: none;background-color:  #ffdd90;" >
     <div class="card-body text-black">
         <div class="svg-cont d-flex justify-content-md-end">
         <select style="width: 35mm; height: 9mm" id="locs" class="form-select" @error('locs') is-invalid @enderror
@@ -25,15 +42,13 @@
         1.492-1.256 3.16-1.275ZM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0Zm3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4Z" />
         </svg>
         </div>
-        <h3 id="tenantCount" class="card-title">{{ $totalTenants }}</h3>
+        <h3 id="tenantCount" class="card-title" style="color: #003057;">{{ $totalTenants }}</h3>
         <h4 class="card-name">Tenants</h4>
 
         </div>
     </div>
 
-<div class="card border-dark mb-3 shadow-sm p-2 mb-1 rounded col-12 col-md-4" style="
-height: 170px;
-">
+<div class="card border-dark mb-3 shadow-sm p-2 mb-1 rounded col-12 col-md-4" style="height: 170px;border-style: none;background-color: #ffdd90;">
 <div class="card-body text-black">
     <div class="svg-cont d-flex justify-content-md-end">
         <select style="width: 35mm; height: 9mm" id="prop_locs" class="form-select" @error('prop_locs') is-invalid
@@ -48,14 +63,14 @@ height: 170px;
     </div>
 
 
-    <h3 id="propertyCount" class="card-title"> {{ $totalProperties }}</h3>
+    <h3 id="propertyCount" class="card-title" style="color: #003057;"> {{ $totalProperties }}</h3>
     <h4 class="card-name">Properties</h4>
     <div class="row">
         <div class="col-6">
-            <h6 id="availPropertyCount" class="card-title">Available: {{ $availProperties }}</h6>
+            <h6 id="availPropertyCount" class="card-title" style="color: #003057;">Available: {{ $availProperties }}</h6>
         </div>
         <div class="col-6">
-            <h6 id="occupiedPropertyCount" class="card-title">Occupied: {{ $occupiedProperties }}
+            <h6 id="occupiedPropertyCount" class="card-title" style="color: #003057;">Occupied: {{ $occupiedProperties }}
             </h6>
 
         </div>
@@ -64,9 +79,7 @@ height: 170px;
 </div>
 </div>
 
-<div class="card border-warning mb-3 shadow-sm p-2 mb-1 rounded col-12 col-md-4 mb-4" style="
-    height: 170px;
-">
+<div class="card border-warning mb-3 shadow-sm p-2 mb-1 rounded col-12 col-md-4" style="height: 170px;border-style: none;background-color: #ffdd90;">
     <a style="text-decoration: none" href="{{ url('maintenance') }}">
         <div class="card-body text-black">
             <div class="svg-cont d-flex justify-content-md-end">
@@ -77,15 +90,13 @@ height: 170px;
                         d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0Zm-1 0a7 7 0 1 0-13.202 3.249l1.988-1.657a4.5 4.5 0 0 1 7.537-4.623L7.497 6.5l1 2.5 1.333 3.11c-.56.251-1.18.39-1.833.39a4.49 4.49 0 0 1-1.592-.29L4.747 14.2A7 7 0 0 0 15 8Zm-8.295.139a.25.25 0 0 0-.288-.376l-1.5.5.159.474.808-.27-.595.894a.25.25 0 0 0 .287.376l.808-.27-.595.894a.25.25 0 0 0 .287.376l1.5-.5-.159-.474-.808.27.596-.894a.25.25 0 0 0-.288-.376l-.808.27.596-.894Z" />
                 </svg>
             </div>
-            <h3 class="card-title">{{ $totalMaintenance }}</h3>
+            <h3 class="card-title" style="color: #003057;">{{ $totalMaintenance }}</h3>
             <h4 class="card-name">Maint. Request</h4>
         </div>
     </a>
 </div>
 
-<div class="card border-success mb-3 shadow-sm p-2 mb-1 rounded col-12 col-md-4 mb-4" style="
-    height: 170px;
-">
+<div class="card border-success mb-3 shadow-sm p-2 mb-1 rounded col-12 col-md-4 " style="height: 170px;border-style: none;background-color: #ffdd90;">
     <div class="card-body text-black">
         <div class="svg-cont d-flex justify-content-md-end">
             <select style="width: 35mm; height: 9mm" id="month_select" name="month_select"
@@ -104,7 +115,7 @@ height: 170px;
                 <option value="December">December</option>
             </select>
         </div>
-        <h3 id="totalIncome" class="card-title">₱ {{$totalMonthIncome}} </h3>
+        <h3 id="totalIncome" class="card-title" style="color: #003057;">₱ {{$totalMonthIncome}} </h3>
         <h4 class="card-name">Monthly Total Income</h4>
     </div>
 </div>

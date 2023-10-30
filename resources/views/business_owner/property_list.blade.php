@@ -2,7 +2,10 @@
 
 @section('content')
     <div class="container" style="margin-top: 10%">
-            <div class="card p-2 mt-5"><div class=" col-6 p-4">Note: Add the properties first before adding any tenants.</div>
+            <div class="row justify-content-center"  style="
+    padding-left: 12px;
+    font-size: medium;
+"><div class="" style=" color: #ff4d21;font-weight: 700;">Note: Add the properties first before adding any tenants.</div>
     </div>
     <div class="container" style="margin-top: 10px">
         @if (Session::has('message'))
@@ -15,12 +18,15 @@
         @endif
 
         <div class="card p-2 mt-2 mb-3">
-            <div class="row justify-content-center">
-                <div class="col-md-6 p-4">
-                    <h2>J and E Rental Properties</h2>
+            <div class="row justify-content-center" style="
+    height: 48px;
+">
+                <div class="col-md-6 p-1">
+                    <h2 style="color: #ff4d21;font-weight: 700;padding-top: 15px;padding-left: 23px;">J and E Rental Properties</h2>
+                    
                 </div>
 
-                <div class="col-md-6 text-end">
+                <div class="col-md-6 text-end" style="padding-top: 13px;">
                     {{-- PDF --}}
                     {{-- <a href="" class="btn btn btn-outline-danger me-2"><svg xmlns="http://www.w3.org/2000/svg"
                             width="16" height="16" fill="currentColor" class="bi bi-file type-pdf"
@@ -65,7 +71,7 @@
                         </svg></a>
                 </div>
             </div>
-
+<hr>
             <!-- <div class="card-group row d-flex align-items-center justify-content-center gap-2 mb-2" style="margin-top: 4vh;">
                 <h4 class="row d-flex align-items-center justify-content-center"> Total</h4>
                 <div class="card border-primary mb-3 shadow-sm p-3 mb-5 rounded col-6 col-md-4" style="max-width: 15rem;">
@@ -91,15 +97,15 @@
             </div> -->
 
             <div class="d-flex justify-content-between" style="font-size: 110%">
-                <div class="col-form-label">Total Properties: {{ $totalProperties }}</div>
+                <div class="col-form-label" style="color: #003057;font-weight: 700;">Total Properties: {{ $totalProperties }}</div>
             </div>
 
             <div class="d-flex justify-content-between" style="font-size: 110%">
-                <div class="col-form-label">Total <span class="text-black bg-warning p-1">Occupied:</span> {{ $totalOccupiedProperties }}</div>
+                <div class="col-form-label" style="color: #003057;font-weight: 700;">Total <span class="text-black bg-warning p-1">Occupied:</span> {{ $totalOccupiedProperties }}</div>
             </div>
 
             <div class="d-flex justify-content-between" style="font-size: 110%">
-                <div class="col-form-label">Total <span class="text-white bg-success p-1">Available:</span> {{ $totalAvailProperties }}</div>
+                <div class="col-form-label" style="color: #003057;font-weight: 700;">Total <span class="text-white bg-success p-1">Available:</span> {{ $totalAvailProperties }}</div>
             </div>
 
             <div class="card p-2">

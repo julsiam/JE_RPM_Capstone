@@ -75,6 +75,9 @@
     a.alert_message:hover {
         color: grey
     }
+    body{
+        background-color: #ffe9b9;
+    }
 </style>
 
 <body>

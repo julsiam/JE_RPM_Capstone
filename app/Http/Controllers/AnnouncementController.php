@@ -20,7 +20,7 @@ class AnnouncementController extends Controller
 
     public function addAnnouncement(Request $request)
     {
-        date_default_timezone_set('America/New_York');
+        date_default_timezone_set('Asia/Manila'); // change default timezone from America/New_York toAsia/Manila
         
         $currentDate = date('Y-m-d H:i');
 

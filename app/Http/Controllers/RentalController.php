@@ -9,8 +9,8 @@ use App\Models\RentalHistory;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-use Mail;
 use App\Mail\SendReceiptEmail;
+use Illuminate\Support\Facades\Mail;
 
 class RentalController extends Controller
 {

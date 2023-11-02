@@ -27,15 +27,12 @@
                     @endif
 
                     <div class="card-body">
-                        <div class="nav nav-fill my-3">
-                            <label class="nav-link shadow-sm step0    border ml-2 ">Personal Information</label>
-                            <label class="nav-link shadow-sm step1   border ml-2 ">Accomodation Information</label>
-                            <label class="nav-link shadow-sm step2   border ml-2 ">Rental Information</label>
-                            <label class="nav-link shadow-sm step3   border ml-2 ">Other Information</label>
-                        </div>
                         <form method="POST" action="{{ route('tenant.addTenant') }}" class="tenant_form" enctype="multipart/form-data">
                             @csrf
-                            <div class="form-section">
+                            <div class="nav nav-fill my-3">
+                                <label class="nav-link shadow-sm step0    border ml-2 ">Personal Information</label>
+                            </div>
+                            <div class="form-scrolling-section">
                                 <div class="row mb-3">
                                     <label for="first_name"
                                         class="col-md-4 col-form-label text-md-end">{{ __('First Name') }}</label>
@@ -230,10 +227,24 @@
                                         @enderror
                                     </div>
                                 </div>
-                            </div>
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <input id="property_id" type="hidden"
+                                            class="form-control @error('property_id') is-invalid @enderror"
+                                            name="property_id" value="{{ old('property_id') }}"
+                                            autocomplete="property_id" autofocus readonly>
 
-
-                            <div class="form-section">
+                                        @error('property_id')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <!--Accomodation-->
+                                <div class="nav nav-fill my-3">
+                                    <label class="nav-link shadow-sm step1   border ml-2 ">Accomodation Information</label>
+                                </div>
                                 <div class="row mb-3">
                                     <label for="location"
                                         class="col-md-4 col-form-label text-md-end">{{ __('Location') }}</label>
@@ -256,7 +267,6 @@
                                         @enderror
                                     </div>
                                 </div>
-
                                 <div class="row mb-3">
                                     <label for="room_unit"
                                         class="col-md-4 col-form-label text-md-end">{{ __('Room Unit') }}</label>
@@ -290,43 +300,6 @@
                                         @enderror
                                     </div>
                                 </div>
-                            </div>
-
-
-                            <div class="form-section">
-                                <div class="row mb-3">
-                                    <div class="col-md-6">
-                                        <input id="property_id" type="hidden"
-                                            class="form-control @error('property_id') is-invalid @enderror"
-                                            name="property_id" value="{{ old('property_id') }}"
-                                            autocomplete="property_id" autofocus readonly>
-
-                                        @error('property_id')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
-
-
-                                <div class="row mb-3">
-                                    <label for="name"
-                                        class="col-md-4 col-form-label text-md-end">{{ __('Tenant Name') }}</label>
-
-                                    <div class="col-md-6">
-                                        <input id="name" type="text"
-                                            class="form-control @error('name') is-invalid @enderror" name="name"
-                                            value="{{ old('name') }}" required autocomplete="name" autofocus readonly>
-
-                                        @error('name')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
-
                                 <div class="row mb-3">
                                     <label for="rent_started"
                                         class="col-md-4 col-form-label text-md-end">{{ __('Move-in Date') }}</label>
@@ -450,7 +423,7 @@
                                     </div>
                                 </div>
 
-                                <div class="row mb-3">
+                                 <div class="row mb-3">
                                     <label for="electric_bill"
                                         class="col-md-4 col-form-label text-md-end">{{ __('Electric Bill') }}</label>
                                     <div class="col-md-6">
@@ -464,9 +437,9 @@
                                             </span>
                                         @enderror
                                     </div>
-                                </div>
+                                </div> 
 
-                                <div class="row mb-3">
+                                 <div class="row mb-3">
                                     <label for="total_bill"
                                         class="col-md-4 col-form-label text-md-end">{{ __('Total Bill') }}</label>
                                     <div class="col-md-6">
@@ -479,7 +452,7 @@
                                             </span>
                                         @enderror
                                     </div>
-                                </div>
+                                </div> 
 
                                 {{-- value="{{ old('amount_paid') }}" --}}
 
@@ -531,15 +504,14 @@
                                             </span>
                                         @enderror
                                     </div>
-
-                                </div>
+                                </div> 
                             </div>
-
-
-                            {{-- FILE UPLOAD --}}
-
-                            <div class="form-section">
-                                <div class="row mb-3">
+                                 <!--Others-->
+                                <div class="nav nav-fill my-3">
+                                    <label class="nav-link shadow-sm step2   border ml-2 ">Other Information</label>
+                                </div>
+                                    {{-- FILE UPLOAD --}}
+                                    <div class="row mb-3">
                                     <label for="id_photo"
                                         class="col-md-4 col-form-label text-md-end">{{ __('ID Photo') }}</label>
 
@@ -559,7 +531,7 @@
                                         @enderror
                                     </div>
                                 </div>
-
+                                
                                 <div class="row mb-3">
                                     <label for="contract_pdf"
                                         class="col-md-4 col-form-label text-md-end">{{ __('Contract/MOA') }}</label>
@@ -580,26 +552,13 @@
                                             </span>
                                         @enderror
                                     </div>
+
+                                    <div class="col-md-8">
+                                        <button type="submit" class="btn btn-primary">
+                                            {{ __('Add Tenant') }}
+                                        </button>
+                                    </div>
                                 </div>
-                            </div>
-
-
-
-
-
-                            <div class="row mb-0 form form-navigation">
-                                <div class="col-md-8 offset-md-4">
-                                    <button type="button" class="previous btn btn-primary float-left">&lt;
-                                        Previous</button>
-                                    <button type="button" class="next btn btn-primary">Next &gt;</button>
-
-                                    <button type="submit" class="btn btn-primary">
-                                        {{ __('Add Tenant') }}
-                                    </button>
-                                </div>
-                                {{-- <a style="cursor: pointer; width: 100px;color:#fff;" class="btn btn-danger"
-                                    onclick="history.back()">BACK
-                                </a> --}}
                             </div>
                         </form>
                     </div>

@@ -18,20 +18,17 @@
                         @csrf
                         <div class="form-section">
                             <div class="row mb-3">
-                                <label for="location"
-                                    class="col-md-4 col-form-label text-md-end">{{ __('Location') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="location" type="text"
-                                        class="form-control @error('location') is-invalid @enderror" name="location"
-                                        value="{{ old('location') }}" required autocomplete="location" autofocus>
-
-                                    @error('location')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
+                                <label for="location" class="col-md-4 col-form-label text-md-end">{{ __('Location') }}</label>
+                                    <div class="col-md-6">
+                                        <input id="location" type="text"
+                                            class="form-control @error('location') is-invalid @enderror" name="location"
+                                            value="{{ old('location') }}" required autocomplete="location" autofocus>
+                                        @error('location')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
                             </div>
 
                             <div class="row mb-3">
@@ -42,7 +39,7 @@
                                     <input id="room_unit" type="text"
                                         class="form-control @error('room_unit') is-invalid @enderror" name="room_unit"
                                         value="{{ old('room_unit') }}" required autocomplete="room_unit" autofocus>
-
+                                   
                                     @error('room_unit')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>

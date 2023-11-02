@@ -120,6 +120,7 @@
                                             <th>RENT FROM</th>
                                             <th>DUES</th>
                                             <th>DATE UPDATED</th>
+                                            <th></th> <!--para mapantay ang table-->
                                             {{-- <th>ROOM RENT</th>
                                             <th>WATER BILL</th>
                                             <th>ELECTRIC BILL</th>
@@ -197,6 +198,7 @@
                                                     </span>
                                                 @enderror
                                             </td>
+                                            <td></td> <!--para mapantay ang table-->
                                         </tr>
                                     </tbody>
 

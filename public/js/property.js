@@ -22,4 +22,30 @@ $(document).ready(function () {
         })
     })
 
+    var roomUnitInput = $("#room_unit");
+    var locationInput = $("#location");
+    var existingRoomUnitInputs = $('[name^="room_unit"]');
+
+    locationInput.on("input", function () {
+        var location = locationInput.val().substring(0, 3).toUpperCase();
+        var availableNumber = 1;
+
+        if (location === "") {
+            roomUnitInput.val(""); // Clear the room unit field if location is empty
+            return;
+        }
+
+        existingRoomUnitInputs.each(function () {
+            var value = $(this).val().toUpperCase();
+            if (value.startsWith("JE_" + location + "-")) {
+                var number = parseInt(value.substring(7), 10);
+                if (!isNaN(number) && number >= availableNumber) {
+                    availableNumber = number + 1;
+                }
+            }
+        });
+
+        roomUnitInput.val("JE_" + location + "-" + availableNumber.toString().padStart(2, "0"));
+    });
 });
+

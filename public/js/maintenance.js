@@ -9,7 +9,7 @@ $(document).ready(function () {
             success: function (data) {
                 $('#modal_id').val(data.id);
                 console.log(data.schedule)
-                $('#modal_author_header').text('Requested By: ' + data.user.first_name + ' ' + data.user.last_name);
+                // $('#modal_author_header').text('Requested By: ' + data.user.first_name + ' ' + data.user.last_name); //pangit na kung magbutang pag in ani nga naa naman author
                 $('#modal_location').text(data.user.property.location);
                 $('#modal_room_unit').text(data.user.property.room_unit);
                 $('#modal_maintenance_status').val(data.status);

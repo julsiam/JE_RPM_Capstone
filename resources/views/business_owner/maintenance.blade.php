@@ -35,10 +35,10 @@
                             <thead>
                                 <tr>
                                     <th>Schedule</th>
-                                    <th>Category</th>
-                                    <th>Priority</th>
-                                    <th>Author</th>
                                     <th>Date Created</th>
+                                    <th>Category</th>
+                                    {{-- <th>Priority</th> --}}
+                                    <th>Author</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>
@@ -54,10 +54,10 @@
                                                Not Yet Scheduled
                                             @endif
                                         </td>
-                                        <td>{{ $maintenance->category }}</td>
-                                        <td>{{ $maintenance->priority }}</td>
-                                        <td> {{ $maintenance->user->first_name }} {{ $maintenance->user->last_name }} </td>
                                         <td scope="row">{{ $maintenance->date_requested->format('F d, Y') }}</td>
+                                        <td>{{ $maintenance->category }}</td>
+                                        {{-- <td>{{ $maintenance->priority }}</td> --}}
+                                        <td> {{ $maintenance->user->first_name }} {{ $maintenance->user->last_name }} </td>
 
                                         <td>{{ $maintenance->status }}</td>
                                         <td>

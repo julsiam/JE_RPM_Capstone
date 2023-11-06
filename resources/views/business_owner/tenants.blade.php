@@ -109,7 +109,7 @@
                                 </td>
                                 <td class="text-center">
                                     @if ($tenant->rental)
-                                        {{ $tenant->rental->due_date }}
+                                        {{ $tenant->rental->due_date->format('F d, Y') }}
                                     @else
                                         N/A
                                     @endif

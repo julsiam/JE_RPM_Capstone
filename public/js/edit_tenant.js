@@ -61,14 +61,18 @@ function selectTenant(id, name, email) { //retrieve data and display to the edit
                 year: 'numeric',
             };
             var formattedRentStarted = rentStarted.toLocaleString('en-US', options);
+            // Parse the datetime string from the data and create a Date object
+            var dueDate = new Date(data.rental.due_date);
 
+            // Format the date as 'yyyy-MM-dd'
+            var formattedDueDate = dueDate.toISOString().split('T')[0];
 
             $("#rental_id").val(data.rental.id);
             $("#edit_location").val(data.rental.property.location);
             $("#edit_room_unit").val(data.rental.property.room_unit);
             $("#edit_rent_started").val(formattedRentStarted);
             $("#edit_rent_from").val(data.rental.rent_from);
-            $("#edit_due_date").val(data.rental.due_date);
+            $("#edit_due_date").val(formattedDueDate);
             $("#edit_room_rent").val(data.rental.property.room_fee);
             $("#edit_water_bill").val(data.rental.water_bill);
             $("#edit_electric_bill").val(data.rental.electric_bill);

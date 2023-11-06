@@ -14,8 +14,8 @@
                             aria-label="Basic mixed styles example">
                             <a href="{{ url('/paid_reports') }}" class="btn btn-outline-success active"
                                 aria-current="page">Paid</a>
-                            <a href="{{ url('/unpaid_reports') }}" class="btn btn-outline-warning"
-                                aria-current="page"> Not Yet Paid</a>
+                            <a href="{{ url('/unpaid_reports') }}" class="btn btn-outline-warning" aria-current="page"> Not
+                                Yet Paid</a>
                             <a href="{{ url('/notfullypaid_reports') }}" class="btn btn-outline-primary"> Not Fully Paid</a>
                         </div>
                     </div>
@@ -76,11 +76,11 @@
                             <div class="col col-lg-2">
                                 <label style="color: rgb(128, 128, 128)">Year:</label>
                                 <select id="yearSelection" name="year" class="form-select form-select-sm">
-                                    <option value="2024">2022</option>
+                                    <option value="2022">2022</option>
                                     <option value="2023">2023</option>
                                     <option value="2024">2024</option>
-                                    <option value="2024">2025</option>
-                                    <option value="2024">2026</option>
+                                    <option value="2025">2025</option>
+                                    <option value="2026">2026</option>
                                 </select>
                             </div>
                             <div class="col col-lg-2 mt-3">
@@ -108,7 +108,6 @@
                                         <th scope="col">Amount Paid</th>
                                     </tr>
                                 </thead>
-
                                 <tbody>
                                 </tbody>
                             </table>
@@ -118,6 +117,26 @@
                     <div class="container text-end">
                         <span class="income_span">Total Income: 0.00</span>
                     </div>
+
+                    <div class="col-md-12 p-4">
+                        {{-- <div class="row" style=" float:left;">
+                            <label class="col-form-label">Total Maintenance</label>
+                            <input style="width: 25%" type="text" class="form-control" id="totalProperties" disabled
+                                value="{{ $totalMaintenance }}">
+                        </div> --}}
+
+                        <div class="row mt-4" style=" float:right;">
+                            <a href="#" class="btn btn btn-outline-danger me-2"><svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-file type-pdf" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M14 4.5V14a2 2 0 0 1-2 2h-1v-1h1a1 1 0 0 0 1-1V4.5h-2A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v9H2V2a2 2 0 0 1 2-2h5.5L14 4.5ZM1.6 11.85H0v3.999h.791v-1.342h.803c.287 0 .531-.057.732-.173.203-.117.358-.275.463-.474a1.42 1.42 0 0 0 .161-.677c0-.25-.053-.476-.158-.677a1.176 1.176 0 0 0-.46-.477c-.2-.12-.443-.179-.732-.179Zm.545 1.333a.795.795 0 0 1-.085.38.574.574 0 0 1-.238.241.794.794 0 0 1-.375.082H.788V12.48h.66c.218 0 .389.06.512.181.123.122.185.296.185.522Zm1.217-1.333v3.999h1.46c.401 0 .734-.08.998-.237a1.45 1.45 0 0 0 .595-.689c.13-.3.196-.662.196-1.084 0-.42-.065-.778-.196-1.075a1.426 1.426 0 0 0-.589-.68c-.264-.156-.599-.234-1.005-.234H3.362Zm.791.645h.563c.248 0 .45.05.609.152a.89.89 0 0 1 .354.454c.079.201.118.452.118.753a2.3 2.3 0 0 1-.068.592 1.14 1.14 0 0 1-.196.422.8.8 0 0 1-.334.252 1.298 1.298 0 0 1-.483.082h-.563v-2.707Zm3.743 1.763v1.591h-.79V11.85h2.548v.653H7.896v1.117h1.606v.638H7.896Z" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+
+
                 </div>
 
                 <div class="modal fade" id="noReportModal" tabindex="-1" aria-labelledby="noDataModalLabel"

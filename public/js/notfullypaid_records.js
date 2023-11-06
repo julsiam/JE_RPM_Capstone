@@ -64,7 +64,7 @@ $(document).ready(function () {
     getNfpLocations();
 
     const currentMonth = new Date().getMonth() + 1;
-    const monthAfter = (new Date().getMonth() + 2) % 12;
+    const monthAfter = (currentMonth % 12) + 1;
     const currentYear = new Date().getFullYear();
 
     const monthNames = [
@@ -75,6 +75,16 @@ $(document).ready(function () {
     nfpStartMonth.val(monthNames[currentMonth - 1]);
     nfpEndMonth.val(monthNames[monthAfter - 1]);
     nfpYear.val(currentYear);
+
+    nfpStartMonth.on('change', function () {
+        const selectedStartMonth = getMonthNumber(nfpStartMonth.val());
+        nfpEndMonth.empty();
+
+        for (let i = selectedStartMonth - 1; i < 12; i++) {
+            const option = $('<option>').val(monthNames[i]).text(monthNames[i]);
+            nfpEndMonth.append(option);
+        }
+    })
 
 });
 

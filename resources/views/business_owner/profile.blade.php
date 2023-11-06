@@ -110,8 +110,6 @@
                             </div>
                         </div>
                     </div>
-
-
                 </div>
 
                 {{-- EDIT PROFILE --}}

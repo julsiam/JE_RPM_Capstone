@@ -4,8 +4,8 @@ composer global require hirak/prestissimo
 
 composer install --no-dev --working-dir=/var/www/html
 
-echo "generating application key..."
-php artisan key:generate --show
+# echo "generating application key..."
+# php artisan key:generate --show
 
 echo "Caching config..."
 php artisan config:cache
@@ -17,18 +17,18 @@ php artisan route:cache
 echo "Running migrations..."
 php artisan migrate --force
 
-# Build your assets using npm and Laravel Mix
-# This assumes you are using Laravel Mix for asset compilation
-echo "Building assets..."
-npm install
-npm run production
+# # Build your assets using npm and Laravel Mix
+# # This assumes you are using Laravel Mix for asset compilation
+# echo "Building assets..."
+# npm install
+# npm run production
 
-# Optionally, you can run other Laravel commands here as needed for your application.
+# # Optionally, you can run other Laravel commands here as needed for your application.
 
 
-echo "Running database seeding..."
-php artisan db:seed --class=UserSeeder
+# echo "Running database seeding..."
+# php artisan db:seed --class=UserSeeder
 
-# Storage link (if needed)
+# # Storage link (if needed)
 echo "Creating storage link..."
 php artisan storage:link

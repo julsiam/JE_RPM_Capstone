@@ -15,7 +15,7 @@ php artisan route:cache
 
 # Run migrations (if you need to)
 # echo "Running migrations..."
-# php artisan migrate:fresh --seed --force
+php artisan migrate:fresh --seed --force
 # php artisan migrate --force
 
 # Build your assets using npm and Laravel Mix

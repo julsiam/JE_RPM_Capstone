@@ -17,8 +17,8 @@ echo "Caching routes..."
 php artisan route:cache
 
 # Run migrations (if you need to)
-echo "Running migrations..."
-php artisan migrate --force
+echo "Running the migrations..."
+# php artisan migrate --force
 
 # Build your assets using npm and Laravel Mix
 # This assumes you are using Laravel Mix for asset compilation

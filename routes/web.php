@@ -189,7 +189,7 @@ Route::middleware(['auth', 'user-access:business_owner'])->group(function () {
 
     Route::get('/total_notification', [NotificationController::class, 'totalNotification']);
 
-    Route::get('/sms', [SmsController::class, 'sendsms']);
+    // Route::get('/sms', [SmsController::class, 'sendsms']);
 
     Route::get('email', [MailController::class, 'sendReceiptEmail']);
 

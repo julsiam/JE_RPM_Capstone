@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2979917110e1b768e25904a5da1aeb72",
+    "content-hash": "a2d36890b6b6c414d30bacf4706672a8",
     "packages": [
         {
             "name": "brick/math",
@@ -1114,6 +1114,7 @@
         },
         {
             "name": "laravel/framework",
+<<<<<<< HEAD
             "version": "v10.30.0",
             "source": {
                 "type": "git",
@@ -1124,6 +1125,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/laravel/framework/zipball/3dd85d9dbea82b937f8eaf344b50d613c5d1127a",
                 "reference": "3dd85d9dbea82b937f8eaf344b50d613c5d1127a",
+=======
+            "version": "v10.30.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/framework.git",
+                "reference": "7a2da50258c4d0f693b738d3f3c69b2693aea6c1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/7a2da50258c4d0f693b738d3f3c69b2693aea6c1",
+                "reference": "7a2da50258c4d0f693b738d3f3c69b2693aea6c1",
+>>>>>>> main
                 "shasum": ""
             },
             "require": {
@@ -1312,7 +1325,11 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
+<<<<<<< HEAD
             "time": "2023-10-31T13:19:45+00:00"
+=======
+            "time": "2023-11-01T13:52:17+00:00"
+>>>>>>> main
         },
         {
             "name": "laravel/prompts",
@@ -1818,6 +1835,7 @@
         },
         {
             "name": "league/flysystem",
+<<<<<<< HEAD
             "version": "3.18.0",
             "source": {
                 "type": "git",
@@ -1828,6 +1846,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/015633a05aee22490495159237a5944091d8281e",
                 "reference": "015633a05aee22490495159237a5944091d8281e",
+=======
+            "version": "3.19.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thephpleague/flysystem.git",
+                "reference": "1b2aa10f2326e0351399b8ce68e287d8e9209a83"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/1b2aa10f2326e0351399b8ce68e287d8e9209a83",
+                "reference": "1b2aa10f2326e0351399b8ce68e287d8e9209a83",
+>>>>>>> main
                 "shasum": ""
             },
             "require": {
@@ -1892,7 +1922,11 @@
             ],
             "support": {
                 "issues": "https://github.com/thephpleague/flysystem/issues",
+<<<<<<< HEAD
                 "source": "https://github.com/thephpleague/flysystem/tree/3.18.0"
+=======
+                "source": "https://github.com/thephpleague/flysystem/tree/3.19.0"
+>>>>>>> main
             },
             "funding": [
                 {
@@ -1904,6 +1938,7 @@
                     "type": "github"
                 }
             ],
+<<<<<<< HEAD
             "time": "2023-10-20T17:59:40+00:00"
         },
         {
@@ -1918,6 +1953,22 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/thephpleague/flysystem-local/zipball/e7381ef7643f658b87efb7dbe98fe538fb1bbf32",
                 "reference": "e7381ef7643f658b87efb7dbe98fe538fb1bbf32",
+=======
+            "time": "2023-11-07T09:04:28+00:00"
+        },
+        {
+            "name": "league/flysystem-local",
+            "version": "3.19.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thephpleague/flysystem-local.git",
+                "reference": "8d868217f9eeb4e9a7320db5ccad825e9a7a4076"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/thephpleague/flysystem-local/zipball/8d868217f9eeb4e9a7320db5ccad825e9a7a4076",
+                "reference": "8d868217f9eeb4e9a7320db5ccad825e9a7a4076",
+>>>>>>> main
                 "shasum": ""
             },
             "require": {
@@ -1952,7 +2003,11 @@
             ],
             "support": {
                 "issues": "https://github.com/thephpleague/flysystem-local/issues",
+<<<<<<< HEAD
                 "source": "https://github.com/thephpleague/flysystem-local/tree/3.18.0"
+=======
+                "source": "https://github.com/thephpleague/flysystem-local/tree/3.19.0"
+>>>>>>> main
             },
             "funding": [
                 {
@@ -1964,7 +2019,11 @@
                     "type": "github"
                 }
             ],
+<<<<<<< HEAD
             "time": "2023-10-19T20:07:13+00:00"
+=======
+            "time": "2023-11-06T20:35:28+00:00"
+>>>>>>> main
         },
         {
             "name": "league/mime-type-detection",
@@ -2024,6 +2083,7 @@
         },
         {
             "name": "maatwebsite/excel",
+<<<<<<< HEAD
             "version": "3.1.49",
             "source": {
                 "type": "git",
@@ -2034,18 +2094,30 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/SpartnerNL/Laravel-Excel/zipball/769209f49ebe3419017114f98bd61e2a7d9af259",
                 "reference": "769209f49ebe3419017114f98bd61e2a7d9af259",
+=======
+            "version": "3.1.50",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/SpartnerNL/Laravel-Excel.git",
+                "reference": "d79e66391aa306983bb7e234503f5605c3e33348"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/SpartnerNL/Laravel-Excel/zipball/d79e66391aa306983bb7e234503f5605c3e33348",
+                "reference": "d79e66391aa306983bb7e234503f5605c3e33348",
+>>>>>>> main
                 "shasum": ""
             },
             "require": {
                 "composer/semver": "^3.3",
                 "ext-json": "*",
-                "illuminate/support": "5.8.*|^6.0|^7.0|^8.0|^9.0|^10.0",
-                "php": "^7.0|^8.0",
+                "illuminate/support": "5.8.*||^6.0||^7.0||^8.0||^9.0||^10.0",
+                "php": "^7.0||^8.0",
                 "phpoffice/phpspreadsheet": "^1.18",
-                "psr/simple-cache": "^1.0|^2.0|^3.0"
+                "psr/simple-cache": "^1.0||^2.0||^3.0"
             },
             "require-dev": {
-                "orchestra/testbench": "^6.0|^7.0|^8.0",
+                "orchestra/testbench": "^6.0||^7.0||^8.0",
                 "predis/predis": "^1.1"
             },
             "type": "library",
@@ -2088,7 +2160,11 @@
             ],
             "support": {
                 "issues": "https://github.com/SpartnerNL/Laravel-Excel/issues",
+<<<<<<< HEAD
                 "source": "https://github.com/SpartnerNL/Laravel-Excel/tree/3.1.49"
+=======
+                "source": "https://github.com/SpartnerNL/Laravel-Excel/tree/3.1.50"
+>>>>>>> main
             },
             "funding": [
                 {
@@ -2100,7 +2176,11 @@
                     "type": "github"
                 }
             ],
+<<<<<<< HEAD
             "time": "2023-10-26T09:01:33+00:00"
+=======
+            "time": "2023-11-06T11:29:48+00:00"
+>>>>>>> main
         },
         {
             "name": "maennchen/zipstream-php",
@@ -5990,6 +6070,7 @@
         },
         {
             "name": "twilio/sdk",
+<<<<<<< HEAD
             "version": "7.12.0",
             "source": {
                 "type": "git",
@@ -6000,6 +6081,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/twilio/twilio-php/zipball/f281d7b793f02377ab0f38e7166e16820acc3eae",
                 "reference": "f281d7b793f02377ab0f38e7166e16820acc3eae",
+=======
+            "version": "7.12.1",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:twilio/twilio-php.git",
+                "reference": "457122424aca03122239cf13c83cf170fca15443"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/twilio/twilio-php/zipball/457122424aca03122239cf13c83cf170fca15443",
+                "reference": "457122424aca03122239cf13c83cf170fca15443",
+>>>>>>> main
                 "shasum": ""
             },
             "require": {
@@ -6035,7 +6128,11 @@
                 "sms",
                 "twilio"
             ],
+<<<<<<< HEAD
             "time": "2023-10-19T11:57:30+00:00"
+=======
+            "time": "2023-11-06T15:20:52+00:00"
+>>>>>>> main
         },
         {
             "name": "vlucas/phpdotenv",
@@ -6325,16 +6422,16 @@
         },
         {
             "name": "filp/whoops",
-            "version": "2.15.3",
+            "version": "2.15.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filp/whoops.git",
-                "reference": "c83e88a30524f9360b11f585f71e6b17313b7187"
+                "reference": "a139776fa3f5985a50b509f2a02ff0f709d2a546"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filp/whoops/zipball/c83e88a30524f9360b11f585f71e6b17313b7187",
-                "reference": "c83e88a30524f9360b11f585f71e6b17313b7187",
+                "url": "https://api.github.com/repos/filp/whoops/zipball/a139776fa3f5985a50b509f2a02ff0f709d2a546",
+                "reference": "a139776fa3f5985a50b509f2a02ff0f709d2a546",
                 "shasum": ""
             },
             "require": {
@@ -6384,7 +6481,7 @@
             ],
             "support": {
                 "issues": "https://github.com/filp/whoops/issues",
-                "source": "https://github.com/filp/whoops/tree/2.15.3"
+                "source": "https://github.com/filp/whoops/tree/2.15.4"
             },
             "funding": [
                 {
@@ -6392,7 +6489,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-07-13T12:00:00+00:00"
+            "time": "2023-11-03T12:00:00+00:00"
         },
         {
             "name": "hamcrest/hamcrest-php",
@@ -8700,7 +8797,7 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^8.1"
+        "php": "^8.2"
     },
     "platform-dev": [],
     "plugin-api-version": "2.3.0"

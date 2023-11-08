@@ -8,9 +8,12 @@ use App\Models\Rental;
 use App\Models\RentalHistory;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Log;
 use App\Mail\SendReceiptEmail;
-use Illuminate\Support\Facades\Mail;
+use App\Models\Maintenance;
+use App\Models\User;
+
 
 class RentalController extends Controller
 {
@@ -172,6 +175,7 @@ class RentalController extends Controller
         return view('business_owner.paid_reports', compact('notifications', 'newNotification', 'rentLocations'));
     }
 
+
     //GET PAID REPORTS
     public function getPaidReports(Request $request)
     {
@@ -316,8 +320,6 @@ class RentalController extends Controller
     }
 
 
-
-
     public function getTodaysDue()
     {
         $currentDate = date('Y-m-d');
@@ -329,6 +331,7 @@ class RentalController extends Controller
             //     $query->where('status', 'Not Yet Paid')
             //         ->orWhere('amount_paid', 0.00);
             // })
+
             ->get();
 
         $events = [];
@@ -350,6 +353,72 @@ class RentalController extends Controller
 
             $events[] = $event;
         }
+
+        return response()->json($events);
+    }
+
+
+
+    public function getEvents(Request $request)
+    {
+        $currentDate = now(); // Get the current date and time
+
+        $dueDates = Rental::with('user', 'property')
+            ->whereDate('due_date', $currentDate->toDateString())
+            ->where('status', 'Not Yet Paid')
+            ->where('amount_paid', 0.00)
+            ->get()
+            ->map(function ($rental) {
+                $tenantName = $rental->user->first_name . ' ' . $rental->user->last_name;
+
+                // $formattedDueDate = $rental->due_date->format('Y-m-d');
+
+                return [
+                    'title' => $tenantName,
+                    'start' => $rental->due_date,
+                    'end' => $rental->due_date,
+                    'description' => 'Tenant: '. $rental->user->first_name . ' ' .
+                        $rental->user->last_name . '<br>Total Rent: ' .
+                        $rental->total_bill . '<br> Location: ' . $rental->property->location,
+                    'event_type' => 'due_date',
+                ];
+            });
+
+        // $birthdays = User::whereDate('birthdate', $currentDate->toDateString())
+        $birthdays = User::whereRaw("MONTH(birthdate) = MONTH(?) AND DAY(birthdate) = DAY(?)", [$currentDate, $currentDate])
+            ->get()
+            ->map(function ($user) use ($currentDate) {
+                $tenantName = $user->first_name . ' ' . $user->last_name;
+                return [
+                    'title' => $tenantName,
+                    'start' => $currentDate,
+                    'end' => $currentDate,
+                    'description' => 'Tenant: '. $user->first_name . ' ' .
+                        $user->last_name . '<br> Location: ' . $user->property->location,
+                    'event_type' => 'birthday',
+
+                ];
+            });
+
+        $maintenances = Maintenance::with(['user', 'user.property'])
+            ->whereDate('schedule', $currentDate)
+            ->get()
+            ->map(function ($maintenance) use ($currentDate) {
+                $category = $maintenance->category; //category is what to repair in the db
+                return [
+                    'title' => $category,
+                    'start' => $currentDate,
+                    'end' => $currentDate,
+                    'description' => 'Category: ' . $maintenance->category .
+                        '<br> Author: ' . $maintenance->user->first_name . ' ' .
+                        $maintenance->user->last_name .
+                        '<br> Location: ' . $maintenance->user->property->location,
+                    'event_type' => 'maintenance',
+                ];
+            });
+
+
+        $events = $dueDates->concat($birthdays)->concat($maintenances);
 
         return response()->json($events);
     }

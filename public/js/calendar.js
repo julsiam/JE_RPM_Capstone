@@ -11,54 +11,88 @@ $(document).ready(function () {
         selectable: true,
         selectHelper: true,
 
+
         events: {
-            url: '/calendar',
+            url: '/due_date',
             method: 'GET',
-            failure: function () {
-                alert('there was an error while fetching events!');
-            },
-            success: function (data) {
-                console.log(data); // Log the data received from the server
-            },
-            color: 'green',   // a non-ajax option
-            textColor: 'white'
+            allDay: false,
         },
 
         eventRender: function (event, element) {
-            if (event.status === 'Not Yet Paid' || event.amount_paid === 0.00) {
+
+            var event_type = event.event_type;
+
+            if (event_type === 'due_date') {
                 element.popover({
-                    title: 'Today\s Due Date',
+                    title: 'Today\'s Due Date',
                     content: event.description,
                     trigger: 'hover',
                     placement: 'right',
                     container: 'body',
-                    html: true
+                    html: true,
                 });
-                return true;
+                element.css('background-color', 'green'); //color for due dates
 
-            } else {
-                return false;
+            } else if (event_type === 'birthday') {
+                element.popover({
+                    title: 'Today\'s Birthday',
+                    content: event.description,
+                    trigger: 'hover',
+                    placement: 'right',
+                    container: 'body',
+                    html: true,
+                });
+                element.css('background-color', 'red'); //color for birthdays
+
+            }else if (event_type === 'maintenance'){
+                element.popover({
+                    title: 'Today\'s Maintenance Schedule',
+                    content: event.description,
+                    trigger: 'hover',
+                    placement: 'right',
+                    container: 'body',
+                    html: true,
+                });
+                element.css('background-color', 'orange'); //color for birthdays
             }
         },
 
-        // eventRender: function (event, element) {
-        //     element.popover({
-        //         title: 'Today\s Due Date',
-        //         content: event.description,
-        //         trigger: 'hover',
-        //         placement: 'right',
-        //         container: 'body',
-        //         html: true
-        //     });
+        eventLimit: 3,
+        eventLimitClick: 'popover',
+
+
+
+
+        // events: {
+        //     url: '/calendar',
+        //     method: 'GET',
+        //     failure: function () {
+        //         alert('there was an error while fetching events!');
+        //     },
+        //     success: function (data) {
+        //         console.log(data); // Log the data received from the server
+        //     },
+        //     color: 'green',   // a non-ajax option
+        //     textColor: 'white'
         // },
 
-        // eventRender: function (event, element){
-        //     if(event.status === 'Unpaid' || event.amount_paid === 0){
+        // eventRender: function (event, element) {
+        //     if (event.status === 'Not Yet Paid' || event.amount_paid === 0.00) {
+        //         element.popover({
+        //             title: 'Today\s Due Date',
+        //             content: event.description,
+        //             trigger: 'hover',
+        //             placement: 'right',
+        //             container: 'body',
+        //             html: true
+        //         });
         //         return true;
-        //     }else {
+
+        //     } else {
         //         return false;
         //     }
         // },
+
 
         eventStartEditable: false
     });

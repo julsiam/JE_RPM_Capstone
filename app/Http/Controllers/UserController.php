@@ -324,7 +324,8 @@ class UserController extends Controller
         // return response()->json($user);
     }
 
-    public function profilePage(){
+    public function profilePage()
+    {
         $tenants = User::with('property')
             ->where('type', 0)
             ->get();
@@ -341,7 +342,7 @@ class UserController extends Controller
             ->where('seen', 0)
             ->count();
 
-            return view('business_owner.profile', compact('notifications', 'newNotification'));
+        return view('business_owner.profile', compact('notifications', 'newNotification'));
     }
 
 

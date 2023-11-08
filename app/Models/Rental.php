@@ -27,7 +27,7 @@ class Rental extends Model
 
     protected $casts = [
         // 'rent_from' => 'datetime',
-        // 'due_date' => 'datetime',
+        'due_date' => 'datetime',
         // 'date_paid' => 'datetime',
 
     ];

@@ -31,6 +31,7 @@ class SmsController extends Controller
         foreach ($rentals as $rental) {
             $receiverPhone = $this->formatPhoneNumber($rental->user->phone_number);
             $tenantName = $rental->user->first_name;
+            $tenantRent = $rental->total_bill;
 
             $sid = getenv("TWILIO_SID");
             $token = getenv("TWILIO_TOKEN");
@@ -41,7 +42,7 @@ class SmsController extends Controller
                 ->create(
                     $receiverPhone, // to
                     [
-                        "body" => "Hello $tenantName, your rental is due today!",
+                        "body" => "Hello $tenantName, your rental of $tenantRent is due today! Please settle!",
                         "from" => $phone
                     ]
                 );

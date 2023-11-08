@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('property_id')->nullable(); // Add this column
             $table->foreign('property_id')->references('id')->on('properties')->onDelete('cascade');
             $table->date('rent_started')->nullable();
-            $table->date('due_date')->nullable();
+            $table->dateTime('due_date')->nullable();
             $table->decimal('water_bill')->nullable();
             $table->decimal('electric_bill')->nullable();
             $table->decimal('total_bill')->nullable();

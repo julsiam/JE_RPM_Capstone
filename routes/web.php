@@ -175,6 +175,9 @@ Route::middleware(['auth', 'user-access:business_owner'])->group(function () {
 
     Route::get('/calendar', [RentalController::class, 'getTodaysDue'])->name('calendar');
 
+    Route::get('/due_date', [RentalController::class, 'getEvents'])->name('due_date');
+
+
     Route::get('/profile', [UserController::class, 'profilePage']);
 
     Route::get('/get_profile_details', [UserController::class, 'getProfileDetails']);
@@ -186,7 +189,7 @@ Route::middleware(['auth', 'user-access:business_owner'])->group(function () {
 
     Route::get('/total_notification', [NotificationController::class, 'totalNotification']);
 
-    Route::get('/sms', [SmsController::class, 'sendsms']);
+    // Route::get('/sms', [SmsController::class, 'sendsms']);
 
     Route::get('email', [MailController::class, 'sendReceiptEmail']);
 

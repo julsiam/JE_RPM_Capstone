@@ -17,8 +17,8 @@ echo "Caching routes..."
 php artisan route:cache
 
 # Run migrations (if you need to)
-echo "Running migrations..."
-php artisan migrate:fresh --seed --force
+# echo "Running migrations..."
+# php artisan migrate:fresh --seed --force
 # php artisan migrate --force
 
 # Build your assets using npm and Laravel Mix
@@ -31,8 +31,8 @@ npm run production
 # Optionally, you can run other Laravel commands here as needed for your application.
 
 
-echo "Running database seeding..."
-# php artisan db:seed --class=UserSeeder
+# echo "Running database seeding..."
+# # php artisan db:seed --class=UserSeeder
 
 # Storage link (if needed)
 echo "Creating storage link..."

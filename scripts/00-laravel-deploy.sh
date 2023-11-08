@@ -3,7 +3,6 @@ echo "Running composer"
 
 composer global require hirak/prestissimo
 
-
 composer install --no-dev --working-dir=/var/www/html
 
 composer update
@@ -26,12 +25,15 @@ php artisan migrate --force
 echo "Building assets..."
 npm install
 npm run production
+npm run migrate
+npm run seed
+
 
 # Optionally, you can run other Laravel commands here as needed for your application.
 
 
-echo "Running database seeding..."
-php artisan db:seed --class=UserSeeder
+# echo "Running database seeding..."
+# php artisan db:seed --class=UserSeeder
 
 # Storage link (if needed)
 echo "Creating storage link..."

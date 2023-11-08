@@ -7,9 +7,6 @@ composer install --no-dev --working-dir=/var/www/html
 
 composer update
 
-# echo "generating application key..."
-# php artisan key:generate --show
-
 echo "Caching config..."
 php artisan config:cache
 
@@ -27,8 +24,6 @@ echo "Building assets..."
 npm install
 npm run production
 
-
-# Optionally, you can run other Laravel commands here as needed for your application.
 
 
 # echo "Running database seeding..."

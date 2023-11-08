@@ -9,7 +9,7 @@
         "start": "php artisan serve",
         "migrate": "php artisan migrate --force",
         "notification": "php artisan notification:create",
-        "seed": "php artisan db:seed --class=UserSeeder",
+        "seed": "php artisan db:seed --class=DatabaseSeeder",
         "optimize": "php artisan optimize:clear",
         "storage:link": "php artisan storage:link",
         "sms": "php artisan sms:send-due-date-notifications"

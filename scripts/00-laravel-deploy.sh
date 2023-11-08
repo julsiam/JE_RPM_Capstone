@@ -1,19 +1,12 @@
 #!/usr/bin/env bash
 echo "Running composer"
 
+composer global require hirak/prestissimo
 
-
-echo "Building assets..."
-
-
-composer install
-
-npm install
-npm run production
 
 composer install --no-dev --working-dir=/var/www/html
+composer update
 
-composer global require hirak/prestissimo
 # echo "generating application key..."
 # php artisan key:generate --show
 
@@ -29,8 +22,9 @@ php artisan migrate --force
 
 # Build your assets using npm and Laravel Mix
 # This assumes you are using Laravel Mix for asset compilation
-
-
+echo "Building assets..."
+npm install
+npm run production
 
 # Optionally, you can run other Laravel commands here as needed for your application.
 

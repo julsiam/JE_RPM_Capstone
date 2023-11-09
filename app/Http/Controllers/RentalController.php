@@ -237,7 +237,7 @@ class RentalController extends Controller
         $year = $request->input('year');
 
         // Query rental histories with "Not yet paid" status within the specified date range
-        $unpaidRecords = RentalHistory::where('status', 'Not yet paid')
+        $unpaidRecords = RentalHistory::where('status', 'Not Yet Paid')
             ->whereYear('start_date', $year)
             ->whereMonth('start_date', '>=', $start_month)
             ->whereMonth('end_date', '<=', $end_month);

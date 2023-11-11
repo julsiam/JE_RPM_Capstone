@@ -18,8 +18,7 @@ php artisan migrate:fresh --seed --force
 php artisan db:seed
 # php artisan migrate --force
 
-# Build your assets using npm and Laravel Mix
-# Laravel Mix for asset compilation
+#asset
 echo "Building assets..."
 npm install
 npm run production

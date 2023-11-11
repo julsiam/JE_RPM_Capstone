@@ -24,6 +24,6 @@ echo "Building assets..."
 npm install
 npm run production
 
-# Storage link (if needed)
+
 echo "Creating storage link..."
 php artisan storage:link

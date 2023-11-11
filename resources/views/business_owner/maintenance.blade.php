@@ -40,7 +40,7 @@
                                     {{-- <th>Priority</th> --}}
                                     <th>Author</th>
                                     <th>Status</th>
-                                    <th>Action</th>
+                                    <th>Details</th>
                                 </tr>
                             </thead>
 

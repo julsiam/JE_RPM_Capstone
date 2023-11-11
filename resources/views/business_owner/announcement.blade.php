@@ -8,7 +8,7 @@
 }
 
 .annoucement_text {
-    color: #ff4d21;
+    color: #fff4df;
     font-weight: 700;
     padding-top: 4px;
 }
@@ -21,13 +21,13 @@
 
 .card-title {
     margin-bottom: 0;
-    color: #ff6926;
+
     font-weight: 700;
     margin-top: auto;
 }
 
 .card-header {
-    background-color: #fbe8b4;
+    background-color: #253031;
     letter-spacing: 2px;
 }
 
@@ -51,7 +51,7 @@
 }
 
 .card-text {
-    color: #ff6124;
+    color: #253031;
     font-weight: 600;
 
 }
@@ -75,7 +75,7 @@
                         <div class="input-group" style="width:30%">
                             <input id="search" name="search" type="text" class="form-control form-control-sm"
                                 placeholder="Search announcement" style="height: 35px;">
-                            <button class="btn btn-primary btn-sm" type="button" style="height: 35px;"><svg
+                            <button class="btn btn-primary btn-sm" type="button" style="height: 35px; background-color:#FFA500; color: black;"><svg
                                     xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                     class="bi bi-search" viewBox="0 0 16 16">
                                     <path
@@ -85,7 +85,7 @@
 
                         <button type="button" class="btn btn-success" data-bs-toggle="modal"
                             data-bs-target="#addAnnouncementModal" style="
-    background: #A9CCE8;
+    background: #FFA500;
     color: black;
 "><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-megaphone"
                                 viewBox="0 0 16 16">
@@ -114,7 +114,9 @@
                                 </button> &nbsp; &nbsp;
                                 <button type="button" class="btn btn-outline-dark announcement_edit_btn"
                                     data-announcement-id='{{ $announcement->id }}' data-bs-toggle="modal"
-                                    data-bs-target="#editAnnouncementModal">
+                                    data-bs-target="#editAnnouncementModal" style="
+    background-color: #FFA500;
+">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                         class="bi bi-pencil-square" viewBox="0 0 16 16">
                                         <path
@@ -127,12 +129,12 @@
 
 
 
-                            <div class="card-body" style="background: #fff4df;padding-bottom: 1px;padding-top: 30px;">
+                            <div class="card-body" style="background: #EFEFEF;padding-bottom: 1px;padding-top: 30px;">
                                 <p class="card-text">{{ $announcement->details }}</p>
                             </div>
 
                             <div class="card-footer text-muted"
-                                style="height: 105px;background-color: #fff4df;border-style: none;">
+                                style="height: 105px;background-color: #EFEFEF;border-style: none;">
                                 <hr>
                                 <div class="row align-items-center">
                                     <div class="col-auto">

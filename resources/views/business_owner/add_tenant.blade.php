@@ -432,6 +432,24 @@
                                         @enderror
                                     </div>
                                 </div>
+
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text col-md-4 text-md-end">{{ __('Move In Date') }}</span>
+                                    <div class="col-md-8">
+                                        <input id="rent_started" type="date"
+                                            class="form-control @error('rent_started') is-invalid @enderror"
+                                            name="rent_started" value="{{ old('rent_started', date('Y-m-d')) }}"
+                                            required autocomplete="rent_started" autofocus>
+
+                                        @error('rent_started')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+
                             </div>
                         </div>
 
@@ -483,36 +501,36 @@
                             </div>
                         </div>
 
-                        <div class="col-md-8">
+                        <div class="col-md-12 d-flex justify-content-center mt-4">
                             <button type="submit" class="btn btn-primary">
                                 {{ __('Add Tenant') }}
                             </button>
                         </div>
                     </form>
-            </div>
+                </div>
 
-            {{-- FOR MODAL --}}
-            <div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="successModalLabel">Success</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            Tenant added successfully!
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+                {{-- FOR MODAL --}}
+                <div class="modal fade" id="successModal" tabindex="-1" role="dialog"
+                    aria-labelledby="successModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="successModalLabel">Success</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                Tenant added successfully!
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 </div>
 @endsection

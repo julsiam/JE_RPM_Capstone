@@ -74,8 +74,17 @@
         color: grey
     }
     body{
-        background-color: #ffe9b9;
+        background-color: #EFEFEF;
     }
+    .fc-event {
+  background-color: #3498db;
+  color: #fff;
+}
+
+
+
+
+
 </style>
 
 <body>

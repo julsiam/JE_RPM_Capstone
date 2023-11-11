@@ -23,7 +23,7 @@
                     <div class="container mt-4">
                         <div class="row justify-content-md-center">
                             <div class="col col-lg-2">
-                                <label style="color: rgb(128, 128, 128)">Select Location:</label>
+                                <label style="color: rgb(128, 128, 128)">Location:</label>
 
                                 <select id="locationSelect" class="form-select form-select-sm"
                                     @error('locationSelect') is-invalid @enderror name="locationSelect"
@@ -39,7 +39,7 @@
 
                             </div>
                             <div class="col col-lg-2">
-                                <label style="color: rgb(128, 128, 128)">Select Start Month:</label>
+                                <label style="color: rgb(128, 128, 128)">Start Month:</label>
                                 <select id="startMonth" name="month" class="form-select form-select-sm">
                                     <option value="January">January</option>
                                     <option value="February">February</option>
@@ -57,7 +57,7 @@
                             </div>
 
                             <div class="col col-lg-2">
-                                <label style="color: rgb(128, 128, 128)">Select End Month:</label>
+                                <label style="color: rgb(128, 128, 128)">End Month:</label>
                                 <select id="endMonth" name="month" class="form-select form-select-sm">
                                     <option value="January">January</option>
                                     <option value="February">February</option>

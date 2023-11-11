@@ -7,7 +7,7 @@
                 <div class="card mt-5">
                     <div class="row justify-content-center p-4">
                         <div class="col-md-8 text-start">
-                            <h2>J and E Payment Records: NOT YET PAID RECORDS</h2>
+                            <h2>J and E Payment Records: NOT YET PAID HISTORY</h2>
                         </div>
 
                         <div class="col-md-4 text-end btn-group btn-group-sm" role="group"
@@ -23,7 +23,7 @@
                     <div class="container mt-4">
                         <div class="row justify-content-md-center">
                             <div class="col col-lg-2">
-                                <label style="color: rgb(128, 128, 128)">Select Location:</label>
+                                <label style="color: rgb(128, 128, 128)">Location:</label>
 
                                 <select id="locSelect" class="form-select form-select-sm"
                                     @error('locSelect') is-invalid @enderror name="locSelect"
@@ -39,7 +39,7 @@
 
                             </div>
                             <div class="col col-lg-2">
-                                <label style="color: rgb(128, 128, 128)">Select Start Month:</label>
+                                <label style="color: rgb(128, 128, 128)">Start Month:</label>
                                 <select id="sMonthSelect" name="month" class="form-select form-select-sm" required>
                                     <option value="January">January</option>
                                     <option value="February">February</option>
@@ -57,7 +57,7 @@
                             </div>
 
                             <div class="col col-lg-2">
-                                <label style="color: rgb(128, 128, 128)">Select End Month:</label>
+                                <label style="color: rgb(128, 128, 128)">End Month:</label>
                                 <select id="eMonthSelect" name="month" class="form-select form-select-sm">
                                     <option value="January">January</option>
                                     <option value="February">February</option>

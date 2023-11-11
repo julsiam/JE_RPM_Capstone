@@ -8,7 +8,7 @@ function display_locations(availLocations) {
 
     const nullOption = $('<option>', {
         value: '',
-        text: 'Selectaaa'
+        text: 'Select Location'
     });
     nfpLocation.append(nullOption);
 

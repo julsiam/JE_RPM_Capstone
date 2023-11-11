@@ -27,7 +27,7 @@ $(document).ready(function () {
                     title: 'Today\'s Due Date',
                     content: event.description,
                     trigger: 'hover',
-                    placement: 'right',
+                    placement: 'left',
                     container: 'body',
                     html: true,
                 });
@@ -38,7 +38,7 @@ $(document).ready(function () {
                     title: 'Today\'s Birthday',
                     content: event.description,
                     trigger: 'hover',
-                    placement: 'right',
+                    placement: 'left',
                     container: 'body',
                     html: true,
                 });
@@ -49,7 +49,7 @@ $(document).ready(function () {
                     title: 'Today\'s Maintenance Schedule',
                     content: event.description,
                     trigger: 'hover',
-                    placement: 'right',
+                    placement: 'left',
                     container: 'body',
                     html: true,
                 });

@@ -154,7 +154,7 @@ class HomeController extends Controller
 
         $totalIncome = RentalHistory::whereMonth('end_date', $month) //current month
             ->where('initial_paid_amount', '>', 0)
-            ->where('status', 'Paid')
+            // ->where('status', 'Paid')
             ->sum('initial_paid_amount');
 
         return response()->json(['totalIncome' => $totalIncome]);

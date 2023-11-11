@@ -14,6 +14,7 @@ use App\Mail\SendReceiptEmail;
 use App\Models\Maintenance;
 use App\Models\User;
 
+
 class RentalController extends Controller
 {
     protected function validator(array $data)

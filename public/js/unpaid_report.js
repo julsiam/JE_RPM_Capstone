@@ -14,7 +14,7 @@ function locSelection(rentLocations) {
 
     const allOption = $('<option>', {
         value: 'ALL',
-        text: 'LAHAT'
+        text: 'ALL'
     });
     locSelect.append(allOption);
 

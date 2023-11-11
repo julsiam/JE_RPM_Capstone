@@ -5,7 +5,6 @@ composer global require hirak/prestissimo
 
 composer install --no-dev
 
-
 echo "Caching config..."
 php artisan config:cache
 
@@ -15,14 +14,14 @@ php artisan route:cache
 # Running migrations
 echo "Running migrations..."
 php artisan migrate:fresh --seed --force
-php artisan db:seed
+# php artisan db:seed
 # php artisan migrate --force
 
-#asset
+#build asset
 echo "Building assets..."
 npm install
 npm run production
 
-
+#for pictures
 echo "Creating storage link..."
 php artisan storage:link

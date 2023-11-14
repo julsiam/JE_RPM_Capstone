@@ -175,7 +175,7 @@ Route::middleware(['auth', 'user-access:business_owner'])->group(function () {
 
     // Route::get('/calendar', [RentalController::class, 'getTodaysDue'])->name('calendar');
 
-    Route::get('/events', [RentalController::class, 'getEvents'])->name('due_date');
+    Route::get('/events', [RentalController::class, 'getEvents'])->name('events');
 
 
     Route::get('/profile', [UserController::class, 'profilePage']);

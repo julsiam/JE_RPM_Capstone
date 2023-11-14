@@ -12,11 +12,11 @@ $(document).ready(function () {
         selectHelper: true,
 
 
-        eventSources: [ {
-            url: '/events',
+        events: {
+            url: '/due_date',
             method: 'GET',
             // allDay: false,
-        }],
+        },
 
         eventRender: function (event, element) {
 

@@ -310,8 +310,6 @@
         <script src="{{ secure_asset('js/tenants_counts.js') }}"></script>
         <script src="{{ secure_asset('js/property_counts.js') }}"></script>
         <script src="{{ secure_asset('js/income_count.js') }}"></script>
-
-
         <script src="{{ secure_asset('js/tenant_form.js') }}"></script>
         <script src="{{ secure_asset('js/rental_status.js') }}"></script>
         <script src="{{ secure_asset('js/bday.js') }}" defer></script>
@@ -342,57 +340,3 @@
 </body>
 
 </html>
-
-{{-- <script>
-    $(document).ready(function () {
-    var calendar = $('#calendar').fullCalendar({
-        editable: true,
-        height: 600,
-        width: '65%',
-        header: {
-            left: 'prev,next today',
-            center: 'title',
-            right: 'month,agendaWeek,agendaDay'
-        },
-        selectable: true,
-        selectHelper: true,
-
-        eventRender: function (event, element) {
-            if(event.status === 'Not Yet Paid'){
-                element.popover({
-                    title: 'Today\s Due Date',
-                    content: event.description,
-                    trigger: 'hover',
-                    placement: 'right',
-                    container: 'body',
-                    html: true
-                })
-                return true;
-            }else {
-                return false;
-            }
-        },
-
-       // events: '/calendar',
-
-        events: {
-            url: '/calendar',
-            method: 'GET',
-            failure: function () {
-                alert('there was an error while fetching events!');
-            },
-        },
-
-        // eventRender: function (event, element){
-        //     if(event.status === 'Not Yet Paid'){
-        //         return true;
-        //     }else {
-        //         return false;
-        //     }
-        // },
-
-        eventStartEditable: false
-    });
-});
-
-</script> --}}

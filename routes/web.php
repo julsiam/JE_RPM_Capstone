@@ -126,8 +126,6 @@ Route::middleware(['auth', 'user-access:business_owner'])->group(function () {
     Route::get('/properties_export', [PropertyController::class, 'exportPropertyExcel'])->name('properties_export'); //SHOW ALL TENANTS
 
 
-
-
     Route::get('/maintenance', [MaintenanceController::class, 'getMaintenances'])->name('maintenance');
 
     Route::get('/getMaintenanceDetails', [MaintenanceController::class, 'getMaintenance']);
@@ -155,10 +153,6 @@ Route::middleware(['auth', 'user-access:business_owner'])->group(function () {
 
     //TO GET NOT FULLY PAID RECORDS
     Route::get('/get_notfullypaid_reports', [RentalController::class, 'getNotFullyPaidRecords'])->name('get_notfullypaid_reports');
-
-    // Route::get('/notfullypaid_records', function () {
-    //     return view('./business_owner/notfullypaid_records');
-    // });
 
     //TO DISPLAY LOCATIONS IN VIEW
     Route::get('/paid_reports', [RentalController::class, 'paidReport'])->name('paid_reports');

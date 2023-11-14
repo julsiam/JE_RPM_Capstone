@@ -15,6 +15,7 @@ php artisan route:cache
 echo "Running migrations..."
 # php artisan migrate:fresh --seed --force
 php artisan migrate --force
+php artisan db:seed --force
 
 #build asset
 echo "Building assets..."

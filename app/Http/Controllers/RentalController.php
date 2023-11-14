@@ -361,7 +361,7 @@ class RentalController extends Controller
 
     public function getEvents(Request $request)
     {
-        $currentDate = now(); // Get the current date and time
+        $currentDate = now()->timezone('Asia/Singapore'); // Get the current date and time
 
         $dueDates = Rental::with('user', 'property')
             ->whereDate('due_date', $currentDate->toDateString())

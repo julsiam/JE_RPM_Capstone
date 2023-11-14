@@ -19,7 +19,7 @@ $(document).ready(function () {
         },
 
         eventRender: function (event, element) {
-
+            console.log(event)
             var event_type = event.event_type;
 
             if (event_type === 'due_date') {

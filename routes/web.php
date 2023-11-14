@@ -173,9 +173,9 @@ Route::middleware(['auth', 'user-access:business_owner'])->group(function () {
     //TO DISPLAY LOCATIONS IN VIEW
     Route::get('/get_unpaid_reports', [RentalController::class, 'getUnPaidReports'])->name('get_unpaid_reports');
 
-    Route::get('/calendar', [RentalController::class, 'getTodaysDue'])->name('calendar');
+    // Route::get('/calendar', [RentalController::class, 'getTodaysDue'])->name('calendar');
 
-    Route::get('/due_date', [RentalController::class, 'getEvents'])->name('due_date');
+    Route::get('/events', [RentalController::class, 'getEvents'])->name('due_date');
 
 
     Route::get('/profile', [UserController::class, 'profilePage']);

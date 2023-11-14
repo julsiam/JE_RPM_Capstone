@@ -320,42 +320,42 @@ class RentalController extends Controller
     }
 
 
-    public function getTodaysDue()
-    {
-        $currentDate = date('Y-m-d');
+    // public function getTodaysDue()
+    // {
+    //     $currentDate = date('Y-m-d');
 
-        $tenantsWithDues = Rental::with('user', 'property')
-            // ->where('status', 'Not Yet Paid')
-            ->whereDate('due_date', $currentDate)
-            // ->where(function ($query) {
-            //     $query->where('status', 'Not Yet Paid')
-            //         ->orWhere('amount_paid', 0.00);
-            // })
+    //     $tenantsWithDues = Rental::with('user', 'property')
+    //         // ->where('status', 'Not Yet Paid')
+    //         ->whereDate('due_date', $currentDate)
+    //         // ->where(function ($query) {
+    //         //     $query->where('status', 'Not Yet Paid')
+    //         //         ->orWhere('amount_paid', 0.00);
+    //         // })
 
-            ->get();
+    //         ->get();
 
-        $events = [];
+    //     $events = [];
 
-        foreach ($tenantsWithDues as $tenant) {
+    //     foreach ($tenantsWithDues as $tenant) {
 
-            $event = [
-                'title' => $tenant->user->first_name . ' ' . $tenant->user->last_name, //this should be first_name and last_name
-                'description' => 'Tenant: ' . $tenant->user->first_name . ' ' .
-                    $tenant->user->last_name . '<br>Total Rent: ' .
-                    $tenant->total_bill . '<br> Location: ' . $tenant->property->location,
+    //         $event = [
+    //             'title' => $tenant->user->first_name . ' ' . $tenant->user->last_name, //this should be first_name and last_name
+    //             'description' => 'Tenant: ' . $tenant->user->first_name . ' ' .
+    //                 $tenant->user->last_name . '<br>Total Rent: ' .
+    //                 $tenant->total_bill . '<br> Location: ' . $tenant->property->location,
 
-                'start' => $tenant->due_date,
-                'end' => $tenant->due_date,
-                'status' => $tenant->status,
-                'amount_paid' => $tenant->amount_paid
+    //             'start' => $tenant->due_date,
+    //             'end' => $tenant->due_date,
+    //             'status' => $tenant->status,
+    //             'amount_paid' => $tenant->amount_paid
 
-            ];
+    //         ];
 
-            $events[] = $event;
-        }
+    //         $events[] = $event;
+    //     }
 
-        return response()->json($events);
-    }
+    //     return response()->json($events);
+    // }
 
 
 

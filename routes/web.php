@@ -25,13 +25,12 @@ use App\Http\Controllers\UserController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view ('welcome');
 });
 
 Route::get('/mail', function () {
-    return view('email.receipt_mail');
+    return view ('email.receipt_mail');
 });
-
 
 
 Auth::routes([ //for email verify

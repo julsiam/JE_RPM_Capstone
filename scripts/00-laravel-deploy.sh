@@ -10,6 +10,7 @@ composer install --no-dev --working-dir=/var/www/html/
 
 echo "Caching config..."
 php artisan config:cache
+# php artisan cache:clear
 
 echo "Caching routes..."
 php artisan route:cache
@@ -20,8 +21,8 @@ echo "Running migrations..."
 php artisan migrate
 php artisan db:seed
 
-#build asset
-echo "Building assets..."
+#build asset...
+echo "Building assets"
 npm install
 npm run production
 

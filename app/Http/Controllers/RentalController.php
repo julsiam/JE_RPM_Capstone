@@ -385,7 +385,7 @@ class RentalController extends Controller
             });
 
         // $birthdays = User::whereDate('birthdate', $currentDate->toDateString())
-        $birthdays = User::whereRaw("MONTH(birthdate) = MONTH(?) AND DAY(birthdate) = DAY(?)", [$currentDate, $currentDate])
+        $birthdays = User::whereRaw("EXTRACT(MONTH FROM birthdate) = EXTRACT(MONTH FROM ?) AND EXTRACT(DAY FROM birthdate) = EXTRACT(DAY FROM ?)", [$currentDate, $currentDate])
             ->get()
             ->map(function ($user) use ($currentDate) {
                 $tenantName = $user->first_name . ' ' . $user->last_name;

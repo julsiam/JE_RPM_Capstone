@@ -377,7 +377,7 @@ class RentalController extends Controller
                     'title' => $tenantName,
                     'start' => $rental->due_date,
                     'end' => $rental->due_date,
-                    'description' => 'Tenant: '. $rental->user->first_name . ' ' .
+                    'description' => 'Tenant: ' . $rental->user->first_name . ' ' .
                         $rental->user->last_name . '<br>Total Rent: ' .
                         $rental->total_bill . '<br> Location: ' . $rental->property->location,
                     'event_type' => 'due_date',
@@ -385,7 +385,7 @@ class RentalController extends Controller
             });
 
         // $birthdays = User::whereDate('birthdate', $currentDate->toDateString())
-        $birthdays = User::whereRaw("EXTRACT(MONTH FROM birthdate) = EXTRACT(MONTH FROM ?) AND EXTRACT(DAY FROM birthdate) = EXTRACT(DAY FROM ?)", [$currentDate, $currentDate])
+        $birthdays = User::whereRaw("EXTRACT(MONTH FROM birthdate::date) = EXTRACT(MONTH FROM ?::date) AND EXTRACT(DAY FROM birthdate::date) = EXTRACT(DAY FROM ?::date)", [$currentDate, $currentDate])
             ->get()
             ->map(function ($user) use ($currentDate) {
                 $tenantName = $user->first_name . ' ' . $user->last_name;
@@ -393,7 +393,7 @@ class RentalController extends Controller
                     'title' => $tenantName,
                     'start' => $currentDate,
                     'end' => $currentDate,
-                    'description' => 'Tenant: '. $user->first_name . ' ' .
+                    'description' => 'Tenant: ' . $user->first_name . ' ' .
                         $user->last_name . '<br> Location: ' . $user->property->location,
                     'event_type' => 'birthday',
 

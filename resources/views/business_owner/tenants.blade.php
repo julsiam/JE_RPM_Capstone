@@ -89,11 +89,11 @@
                     @foreach ($tenants as $tenant)
                     <tr>
                         <td hidden class="text-start" scope="row">{{ $tenant->id }}</td>
-                        
+
                         <td class="text-start">{{ $tenant->first_name }} {{ $tenant->last_name }}</td>
-                        
+
                         <td class="text-start">{{ $tenant->email }}</td>
-                        
+
                         <td class="text-start">
                             @if ($tenant->property)
                             {{ $tenant->property->location }}
@@ -160,8 +160,8 @@
 
                                         <div class="row">
                                             <div class="col-auto">
-                                                <img style="width: 200px;" id="tenant_profile" src=""
-                                                    alt="Profile Picture">
+                                                {{-- <img style="width: 200px;" id="tenant_profile" src=""
+                                                    alt="Profile Picture"> --}}
                                             </div>
                                         </div>
 

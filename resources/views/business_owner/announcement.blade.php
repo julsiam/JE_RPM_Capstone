@@ -135,7 +135,7 @@
                                 <hr>
                                 <div class="row align-items-center">
                                     <div class="col-auto">
-                                        <img style="width: 42px" src="{{ Auth::user()->profile_picture }}"
+                                        <img style="width: 42px" src="{{ Storage::disk('s3')->url(Auth::user()->profile_picture) }}"
                                         alt="" class="rounded-circle">
                                     </div>
 

@@ -191,14 +191,13 @@ class UserController extends Controller
 
             $idPhotoModel = new File();
             $fileName = time() . '_' . $idPhotoFile->getClientOriginalName(); //time().'_'.$file->getClientOriginalName();
-            $folder = 'id_photos';
-            $filePath = $idPhotoFile->storeAs($folder, $fileName, 'public');
+            $filePath = $idPhotoFile->storePublicly('public/id_photos');
             $filesize = $idPhotoFile->getSize();
 
             $idPhotoModel->user_id = $user_id;
             $idPhotoModel->name = $fileName;
             $idPhotoModel->type = $idPhotoFileType;
-            $idPhotoModel->file_path = '/storage/' . $filePath; // file_path
+            $idPhotoModel->file_path = $filePath; // file_path
             $idPhotoModel->size = $filesize; //size
 
             $idPhotoModel->save();
@@ -209,14 +208,13 @@ class UserController extends Controller
 
             $contractPdfModel = new File();
             $fileName = time() . '_' . $contractPdfFile->getClientOriginalName();
-            $folder = 'contracts';
-            $filePath = $contractPdfFile->storeAs($folder, $fileName, 'public');
+            $filePath = $contractPdfFile->storePublicly('public/contracts');
             $fileSize = $contractPdfFile->getSize();
 
             $contractPdfModel->user_id = $user_id;
             $contractPdfModel->name = $fileName;
             $contractPdfModel->type = $contractPdfFileType;
-            $contractPdfModel->file_path = '/storage/' . $filePath;
+            $contractPdfModel->file_path = $filePath;
             $contractPdfModel->size = $fileSize;
 
             $contractPdfModel->save();
@@ -398,16 +396,22 @@ class UserController extends Controller
         }
 
         if ($request->hasFile('profilePictureInput')) {
-            $image = $request->file('profilePictureInput');
-            $imageName = time() . '_' . $image->getClientOriginalName();
-            $folder = 'profile';
-            $imagePath = $image->storeAs($folder, $imageName, 'public');
+            // $image = $request->file('profilePictureInput');
+            // $imageName = time() . '_' . $image->getClientOriginalName();
+            // $folder = 'profile';
+            // $imagePath = $image->storeAs($folder, $imageName, 'public');
+
+
+            $path = $request->file('profilePictureInput')
+            ->storePublicly('public/profile');
+
 
             if ($user->profile_picture !== 'image/default_photo.png') {
-                Storage::delete('public/' . $user->profile_picture);
-                // Storage::delete('public/storage/profile' . $user->profile_picture);
+                // Storage::delete('public/' . $user->profile_picture);
+                Storage::disk('s3')->delete($user->profile_picture);
             }
-            $user->profile_picture = '/storage/' . $imagePath;
+
+            $user->profile_picture = $path;
 
             $user->save();
 

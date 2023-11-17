@@ -14,7 +14,7 @@
                     <div class="card-body text-center">
                         <form method="POST" action="{{ route('edit_profile_pic') }}" enctype="multipart/form-data">
                             @csrf
-                            <img id="profilePicturePreview" src="{{ Auth::user()->profile_picture }}" alt="avatar"
+                            <img id="profilePicturePreview" src="{{ Storage::disk('s3')->url(Auth::user()->profile_picture) }}" alt="Profile Picture"
                                 class="rounded-circle img-fluid" style="width: 150px;">
                             <h5 class="my-3">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</h5>
                             <p class="text-muted mb-1">J and E RPM Business Owner</p>

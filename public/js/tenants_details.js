@@ -45,13 +45,13 @@ $(document).ready(function () {
                     var contractPath = data.file.find(file => file.type === 'contract_pdf');
 
                     if (idPhotoPath) {
-                        $('#tenant_idPhoto').attr('src', idPhotoPath.file_path);
+                        $('#tenant_idPhoto').attr('src', 'https://jerpm.s3.amazonaws.com/' + idPhotoPath.file_path);
                     } else {
                         $('#tenant_idPhoto').attr('src', defaultPhotoUrl); // No ID photo available
                     }
 
                     if (contractPath) {
-                        $('#tenant_contractLink').attr('href', contractPath.file_path);
+                        $('#tenant_contractLink').attr('href', 'https://jerpm.s3.amazonaws.com/' + contractPath.file_path);
                     } else {
                         $('#tenant_contractLink').attr('href', ' '); // No contract available
                     }

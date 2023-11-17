@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id'); // Add the user_id column
             $table->string('name');
             $table->string('type'); //id_photo , contract
-            $table->string('file_path');
+            $table->binary('file_path');
             $table->string('size')->nullable();
             $table->timestamps();
 

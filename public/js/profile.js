@@ -1,21 +1,21 @@
-document.getElementById("profilePictureInput").addEventListener("change", function () {
-    var input = this;
-    var preview = document.getElementById("profilePicturePreview");
-    var saveButton = document.getElementById("saveButton");
+document.addEventListener("DOMContentLoaded", function () {
+    document.getElementById("profilePictureInput").addEventListener("change", function () {
+        var input = this;
+        var preview = document.getElementById("profilePicturePreview");
+        var saveButton = document.getElementById("saveButton");
 
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
 
-        reader.onload = function (e) {
-            preview.src = e.target.result;
-            saveButton.style.display = "inline"; // Enable the "Save" button
-        };
+            reader.onload = function (e) {
+                preview.src = e.target.result;
+                saveButton.style.display = "inline"; // Enable the "Save" button
+            };
 
-        reader.readAsDataURL(input.files[0]);
-    }
+            reader.readAsDataURL(input.files[0]);
+        }
+    });
 });
-
-
 // $('.profile_edit_btn').click(function () {
 //     var profileId = $(this).data('profile-id');
 //     $.ajax({

@@ -102,7 +102,7 @@ function selectTenant(id, name, email) { //retrieve data and display to the edit
 
 
             // Define the base URL for S3 assets
-            var s3BaseUrl = 'https://jerpm.s3.amazonaws.com/';
+            var s3BaseUrl = "{{ config('filesystems.disks.s3.url') }}";
 
             if (data.file.length > 0) {
                 var defaultPhotoUrl = "{{ asset('image/default_photo.png') }}";
@@ -110,9 +110,9 @@ function selectTenant(id, name, email) { //retrieve data and display to the edit
                 var idPhotoPath = data.file.find(file => file.type === 'id_photo');
                 var contractPath = data.file.find(file => file.type === 'contract_pdf');
 
-                // Construct URLs using the base URL for assets
-                var idPhotoUrl = idPhotoPath ? s3BaseUrl + idPhotoPath.file_path : defaultPhotoUrl;
-                var contractUrl = contractPath ? s3BaseUrl + contractPath.file_path : '';
+                // Construct URLs using the s3BaseUrl for assets
+                var idPhotoUrl = idPhotoPath ? s3BaseUrl + '/' + idPhotoPath.file_path : defaultPhotoUrl;
+                var contractUrl = contractPath ? s3BaseUrl + '/' + contractPath.file_path : '';
 
                 if (idPhotoPath) {
                     $('#idPhoto').attr('src', idPhotoUrl);

@@ -98,6 +98,7 @@ function selectTenant(id, name, email) { //retrieve data and display to the edit
                 } else {
                     $('#contractLink').attr('href', ' '); // No contract available
                 }
+
             }
         },
 

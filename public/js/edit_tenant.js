@@ -81,52 +81,24 @@ function selectTenant(id, name, email) { //retrieve data and display to the edit
             $("#edit_balance").val(data.rental.balance);
             $("#edit_status").val(data.rental.status);
 
-            // if (data.file.length > 0) {
-            //     var defaultPhotoUrl = "{{ asset('image/default_photo.png') }}";
-
-            //     var idPhotoPath = data.file.find(file => file.type === 'id_photo');
-            //     var contractPath = data.file.find(file => file.type === 'contract_pdf');
-
-            //     if (idPhotoPath) {
-            //         $('#idPhoto').attr('src', 'https://jerpm.s3.amazonaws.com/' + idPhotoPath.file_path);
-            //     } else {
-            //         $('#idPhoto').attr('src', defaultPhotoUrl); // No ID photo available
-            //     }
-
-            //     if (contractPath) {
-            //         $('#contractLink').attr('href', 'https://jerpm.s3.amazonaws.com/' + contractPath.file_path);
-            //     } else {
-            //         $('#contractLink').attr('href', ' '); // No contract available
-            //     }
-            // }
-
-
-            // Define the base URL for S3 assets
-            var s3BaseUrl = "{{ config('filesystems.disks.s3.url') }}";
-
             if (data.file.length > 0) {
                 var defaultPhotoUrl = "{{ asset('image/default_photo.png') }}";
 
                 var idPhotoPath = data.file.find(file => file.type === 'id_photo');
                 var contractPath = data.file.find(file => file.type === 'contract_pdf');
 
-                // Construct URLs using the s3BaseUrl for assets
-                var idPhotoUrl = idPhotoPath ? s3BaseUrl + '/' + idPhotoPath.file_path : defaultPhotoUrl;
-                var contractUrl = contractPath ? s3BaseUrl + '/' + contractPath.file_path : '';
-
                 if (idPhotoPath) {
-                    $('#idPhoto').attr('src', idPhotoUrl);
+                    $('#idPhoto').attr('src', 'https://jerpm.s3.amazonaws.com/' + idPhotoPath.file_path);
                 } else {
                     $('#idPhoto').attr('src', defaultPhotoUrl); // No ID photo available
                 }
 
                 if (contractPath) {
-                    $('#contractLink').attr('href', contractUrl);
+                    $('#contractLink').attr('href', 'https://jerpm.s3.amazonaws.com/' + contractPath.file_path);
                 } else {
-                    $('#contractLink').attr('href', ''); // No contract available
+                    $('#contractLink').attr('href', ' '); // No contract available
                 }
             }
-
         },
 
         error: function (xhr, status, error) {

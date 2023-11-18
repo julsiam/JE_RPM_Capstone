@@ -15,11 +15,20 @@
                             <form method="POST" action="{{ route('edit_profile_pic') }}" enctype="multipart/form-data">
                                 @csrf
                                 {{-- <img id="profilePicturePreview" src="{{ Auth::user()->profile_picture }}" alt="avatar"
-                                    class="rounded-circle img-fluid" style="width: 150px;"> --}}
+                                    class="rounded-circle img-fluid" style="width: 150px;">
                                 <img id="profilePicturePreview"
                                     src="{{ Storage::disk('s3')->url(Auth::user()->profile_picture) }}"
-                                    alt="Profile Picture" class="rounded-circle img-fluid" style="width: 150px;">
-                                    
+                                    alt="Profile Picture" class="rounded-circle img-fluid" style="width: 150px;"> --}}
+
+                                @if (Storage::disk('s3')->exists(Auth::user()->profile_picture))
+                                    <img id="profilePicturePreview"
+                                        src="{{ Storage::disk('s3')->url(Auth::user()->profile_picture) }}"
+                                        alt="Profile Picture" class="rounded-circle img-fluid" style="width: 150px;">
+                                @else
+                                    <img id="profilePicturePreview" src="{{ Auth::user()->profile_picture }}" alt="avatar"
+                                        class="rounded-circle img-fluid" style="width: 150px;">
+                                @endif
+
                                 <h5 class="my-3">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</h5>
                                 <p class="text-muted mb-1">J and E RPM Business Owner</p>
                                 <p class="text-muted mb-4">{{ Auth::user()->address }}</p>

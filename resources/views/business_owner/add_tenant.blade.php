@@ -16,7 +16,7 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
+    <div class="row justify-content-center" >
         <div class="col-md-8">
             <div style="margin-top:15%" class="card">
                 <div class="card-header">{{ __('Add Tenant') }}</div>

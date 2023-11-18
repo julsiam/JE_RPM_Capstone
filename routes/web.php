@@ -193,4 +193,7 @@ Route::middleware(['auth', 'user-access:business_owner'])->group(function () {
 
     Route::get('email', [MailController::class, 'sendReceiptEmail']);
 
+    // To show the line graphs
+    Route::get('/show-line-chart', [YourController::class, 'showLineChart']);
+
 });

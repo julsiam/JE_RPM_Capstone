@@ -4,18 +4,18 @@
     <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-md-12 mt-4">
-                <div class="card mt-5">
-                    <div class="row justify-content-center p-4">
+                <div class="card mt-5" style="border-radius: 10px;">
+                    <div class="row justify-content-center" style="margin-left: inherit; margin-right: inherit; background-color:#253031; border-top-left-radius:10px; border-top-right-radius:10px; margin-bottom: 10px;">
                         <div class="col-md-8 text-start">
-                            <h2>J and E Payment Records: NOT FULLY PAID HISTORY</h2>
+                            <h2 style="color:white; font-weight: 700;padding-top: 15px;padding-left: 23px;">J and E Payment Records: NOT FULLY PAID HISTORY</h2>
                         </div>
 
-                        <div class="col-md-4 text-end btn-group btn-group-sm" role="group"
+                        <div class="col-md-4 text-end btn-group btn-group-sm p-3" role="group"
                             aria-label="Basic mixed styles example">
                             <a href="{{ url('/paid_reports') }}" class="btn btn-outline-success">Paid</a>
                             <a href="{{ url('/unpaid_reports') }}" class="btn btn-outline-warning"
                                 aria-current="page"> Not Yet Paid</a>
-                            <a href="{{url('/notfullypaid_reports')}}" class="btn btn-outline-primary active"> Not Fully Paid</a>
+                            <a href="{{url('/notfullypaid_reports')}}" class="btn btn-outline-danger active"> Not Fully Paid</a>
                         </div>
                     </div>
 
@@ -83,7 +83,7 @@
                                 </select>
                             </div>
                             <div class="col col-lg-2 mt-3">
-                                <a type="btn" id="searchIcon" class="btn btn-outline-success me-2 searchIcon">
+                                <a type="btn" id="searchIcon" class="btn btn-warning me-2 searchIcon">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                         fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                                         <path

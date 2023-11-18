@@ -17,7 +17,8 @@
         @endif
 
         <div class="card mt-2 mb-3">
-            <div class="row justify-content-center" style="margin-left: inherit; margin-right: inherit; background-color:#253031">
+            <div class="row justify-content-center"
+                style="margin-left: inherit; margin-right: inherit; background-color:#253031">
                 <div class="col-md-6 p-1">
                     <h2 style="color:white; font-weight: 700;padding-top: 15px;padding-left: 23px;">J and E Rental
                         Properties</h2>
@@ -68,21 +69,26 @@
                         </svg></a>
                 </div>
             </div>
+            <div class="p-2">
+                <div class="d-flex justify-content-between" style="font-size: 110%">
+                    <div class="col-form-label" style="color: #003057;font-weight: 700;">Total Properties:
+                        {{ $totalProperties }}</div>
+                </div>
 
-            <div class="d-flex justify-content-between" style="font-size: 110%">
-                <div class="col-form-label" style="color: #003057;font-weight: 700;">Total Properties:
-                    {{ $totalProperties }}</div>
+                <div class="d-flex justify-content-between" style="font-size: 110%">
+                    <div class="col-form-label" style="color: #003057;font-weight: 700;">Total <span
+                            class="text-black p-1" style="background-color:#FFA500">Occupied</span>
+                      :  {{ $totalOccupiedProperties }}</div>
+                </div>
+
+                <div class="d-flex justify-content-between" style="font-size: 110%">
+                    <div class="col-form-label" style="color: #003057;font-weight: 700;">Total
+                        <span class="text-white p-1" style="background-color:#253031;">Available</span>
+                       : {{ $totalAvailProperties }}
+                    </div>
+                </div>
             </div>
 
-            <div class="d-flex justify-content-between" style="font-size: 110%">
-                <div class="col-form-label" style="color: #003057;font-weight: 700;">Total <span class="text-black p-1"
-                        style="background-color:#FFA500">Occupied:</span> {{ $totalOccupiedProperties }}</div>
-            </div>
-
-            <div class="d-flex justify-content-between" style="font-size: 110%">
-                <div class="col-form-label" style="color: #003057;font-weight: 700;">Total <span class="text-white p-1"
-                        style="background-color:#253031;">Available:</span> {{ $totalAvailProperties }}</div>
-            </div>
 
             <div class="card p-2">
                 <table id="propertyTable" class="table table-hover">

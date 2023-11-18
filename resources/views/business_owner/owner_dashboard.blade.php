@@ -29,7 +29,7 @@ option {
 
             <div class="card-group row d-flex align-items-center justify-content-center gap-3 mx-2">
                 <div class="card border-primary mb-3 shadow-sm p-1 mb-3 rounded col-12 col-md-4"
-                    style="height: 170px;border-style: none;background-color:  #FFFFFF;">
+                    style="height: 170px;border-style: none;background-color:  #135083;">
                     <div class="card-body text-black">
                         <div class="svg-cont d-flex justify-content-md-end">
                             <select style="width: 35mm; height: 9mm" id="locs" class="form-select" @error('locs')
@@ -43,14 +43,14 @@ option {
                                     1.492-1.256 3.16-1.275ZM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0Zm3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4Z" />
                             </svg>
                         </div>
-                        <h3 id="tenantCount" class="card-title" style="color: #003057;">{{ $totalTenants }}</h3>
-                        <h4 class="card-name">Tenants</h4>
+                        <h3 id="tenantCount" class="card-title" style="color: #FFFFFF;">{{ $totalTenants }}</h3>
+                        <h4 class="card-name" style="color: #FFFFFF;">Tenants</h4>
 
                     </div>
                 </div>
 
                 <div class="card border-dark mb-3 shadow-sm p-2 mb-1 rounded col-12 col-md-4"
-                    style="height: 170px;border-style: none;background-color: #253031;">
+                    style="height: 170px;border-style: none;background-color: #A9CCE8;">
                     <div class="card-body text-black">
                         <div class="svg-cont d-flex justify-content-md-end">
                             <select style="width: 35mm; height: 9mm" id="prop_locs" class="form-select"
@@ -65,15 +65,15 @@ option {
                         </div>
 
 
-                        <h3 id="propertyCount" class="card-title" style="color: #FFFFFF;"> {{ $totalProperties }}</h3>
-                        <h4 class="card-name" style="color: #FFFFFF;">Properties</h4>
+                        <h3 id="propertyCount" class="card-title"  style="color: #003057;"> {{ $totalProperties }}</h3>
+                        <h4 class="card-name">Properties</h4>
                         <div class="row">
                             <div class="col-6">
-                                <h6 id="availPropertyCount" class="card-title" style="color: #FFFFFF;">Available:
+                                <h6 id="availPropertyCount" class="card-title"  style="color: #003057;">Available:
                                     {{ $availProperties }}</h6>
                             </div>
                             <div class="col-6">
-                                <h6 id="occupiedPropertyCount" class="card-title" style="color: #FFFFFF;">Occupied:
+                                <h6 id="occupiedPropertyCount" class="card-title" style="color: #003057;">Occupied:
                                     {{ $occupiedProperties }}
                                 </h6>
 
@@ -84,7 +84,7 @@ option {
                 </div>
 
                 <div class="card border-warning mb-3 shadow-sm p-2 mb-1 rounded col-12 col-md-4"
-                    style="height: 170px;border-style: none;background-color: #FFFFFF;">
+                    style="height: 170px;border-style: none;background-color: #135083;">
                     <a style="text-decoration: none" href="{{ url('maintenance') }}">
                         <div class="card-body text-black">
                             <div class="svg-cont d-flex justify-content-md-end">
@@ -96,14 +96,14 @@ option {
                                         d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0Zm-1 0a7 7 0 1 0-13.202 3.249l1.988-1.657a4.5 4.5 0 0 1 7.537-4.623L7.497 6.5l1 2.5 1.333 3.11c-.56.251-1.18.39-1.833.39a4.49 4.49 0 0 1-1.592-.29L4.747 14.2A7 7 0 0 0 15 8Zm-8.295.139a.25.25 0 0 0-.288-.376l-1.5.5.159.474.808-.27-.595.894a.25.25 0 0 0 .287.376l.808-.27-.595.894a.25.25 0 0 0 .287.376l1.5-.5-.159-.474-.808.27.596-.894a.25.25 0 0 0-.288-.376l-.808.27.596-.894Z" />
                                 </svg>
                             </div>
-                            <h3 class="card-title" style="color: #003057;">{{ $totalMaintenance }}</h3>
-                            <h4 class="card-name">Maint. Request</h4>
+                            <h3 class="card-title" style="color: #ffffff;">{{ $totalMaintenance }}</h3>
+                            <h4 class="card-name" style="color: #ffffff;">Maint. Request</h4>
                         </div>
                     </a>
                 </div>
 
                 <div class="card border-success mb-3 shadow-sm p-2 mb-1 rounded col-12 col-md-4 "
-                    style="height: 170px;border-style: none;background-color: #253031;">
+                    style="height: 170px;border-style: none;background-color: #A9CCE8;">
                     <div class="card-body text-black">
                         <div class="svg-cont d-flex justify-content-md-end">
                             <select style="width: 35mm; height: 9mm" id="month_select" name="month_select"
@@ -129,22 +129,54 @@ option {
                                     d="M0 5a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V5zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V7a2 2 0 0 1-2-2H3z" />
                             </svg>
                         </div>
-                        <h3 id="totalIncome" class="card-title" style="color: #FFFFFF;">₱ {{$totalMonthIncome}} </h3>
-                        <h4 class="card-name" style="color: #FFFFFF;">Monthly Total Income</h4>
+                        <h3 id="totalIncome" class="card-title" style="color: #003057;">₱ {{$totalMonthIncome}} </h3>
+                        <h4 class="card-name" style="color: #003057;">Monthly Total Income</h4>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </div>  
 </div>
-<div class="card-group col-md-4 row gap-3 mx-2">
+
+
+
+<div class="row p-3">
+    <div class="col-md-5 ">
+
     <div class="card mb-3 shadow-sm p-1 mb-3 rounded">
-        graph
-    </div>
+            <!-- Chart container -->
+            <canvas id="lineChart" width="400" height="200"></canvas>
+        </div>
+        <div class="card mb-3 shadow-sm p-1 mb-3 rounded">
+          
+            <canvas id="lineChart" width="400" height="200"></canvas>
+        </div>
 </div>
-<div class="card-group row d-flex align-items-center justify-content-center gap-3 mx-3">
+
+
+    <div class="col-md-7">
     <div class="container md-10 mb-5">
-        <div id="calendar" style="margin-left: 35%;"></div>
+        <div id="calendar"></div>
+    </div>
+    
     </div>
 </div>
+
+
+
+
+
+<div class="card-group col-md-4 row gap-3 mx-2">
+        
+    </div>
+<div class="card-group row d-flex align-items-center justify-content-center gap-3 mx-3">
+    
+</div>
+
+
+<!-- Include the Chart.js library -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- Include your custom JavaScript file -->
+<script src="{{ asset('js/lineChart.js') }}"></script>
 @endsection

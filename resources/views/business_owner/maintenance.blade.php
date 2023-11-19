@@ -10,8 +10,8 @@
     <div class="row justify-content-center">
         <div class="col-md-12 mt-4">
             <div class="card mt-5" style="border-radius: 10px;">
-                <div class="text-center col-md-12" style="margin-left: inherit; margin-right: inherit; background-color:#253031; border-top-left-radius:10px; border-top-right-radius:10px; margin-bottom: 10px;">
-                    <h2 style="color:white; font-weight: 700;padding-top: 15px;padding-left: 23px;">J and E Rental Maintenance</h2>
+                <div class="text-center col-md-12" style="margin-left: inherit; margin-right: inherit; background-color:#A9CCE8; border-top-left-radius:10px; border-top-right-radius:10px; margin-bottom: 10px;">
+                    <h2 style="color:#135083; font-weight: 700;padding-top: 15px;padding-left: 23px;">J and E Rental Maintenance</h2>
                 </div>
                 <div style="padding: 10px;">
                 {{-- <div class="row p-2">
@@ -62,7 +62,7 @@
 
                                 <td>{{ $maintenance->status }}</td>
                                 <td>
-                                    <button class="btn btn-secondary btn-sm maintenance-details-button"
+                                    <button class="btn btn-outline-primary btn-sm maintenance-details-button"
                                         data-maintenance-id='{{ $maintenance->id }}' data-bs-toggle="modal"
                                         data-bs-target="#maintenanceModal"><svg xmlns="http://www.w3.org/2000/svg"
                                             width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical"

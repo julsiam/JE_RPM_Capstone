@@ -15,6 +15,9 @@ option {
     color: #003057;
     font-weight: 700;
 }
+
+/*for scribbling effect*/
+
 </style>
 
 @section('content')
@@ -172,6 +175,8 @@ option {
 <div class="card-group row d-flex align-items-center justify-content-center gap-3 mx-3">
     
 </div>
+<!-- this is animate counter file -->
+<!-- <script src="{{ asset('js/animateCounter.js') }}"></script> -->
 
 
 <!-- Include the Chart.js library -->

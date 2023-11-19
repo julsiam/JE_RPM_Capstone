@@ -10,9 +10,9 @@
 
 <div class="container" style="margin-top: 10%">
     <div class="card mt-5" style="border-radius: 25px;">
-        <div class="row justify-content-center" style="margin-left: inherit; margin-right: inherit; background-color:#253031; border-top-left-radius:10px; border-top-right-radius:10px;">
+        <div class="row justify-content-center" style="margin-left: inherit; margin-right: inherit; background-color:#A9CCE8; border-top-left-radius:10px; border-top-right-radius:10px;">
             <div class="col-md-6 ">
-                <h2 style="color:white; font-weight: 700;padding-top: 15px;padding-left: 23px;">J and E Rental Tenants</h2>
+                <h2 style="color:#135083; font-weight: 700;padding-top: 15px;padding-left: 23px;">J and E Rental Tenants</h2>
             </div>
 
             <div class="col-md-6 text-end p-3">
@@ -122,7 +122,7 @@
 
 
                         <td class="text-center">
-                            <button class="btn btn-secondary btn-sm detailsBtn" data-tenant-id='{{ $tenant->id }}'
+                            <button class="btn btn-outline-primary btn-sm detailsBtn" style="" data-tenant-id='{{ $tenant->id }}'
                                 data-bs-toggle='modal' data-bs-target='#tenantProfileModal'><svg
                                     xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                     class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
@@ -140,12 +140,12 @@
             aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-xl">
                 <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="addAnnouncementModalLabel">{{ __('Tenant Profile') }}</h5>
+                    <div class="modal-header" style="background-color: #A9CCE8;">
+                        <h4 class="modal-title" id="addAnnouncementModalLabel" style="color: #135083; font-weight:700; letter-spacing: 2px;">{{ __('Tenant Profile') }}</h4>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
 
-                    <div class="modal-body m-2">
+                    <div class="modal-body m-2" style="background-color: #F2F2F3;">
                         <div class="mb-3">
                             <div class="">
                                 <input id="tenant_id" required style="border-color: rgb(166, 166, 166)" type="hidden"
@@ -310,9 +310,9 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary"
+                        <button type="button" class="btn btn-danger" 
                             data-bs-dismiss="modal">{{ __('Cancel') }}</button>
-                        <a href="{{url('edit_tenant')}}" type="button" class="btn btn-primary">{{ __('Update') }}</a>
+                        <a href="{{url('edit_tenant')}}" type="button" class="btn btn-outline-dark" style="background-color:#FE8900">{{ __('Update') }}</a>
                     </div>
                 </div>
             </div>

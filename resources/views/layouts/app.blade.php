@@ -132,7 +132,7 @@
 
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
 
-                                <a class="dropdown-item">
+                                <!-- <a class="dropdown-item">
                                     {{-- <h6 class="dropdown-header">
                                             <img style="width:65px" src="image/gwapo1.jpg" alt="">
                                             {{ Auth::user()->name }} <br>
@@ -152,7 +152,7 @@
                                         <h6> {{ Auth::user()->email }}</h6> --}}
                                     </div>
 
-                                </a>
+                                </a> -->
 
                                 <a class="dropdown-item" href="{{ url('profile') }}">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -163,7 +163,7 @@
                                     {{ __('Profile') }}
                                 </a>
 
-                                <a class="dropdown-item" href="{{ route('logout') }}">
+                                <!-- <a class="dropdown-item" href="{{ route('logout') }}">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                         class="bi bi-key" viewBox="0 0 16 16">
                                         <path
@@ -171,7 +171,7 @@
                                         <path d="M4 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
                                     </svg>
                                     {{ __('Change Password') }}
-                                </a>
+                                </a> -->
 
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                     @csrf

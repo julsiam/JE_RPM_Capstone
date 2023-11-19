@@ -9,13 +9,14 @@
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-12 mt-4">
-            <div class="card mt-5">
+            <div class="card mt-5" style="border-top-left-radius: 10px;
+    border-top-right-radius: 10px;">
 
-                <div class="row justify-content-between p-2">
-                    <div class="col-6">
-                        <h2>Maintenance Request </h2>
+                <div class="row justify-content-between p-2" style="margin-left: inherit; margin-right: inherit; background-color:#253031; border-top-left-radius:10px; border-top-right-radius:10px; margin-bottom: 10px;" >
+                    <div class="col-6" >
+                        <h2 style="color:white; font-weight: 700;padding-top: 15px;padding-left: 23px;">Maintenance Request </h2>
                     </div>
-                    <div class="col-6 text-end">
+                    <div class="col-6 text-end" style="margin-top: 10px;">
                         <a href="#" class="btn btn-success me-2" data-bs-toggle="modal"
                             data-bs-target="#addRequestModal">
                             {{-- <a href="{{url('req ')}}" class="btn btn-success me-2"> --}}
@@ -28,8 +29,8 @@
                             </svg>
                         </a>
                     </div>
-
-                    <div>
+                    </div>
+                    <div class="card-body p-3">
                         <table id="maintenanceData" class="table table-striped">
                             <thead>
                                 <tr>
@@ -60,10 +61,10 @@
                         </table>
                     </div>
 
-                    <div class="d-flex justify-content-between">
+                    <div class="d-flex justify-content-between p-3">
                         <div class="col-form-label">Total Requests: {{ $totalRequests }}</div>
                     </div>
-                </div>
+               
             </div>
         </div>
 

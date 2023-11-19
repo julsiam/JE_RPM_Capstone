@@ -16,10 +16,10 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center" >
+    <div class="row justify-content-center">
         <div class="col-md-8">
             <div style="margin-top:15%" class="card">
-                <div class="card-header">{{ __('Add Tenant') }}</div>
+                <div class="card-header" style="margin-left: inherit; margin-right: inherit; background-color:#A9CCE8; border-top-left-radius:10px; border-top-right-radius:10px;"><h2 style="color:#135083; font-weight: 700;padding-top: 15px;padding-left: 23px;">{{ __('Add Tenant') }}</h2></div>
                 @if (session('status'))
                 <div class="alert alert-success" role="alert">
                     {{ session('status') }}
@@ -31,7 +31,7 @@
                         enctype="multipart/form-data">
                         @csrf
                         <div class="nav nav-fill my-3">
-                            <label class="nav-link shadow-sm step0    border ml-2 ">Personal Information</label>
+                            <label class="nav-link shadow-sm border ml-2 ">Personal Information</label>
                         </div>
                         <div class="row">
                             <div class="col-md-6">
@@ -234,7 +234,7 @@
 
                         <!--Accomodation-->
                         <div class="nav nav-fill my-3">
-                            <label class="nav-link shadow-sm step1   border ml-2 ">Accomodation Information</label>
+                            <label class="nav-link shadow-sm border ml-2 ">Accomodation Information</label>
                         </div>
                         <div class="row">
                             <div class="col-md-6">
@@ -455,7 +455,7 @@
 
                         <!--Others-->
                         <div class="nav nav-fill my-3">
-                            <label class="nav-link shadow-sm step2   border ml-2 ">Other Information</label>
+                            <label class="nav-link shadow-sm  border ml-2 ">Other Information</label>
                         </div>
                         {{-- FILE UPLOAD --}}
                         <div class="row mb-3">
@@ -502,10 +502,18 @@
                         </div>
 
                         <div class="col-md-12 d-flex justify-content-center mt-4">
-                            <button type="submit" class="btn btn-primary">
+                            <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#successModal">
                                 {{ __('Add Tenant') }}
                             </button>
                         </div>
+
+                        <!-- <div class="col-md-12 d-flex justify-content-center mt-4">
+                            <button type="button" class="btn btn-primary" data-toggle="modal"
+                                data-target="#successModal">
+                                {{ __('Add Tenant') }}
+                            </button>
+                        </div> -->
+
                     </form>
                 </div>
 

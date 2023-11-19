@@ -3,7 +3,7 @@
 @section('content')
 <div class="container" style="margin-top: 10%">
     <div class="row justify-content-center" style="padding-left: 12px;font-size: medium;">
-        <div class="" style=" color: black;font-weight: 700;">Note: Add the properties first before adding any tenants.
+        <div class="" style=" color: #135083;font-weight: 700;">Note: Add the properties first before adding any tenants.
         </div>
     </div>
     <div class="container" style="margin-top: 10px">
@@ -18,9 +18,9 @@
 
         <div class="card mt-2 mb-3">
             <div class="row justify-content-center"
-                style="margin-left: inherit; margin-right: inherit; background-color:#253031">
+                style="margin-left: inherit; margin-right: inherit; background-color:#A9CCE8">
                 <div class="col-md-6 p-1">
-                    <h2 style="color:white; font-weight: 700;padding-top: 15px;padding-left: 23px;">J and E Rental
+                    <h2 style="color:#135083; font-weight: 700;padding-top: 15px;padding-left: 23px;">J and E Rental
                         Properties</h2>
                 </div>
 
@@ -77,13 +77,13 @@
 
                 <div class="d-flex justify-content-between" style="font-size: 110%">
                     <div class="col-form-label" style="color: #003057;font-weight: 700;">Total <span
-                            class="text-black p-1" style="background-color:#FFA500">Occupied</span>
+                            class=" p-1" style="background-color:#FFA500">Occupied</span>
                       :  {{ $totalOccupiedProperties }}</div>
                 </div>
 
                 <div class="d-flex justify-content-between" style="font-size: 110%">
                     <div class="col-form-label" style="color: #003057;font-weight: 700;">Total
-                        <span class="text-white p-1" style="background-color:#253031;">Available</span>
+                        <span class=" p-1" style="background-color:#A9CCE8">Available</span>
                        : {{ $totalAvailProperties }}
                     </div>
                 </div>
@@ -118,8 +118,8 @@
                                 @if ($property->status == 'Occupied')
                                 <span class="text-black p-1" style="background-color:#FFA500">Occupied</span>
                                 @elseif ($property->status == 'Available')
-                                <span class="text-white p-1"
-                                    style="background-color:#253031; color:antiquewhite">Available</span>
+                                <span class="text-black p-1"
+                                    style="background-color:#A9CCE8;">Available</span>
                                 @else
                                 {{ $property->status }}
                                 @endif
@@ -131,7 +131,7 @@
                                 No Tenant
                                 @endif
                             </td>
-                            <td> <button class="btn btn-secondary btn-sm propertyDetailsBtn"
+                            <td> <button class="btn btn-outline-primary  btn-sm propertyDetailsBtn" 
                                     data-property-id='{{ $property->id }}' data-bs-toggle='modal'
                                     data-bs-target='#propertyModal'>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -151,11 +151,13 @@
                 aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-lg">
                     <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="addAnnouncementModalLabel">{{ __('Edit Property') }}</h5>
+                        <div class="modal-header" style="background-color: #A9CCE8;">
+                            <h3 class="modal-title" id="addAnnouncementModalLabel" style="letter-spacing: 2px;
+  color: #003057;
+        font-weight: 700;">{{ __('Edit Property') }}</h3>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="modal-body">
+                        <div class="modal-body" style="background-color:#F2F2F3;"> 
                             <form method="POST" action="{{ route('edit_property') }}">
                                 @csrf
                                 <div class="mb-3">
@@ -246,7 +248,7 @@
                                 <div class="modal-footer">
                                     <!-- <button type="button" class="btn btn-secondary"
                                         data-bs-dismiss="modal">{{ __('Cancel') }}</button> -->
-                                    <button type="submit" class="btn btn-primary">{{ __('Update') }}</button>
+                                    <button type="submit" class="btn btn-outline-dark" style="background-color: #FFA500;">{{ __('Update') }}</button>
                                 </div>
                             </form>
                         </div>

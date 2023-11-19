@@ -5,9 +5,9 @@
         <div class="row justify-content-center">
             <div class="col-md-12 mt-4">
                 <div class="card mt-5" style="border-radius: 10px;">
-                    <div class="row justify-content-center" style="margin-left: inherit; margin-right: inherit; background-color:#253031; border-top-left-radius:10px; border-top-right-radius:10px; margin-bottom: 10px;">
+                    <div class="row justify-content-center" style="margin-left: inherit; margin-right: inherit; background-color:#A9CCE8; border-top-left-radius:10px; border-top-right-radius:10px; margin-bottom: 10px;">
                         <div class="col-md-8 text-start">
-                            <h2 style="color:white; font-weight: 700;padding-top: 15px;padding-left: 23px;">J and E Payment Records: NOT FULLY PAID HISTORY</h2>
+                            <h2 style="color:#135083; font-weight: 700;padding-top: 15px;padding-left: 23px;">J and E Payment Records: NOT FULLY PAID HISTORY</h2>
                         </div>
 
                         <div class="col-md-4 text-end btn-group btn-group-sm p-3" role="group"

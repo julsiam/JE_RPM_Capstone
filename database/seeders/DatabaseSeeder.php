@@ -26,7 +26,8 @@ class DatabaseSeeder extends Seeder
                 'occupation' => 'Business Woman',
                 'work_address' => "Cebu City",
                 'password' => bcrypt('chris12345'),
-                'type' => 1
+                'type' => 1,
+                'status'=>'Active'
             ]
         ];
 

@@ -318,11 +318,12 @@
                             <button type="button" class="btn btn-secondary"
                                 data-bs-dismiss="modal">{{ __('Cancel') }}</button>
 
-                            <button type="button" class="btn btn-danger deleteTenantBtn"
-                                data-tenant-id="{{ $tenant->id }}">
-                                {{ __('Delete Tenant') }}
-                            </button>
-
+                            @foreach ($tenants as $tenant)
+                                <button type="button" class="btn btn-danger deleteTenantBtn"
+                                    data-tenant-id="{{ $tenant->id }}">
+                                    {{ __('Delete Tenant') }}
+                                </button>
+                            @endforeach
 
                             <a href="{{ url('edit_tenant') }}" type="button"
                                 class="btn btn-primary">{{ __('Update') }}</a>

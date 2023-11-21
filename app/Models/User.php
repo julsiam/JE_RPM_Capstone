@@ -10,11 +10,12 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Casts\Attribute;
-
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable;
+    //SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -35,7 +36,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'work_address',
         'password',
         'type',
-        'profile_picture'
+        'profile_picture',
+        'status'
     ];
 
     /**
@@ -71,23 +73,37 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasOne(Property::class);
     }
 
-    public function rental(){
+    public function rental()
+    { //should be rentals
         return $this->hasOne(Rental::class);
     }
 
-    public function announcements(){
+    public function announcements()
+    {
         return $this->hasMany(Announcement::class);
     }
 
-    public function maintenance(){
+    public function maintenance()
+    {
         return $this->hasMany(Maintenance::class);
     }
 
-    public function file(){
+    public function file()
+    {
         return $this->hasMany(File::class);
     }
 
-    public function notification(){
+    public function notification()
+    {
         return $this->hasMany(Notification::class);
     }
+
+    // protected $cascadeDeletes =
+    // [
+    //     'property',
+    //     'rental',
+    //     'announcements',
+    //     'maintenance',
+    //     'file'
+    // ];
 }

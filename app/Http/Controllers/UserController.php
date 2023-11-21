@@ -138,6 +138,7 @@ class UserController extends Controller
         }
 
         $defaultImagePath = 'image/default_photo.png'; // Provide the correct path to your default image
+        $status = 'Active';
 
         $user = User::create([
             'first_name' => $request->input('first_name'),
@@ -153,6 +154,7 @@ class UserController extends Controller
             'type' => 0,
             'property_id' => $propertyId,
             'password' => Hash::make($request->input('password')),
+            'status' => $status,
 
             'profile_picture' => $defaultImagePath,
         ]);
@@ -227,6 +229,28 @@ class UserController extends Controller
         return redirect()->route('tenants')->with('success', 'Tenant added successfully!');
     }
 
+
+    public function deleteTenant(Request $request) //JUST UPDATE THE TENANT STATUS
+    {
+        $tenant = User::find($request->tenant_delete_id);
+
+        if ($tenant) {
+
+            $tenant->status = 'Inactive';
+
+            $property = $tenant->property;
+            if ($property) {
+                $property->resetForNewTenant();
+            }
+
+            $tenant->save();
+            return redirect()->route('tenants')->with('delete', 'Deactivated Successfully!');
+        }
+
+        return redirect()->route('tenants')->with('error', 'Tenant not found!');
+    }
+
+
     public function editTenantForm()
     {
         $currentDate = date('Y-m-d');
@@ -253,8 +277,9 @@ class UserController extends Controller
     {
         $tenants = User::with('property')
             ->where('type', 0)
+            ->where('status', 'Active')
             ->get();
-
+            
         $currentDate = date('Y-m-d');
 
         $notifications = Notification::with('user')
@@ -284,13 +309,16 @@ class UserController extends Controller
     //SHOW ALL TENANTS AND DISPLAY IN MODAL
     public function getTenantsList()
     {
-        $tenants = User::where('type', 0)->select('id', 'first_name', 'last_name', 'email')->get();
+        $tenants = User::where('type', 0)
+            ->where('status', 'Active')
+            ->select('id', 'first_name', 'last_name', 'email')
+            ->get();
 
         return response()->json($tenants);
     }
 
 
-    public function getTenantDetails(Request $request)
+    public function getTenantDetails(Request $request) //// DETAILS IN TENANT PROFILE IN EDIT RENTALS
     {
         $id = $request->input('id');
         $tenant = User::with(['rental.property', 'file' => function ($query) {
@@ -303,7 +331,7 @@ class UserController extends Controller
     }
 
 
-    public function getTenant(Request $request)
+    public function getTenant(Request $request) // DETAILS IN TENANT PROFILE IN TENANT LIST TABLE
     {
         $tenantId = $request->input('data-tenant-id');
         $tenant = User::with(['rental.property', 'rental.rentalHistory', 'file' => function ($query) {
@@ -312,6 +340,9 @@ class UserController extends Controller
 
         return response()->json($tenant);
     }
+
+
+
 
     public function getProfileDetails()
     {
@@ -403,7 +434,7 @@ class UserController extends Controller
 
 
             $path = $request->file('profilePictureInput')
-            ->storePublicly('public/profile');
+                ->storePublicly('public/profile');
 
 
             if ($user->profile_picture !== 'image/default_photo.png') {

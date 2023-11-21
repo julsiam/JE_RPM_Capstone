@@ -99,12 +99,17 @@ Route::middleware(['auth', 'user-access:business_owner'])->group(function () {
 
     Route::get('/tenants', [UserController::class, 'tenantsList'])->name('tenants'); //SHOW ALL TENANTS
 
+    Route::post('/delete_tenant', [UserController::class, 'deleteTenant'])->name('tenant.delete_tenant'); //update tenant status
+
+
+
+
     Route::get('/tenants_export', [UserController::class, 'exportTenantExcel'])->name('tenants_export'); //SHOW ALL TENANTS
 
 
     Route::get('/tenants-list', [UserController::class, 'getTenantsList']); //MODAL LIST OF TENANTS IN EDIT TENANT
 
-    Route::get('/get-tenant-details', [UserController::class, 'getTenantDetails']); //INDIVIDUAL
+    Route::get('/get-tenant-details', [UserController::class, 'getTenantDetails']); //INDIVIDUAL IN EDIT RENTAL
 
     Route::get('/tenant-details', [UserController::class, 'getTenant']);
 

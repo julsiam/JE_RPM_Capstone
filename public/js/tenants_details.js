@@ -19,6 +19,7 @@ $(document).ready(function () {
                     day: 'numeric',
                     year: 'numeric',
                 };
+
                 var moveInDate = moveinDate.toLocaleString('en-US', options);
                 var bdate = bday.toLocaleString('en-US', options);
 
@@ -63,7 +64,6 @@ $(document).ready(function () {
                         var month = new Date(historyItem.end_date);
                         var dueDate = new Date(historyItem.end_date);
                         var datePaid = new Date(historyItem.created_at);
-
                         var options = {
                             timeZone: 'UTC', // Use UTC or your desired timezone
                             month: 'long',
@@ -88,6 +88,7 @@ $(document).ready(function () {
 
                         paymentHistory.append(row);
                     });
+
                 } else {
                     // If no rental history is available, you can display a message or handle it accordingly
                     var noHistoryRow = $('<tr>');

@@ -320,45 +320,6 @@ class RentalController extends Controller
     }
 
 
-    // public function getTodaysDue()
-    // {
-    //     $currentDate = date('Y-m-d');
-
-    //     $tenantsWithDues = Rental::with('user', 'property')
-    //         // ->where('status', 'Not Yet Paid')
-    //         ->whereDate('due_date', $currentDate)
-    //         // ->where(function ($query) {
-    //         //     $query->where('status', 'Not Yet Paid')
-    //         //         ->orWhere('amount_paid', 0.00);
-    //         // })
-
-    //         ->get();
-
-    //     $events = [];
-
-    //     foreach ($tenantsWithDues as $tenant) {
-
-    //         $event = [
-    //             'title' => $tenant->user->first_name . ' ' . $tenant->user->last_name, //this should be first_name and last_name
-    //             'description' => 'Tenant: ' . $tenant->user->first_name . ' ' .
-    //                 $tenant->user->last_name . '<br>Total Rent: ' .
-    //                 $tenant->total_bill . '<br> Location: ' . $tenant->property->location,
-
-    //             'start' => $tenant->due_date,
-    //             'end' => $tenant->due_date,
-    //             'status' => $tenant->status,
-    //             'amount_paid' => $tenant->amount_paid
-
-    //         ];
-
-    //         $events[] = $event;
-    //     }
-
-    //     return response()->json($events);
-    // }
-
-
-
     public function getEvents(Request $request)
     {
         $currentDate = now()->timezone('Asia/Singapore'); // Get the current date and time
@@ -369,42 +330,37 @@ class RentalController extends Controller
             ->where('amount_paid', 0.00)
             ->get()
             ->map(function ($rental) {
+                $tenantEmail = $rental->user->email;
+                $tenantContact = $rental->user->phone_number;
+
                 $tenantName = $rental->user->first_name . ' ' . $rental->user->last_name;
 
-                // $formattedDueDate = $rental->due_date->format('Y-m-d');
+                $description = 'Tenant: ' . $tenantName . '<br>Total Rent: ' . $rental->total_bill;
+
+                if ($rental->property) {
+                    $description .= '<br>Locations: ' . $rental->property->location;
+                    $description .= '<br>Email: '. $tenantEmail;
+
+                } else {
+                    $description .= '<br>Location: User is INACTIVE';
+                    $description .= '<br>Email: '. $tenantEmail;
+                    $description .= '<br>Email: '. $tenantContact;
+                }
 
                 return [
                     'title' => $tenantName,
                     'start' => $rental->due_date,
                     'end' => $rental->due_date,
-                    'description' => 'Tenant: ' . $rental->user->first_name . ' ' .
-                        $rental->user->last_name . '<br>Total Rent: ' .
-                        $rental->total_bill . '<br> Location: ' . $rental->property->location,
+                    'description' => $description,
                     'event_type' => 'due_date',
                 ];
             });
 
 
-
-
-        // $birthdays = User::whereBetween(DB::raw("CONCAT(MONTH(birthdate), '-', DAY(birthdate))"), [$currentDate->format('n-j'), $currentDate->addDays(7)->format('n-j')])
-        //     ->get()
-        //     ->map(function ($user) use ($currentDate) {
-        //         $tenantName = $user->first_name . ' ' . $user->last_name;
-        //         return [
-        //             'title' => $tenantName,
-        //             'start' => $currentDate,
-        //             'end' => $currentDate,
-        //             'description' => 'Tenant: ' . $user->first_name . ' ' .
-        //                 $user->last_name . '<br> Location: ' . $user->property->location,
-        //             'event_type' => 'birthday',
-        //         ];
-        //     });
-
-
         if (env('APP_ENV') == 'local') {
             // $birthdays = User::whereDate('birthdate', $currentDate->toDateString())
             $birthdays = User::whereRaw("MONTH(birthdate) = MONTH(?) AND DAY(birthdate) = DAY(?)", [$currentDate, $currentDate])
+                ->where('status', 'Active')
                 ->get()
                 ->map(function ($user) use ($currentDate) {
                     $tenantName = $user->first_name . ' ' . $user->last_name;
@@ -421,6 +377,7 @@ class RentalController extends Controller
         } else {
             // $birthdays = User::whereDate('birthdate', $currentDate->toDateString())
             $birthdays = User::whereRaw("EXTRACT(MONTH FROM birthdate::date) = EXTRACT(MONTH FROM ?::date) AND EXTRACT(DAY FROM birthdate::date) = EXTRACT(DAY FROM ?::date)", [$currentDate, $currentDate])
+                ->where('status', 'Active')
                 ->get()
                 ->map(function ($user) use ($currentDate) {
                     $tenantName = $user->first_name . ' ' . $user->last_name;
@@ -437,20 +394,31 @@ class RentalController extends Controller
         }
 
 
-
         $maintenances = Maintenance::with(['user', 'user.property'])
             ->whereDate('schedule', $currentDate)
             ->get()
             ->map(function ($maintenance) use ($currentDate) {
                 $category = $maintenance->category; //category is what to repair in the db
+                $user = $maintenance->user;
+
+                $title = $category;
+                $start = $currentDate;
+                $end = $currentDate;
+
+                $description = 'Category: ' . $category;
+
+                if ($user && $user->status === 'Active') {
+                    $description .= '<br>Author: ' . $user->first_name . ' ' . $user->last_name;
+                    $description .= '<br>Location: ' . $user->property->location;
+                } else {
+                    $description .= '<br>Author: Requestor is no longer a tenant!';
+                }
+
                 return [
-                    'title' => $category,
-                    'start' => $currentDate,
-                    'end' => $currentDate,
-                    'description' => 'Category: ' . $maintenance->category .
-                        '<br> Author: ' . $maintenance->user->first_name . ' ' .
-                        $maintenance->user->last_name .
-                        '<br> Location: ' . $maintenance->user->property->location,
+                    'title' => $title,
+                    'start' => $start,
+                    'end' => $end,
+                    'description' => $description,
                     'event_type' => 'maintenance',
                 ];
             });

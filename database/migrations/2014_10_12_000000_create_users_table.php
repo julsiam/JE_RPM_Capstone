@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('property_id')->nullable();
             $table->string('first_name');
             $table->string('last_name');
             $table->bigInteger('phone_number')->nullable();
@@ -26,8 +27,12 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->tinyInteger('type')->default(0); /* Users: 0=>Tenants, 1=>Business Owner */
+            $table->string('status'); //active inactive
+            $table->string('profile_picture')->nullable();
             $table->rememberToken();
             $table->timestamps();
+
+            $table->foreign('property_id')->references('id')->on('properties')->onDelete('cascade');
         });
     }
 

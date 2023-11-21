@@ -16,6 +16,13 @@ option {
     font-weight: 700;
 }
 
+.fc {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 30px;
+  background-color: #F8FAFC;
+}
+
 /*for scribbling effect*/
 
 </style>

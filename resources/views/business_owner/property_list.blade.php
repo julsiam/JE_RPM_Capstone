@@ -77,13 +77,13 @@
 
                 <div class="d-flex justify-content-between" style="font-size: 110%">
                     <div class="col-form-label" style="color: #003057;font-weight: 700;">Total <span
-                            class=" p-1" style="background-color:#FFA500">Occupied</span>
+                            class=" p-1" style="background-color:#FFA500; border-radius: 10px;">Occupied</span>
                       :  {{ $totalOccupiedProperties }}</div>
                 </div>
 
                 <div class="d-flex justify-content-between" style="font-size: 110%">
                     <div class="col-form-label" style="color: #003057;font-weight: 700;">Total
-                        <span class=" p-1" style="background-color:#A9CCE8">Available</span>
+                        <span class=" p-1" style="background-color:#A9CCE8; border-radius: 10px;">Available</span>
                        : {{ $totalAvailProperties }}
                     </div>
                 </div>
@@ -116,10 +116,10 @@
                             <td>
                                 <!--change color when prompted-->
                                 @if ($property->status == 'Occupied')
-                                <span class="text-black p-1" style="background-color:#FFA500">Occupied</span>
+                                <span class="text-black p-1" style="background-color:#FFA500; border-radius: 10px;">Occupied</span>
                                 @elseif ($property->status == 'Available')
                                 <span class="text-black p-1"
-                                    style="background-color:#A9CCE8;">Available</span>
+                                    style="background-color:#A9CCE8; border-radius: 10px;">Available</span>
                                 @else
                                 {{ $property->status }}
                                 @endif

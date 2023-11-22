@@ -27,7 +27,8 @@ class DatabaseSeeder extends Seeder
                 'work_address' => "Cebu City",
                 'password' => bcrypt('chris12345'),
                 'type' => 1,
-                'status'=>'Active'
+                'status'=>'Active',
+                'profile_picture'=>'image/default_photo.png'
             ]
         ];
 

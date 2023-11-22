@@ -152,7 +152,7 @@
                             <div class="mb-3">
                                 <div class="">
                                     <input id="tenant_id" required style="border-color: rgb(166, 166, 166)"
-                                        type="hidden" class="form-control" name="tenant_id" value="" readonly>
+                                        type="text" class="form-control" name="tenant_id" value="" readonly>
                                 </div>
                             </div>
 
@@ -318,12 +318,10 @@
                             <button type="button" class="btn btn-secondary"
                                 data-bs-dismiss="modal">{{ __('Cancel') }}</button>
 
-                            @foreach ($tenants as $tenant)
-                                <button type="button" class="btn btn-danger deleteTenantBtn"
-                                    data-tenant-id="{{ $tenant->id }}">
-                                    {{ __('Delete Tenant') }}
-                                </button>
-                            @endforeach
+                            <button type="button" class="btn btn-danger deleteTenantBtn">
+                                {{ __('Delete Tenant') }}
+                            </button>
+
 
                             <a href="{{ url('edit_tenant') }}" type="button"
                                 class="btn btn-primary">{{ __('Update') }}</a>
@@ -346,7 +344,7 @@
                                                 aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            <input type="hidden" name="tenant_delete_id" id="delete_tenant_id" readonly>
+                                            <input type="text" name="tenant_delete_id" id="delete_tenant_id" readonly>
 
                                             Are you sure you want to delete this tenant. All its details will be lost!
                                             Delete with caution, darlin'!

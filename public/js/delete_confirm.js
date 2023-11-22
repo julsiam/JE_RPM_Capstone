@@ -7,8 +7,8 @@
 //     // Optional: You can also update the modal title or any other content here
 // });
 
-$(document).ready(function(){
-    $('.deleteBtn').click(function(e){
+$(document).ready(function () {
+    $('.deleteBtn').click(function (e) {
         e.preventDefault();
 
         var announcement_id = $(this).val();
@@ -19,11 +19,11 @@ $(document).ready(function(){
 
 
     $('.deleteTenantBtn').click(function(e){
+
         e.preventDefault();
 
         var tenant_id = $('#tenant_id').val();
         $('#delete_tenant_id').val(tenant_id); // Set tenant ID in the confirm delete modal
-
 
         $('#confirmDeleteTenantModal').modal('show');
     });

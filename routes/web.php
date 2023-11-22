@@ -114,6 +114,7 @@ Route::middleware(['auth', 'user-access:business_owner'])->group(function () {
     Route::get('/tenant-details', [UserController::class, 'getTenant']);
 
 
+
     Route::post('/update-rental-details', [RentalController::class, 'editRentalDetails'])->name('tenant.editTenant');
 
     Route::get('/add_property_form', [PropertyController::class, 'addPropertyForm']);

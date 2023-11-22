@@ -230,27 +230,6 @@ class UserController extends Controller
     }
 
 
-    public function deleteTenant(Request $request) //JUST UPDATE THE TENANT STATUS
-    {
-        $tenant = User::find($request->tenant_delete_id);
-
-        if ($tenant) {
-
-            $tenant->status = 'Inactive';
-
-            $property = $tenant->property;
-            if ($property) {
-                $property->resetForNewTenant();
-            }
-
-            $tenant->save();
-            return redirect()->route('tenants')->with('delete', 'Deactivated Successfully!');
-        }
-
-        return redirect()->route('tenants')->with('error', 'Tenant not found!');
-    }
-
-
     public function editTenantForm()
     {
         $currentDate = date('Y-m-d');
@@ -279,7 +258,7 @@ class UserController extends Controller
             ->where('type', 0)
             ->where('status', 'Active')
             ->get();
-            
+
         $currentDate = date('Y-m-d');
 
         $notifications = Notification::with('user')
@@ -334,12 +313,40 @@ class UserController extends Controller
     public function getTenant(Request $request) // DETAILS IN TENANT PROFILE IN TENANT LIST TABLE
     {
         $tenantId = $request->input('data-tenant-id');
+
         $tenant = User::with(['rental.property', 'rental.rentalHistory', 'file' => function ($query) {
             $query->whereIn('type', ['id_photo', 'contract_pdf']);
         }])->findOrFail($tenantId);
 
         return response()->json($tenant);
     }
+
+
+
+    public function deleteTenant(Request $request) //JUST UPDATE THE TENANT STATUS
+    {
+        // $tenant = User::find($request->tenant_delete_id);
+
+        $tenantId = $request->input('tenant_delete_id'); // Retrieve the tenant ID from the request
+
+        $tenant = User::find($tenantId);
+
+        if ($tenant) {
+
+            $tenant->status = 'Inactive';
+
+            $property = $tenant->property;
+            if ($property) {
+                $property->resetForNewTenant();
+            }
+
+            $tenant->save();
+            return redirect()->route('tenants')->with('delete', 'Deactivated Successfully!');
+        }
+
+        return redirect()->route('tenants')->with('error', 'Tenant not found!');
+    }
+
 
 
 

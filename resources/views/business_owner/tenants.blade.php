@@ -2,11 +2,11 @@
 
 
 @section('content')
-@if (session('success'))
-<div class="alert alert-success" role="alert">
-    {{ session('success') }}
-</div>
-@endif
+    @if (session('success'))
+        <div class="alert alert-success" role="alert">
+            {{ session('success') }}
+        </div>
+    @endif
 
 <div class="container" style="margin-top: 10%">
     <div class="card mt-5" style="border-radius: 25px;">
@@ -61,14 +61,15 @@
                     </svg>
                 </a>
 
-                {{-- BACK --}}
-                <a onclick="history.back()" class="btn btn-danger me-2"><svg xmlns="http://www.w3.org/2000/svg"
-                        width="16" height="16" fill="currentColor" class="bi bi-arrow-left-circle" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd"
-                            d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-4.5-.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z" />
-                    </svg></a>
+                    {{-- BACK --}}
+                    <a onclick="history.back()" class="btn btn-danger me-2"><svg xmlns="http://www.w3.org/2000/svg"
+                            width="16" height="16" fill="currentColor" class="bi bi-arrow-left-circle"
+                            viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-4.5-.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z" />
+                        </svg></a>
+                </div>
             </div>
-        </div>
 
 
         <div class="card p-2" style="border-radius: 0;">
@@ -87,38 +88,38 @@
                 </thead>
                 <tbody>
 
-                    @foreach ($tenants as $tenant)
-                    <tr>
-                        <td hidden class="text-start" scope="row">{{ $tenant->id }}</td>
-                        
-                        <td class="text-start">{{ $tenant->first_name }} {{ $tenant->last_name }}</td>
-                        
-                        <td class="text-start">{{ $tenant->email }}</td>
-                        
-                        <td class="text-start">
-                            @if ($tenant->property)
-                            {{ $tenant->property->location }}
-                            @else
-                            N/A
-                            @endif
-                        </td>
+                        @foreach ($tenants as $tenant)
+                            <tr>
+                                <td hidden class="text-start" scope="row">{{ $tenant->id }}</td>
 
-                        <td class="text-start">
-                            @if ($tenant->property)
-                            {{ $tenant->property->room_unit }}
-                            @else
-                            N/A
-                            @endif
-                        </td>
+                                <td class="text-start">{{ $tenant->first_name }} {{ $tenant->last_name }}</td>
 
-                        <!--To change the color if mag due date na si tenant-->
-                        <td class="text-center @if($tenant->rental && $tenant->rental->due_date->isToday()) text-danger fw-bold @endif">
-                            @if ($tenant->rental)
-                            {{ $tenant->rental->due_date->format('F d, Y') }}
-                            @else
-                            N/A
-                            @endif
-                        </td>
+                                <td class="text-start">{{ $tenant->email }}</td>
+
+                                <td class="text-start">
+                                    @if ($tenant->property)
+                                        {{ $tenant->property->location }}
+                                    @else
+                                        N/A
+                                    @endif
+                                </td>
+
+                                <td class="text-start">
+                                    @if ($tenant->property)
+                                        {{ $tenant->property->room_unit }}
+                                    @else
+                                        N/A
+                                    @endif
+                                </td>
+
+                                <!--To change the color if mag due date na si tenant-->
+                                <td class="text-center @if ($tenant->rental && $tenant->rental->due_date->isToday()) text-danger fw-bold @endif">
+                                    @if ($tenant->rental)
+                                        {{ $tenant->rental->due_date->format('F d, Y') }}
+                                    @else
+                                        N/A
+                                    @endif
+                                </td>
 
 
                         <td class="text-center">
@@ -153,170 +154,211 @@
                             </div>
                         </div>
 
-                        <div class="row">
-                            <div class="col-md-8 p-2">
-                                <h5>PERSONAL INFORMATION</h5>
-                                <div>
-                                    <div class="row">
-
-                                        <div class="row">
-                                            <div class="col-auto">
-                                                <img style="width: 200px;" id="tenant_profile" src=""
-                                                    alt="Profile Picture">
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group col-md-5">
-                                            <label style="color: rgb(128, 128, 128)">First Name</label>
-                                            <input id="tenant_first_name" style="border-color: rgb(166, 166, 166)"
-                                                type="text" class="form-control" name="tenant_first_name" readonly
-                                                value="">
-                                        </div>
-
-                                        <div class="form-group col-md-5">
-                                            <label style="color: rgb(128, 128, 128)">Last Name</label>
-                                            <input id="tenant_last_name" style="border-color: rgb(166, 166, 166)"
-                                                type="text" class="form-control" name="tenant_last_name" readonly
-                                                value="">
-                                        </div>
-
-                                        <div class="form-group col-md-5">
-                                            <label style="color: rgb(128, 128, 128)">Email</label>
-                                            <input id="tenant_email" style="border-color: rgb(166, 166, 166)"
-                                                type="text" class="form-control" name="tenant_email" value="" readonly>
-                                        </div>
-
-                                        <div class="form-group col-md-5">
-                                            <label style="color: rgb(128, 128, 128)">Phone Number</label>
-                                            <input id="tenant_phone_number" style="border-color: rgb(166, 166, 166)"
-                                                type="text" class="form-control" name="tenant_phone_number" readonly
-                                                value="">
-                                        </div>
-
-                                        <div class="form-group col-md-5">
-                                            <label style="color: rgb(128, 128, 128)">Permanent Address</label>
-                                            <input id="tenant_address" style="border-color: rgb(166, 166, 166)"
-                                                type="text" class="form-control" name="permanent_tenant_address"
-                                                readonly value="">
-                                        </div>
-
-
-                                        <div class="form-group col-md-5">
-                                            <label style="color: rgb(128, 128, 128)">Birthdate</label>
-                                            <input id="tenant_birthdate" style="border-color: rgb(166, 166, 166)"
-                                                type="text" class="form-control" name="tenant_birthdate" readonly
-                                                value="">
-                                        </div>
-
-                                        <div class="form-group col-md-5">
-                                            <label style="color: rgb(128, 128, 128)">Age</label>
-                                            <input id="tenant_age" style="border-color: rgb(166, 166, 166)" type="text"
-                                                class="form-control" name="tenant_age" readonly value="">
-                                        </div>
-
-                                        <div class="form-group col-md-5">
-                                            <label style="color: rgb(128, 128, 128)">Gender</label>
-                                            <input id="tenant_gender" style="border-color: rgb(166, 166, 166)"
-                                                type="text" class="form-control" name="tenant_gender" readonly value="">
-                                        </div>
-
-                                        <div class="form-group col-md-5">
-                                            <label style="color: rgb(128, 128, 128)">Occupation</label>
-                                            <input id="tenant_occupation" style="border-color: rgb(166, 166, 166)"
-                                                type="text" class="form-control" name="tenant_occupation" readonly
-                                                value="">
-                                        </div>
-
-                                        <div class="form-group col-md-5">
-                                            <label style="color: rgb(128, 128, 128)">Work Address</label>
-                                            <input id="tenant_work_address" style="border-color: rgb(166, 166, 166)"
-                                                type="text" class="form-control" name="tenant_work_address" readonly
-                                                value="">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-3 p-2 mt-4"
-                                style="height:80mm; border: 0.5px solid #ced4da60; border-radius: 5px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1)">
-                                <div>
-                                    <div class="col-md-8 p-2">
-                                        <div class="row">
-                                            <div class="col-auto">
-                                                <img style="width: 200px;" id="tenant_idPhoto"
-                                                    src="{{ asset('image/default_photo.png') }}" alt="ID Photo">
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <a href="" id="tenant_contractLink" target="_blank">Contract of Agreement</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
                             <div class="row">
-                                <div class="col-md-12 p-2 m-2">
-                                    <h5>RENTAL INFORMATION</h5>
+                                <div class="col-md-8 p-2">
+                                    <h5>PERSONAL INFORMATION</h5>
                                     <div>
-                                        <div class="row align-items-start">
-                                            <div class="form-group col md-5">
-                                                <label style="color: rgb(128, 128, 128)">Location</label>
-                                                <input id="tenant_location" style="border-color: rgb(166, 166, 166)"
-                                                    type="text" class="form-control" name="tenant_location" readonly
+                                        <div class="row">
+                                            <div class="row">
+                                                <div class="col-auto">
+                                                    {{-- <img style="width: 200px;" id="tenant_profile" src=""
+                                                    alt="Profile Picture"> --}}
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group col-md-5">
+                                                <label style="color: rgb(128, 128, 128)">First Name</label>
+                                                <input id="tenant_first_name" style="border-color: rgb(166, 166, 166)"
+                                                    type="text" class="form-control" name="tenant_first_name" readonly
                                                     value="">
                                             </div>
-                                            <div class="form-group col md-5">
-                                                <label style="color: rgb(128, 128, 128)">Room Unit</label>
-                                                <input id="tenant_room_unit" style="border-color: rgb(166, 166, 166)"
-                                                    type="text" class="form-control" name="tenant_room_unit" readonly
+
+                                            <div class="form-group col-md-5">
+                                                <label style="color: rgb(128, 128, 128)">Last Name</label>
+                                                <input id="tenant_last_name" style="border-color: rgb(166, 166, 166)"
+                                                    type="text" class="form-control" name="tenant_last_name" readonly
                                                     value="">
                                             </div>
-                                            <div class="form-group col md-5">
-                                                <label style="color: rgb(128, 128, 128)">Move-in Data</label>
-                                                <input id="tenant_movein_date" style="border-color: rgb(166, 166, 166)"
-                                                    type="text" class="form-control" name="tenant_movein_date" readonly
+
+                                            <div class="form-group col-md-5">
+                                                <label style="color: rgb(128, 128, 128)">Email</label>
+                                                <input id="tenant_email" style="border-color: rgb(166, 166, 166)"
+                                                    type="text" class="form-control" name="tenant_email"
+                                                    value="" readonly>
+                                            </div>
+
+                                            <div class="form-group col-md-5">
+                                                <label style="color: rgb(128, 128, 128)">Phone Number</label>
+                                                <input id="tenant_phone_number" style="border-color: rgb(166, 166, 166)"
+                                                    type="text" class="form-control" name="tenant_phone_number"
+                                                    readonly value="">
+                                            </div>
+
+                                            <div class="form-group col-md-5">
+                                                <label style="color: rgb(128, 128, 128)">Permanent Address</label>
+                                                <input id="tenant_address" style="border-color: rgb(166, 166, 166)"
+                                                    type="text" class="form-control" name="permanent_tenant_address"
+                                                    readonly value="">
+                                            </div>
+
+
+                                            <div class="form-group col-md-5">
+                                                <label style="color: rgb(128, 128, 128)">Birthdate</label>
+                                                <input id="tenant_birthdate" style="border-color: rgb(166, 166, 166)"
+                                                    type="text" class="form-control" name="tenant_birthdate" readonly
                                                     value="">
+                                            </div>
+
+                                            <div class="form-group col-md-5">
+                                                <label style="color: rgb(128, 128, 128)">Age</label>
+                                                <input id="tenant_age" style="border-color: rgb(166, 166, 166)"
+                                                    type="text" class="form-control" name="tenant_age" readonly
+                                                    value="">
+                                            </div>
+
+                                            <div class="form-group col-md-5">
+                                                <label style="color: rgb(128, 128, 128)">Gender</label>
+                                                <input id="tenant_gender" style="border-color: rgb(166, 166, 166)"
+                                                    type="text" class="form-control" name="tenant_gender" readonly
+                                                    value="">
+                                            </div>
+
+                                            <div class="form-group col-md-5">
+                                                <label style="color: rgb(128, 128, 128)">Occupation</label>
+                                                <input id="tenant_occupation" style="border-color: rgb(166, 166, 166)"
+                                                    type="text" class="form-control" name="tenant_occupation" readonly
+                                                    value="">
+                                            </div>
+
+                                            <div class="form-group col-md-5">
+                                                <label style="color: rgb(128, 128, 128)">Work Address</label>
+                                                <input id="tenant_work_address" style="border-color: rgb(166, 166, 166)"
+                                                    type="text" class="form-control" name="tenant_work_address"
+                                                    readonly value="">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
 
-
-                            <div class="row">
-                                <div class="col-md-12 p-2 m-2">
-                                    <h5>PAYMENT HISTORY</h5>
+                                <div class="col-md-3 p-2 mt-4"
+                                    style="height:80mm; border: 0.5px solid #ced4da60; border-radius: 5px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1)">
                                     <div>
-                                        <table id="payment_history" class="table">
-                                            <thead>
-                                                <tr>
-                                                    <th>Month</th>
-                                                    <th scope="col">Total Rent</th>
-                                                    <th scope="col">Due Date</th>
-                                                    <th scope="col">Date Paid</th>
-                                                    <th scope="col">Amount Paid</th>
-                                                    <th scope="col">Status</th>
+                                        <div class="col-md-8 p-2">
+                                            <div class="row">
+                                                <div class="col-auto">
+                                                    <img style="width: 200px;" id="tenant_idPhoto"
+                                                        src="{{ asset('image/default_photo.png') }}" alt="ID Photo">
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <a href="" id="tenant_contractLink" target="_blank">Contract of
+                                                    Agreement</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
-                                                </tr>
-                                            </thead>
-                                            <tbody>
+                                <div class="row">
+                                    <div class="col-md-12 p-2 m-2">
+                                        <h5>RENTAL INFORMATION</h5>
+                                        <div>
+                                            <div class="row align-items-start">
+                                                <div class="form-group col md-5">
+                                                    <label style="color: rgb(128, 128, 128)">Location</label>
+                                                    <input id="tenant_location" style="border-color: rgb(166, 166, 166)"
+                                                        type="text" class="form-control" name="tenant_location"
+                                                        readonly value="">
+                                                </div>
+                                                <div class="form-group col md-5">
+                                                    <label style="color: rgb(128, 128, 128)">Room Unit</label>
+                                                    <input id="tenant_room_unit" style="border-color: rgb(166, 166, 166)"
+                                                        type="text" class="form-control" name="tenant_room_unit"
+                                                        readonly value="">
+                                                </div>
+                                                <div class="form-group col md-5">
+                                                    <label style="color: rgb(128, 128, 128)">Move-in Data</label>
+                                                    <input id="tenant_movein_date"
+                                                        style="border-color: rgb(166, 166, 166)" type="text"
+                                                        class="form-control" name="tenant_movein_date" readonly
+                                                        value="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
-                                            </tbody>
-                                        </table>
 
+                                <div class="row">
+                                    <div class="col-md-12 p-2 m-2">
+                                        <h5>PAYMENT HISTORY</h5>
+                                        <div>
+                                            <table id="payment_history" class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Month</th>
+                                                        <th scope="col">Total Rent</th>
+                                                        <th scope="col">Due Date</th>
+                                                        <th scope="col">Date Paid</th>
+                                                        <th scope="col">Amount Paid</th>
+                                                        <th scope="col">Status</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" 
-                            data-bs-dismiss="modal">{{ __('Cancel') }}</button>
-                        <a href="{{url('edit_tenant')}}" type="button" class="btn btn-outline-dark" style="background-color:#FE8900">{{ __('Update') }}</a>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary"
+                                data-bs-dismiss="modal">{{ __('Cancel') }}</button>
+
+                            <button type="button" class="btn btn-danger deleteTenantBtn">
+                                {{ __('Delete Tenant') }}
+                            </button>
+
+
+                            <a href="{{ url('edit_tenant') }}" type="button"
+                                class="btn btn-primary">{{ __('Update') }}</a>
+                        </div>
+
+
+                        {{-- DELETE CONFIRMATION MODAL --}}
+
+                        <div class="modal fade bg-outline-danger" id="confirmDeleteTenantModal" tabindex="-1"
+                            aria-labelledby="confirmDeleteTenantModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <form id="deleteForm" method="POST" action="{{ route('tenant.delete_tenant') }}">
+                                    @csrf
+                                    {{-- @method('DELETE') --}}
+                                    <div class="modal-content">
+                                        <div class="modal-header bg-danger">
+                                            <h5 class="modal-title" id="confirmDeleteTenantModalLabel">Confirm Deletion
+                                            </h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <input type="text" name="tenant_delete_id" id="delete_tenant_id" readonly>
+
+                                            Are you sure you want to delete this tenant. All its details will be lost!
+                                            Delete with caution, darlin'!
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Cancel</button>
+                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 @endsection

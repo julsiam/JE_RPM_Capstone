@@ -328,8 +328,8 @@
                                 </button>
                             </div>
 
-                            <div class="input-group m-2" style="width:30%">     
-                                <input id="searchTenant" name="searchTenant" type="text" class="form-control form-control-sm" placeholder="Search"> 
+                            <div class="input-group m-2" style="width:30%">
+                                <input id="searchTenant" name="searchTenant" type="text" class="form-control form-control-sm" placeholder="Search">
                                 <span class="input-group-text">
                                     &nbsp;
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">

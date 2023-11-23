@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('category');
             $table->string('priority');
             $table->string('description');
+            $table->dateTime('schedule')->nullable();
             $table->string('status');
             $table->timestamps();
         });

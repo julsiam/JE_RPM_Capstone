@@ -88,13 +88,13 @@ function selectTenant(id, name, email) { //retrieve data and display to the edit
                 var contractPath = data.file.find(file => file.type === 'contract_pdf');
 
                 if (idPhotoPath) {
-                    $('#idPhoto').attr('src', idPhotoPath.file_path);
+                    $('#idPhoto').attr('src', 'https://jerpm.s3.amazonaws.com/' + idPhotoPath.file_path);
                 } else {
                     $('#idPhoto').attr('src', defaultPhotoUrl); // No ID photo available
                 }
 
                 if (contractPath) {
-                    $('#contractLink').attr('href', contractPath.file_path);
+                    $('#contractLink').attr('href', 'https://jerpm.s3.amazonaws.com/' + contractPath.file_path);
                 } else {
                     $('#contractLink').attr('href', ' '); // No contract available
                 }

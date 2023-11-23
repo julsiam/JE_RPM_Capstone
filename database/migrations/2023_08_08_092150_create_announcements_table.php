@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->string('subject');
             $table->string('details');
+            $table->string('location');
             $table->timestamp('date_created');
             $table->timestamps(); // This will create created_at and updated_at columns
         });

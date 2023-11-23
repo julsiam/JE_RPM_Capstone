@@ -57,17 +57,35 @@ class LoginController extends Controller
             'password' => 'required',
         ]);
 
-        if(auth()->attempt(array('email' => $input['email'], 'password' => $input['password'])))
-        {
+        $credentials = [
+            'email' => $input['email'],
+            'password' => $input['password'],
+            'status' => 'Active',
+        ];
+
+        if (auth()->attempt($credentials)) {
             if (auth()->user()->type == 'business_owner') {
                 return redirect()->route('business_owner.owner_dashboard');
-
-            }else{
+            } else {
                 return redirect()->route('tenants.home');
             }
-        }else{
+        } else {
             return redirect()->route('login')->with('error', 'Invalid Credentials! Try again');
         }
+
+
+
+        // if(auth()->attempt(array('email' => $input['email'], 'password' => $input['password'])))
+        // {
+        //     if (auth()->user()->type == 'business_owner') {
+        //         return redirect()->route('business_owner.owner_dashboard');
+
+        //     }else{
+        //         return redirect()->route('tenants.home');
+        //     }
+        // }else{
+        //     return redirect()->route('login')->with('error', 'Invalid Credentials! Try again');
+        // }
 
     }
 }

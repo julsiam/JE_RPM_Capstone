@@ -138,6 +138,7 @@ class UserController extends Controller
         }
 
         $defaultImagePath = 'image/default_photo.png'; // Provide the correct path to your default image
+        $status = 'Active';
 
         $user = User::create([
             'first_name' => $request->input('first_name'),
@@ -153,6 +154,7 @@ class UserController extends Controller
             'type' => 0,
             'property_id' => $propertyId,
             'password' => Hash::make($request->input('password')),
+            'status' => $status,
 
             'profile_picture' => $defaultImagePath,
         ]);
@@ -191,14 +193,13 @@ class UserController extends Controller
 
             $idPhotoModel = new File();
             $fileName = time() . '_' . $idPhotoFile->getClientOriginalName(); //time().'_'.$file->getClientOriginalName();
-            $folder = 'id_photos';
-            $filePath = $idPhotoFile->storeAs($folder, $fileName, 'public');
+            $filePath = $idPhotoFile->storePublicly('public/id_photos');
             $filesize = $idPhotoFile->getSize();
 
             $idPhotoModel->user_id = $user_id;
             $idPhotoModel->name = $fileName;
             $idPhotoModel->type = $idPhotoFileType;
-            $idPhotoModel->file_path = '/storage/' . $filePath; // file_path
+            $idPhotoModel->file_path = $filePath; // file_path
             $idPhotoModel->size = $filesize; //size
 
             $idPhotoModel->save();
@@ -209,14 +210,13 @@ class UserController extends Controller
 
             $contractPdfModel = new File();
             $fileName = time() . '_' . $contractPdfFile->getClientOriginalName();
-            $folder = 'contracts';
-            $filePath = $contractPdfFile->storeAs($folder, $fileName, 'public');
+            $filePath = $contractPdfFile->storePublicly('public/contracts');
             $fileSize = $contractPdfFile->getSize();
 
             $contractPdfModel->user_id = $user_id;
             $contractPdfModel->name = $fileName;
             $contractPdfModel->type = $contractPdfFileType;
-            $contractPdfModel->file_path = '/storage/' . $filePath;
+            $contractPdfModel->file_path = $filePath;
             $contractPdfModel->size = $fileSize;
 
             $contractPdfModel->save();
@@ -228,6 +228,7 @@ class UserController extends Controller
 
         return redirect()->route('tenants')->with('success', 'Tenant added successfully!');
     }
+
 
     public function editTenantForm()
     {
@@ -255,6 +256,7 @@ class UserController extends Controller
     {
         $tenants = User::with('property')
             ->where('type', 0)
+            ->where('status', 'Active')
             ->get();
 
         $currentDate = date('Y-m-d');
@@ -286,13 +288,16 @@ class UserController extends Controller
     //SHOW ALL TENANTS AND DISPLAY IN MODAL
     public function getTenantsList()
     {
-        $tenants = User::where('type', 0)->select('id', 'first_name', 'last_name', 'email')->get();
+        $tenants = User::where('type', 0)
+            ->where('status', 'Active')
+            ->select('id', 'first_name', 'last_name', 'email')
+            ->get();
 
         return response()->json($tenants);
     }
 
 
-    public function getTenantDetails(Request $request)
+    public function getTenantDetails(Request $request) //// DETAILS IN TENANT PROFILE IN EDIT RENTALS
     {
         $id = $request->input('id');
         $tenant = User::with(['rental.property', 'file' => function ($query) {
@@ -305,15 +310,46 @@ class UserController extends Controller
     }
 
 
-    public function getTenant(Request $request)
+    public function getTenant(Request $request) // DETAILS IN TENANT PROFILE IN TENANT LIST TABLE
     {
         $tenantId = $request->input('data-tenant-id');
+
         $tenant = User::with(['rental.property', 'rental.rentalHistory', 'file' => function ($query) {
             $query->whereIn('type', ['id_photo', 'contract_pdf']);
         }])->findOrFail($tenantId);
 
         return response()->json($tenant);
     }
+
+
+
+    public function deleteTenant(Request $request) //JUST UPDATE THE TENANT STATUS
+    {
+        // $tenant = User::find($request->tenant_delete_id);
+
+        $tenantId = $request->input('tenant_delete_id'); // Retrieve the tenant ID from the request
+
+        $tenant = User::find($tenantId);
+
+        if ($tenant) {
+
+            $tenant->status = 'Inactive';
+
+            $property = $tenant->property;
+            if ($property) {
+                $property->resetForNewTenant();
+            }
+
+            $tenant->save();
+            return redirect()->route('tenants')->with('delete', 'Deactivated Successfully!');
+        }
+
+        return redirect()->route('tenants')->with('error', 'Tenant not found!');
+    }
+
+
+
+
 
     public function getProfileDetails()
     {
@@ -398,16 +434,22 @@ class UserController extends Controller
         }
 
         if ($request->hasFile('profilePictureInput')) {
-            $image = $request->file('profilePictureInput');
-            $imageName = time() . '_' . $image->getClientOriginalName();
-            $folder = 'profile';
-            $imagePath = $image->storeAs($folder, $imageName, 'public');
+            // $image = $request->file('profilePictureInput');
+            // $imageName = time() . '_' . $image->getClientOriginalName();
+            // $folder = 'profile';
+            // $imagePath = $image->storeAs($folder, $imageName, 'public');
+
+
+            $path = $request->file('profilePictureInput')
+                ->storePublicly('public/profile');
+
 
             if ($user->profile_picture !== 'image/default_photo.png') {
-                Storage::delete('public/' . $user->profile_picture);
-                // Storage::delete('public/storage/profile' . $user->profile_picture);
+                // Storage::delete('public/' . $user->profile_picture);
+                Storage::disk('s3')->delete($user->profile_picture);
             }
-            $user->profile_picture = '/storage/' . $imagePath;
+
+            $user->profile_picture = $path;
 
             $user->save();
 

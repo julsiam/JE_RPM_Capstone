@@ -58,7 +58,9 @@ class HomeController extends Controller
 
         $selectedLocation = $request->input('locs');
 
-        $totalTenants = User::where('type', 0)->count();
+        $totalTenants = User::where('type', 0)
+            ->where('status', 'Active')
+            ->count();
 
 
         $totalProperties = Property::count();
@@ -101,10 +103,13 @@ class HomeController extends Controller
 
         if ($selectedLocation === 'ALL') {
 
-            $tenantCount = User::where('type', 0)->count();
+            $tenantCount = User::where('type', 0)
+                ->where('status', 'Active')
+                ->count();
         } else {
             $tenantCount = User::with('property')
                 ->where('type', 0)
+                ->where('status', 'Active')
                 ->whereHas('property', function ($query) use ($selectedLocation) {
                     $query->where('location', $selectedLocation);
                 })

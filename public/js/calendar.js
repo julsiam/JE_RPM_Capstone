@@ -15,11 +15,11 @@ $(document).ready(function () {
         events: {
             url: '/due_date',
             method: 'GET',
-            allDay: false,
+            // allDay: false,
         },
 
         eventRender: function (event, element) {
-
+            console.log(event)
             var event_type = event.event_type;
 
             if (event_type === 'due_date') {

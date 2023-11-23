@@ -14,11 +14,14 @@ return new class extends Migration
         Schema::create('rental_histories', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('rental_id');
-            $table->foreign('rental_id')->references('id')->on('rentals')->onDelete('cascade');
             $table->dateTime('start_date');
             $table->dateTime('end_date');
+            $table->decimal('total_rent');
             $table->decimal('initial_paid_amount');
+            $table->string('status');
             $table->timestamps();
+
+            $table->foreign('rental_id')->references('id')->on('rentals')->onDelete('cascade');
         });
     }
 

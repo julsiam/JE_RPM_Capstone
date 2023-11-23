@@ -19,6 +19,7 @@ $(document).ready(function () {
                     day: 'numeric',
                     year: 'numeric',
                 };
+
                 var moveInDate = moveinDate.toLocaleString('en-US', options);
                 var bdate = bday.toLocaleString('en-US', options);
 
@@ -45,13 +46,13 @@ $(document).ready(function () {
                     var contractPath = data.file.find(file => file.type === 'contract_pdf');
 
                     if (idPhotoPath) {
-                        $('#tenant_idPhoto').attr('src', idPhotoPath.file_path);
+                        $('#tenant_idPhoto').attr('src', 'https://jerpm.s3.amazonaws.com/' + idPhotoPath.file_path);
                     } else {
                         $('#tenant_idPhoto').attr('src', defaultPhotoUrl); // No ID photo available
                     }
 
                     if (contractPath) {
-                        $('#tenant_contractLink').attr('href', contractPath.file_path);
+                        $('#tenant_contractLink').attr('href', 'https://jerpm.s3.amazonaws.com/' + contractPath.file_path);
                     } else {
                         $('#tenant_contractLink').attr('href', ' '); // No contract available
                     }
@@ -63,7 +64,6 @@ $(document).ready(function () {
                         var month = new Date(historyItem.end_date);
                         var dueDate = new Date(historyItem.end_date);
                         var datePaid = new Date(historyItem.created_at);
-
                         var options = {
                             timeZone: 'UTC', // Use UTC or your desired timezone
                             month: 'long',
@@ -88,6 +88,7 @@ $(document).ready(function () {
 
                         paymentHistory.append(row);
                     });
+
                 } else {
                     // If no rental history is available, you can display a message or handle it accordingly
                     var noHistoryRow = $('<tr>');

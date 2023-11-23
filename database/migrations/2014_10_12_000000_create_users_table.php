@@ -26,6 +26,8 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->tinyInteger('type')->default(0); /* Users: 0=>Tenants, 1=>Business Owner */
+            $table->string('status'); //active inactive
+            $table->string('profile_picture')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

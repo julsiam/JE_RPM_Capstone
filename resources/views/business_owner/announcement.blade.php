@@ -59,18 +59,18 @@
 </style>
 <div class="container-fluid">
 
-    @if (session('success'))
-    <div class="alert alert-success" role="alert">
-        {{ session('success') }}
-    </div>
-    @endif
-    <div class="announcement-card">
-        <div class="row justify-content-center">
-            <div style="margin-top:8%;" class="col-md-10">
-                <div class="card" style="border-width:2px; border-color:#A9A9A9;">
+        @if (session('success'))
+            <div class="alert alert-success" role="alert">
+                {{ session('success') }}
+            </div>
+        @endif
+        <div class="announcement-card">
+            <div class="row justify-content-center">
+                <div style="margin-top:8%;" class="col-md-10">
+                    <div class="card" style="border-width:2px; border-color:#A9A9A9;">
 
-                    <div class="card-header d-flex justify-content-between align-items" style="height: 55px;">
-                        <h2 class="annoucement_text">{{ __('Announcement') }}</h2>
+                        <div class="card-header d-flex justify-content-between align-items" style="height: 55px;">
+                            <h2 class="annoucement_text">{{ __('Announcement') }}</h2>
 
 
                         <div class="input-group" style="width:30%">
@@ -85,12 +85,12 @@
                             </svg>+</button>
                     </div>
 
-                    <div id="announcementData" class="card-body">
-                        @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                        @endif
+                        <div id="announcementData" class="card-body">
+                            @if (session('status'))
+                                <div class="alert alert-success" role="alert">
+                                    {{ session('status') }}
+                                </div>
+                            @endif
 
                         @foreach ($announcements as $announcement)
                         <div class="card mb-4">
@@ -112,62 +112,83 @@
 
 
 
-                            <div class="card-body" style="background: #EFEFEF;padding-bottom: 1px;padding-top: 30px;">
-                                <p class="card-text">{{ $announcement->details }}</p>
-                            </div>
-
-                            <div class="card-footer text-muted" style="height: 105px;background-color: #EFEFEF;border-style: none;">
-                                <hr>
-                                <div class="row align-items-center">
-                                    <div class="col-auto">
-                                        <img style="width: 42px" src="{{ asset('image/gwapo1.jpg') }}" alt="" class="rounded-circle">
+                                    <div class="card-body"
+                                        style="background: #EFEFEF;padding-bottom: 1px;padding-top: 30px;">
+                                        <p class="card-text">{{ $announcement->details }}</p>
                                     </div>
 
-                                    <div class="col">
+                                    <div class="card-footer text-muted"
+                                        style="height: 105px;background-color: #EFEFEF;border-style: none;">
+                                        <hr>
+                                        <div class="row align-items-center">
+                                            <div class="col-auto">
 
-                                        <h5 class="card-title mb-0" style="font-size: small;">
-                                            {{ $announcement->user->first_name }}
-                                            {{ $announcement->user->last_name }}
-                                        </h5>
-                                        <p style="font-size: smaller; margin-bottom: 0;">J and E Rentals and Property
-                                            Owner</p>
-                                        <p style="font-size: smaller; margin-bottom: 1;">
-                                            {{ $announcement->date_created->format('F d, Y | g:i A') }} | Visible to:
-                                            {{ $announcement->location }}
-                                        </p>
+                                                @if (Storage::disk('s3')->exists(Auth::user()->profile_picture))
+                                                    <img style="width: 42px"
+                                                        src="{{ Storage::disk('s3')->url(Auth::user()->profile_picture) }}"
+                                                        alt="" class="rounded-circle">
+                                                @else
+                                                    <img style="width: 42px"
+                                                    src="{{ asset('image/default_photo.png') }}" alt="Profile"
+                                                        class="rounded-circle img-fluid">
+                                                @endif
+
+
+
+
+
+
+                                            </div>
+
+                                            <div class="col">
+
+                                                <h5 class="card-title mb-0" style="font-size: small;">
+                                                    {{ $announcement->user->first_name }}
+                                                    {{ $announcement->user->last_name }}</h5>
+                                                <p style="font-size: smaller; margin-bottom: 0;">J and E Rentals and
+                                                    Property
+                                                    Owner</p>
+                                                <p style="font-size: smaller; margin-bottom: 1;">
+                                                    {{ $announcement->date_created->format('F d, Y | g:i A') }} | Visible
+                                                    to:
+                                                    {{ $announcement->location }}</p>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            @endforeach
                         </div>
-                        @endforeach
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<!-- Add Announcement Modal -->
+    <!-- Add Announcement Modal -->
 
-<div class="modal fade" id="addAnnouncementModal" tabindex="-1" aria-labelledby="addAnnouncementModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="addAnnouncementModalLabel">{{ __('Add Announcement') }}</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body" style="background-color: #F2F2F3;">
-                <form method="POST" action="{{ route('announcement.addAnnouncement') }}" onsubmit="return confirmAnnouncement()">
-                    @csrf
-                    <div class="mb-3">
-                        <label for="subject" class="form-label">{{ __('Subject') }}</label>
-                        <input id="subject" type="text" class="form-control @error('subject') is-invalid @enderror" name="subject" value="{{ old('subject') }}" required autofocus>
-                        @error('subject')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
+    <div class="modal fade" id="addAnnouncementModal" tabindex="-1" aria-labelledby="addAnnouncementModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addAnnouncementModalLabel">{{ __('Add Announcement') }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="{{ route('announcement.addAnnouncement') }}"
+                        onsubmit="return confirmAnnouncement()">
+                        @csrf
+                        <div class="mb-3">
+                            <label for="subject" class="form-label">{{ __('Subject') }}</label>
+                            <input id="subject" type="text"
+                                class="form-control @error('subject') is-invalid @enderror" name="subject"
+                                value="{{ old('subject') }}" required autofocus>
+                            @error('subject')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
 
                     <div class="mb-3">
                         <label for="details" class="form-label">{{ __('Details') }}</label>
@@ -186,15 +207,15 @@
                                 {{-- @foreach ($availableLocations as $location)
                                         <option value="{{ $location }}">{{ $location }}</option>
                                 @endforeach --}}
-                            </select>
+                                </select>
 
-                            @error('location')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
+                                @error('location')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
                         </div>
-                    </div>
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal" >{{ __('Cancel') }}</button>
@@ -206,7 +227,7 @@
     </div>
 </div>
 
-{{-- EDIT ANNOUNCEMENT --}}
+    {{-- EDIT ANNOUNCEMENT --}}
 
 <div class="modal fade" id="editAnnouncementModal" tabindex="-1" aria-labelledby="editAnnouncementModal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -250,13 +271,13 @@
                             <select id="editLocation" class="form-select @error('editLocation') is-invalid @enderror" name="editLocation" autocomplete="editLocation">
                             </select>
 
-                            @error('editLocation')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
+                                @error('editLocation')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
                         </div>
-                    </div>
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">{{ __('Cancel') }}</button>
@@ -270,9 +291,10 @@
 
 
 
-{{-- DELETE CONFIRMATION MODAL --}}
+    {{-- DELETE CONFIRMATION MODAL --}}
 
-<div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog">
         <form id="deleteForm" method="POST" action="{{ route('announcement.delete') }}">
             @csrf
@@ -282,29 +304,32 @@
                     <h5 class="modal-title" id="confirmDeleteModalLabel">Confirm Deletion</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body" style="background-color: #F2F2F3;">
+                <div class="modal-body">
                     <input type="hidden" name="announcement_delete_id" id="announcement_id">
                     Are you sure you want to delete this announcement?
                 </div>
-                <div class="modal-footer" style="background-color: #F2F2F3;">
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-outline-dark" style="background-color: #FFA500;">Delete</button>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-danger">Delete</button>
 
-                    {{-- <form id="deleteForm" method="POST" action="">
+                        {{-- <form id="deleteForm" method="POST" action="">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-outline-dark" style="background-color: #FFA500;">Delete</button>
                     </form> --}}
+                    </div>
                 </div>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
-</div>
 @endsection
 
 
 
 <script>
+    function confirmAnnouncement() {
+        return confirm("Are you sure you want to save this announcement?");
+    }
     function confirmAnnouncement() {
         return confirm("Are you sure you want to save this announcement?");
     }

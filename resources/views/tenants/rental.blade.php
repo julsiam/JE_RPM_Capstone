@@ -11,11 +11,12 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div style="margin-top:10%" class="card">
-                <div class="text-center col-md-12 p-4">
-                    <h2>Your Rental</h2>
+                <div class="modal-header p-2" style="background-color:red; color: black;">
+                    <div class="text-center col-md-12">
+                        <h2>Your Rental</h2>
+                    </div>
+
                 </div>
-
-
                 <div class="col-md-6 m-4">
                     <div class="input-group" style="width:45%">
                         <div class="input-group-prepend">
@@ -59,10 +60,8 @@
                                 <td>Paid</td>
                                 <td>
                                     <button class="btn btn-primary btn-sm detailsBtn">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                            fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
-                                            <path
-                                                d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                                            <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
                                         </svg>
                                     </button>
                                 </td>

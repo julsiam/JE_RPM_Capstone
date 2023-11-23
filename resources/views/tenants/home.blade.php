@@ -3,12 +3,12 @@
 @section('content')
 <style>
     .annoucement_text {
-    color: #fff4df;
+    color: #135083;
     font-weight: 700;
     padding-top: 4px;
 }
 .card-header {
-    background-color: #253031;
+    background-color: #A9CCE8;
     letter-spacing: 2px;
 }
 .card-title {
@@ -33,7 +33,7 @@ margin-bottom: 4%;
         <div class="col-md-10 mt-5">
             <div class="card mt-2">
        
-                <div class="card-header" style="margin-left: inherit; margin-right: inherit; background-color:#253031">
+                <div class="card-header" style="margin-left: inherit; margin-right: inherit; background-color:#A9CCE8">
                     <h2 class="annoucement_text">Announcement</h2>
                 </div>
                 

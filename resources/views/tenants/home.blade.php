@@ -59,11 +59,10 @@ margin-bottom: 4%;
                                 <div class="row align-items-center">
                                 
                                     <div class="col-auto">
-                                       
-                                        <img style="width: 75px" src="{{ $announcement->user->profile_picture }}" alt=""
+                                        <img style="max-width: 60px" src="{{ $announcement->user->profile_picture }}" alt=""
                                             class="rounded-circle">
                                     </div>
-                                    <div class="col">
+                                    <div class="col md-8">
                                         <h5 class="card-title" style="font-size: small;">{{ $announcement->user->first_name }} {{ $announcement->user->last_name }}</h5>
                                         <p style="font-size: smaller; margin-bottom: 0;">J and E Rentals and Property Owner</p>
                                         <p style="font-size: smaller; margin-bottom: 0;">

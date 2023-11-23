@@ -12,9 +12,11 @@
             <div class="card mt-5" style="border-top-left-radius: 10px;
     border-top-right-radius: 10px;">
 
-                <div class="row justify-content-between p-2" style="margin-left: inherit; margin-right: inherit; background-color:#A9CCE8; border-top-left-radius:10px; border-top-right-radius:10px; margin-bottom: 10px;" >
-                    <div class="col-6" >
-                        <h2 style="color: #135083; font-weight: 700;padding-top: 15px;padding-left: 23px;">Maintenance Request </h2>
+                <div class="row justify-content-between p-2"
+                    style="margin-left: inherit; margin-right: inherit; background-color:#A9CCE8; border-top-left-radius:10px; border-top-right-radius:10px; margin-bottom: 10px;">
+                    <div class="col-6">
+                        <h2 style="color: #135083; font-weight: 700;padding-top: 15px;padding-left: 23px;">Maintenance
+                            Request </h2>
                     </div>
                     <div class="col-6 text-end" style="margin-top: 10px;">
                         <a href="#" class="btn btn-success me-2" data-bs-toggle="modal"
@@ -29,42 +31,48 @@
                             </svg>
                         </a>
                     </div>
-                    </div>
-                    <div class="card-body p-3">
-                        <table id="maintenanceData" class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Date Created</th>
-                                    <th>Category</th>
-                                    <th>Priority</th>
-                                    <th>Status</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
+                </div>
+                <div class="card-body p-3">
+                    <table id="maintenanceData" class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Date Created</th>
+                                <th>Category</th>
+                                <th>Priority</th>
+                                <th>Status</th>
+                                <th>Schedule</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
 
-                            <tbody>
-                                @foreach ($maintenanceRequests as $maintenance)
-                                <tr>
-                                    <td>{{ $maintenance->date_requested->format('F d, Y') }}</td>
-                                    <td>{{ $maintenance->category }}</td>
-                                    <td>{{ $maintenance->priority }}</td>
-                                    <td>{{ $maintenance->status }}</td>
-                                    <td>
-                                        <button class="btn btn-primary btn-sm detailsBtn" data-bs-toggle="modal"
-                                            data-bs-target="#detailsModal"
-                                            data-request-id='{{ $maintenance->id }}'>Details</button>
-                                    </td>
-                                </tr>
-                                @endforeach
+                        <tbody>
+                            @foreach ($maintenanceRequests as $maintenance)
+                            <tr>
+                                <td>{{ $maintenance->date_requested->format('F d, Y') }}</td>
+                                <td>{{ $maintenance->category }}</td>
+                                <td>{{ $maintenance->priority }}</td>
+                                <td>{{ $maintenance->status }}</td>
+                                <td></td>
+                                <td>
+                                    <button class="btn btn-primary btn-sm detailsBtn" data-bs-toggle="modal"
+                                        data-bs-target="#detailsModal" data-request-id='{{ $maintenance->id }}'><svg
+                                            xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                                            <path
+                                                d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+                                        </svg></button>
+                                </td>
+                            </tr>
+                            @endforeach
 
-                            </tbody>
-                        </table>
-                    </div>
+                        </tbody>
+                    </table>
+                </div>
 
-                    <div class="d-flex justify-content-between p-3">
-                        <div class="col-form-label">Total Requests: {{ $totalRequests }}</div>
-                    </div>
-               
+                <div class="d-flex justify-content-between p-3">
+                    <div class="col-form-label">Total Requests: {{ $totalRequests }}</div>
+                </div>
+
             </div>
         </div>
 
@@ -74,7 +82,9 @@
             <div class="modal-dialog modal-dialog-centered modal-xl">
                 <div class="modal-content">
                     <div style="background-color:#A9CCE8;" class="modal-header">
-                        <h5 class="modal-title" id="maintenanceModalLabel" style="color:#135083; font-weight: 700; letter-spacing:2px;" >Maintenance Request Details</h5>
+                        <h5 class="modal-title" id="maintenanceModalLabel"
+                            style="color:#135083; font-weight: 700; letter-spacing:2px;">Maintenance Request Details
+                        </h5>
 
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
@@ -93,32 +103,32 @@
                                         <div class="form-group">
                                             <label style="color: #135083; font-size:20px">Location: </label>
 
-                                           <b> <span id="details_location"
-                                                style="border-color: rgb(166, 166, 166); font-size:20px; color:#135083;"
-                                                class="form-control-static"></span></b>
+                                            <b> <span id="details_location"
+                                                    style="border-color: rgb(166, 166, 166); font-size:20px; color:#135083;"
+                                                    class="form-control-static"></span></b>
                                         </div>
 
                                         <div class="form-group mt-2">
                                             <label style="color: #135083; font-size:20px">Room Unit: </label>
-                                           <b> <span id="details_room_unit"
-                                                style="border-color: rgb(166, 166, 166); font-size:18px; color:#135083;"
-                                                class="form-control-static"></span> </b>
+                                            <b> <span id="details_room_unit"
+                                                    style="border-color: rgb(166, 166, 166); font-size:18px; color:#135083;"
+                                                    class="form-control-static"></span> </b>
                                         </div>
 
                                         <div class="form-group mt-2">
                                             <label style="color: #135083; font-size:20px">Category:
                                             </label>
 
-                                           <b> <span id="details_category"
-                                                style="border-color: rgb(166, 166, 166); font-size:18px; color:#135083;"
-                                                class="form-control-static"></span> </b>
+                                            <b> <span id="details_category"
+                                                    style="border-color: rgb(166, 166, 166); font-size:18px; color:#135083;"
+                                                    class="form-control-static"></span> </b>
                                         </div>
 
                                         <div class="form-group mt-2">
                                             <label style="color: #135083; font-size:20px">Status: </label>
-                                          <b>  <span id="details_status"
-                                                style="border-color: rgb(166, 166, 166); font-size:18px; color:#135083;"
-                                                class="form-control-static"></span> </b>
+                                            <b> <span id="details_status"
+                                                    style="border-color: rgb(166, 166, 166); font-size:18px; color:#135083;"
+                                                    class="form-control-static"></span> </b>
                                         </div>
 
                                     </div>
@@ -127,25 +137,25 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label style="color: #135083; font-size:20px">Author: </label>
-                                          <b>  <span id="details_author"
-                                                style="border-color: #135083; font-size:18px; color:#135083;"
-                                                class="form-control-static"></span> </b>
+                                            <b> <span id="details_author"
+                                                    style="border-color: #135083; font-size:18px; color:#135083;"
+                                                    class="form-control-static"></span> </b>
                                         </div>
 
                                         <div class="form-group mt-2">
                                             <label style="color: #135083; font-size:20px">Date
                                                 Requested: </label>
-                                           <b> <span id="details_date_requested"
-                                                style="border-color: rgb(166, 166, 166); font-size:18px;color:#135083;"
-                                                class="form-control-static"></span> </b>
+                                            <b> <span id="details_date_requested"
+                                                    style="border-color: rgb(166, 166, 166); font-size:18px;color:#135083;"
+                                                    class="form-control-static"></span> </b>
                                         </div>
 
                                         <div class="form-group mt-2">
                                             <label style="color: #135083; font-size:20px">
                                                 Priority: </label>
                                             <b> <span id="details_priority"
-                                                style="border-color: rgb(166, 166, 166); font-size:18px;color:#135083;"
-                                                class="form-control-static"></span> </b>
+                                                    style="border-color: rgb(166, 166, 166); font-size:18px;color:#135083;"
+                                                    class="form-control-static"></span> </b>
                                         </div>
 
                                     </div>
@@ -154,25 +164,26 @@
                                         <label style="color: #135083; font-size:20px">Description:
                                         </label> <br>
 
-                                       <b> <span id="details_description"
-                                            style="border-color: rgb(166, 166, 166); font-size:20px; color:#135083;"
-                                            class="form-control-static"></span> </b>
+                                        <b> <span id="details_description"
+                                                style="border-color: rgb(166, 166, 166); font-size:20px; color:#135083;"
+                                                class="form-control-static"></span> </b>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="modal-footer">
 
-                                <button id="followUpBtn" type="submit" class="btn" style="background-color:#135083; color:white"
-                                onmouseover="this.style.backgroundColor='#A9CCE8'; this.style.color='black';"
-                                onmouseout="this.style.backgroundColor='#135083'; this.style.color='white';"
-                                >Follow Up
+                                <button id="followUpBtn" type="submit" class="btn"
+                                    style="background-color:#135083; color:white"
+                                    onmouseover="this.style.backgroundColor='#A9CCE8'; this.style.color='black';"
+                                    onmouseout="this.style.backgroundColor='#135083'; this.style.color='white';">Follow
+                                    Up
                                 </button>
-                                <button type="button" class="btn" data-bs-dismiss="modal" style="background-color:#FE8900;"
-                                onmouseover="this.style.backgroundColor='red'; this.style.color='white';"
-                                onmouseout="this.style.backgroundColor='#FE8900'; this.style.color='black';"
-                                >Close</button>
-                                
+                                <button type="button" class="btn" data-bs-dismiss="modal"
+                                    style="background-color:#FE8900;"
+                                    onmouseover="this.style.backgroundColor='red'; this.style.color='white';"
+                                    onmouseout="this.style.backgroundColor='#FE8900'; this.style.color='black';">Close</button>
+
                             </div>
                         </form>
                     </div>
@@ -186,13 +197,14 @@
             aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-xl">
                 <div class="modal-content">
-                    <div class="modal-header" style="background-color:#A9CCE8; color:#135083"  > 
-                        <h4 class="modal-title" id="maintenanceModalLabel" style="color: #135083; font-weight: 700;padding-left: 23px;">Create Maintenance Request</h4>
+                    <div class="modal-header" style="background-color:#A9CCE8; color:#135083">
+                        <h4 class="modal-title" id="maintenanceModalLabel"
+                            style="color: #135083; font-weight: 700;padding-left: 23px;">Create Maintenance Request</h4>
 
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
 
-                    <div class="modal-body" style="background-color: #F2F2F3;"> 
+                    <div class="modal-body" style="background-color: #F2F2F3;">
                         <form action="{{ route('maintenance.submit') }}" method="POST">
                             @csrf
                             <div class="card p-4">
@@ -300,15 +312,14 @@
 
                             <div class="modal-footer">
                                 <button type="submit" class="btn" style="background-color:#135083; color:white"
-                                onmouseover="this.style.backgroundColor='#A9CCE8'; this.style.color='black';"
-                                onmouseout="this.style.backgroundColor='#135083'; this.style.color='white';"
-                                >Submit
+                                    onmouseover="this.style.backgroundColor='#A9CCE8'; this.style.color='black';"
+                                    onmouseout="this.style.backgroundColor='#135083'; this.style.color='white';">Submit
                                     Request</button>
 
-                                    <button type="button" class="btn" data-bs-dismiss="modal" style="background-color:#FE8900;"
-                                onmouseover="this.style.backgroundColor='red'; this.style.color='white';"
-                                onmouseout="this.style.backgroundColor='#FE8900'; this.style.color='black';"
-                                >Close</button>
+                                <button type="button" class="btn" data-bs-dismiss="modal"
+                                    style="background-color:#FE8900;"
+                                    onmouseover="this.style.backgroundColor='red'; this.style.color='white';"
+                                    onmouseout="this.style.backgroundColor='#FE8900'; this.style.color='black';">Close</button>
                             </div>
                         </form>
                     </div>

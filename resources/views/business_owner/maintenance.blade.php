@@ -188,32 +188,6 @@
                             <h5 id="modal_description" class="card-text"></h5>
                         </div>
 
-
-                        <!-- <div class="form-group mt-5">
-                                    <label for="status">Status:
-                                        &nbsp;</label>
-                                    <div class="input-group">
-                                        <select id="modal_maintenance_status" name="modal_maintenance_status"
-                                            class="form-select form-select-sm">
-                                            <option value="Pending">PENDING</option>
-                                            <option value="On Going">ON GOING</option>
-                                            <option value="Done">DONE</option>
-                                            <option value="Disapproved">DISAPPROVED</option>
-                                        </select>
-                                    </div>
-                                </div> -->
-
-
-                        <!-- <div class="form-group mt-2">
-                                    <label for="schedule">Schedule:
-                                        &nbsp;</label>
-                                    <div class="input-group">
-                                        <input id="modal_schedule" style="border-color: rgb(166, 166, 166)" type="datetime-local"
-                                            class="form-control" name="modal_schedule" value="">
-                                    </div>
-                                </div> -->
-
-
                     </div>
 
                     <div class="modal-footer">

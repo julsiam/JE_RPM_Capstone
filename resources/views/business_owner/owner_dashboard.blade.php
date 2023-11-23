@@ -17,14 +17,13 @@ option {
 }
 
 .fc {
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 30px;
-  background-color: #F8FAFC;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 30px;
+    background-color: #F8FAFC;
 }
 
 /*for scribbling effect*/
-
 </style>
 
 @section('content')
@@ -44,8 +43,10 @@ option {
                         <div class="svg-cont d-flex justify-content-md-end">
                             <select style="width: 35mm; height: 9mm" id="locs" class="form-select" @error('locs')
                                 is-invalid @enderror name="locs" autocomplete="locs"> </select> &nbsp;
-                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-people" viewBox="0 0 16 16">
-                                <path d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8Zm-7.978-1A.261.261 0 0 1 7 12.996c.001-.264.167-1.03.76-1.72C8.312
+                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                                class="bi bi-people" viewBox="0 0 16 16">
+                                <path
+                                    d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8Zm-7.978-1A.261.261 0 0 1 7 12.996c.001-.264.167-1.03.76-1.72C8.312
                                     10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002a.274.274 0 0
                                     1-.014.002H7.022ZM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM6.936 9.28a5.88 5.88 0 0
                                     0-1.23-.247A7.35 7.35 0 0 0 5 9c-4 0-5 3-5 4 0 .667.333 1 1 1h4.216A2.238 2.238 0 0 1 5 13c0-1.01.377-2.042
@@ -75,11 +76,11 @@ option {
                         </div>
 
 
-                        <h3 id="propertyCount" class="card-title"  style="color: #003057;"> {{ $totalProperties }}</h3>
+                        <h3 id="propertyCount" class="card-title" style="color: #003057;"> {{ $totalProperties }}</h3>
                         <h4 class="card-name">Properties</h4>
                         <div class="row">
                             <div class="col-6">
-                                <h6 id="availPropertyCount" class="card-title"  style="color: #003057;">Available:
+                                <h6 id="availPropertyCount" class="card-title" style="color: #003057;">Available:
                                     {{ $availProperties }}</h6>
                             </div>
                             <div class="col-6">
@@ -143,7 +144,7 @@ option {
                 </div>
             </div>
         </div>
-    </div>  
+    </div>
 </div>
 
 
@@ -151,22 +152,22 @@ option {
 <div class="row p-3">
     <div class="col-md-5 ">
 
-    <div class="card mb-3 shadow-sm p-1 mb-3 rounded">
+        <div class="card mb-3 shadow-sm p-1 mb-3 rounded">
             <!-- Chart container -->
             <canvas id="lineChart" width="400" height="200"></canvas>
         </div>
-        <div class="card mb-3 shadow-sm p-1 mb-3 rounded">
+        <!-- <div class="card mb-3 shadow-sm p-1 mb-3 rounded">
           
             <canvas id="lineChart" width="400" height="200"></canvas>
-        </div>
-</div>
+        </div> -->
+    </div>
 
 
     <div class="col-md-7">
-    <div class="container md-10 mb-5">
-        <div id="calendar"></div>
-    </div>
-    
+        <div class="container md-10 mb-5">
+            <div id="calendar"></div>
+        </div>
+
     </div>
 </div>
 
@@ -174,12 +175,12 @@ option {
 
 
 
-<div class="card-group col-md-4 row gap-3 mx-2">
+<!-- <div class="card-group col-md-4 row gap-3 mx-2">
         
     </div>
 <div class="card-group row d-flex align-items-center justify-content-center gap-3 mx-3">
     
-</div>
+</div> -->
 <!-- this is animate counter file -->
 <!-- <script src="{{ asset('js/animateCounter.js') }}"></script> -->
 

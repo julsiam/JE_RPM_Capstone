@@ -3,8 +3,7 @@
 @section('content')
 <div class="container" style="margin-top: 10%">
     <div class="row justify-content-center" style="padding-left: 12px;font-size: medium;">
-        <div class="" style=" color: #135083;font-weight: 700;">Note: Add the properties first before adding any tenants.
-        </div>
+        <div class="" style=" color: #135083;font-weight: 700;">Note: Add the properties first before adding any tenants.</div>
     </div>
     <div class="container" style="margin-top: 10px">
         @if (Session::has('message'))

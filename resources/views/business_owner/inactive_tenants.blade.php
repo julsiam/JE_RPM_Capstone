@@ -49,16 +49,16 @@
                             d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z" />
                     </svg></a>
 
-                {{-- ADD TENANT --}}
-                <a href="{{ route('add_tenant_form') }}" class="btn btn-warning me-2" class="btn btn-success me-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                        class="bi bi-person-plus" viewBox="0 0 16 16">
-                        <path
-                            d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
-                        <path fill-rule="evenodd"
-                            d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z" />
-                    </svg>
-                </a>
+                    {{-- ADD TENANT --}}
+                    <a href="{{ route('add_tenant_form') }}" class="btn btn-success me-2" class="btn btn-success me-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-person-plus" viewBox="0 0 16 16">
+                            <path
+                                d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
+                            <path fill-rule="evenodd"
+                                d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z" />
+                        </svg>
+                    </a>
 
                 {{-- BACK --}}
                 <a onclick="history.back()" class="btn btn-danger me-2"><svg xmlns="http://www.w3.org/2000/svg"
@@ -161,15 +161,15 @@
             </table>
         </div>
 
-        {{-- MODAL --}}
-        <div class="modal fade" id="inactiveTenantProfileModal" tabindex="-1" aria-labelledby="tenantProfileModal"
-            aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-xl">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="inactiveTenantProfileModal">{{ __('Tenant Profile') }}</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
+            {{-- MODAL --}}
+            {{-- <div class="modal fade" id="inactiveTenantProfileModal" tabindex="-1" aria-labelledby="tenantProfileModal"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="inactiveTenantProfileModal">{{ __('Tenant Profile') }}</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
 
                     <div class="modal-body m-2">
                         <div class="mb-3">
@@ -179,17 +179,16 @@
                             </div>
                         </div>
 
-                        <div class="row">
-                            <div class="col-md-8 p-2">
-                                <h5>PERSONAL INFORMATION</h5>
-                                <div>
-                                    <div class="row">
+                            <div class="row">
+                                <div class="col-md-8 p-2">
+                                    <h5>PERSONAL INFORMATION</h5>
+                                    <div>
                                         <div class="row">
-                                            <div class="col-auto">
-                                                {{-- <img style="width: 200px;" id="inactive_profile" src=""
-                                                    alt="Profile Picture"> --}}
+                                            <div class="row">
+                                                <div class="col-auto">
+
+                                                </div>
                                             </div>
-                                        </div>
 
                                         <div class="form-group col-md-5">
                                             <label style="color: rgb(128, 128, 128)">First Name</label>
@@ -340,18 +339,19 @@
                         <button type="button" class="btn btn-secondary"
                             data-bs-dismiss="modal">{{ __('Cancel') }}</button>
 
-                        {{-- <button type="button" class="btn btn-danger deleteTenantBtn">
+                            <button type="button" class="btn btn-danger deleteTenantBtn">
                                 {{ __('Delete Tenant') }}
                         </button>
 
 
-                        <a href="{{ url('edit_tenant') }}" type="button" class="btn btn-primary">{{ __('Update') }}</a>
-                        --}}
-                    </div>
+                            <a href="{{ url('edit_tenant') }}" type="button"
+                                class="btn btn-primary">{{ __('Update') }}</a>
+                        </div>
 
+                    </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
-</div>
 @endsection
+

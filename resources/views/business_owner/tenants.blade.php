@@ -143,11 +143,6 @@
                                 </td>
 
 
-                                <td class="text-center">
-                                    {{ $tenant->rental->status }}
-                                </td>
-
-
                         <td class="text-center">
                             <button class="btn btn-outline-primary btn-sm detailsBtn"
                                 data-tenant-id='{{ $tenant->id }}' data-bs-toggle='modal'

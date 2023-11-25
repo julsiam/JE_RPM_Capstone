@@ -367,6 +367,6 @@
     </div>
 @endsection
 
-<script>
+{{-- <script>
     var tenantData = {!! json_encode($tenant) !!};
-</script>
+</script> --}}

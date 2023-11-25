@@ -53,7 +53,7 @@
                                 d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z" />
                         </svg>
                     </a>
-                    
+
                     {{-- BACK --}}
                     <a onclick="history.back()" class="btn btn-danger me-2"><svg xmlns="http://www.w3.org/2000/svg"
                             width="16" height="16" fill="currentColor" class="bi bi-arrow-left-circle"
@@ -353,6 +353,4 @@
         </div>
     </div>
 @endsection
-{{-- <script>
-    var tenantData = {!! json_encode($tenant) !!};
-</script> --}}
+

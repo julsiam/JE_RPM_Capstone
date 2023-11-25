@@ -380,6 +380,3 @@
     </div>
 @endsection
 
-{{-- <script>
-    var tenantData = {!! json_encode($tenant) !!};
-</script> --}}

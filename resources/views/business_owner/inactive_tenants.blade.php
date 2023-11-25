@@ -161,7 +161,7 @@
             </table>
         </div>
 
-            {{-- MODAL --}}
+            <!-- {{-- MODAL --}}
             {{-- <div class="modal fade" id="inactiveTenantProfileModal" tabindex="-1" aria-labelledby="tenantProfileModal"
                 aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-xl">
@@ -350,7 +350,7 @@
 
                     </div>
                 </div>
-            </div> --}}
+            </div> --}} -->
         </div>
     </div>
 @endsection

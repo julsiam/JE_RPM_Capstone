@@ -25,6 +25,7 @@ $(document).ready(function () {
         var tenant_id = $('#tenant_id').val();
         $('#delete_tenant_id').val(tenant_id); // Set tenant ID in the confirm delete modal
 
+        
         $('#confirmDeleteTenantModal').modal('show');
     });
 })

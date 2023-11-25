@@ -303,6 +303,10 @@
         <script src="{{ asset('js/profile.js') }}"></script>
         <script src="{{ asset('js/property.js') }}"></script>
         <script src="{{ asset('js/notification.js') }}"></script>
+        <script src="{{ asset('js/update_tenant.js') }}"></script>
+        <script src="{{ asset('js/inactive_tenants_details.js') }}"></script>
+
+
     @else
         <script src="{{ secure_asset('js/tenants_counts.js') }}"></script>
         <script src="{{ secure_asset('js/property_counts.js') }}"></script>
@@ -332,8 +336,10 @@
         <script src="{{ secure_asset('js/profile.js') }}"></script>
         <script src="{{ secure_asset('js/property.js') }}"></script>
         <script src="{{ secure_asset('js/notification.js') }}"></script>
-    @endif
+        <script src="{{ secure_asset('js/update_tenant.js') }}"></script>
+        <script src="{{ secure_asset('js/inactive_tenants_details.js') }}"></script>
 
+    @endif
 </body>
 
 </html>

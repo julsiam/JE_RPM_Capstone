@@ -8,6 +8,7 @@ use App\Models\Notification;
 use App\Models\Property;
 use App\Models\Rental;
 use App\Models\RentalHistory;
+use App\Models\TenantProperty;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -159,6 +160,12 @@ class UserController extends Controller
             'profile_picture' => $defaultImagePath,
         ]);
 
+        $tenantPropertyHistory = TenantProperty::create([
+            'user_id' => $user->id,
+            'location' => $request->input('location'),
+            'room_unit' => $request->input('room_unit'),
+            'room_fee' => $request->input('room_fee_display'),
+        ]);
 
         $rental = Rental::create([
             'user_id' => $user->id,
@@ -230,25 +237,6 @@ class UserController extends Controller
     }
 
 
-    public function editTenantForm()
-    {
-        $currentDate = date('Y-m-d');
-
-        $notifications = Notification::with('user')
-            ->whereDate('created_at', $currentDate)
-            ->orderBy('created_at', 'desc')
-            ->get();
-
-        $newNotification = Notification::with('rental.user')
-            ->whereDate('created_at', $currentDate)
-            ->where('seen', 0)
-            ->count();
-
-
-        return view('business_owner.edit_tenant', compact('notifications', 'newNotification',));
-    }
-
-
 
     //SHOW ALL TENANTS
 
@@ -297,9 +285,35 @@ class UserController extends Controller
     }
 
 
+    public function editTenantForm($id)
+    {
+        $currentDate = date('Y-m-d');
+
+        $tenant = User::with(['rental.property', 'file' => function ($query) {
+            $query->whereIn('type', ['id_photo', 'contract_pdf']);
+        }])->findOrFail($id);
+
+
+        $notifications = Notification::with('user')
+            ->whereDate('created_at', $currentDate)
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        $newNotification = Notification::with('rental.user')
+            ->whereDate('created_at', $currentDate)
+            ->where('seen', 0)
+            ->count();
+
+
+        return view('business_owner.edit_tenant', ['tenant' => $tenant], compact('tenant', 'notifications', 'newNotification',));
+    }
+
+
+
     public function getTenantDetails(Request $request) //// DETAILS IN TENANT PROFILE IN EDIT RENTALS
     {
         $id = $request->input('id');
+
         $tenant = User::with(['rental.property', 'file' => function ($query) {
             $query->whereIn('type', ['id_photo', 'contract_pdf']);
         }])->findOrFail($id);
@@ -320,6 +334,21 @@ class UserController extends Controller
 
         return response()->json($tenant);
     }
+
+
+    public function getInactiveTenant(Request $request) // DETAILS IN TENANT PROFILE IN TENANT LIST TABLE
+    {
+        $tenantId = $request->input('data-inactiveTenant-id');
+
+        $tenant = User::with(['rental', 'rental.rentalHistory', 'file' => function ($query) {
+            $query->whereIn('type', ['id_photo', 'contract_pdf']);
+        }])->findOrFail($tenantId);
+
+        dd($tenant);
+
+        return response()->json($tenant);
+    }
+
 
 
 
@@ -345,6 +374,33 @@ class UserController extends Controller
         }
 
         return redirect()->route('tenants')->with('error', 'Tenant not found!');
+    }
+
+
+    public function getInactiveTenants()
+    {
+        $inactiveTenants = User::with(['rental', 'tenantProperty'])
+            ->where('type', 0)
+            ->where('status', 'Inactive')
+            ->whereHas('rental', function ($query) {
+                $query->where('status', 'Not Yet Paid');
+            })
+            ->get();
+
+
+        $currentDate = date('Y-m-d');
+
+        $notifications = Notification::with('user')
+            ->whereDate('created_at', $currentDate)
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        $newNotification = Notification::with('rental.user')
+            ->whereDate('created_at', $currentDate)
+            ->where('seen', 0)
+            ->count();
+
+        return view('business_owner.inactive_tenants', compact('notifications', 'newNotification', 'inactiveTenants'));
     }
 
 

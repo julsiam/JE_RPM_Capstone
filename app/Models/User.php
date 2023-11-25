@@ -98,6 +98,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Notification::class);
     }
 
+    public function tenantProperty()
+    {
+        return $this->hasOne(TenantProperty::class);
+    }
+
     // protected $cascadeDeletes =
     // [
     //     'property',

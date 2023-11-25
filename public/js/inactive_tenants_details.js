@@ -1,16 +1,17 @@
 $(document).ready(function () {
+    $('#inactiveTenantsData').on('click', '.inactiveDetailsBtn', function () {
+        var tenantId = $(this).data('inactiveTenant-id'); // Update here
+        var paymentHistory = $('#inactive_payment_history tbody');
+        paymentHistory.empty();
 
-    $('#tenantsData').on('click', '.detailsBtn', function () {
-        var tenantId = $(this).data('tenant-id');
-        var paymentHistory = $('#payment_history tbody');
-        paymentHistory.empty()
 
         $.ajax({
-            url: '/tenant-details',
+            url: '/inactive-tenant-details',
             method: 'GET',
-            data: { 'data-tenant-id': tenantId },
+            data: { 'data-inactiveTenant-id': tenantId }, // Update here
 
             success: function (data) {
+                    console.log(data)
                 var moveinDate = new Date(data.rental.rent_started);
                 var bday = new Date(data.birthdate);
                 var options = {
@@ -20,24 +21,25 @@ $(document).ready(function () {
                     year: 'numeric',
                 };
 
+
                 var moveInDate = moveinDate.toLocaleString('en-US', options);
                 var bdate = bday.toLocaleString('en-US', options);
 
-                $('#tenant_id').val(data.id);
-                $('#tenant_profile').attr('src', data.profile_picture);
-                $('#tenant_email').val(data.email)
-                $('#tenant_phone_number').val(data.phone_number);
-                $('#tenant_address').val(data.address)
-                $('#tenant_first_name').val(data.first_name);
-                $('#tenant_last_name').val(data.last_name)
-                $('#tenant_birthdate').val(bdate);
-                $('#tenant_age').val(data.age)
-                $('#tenant_gender').val(data.gender);
-                $('#tenant_occupation').val(data.occupation);
-                $('#tenant_work_address').val(data.work_address);
-                $('#tenant_location').val(data.rental.property.location);
-                $('#tenant_room_unit').val(data.rental.property.room_unit);
-                $('#tenant_movein_date').val(moveInDate);
+                $('#inactive_tenant_id').val(data.id);
+                $('#inactive_profile').attr('src', data.profile_picture);
+                $('#inactive_email').val(data.email)
+                $('#inactive_phone_number').val(data.phone_number);
+                $('#inactive_address').val(data.address)
+                $('#inactive_first_name').val(data.first_name);
+                $('#inactive_last_name').val(data.last_name)
+                $('#inactive_birthdate').val(bdate);
+                $('#inactive_age').val(data.age)
+                $('#inactive_gender').val(data.gender);
+                $('#inactive_occupation').val(data.occupation);
+                $('#inactive_work_address').val(data.work_address);
+                $('#inactive_location').val(data.rental.property.location);
+                $('#inactive_room_unit').val(data.rental.property.room_unit);
+                $('#inactive_movein_date').val(moveInDate);
                 $('#updateDetailsBtn').val(data.id);
 
 
@@ -48,15 +50,15 @@ $(document).ready(function () {
                     var contractPath = data.file.find(file => file.type === 'contract_pdf');
 
                     if (idPhotoPath) {
-                        $('#tenant_idPhoto').attr('src', 'https://jerpm.s3.amazonaws.com/' + idPhotoPath.file_path);
+                        $('#inactive_tenant_idPhoto').attr('src', 'https://jerpm.s3.amazonaws.com/' + idPhotoPath.file_path);
                     } else {
-                        $('#tenant_idPhoto').attr('src', defaultPhotoUrl); // No ID photo available
+                        $('#inactive_tenant_idPhoto').attr('src', defaultPhotoUrl); // No ID photo available
                     }
 
                     if (contractPath) {
-                        $('#tenant_contractLink').attr('href', 'https://jerpm.s3.amazonaws.com/' + contractPath.file_path);
+                        $('#inactive_contractLink').attr('href', 'https://jerpm.s3.amazonaws.com/' + contractPath.file_path);
                     } else {
-                        $('#tenant_contractLink').attr('href', ' '); // No contract available
+                        $('#inactive_contractLink').attr('href', ' '); // No contract available
                     }
                 }
 

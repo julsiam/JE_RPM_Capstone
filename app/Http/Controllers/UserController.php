@@ -283,6 +283,7 @@ class UserController extends Controller
 
         return response()->json($tenants);
     }
+    
 
 
     public function editTenantForm($id)

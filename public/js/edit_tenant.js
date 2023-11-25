@@ -26,6 +26,8 @@ function fetchTenantsList() {
 
 $(document).ready(function () {
 
+    var tenantData = JSON.parse(localStorage.getItem('tenantData'));
+
     var bday = new Date(tenantData.birthdate);
     var options = {
         timeZone: 'UTC', // Use UTC or your desired timezone

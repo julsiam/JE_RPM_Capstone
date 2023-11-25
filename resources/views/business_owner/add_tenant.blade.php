@@ -30,8 +30,8 @@
                     <form method="POST" action="{{ route('tenant.addTenant') }}" class="tenant_form"
                         enctype="multipart/form-data">
                         @csrf
-                        <div class="nav nav-fill my-3">
-                            <label class="nav-link shadow-sm border ml-2 ">Personal Information</label>
+                        <div class="nav nav-fill my-3" style="background-color: #135083;">
+                            <label class="nav-link shadow-sm border ml-2 text-white">Personal Information</label>
                         </div>
                         <div class="row">
                             <div class="col-md-6">
@@ -233,8 +233,8 @@
                         </div>
 
                         <!--Accomodation-->
-                        <div class="nav nav-fill my-3">
-                            <label class="nav-link shadow-sm border ml-2 ">Accomodation Information</label>
+                        <div class="nav nav-fill my-3" style="background-color: #135083;">
+                            <label class="nav-link shadow-sm border ml-2 text-white">Accomodation Information</label>
                         </div>
                         <div class="row">
                             <div class="col-md-6">
@@ -260,22 +260,6 @@
                                         @enderror
                                     </div>
                                 </div>
-
-                                <!-- <div class="input-group mb-3">
-                                    <span class="input-group-text col-md-4 text-md-end">{{ __('Room Fee') }}</span>
-                                    <div class="col-md-8">
-                                        <input id="room_fee" type="text"
-                                            class="form-control @error('room_fee') is-invalid @enderror" name="room_fee"
-                                            value="{{ old('room_fee') }}" required autocomplete="room_fee" autofocus
-                                            readonly>
-
-                                        @error('room_fee')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                        @enderror
-                                    </div>
-                                </div> -->
 
                                 <div class="input-group mb-3">
                                     <span class="input-group-text col-md-4 text-md-end">{{ __('Rent From') }}</span>
@@ -454,8 +438,8 @@
                         </div>
 
                         <!--Others-->
-                        <div class="nav nav-fill my-3">
-                            <label class="nav-link shadow-sm  border ml-2 ">Other Information</label>
+                        <div class="nav nav-fill my-3" style="background-color: #135083;">
+                            <label class="nav-link shadow-sm  border ml-2 text-white">Other Information</label>
                         </div>
                         {{-- FILE UPLOAD --}}
                         <div class="row mb-3">
@@ -506,13 +490,6 @@
                                 {{ __('Add Tenant') }}
                             </button>
                         </div>
-
-                        <!-- <div class="col-md-12 d-flex justify-content-center mt-4">
-                            <button type="button" class="btn btn-primary" data-toggle="modal"
-                                data-target="#successModal">
-                                {{ __('Add Tenant') }}
-                            </button>
-                        </div> -->
 
                     </form>
                 </div>

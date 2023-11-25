@@ -9,19 +9,18 @@
     </div>
     @endif
 </div>
-<div class="row p-5">
-
-    <div class="col-md-7 p-4">
-        <div style="margin-top:10%" class="card">
+<div class="row p-2 p-md-5 mt-5">
+    <div class="col-12 col-md-7 p-2 p-md-5 mt-5">
+        <div class="card">
             <div class="modal-header p-2"
                 style="margin-left: inherit; margin-right: inherit; background-color:#A9CCE8; border-top-left-radius:10px; border-top-right-radius:10px;">
-                <div class="text-center col-md-12">
+                <div class="text-center">
                     <h2 style="color:#135083; font-weight: 700;padding-top: 15px;padding-left: 23px;">Payment History
                     </h2>
                 </div>
 
             </div>
-            <div class="col-md-8 m-4">
+            <div class="col-12 col-md-8 m-3 m-md-4">
                 <div class="input-group" style="width:45%">
                     <div class="input-group-prepend">
                         <label class="input-group-text" for="sort-by">Month</label>
@@ -45,7 +44,7 @@
                 </div>
             </div>
 
-            <div class="card mt-5 p-2 m-2 mb-2">
+            <div class="card mt-3 mt-md-5 p-2 m-2 mb-2">
                 <table class="table">
                     <thead>
                         <tr>
@@ -76,8 +75,8 @@
             </div>
         </div>
     </div>
-    <div class="col-md-5 p-5">
-        <div style="margin-top: 10%;" class="card">
+    <div class="col-12 col-md-5 p-3 p-md-5 ">
+        <div class="card">
             <div class="modal-header p-2"
                 style="margin-left: inherit; margin-right: inherit; background-color:#A9CCE8; border-top-left-radius:10px; border-top-right-radius:10px;">
                 <div class="text-center col-md-12">
@@ -88,8 +87,8 @@
 
             </div>
             <div class="row">
-                <div class="col-md-8 justify-content-center">
-                    <div style="background-color: yellow;">
+                <div class="col-12 col-md-8 justify-content-center">
+                    <div class="text-white" style="background-color: #135083;">
                         <div class="mb-0 text-center p-2">
                             <h5 class="mb-0 text-center">J and E Rentals Property</h5>
                             <a href="">je.rentals2023@gmail.com</a>
@@ -97,20 +96,18 @@
                         </div>
                         <div class="p-2">
                             <p class="mb-0">Payment Instructions:</p>
-                            <p class="mb-5">Please make the payment using one of the following methods.</p>
+                            <p class="mb-3">Please make the payment using one of the following methods.</p>
                             <h6>Bank Transfer</h6>
                             <p class="mb-0">Bank Name: Union Bank</p>
                             <p class="mb-0">Account Name: Christine Toledo</p>
-                            <p class="mb-0">Account Number: 109664541244</p>
+                            <p class="mb-3">Account Number: 109664541244</p>
                             <h6>Online Payment</h6>
-                            <p>To make an online payment, please scan the QR code on the right side or visit the
-                                following
-                                secure payment portal</p>
+                            <p>To make an online payment, please scan the QR code on the right side.</p>
                         </div>
                     </div>
 
                 </div>
-                <div class="col-md-4 justify-content-center">
+                <div class="col-12 col-md-4">
                     <div class="text-center p-2">
                         <h5>Scan to Pay</h5>
                     </div>
@@ -120,4 +117,6 @@
         </div>
     </div>
 </div>
+
+
 @endsection

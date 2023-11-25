@@ -3,7 +3,8 @@
 @section('content')
 <div class="container" style="margin-top: 10%">
     <div class="row justify-content-center" style="padding-left: 12px;font-size: medium;">
-        <div class="" style=" color: #135083;font-weight: 700;">Note: Add the properties first before adding any tenants.</div>
+        <div class="" style=" color: #135083;font-weight: 700;">Note: Add the properties first before adding any
+            tenants.</div>
     </div>
     <div class="container" style="margin-top: 10px">
         @if (Session::has('message'))
@@ -75,15 +76,15 @@
                 </div>
 
                 <div class="d-flex justify-content-between" style="font-size: 110%">
-                    <div class="col-form-label" style="color: #003057;font-weight: 700;">Total <span
-                            class=" p-1" style="background-color:#FFA500; border-radius: 10px;">Occupied</span>
-                      :  {{ $totalOccupiedProperties }}</div>
+                    <div class="col-form-label" style="color: #003057;font-weight: 700;">Total <span class=" p-1"
+                            style="background-color:#FFA500; border-radius: 10px;">Occupied</span>
+                        : {{ $totalOccupiedProperties }}</div>
                 </div>
 
                 <div class="d-flex justify-content-between" style="font-size: 110%">
                     <div class="col-form-label" style="color: #003057;font-weight: 700;">Total
                         <span class=" p-1" style="background-color:#A9CCE8; border-radius: 10px;">Available</span>
-                       : {{ $totalAvailProperties }}
+                        : {{ $totalAvailProperties }}
                     </div>
                 </div>
             </div>
@@ -115,7 +116,8 @@
                             <td>
                                 <!--change color when prompted-->
                                 @if ($property->status == 'Occupied')
-                                <span class="text-black p-1" style="background-color:#FFA500; border-radius: 10px;">Occupied</span>
+                                <span class="text-black p-1"
+                                    style="background-color:#FFA500; border-radius: 10px;">Occupied</span>
                                 @elseif ($property->status == 'Available')
                                 <span class="text-black p-1"
                                     style="background-color:#A9CCE8; border-radius: 10px;">Available</span>
@@ -130,7 +132,7 @@
                                 No Tenant
                                 @endif
                             </td>
-                            <td> <button class="btn btn-outline-primary  btn-sm propertyDetailsBtn" 
+                            <td> <button class="btn btn-outline-primary  btn-sm propertyDetailsBtn"
                                     data-property-id='{{ $property->id }}' data-bs-toggle='modal'
                                     data-bs-target='#propertyModal'>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -151,12 +153,10 @@
                 <div class="modal-dialog modal-dialog-centered modal-lg">
                     <div class="modal-content">
                         <div class="modal-header" style="background-color: #A9CCE8;">
-                            <h3 class="modal-title" id="addAnnouncementModalLabel" style="letter-spacing: 2px;
-  color: #003057;
-        font-weight: 700;">{{ __('Edit Property') }}</h3>
+                            <h3 class="modal-title" id="addAnnouncementModalLabel" style="letter-spacing: 2px; color: #003057; font-weight: 700;">{{ __('Edit Property') }}</h3>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="modal-body" style="background-color:#F2F2F3;"> 
+                        <div class="modal-body" style="background-color:#F2F2F3;">
                             <form method="POST" action="{{ route('edit_property') }}">
                                 @csrf
                                 <div class="mb-3">
@@ -171,9 +171,9 @@
                                                 <!--Left column-->
                                                 <label for="edit_location"
                                                     class="form-label">{{ __('Location') }}</label>
-                                                <input id="edit_location" name="edit_location" type="text"
+                                                <input id="edit_location" name="edit_location" type="text" style="background-color: #d3d3d3;"
                                                     class="form-control @error('edit_location') is-invalid @enderror"
-                                                    value="{{ old('edit_location') }}" required autofocus>
+                                                    value="{{ old('edit_location') }}" readonly>
                                                 @error('edit_location')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -183,7 +183,7 @@
 
                                                 <label for="edit_room_unit"
                                                     class="form-label">{{ __('Room Unit') }}</label>
-                                                <input id="edit_room_unit" name="edit_room_unit" type="text"
+                                                <input id="edit_room_unit" name="edit_room_unit" type="text" style="background-color: #d3d3d3;"
                                                     class="form-control @error('edit_room_unit') is-invalid @enderror"
                                                     value="{{ old('edit_room_unit') }}" readonly>
                                                 @error('edit_room_unit')
@@ -220,7 +220,7 @@
 
                                                 <label for="edit_occupant"
                                                     class="form-label">{{ __('Occupant') }}</label>
-                                                <input id="edit_occupant" name="edit_occupant" type="text"
+                                                <input id="edit_occupant" name="edit_occupant" type="text" style="background-color: #d3d3d3;"
                                                     class="form-control @error('edit_occupant') is-invalid @enderror"
                                                     value="" required autofocus readonly>
                                                 @error('edit_occupant')
@@ -230,7 +230,7 @@
                                                 @enderror
 
                                                 <label for="edit_status" class="form-label">{{ __('Status') }}</label>
-                                                <input id="edit_status" name="edit_status" type="text"
+                                                <input id="edit_status" name="edit_status" type="text" style="background-color: #d3d3d3;"
                                                     class="form-control @error('edit_status') is-invalid @enderror"
                                                     value="{{old('edit_status')}}" required autofocus readonly>
                                                 @error('edit_status')
@@ -247,7 +247,8 @@
                                 <div class="modal-footer">
                                     <!-- <button type="button" class="btn btn-secondary"
                                         data-bs-dismiss="modal">{{ __('Cancel') }}</button> -->
-                                    <button type="submit" class="btn btn-outline-dark" style="background-color: #FFA500;">{{ __('Update') }}</button>
+                                    <button type="submit" class="btn btn-outline-dark"
+                                        style="background-color: #FFA500;">{{ __('Update') }}</button>
                                 </div>
                             </form>
                         </div>

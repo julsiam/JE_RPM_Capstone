@@ -22,14 +22,12 @@ option {
     padding: 30px;
     background-color: #F8FAFC;
 }
-
-/*for scribbling effect*/
 </style>
 
 @section('content')
 <div class="container-fluid">
     <div class="row justify-content-center">
-        <div style="margin-top:7%;" class="col-md-12">
+        <div style="margin-top:8%;" class="col-md-12">
             @if (session('status'))
             <div class="alert alert-success" role="alert">
                 {{ session('status') }}
@@ -156,6 +154,7 @@ option {
             <!-- Chart container -->
             <canvas id="lineChart" width="400" height="200"></canvas>
         </div>
+
         <!-- <div class="card mb-3 shadow-sm p-1 mb-3 rounded">
           
             <canvas id="lineChart" width="400" height="200"></canvas>
@@ -172,22 +171,9 @@ option {
 </div>
 
 
-
-
-
-<!-- <div class="card-group col-md-4 row gap-3 mx-2">
-        
-    </div>
-<div class="card-group row d-flex align-items-center justify-content-center gap-3 mx-3">
-    
-</div> -->
-<!-- this is animate counter file -->
-<!-- <script src="{{ asset('js/animateCounter.js') }}"></script> -->
-
-
-<!-- Include the Chart.js library -->
+<!-- Include the Chart.js -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-<!-- Include your custom JavaScript file -->
+<!-- Include lineChart.js -->
 <script src="{{ asset('js/lineChart.js') }}"></script>
 @endsection

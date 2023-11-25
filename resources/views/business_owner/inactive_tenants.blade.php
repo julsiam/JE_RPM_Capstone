@@ -12,12 +12,12 @@
         <div class="card p-2 mt-5">
             <div class="row justify-content-center">
                 <div class="col-md-6 p-4">
-                    <h2>J and E Rental Tenants</h2>
+                    <h2>J and E Rental Inactive Tenants</h2>
                 </div>
 
                 <div class="col-md-6 text-end">
                     {{-- INACTIVE --}}
-                    <a href="{{ route('inactive-tenants') }}" class="btn btn btn-outline-warning me-2">Inactive Tenants
+                    <a href="{{ route('tenants') }}" class="btn btn btn-outline-warning me-2">Active Tenants
                         {{-- <svg xmlns="http://www.w3.org/2000/svg"
                             width="16" height="16" fill="currentColor" class="bi bi-file type-pdf"
                             viewBox="0 0 16 16">
@@ -44,7 +44,7 @@
                         </svg></a>
 
                     {{-- ADD TENANT --}}
-                    <a href="{{ url('add_tenant_form') }}" class="btn btn-success me-2" class="btn btn-success me-2">
+                    <a href="{{ route('add_tenant_form') }}" class="btn btn-success me-2" class="btn btn-success me-2">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="bi bi-person-plus" viewBox="0 0 16 16">
                             <path
@@ -77,7 +77,7 @@
 
 
             <div class="card p-2">
-                <table id="tenantsData" class="table table-hover">
+                <table id="inactiveTenantsData" class="table table-hover">
                     <thead class="thead-dark">
                         <tr>
                             <th hidden class="text-start">ID</th>
@@ -87,59 +87,80 @@
                             <th class="text-start">ROOM UNIT</th>
                             <th class="text-center">DUES</th>
                             <th class="text-center">STATUS</th>
-                            <th class="text-center">DETAILS</th>
+                            {{-- <th class="text-center">DETAILS</th> --}}
                         </tr>
                     </thead>
                     <tbody>
-
-                        @foreach ($tenants as $tenant)
+                        @foreach ($inactiveTenants as $inactive_tenant)
                             <tr>
-                                <td hidden class="text-start" scope="row">{{ $tenant->id }}</td>
+                                <td hidden class="text-start" scope="row">{{ $inactive_tenant->id }}</td>
 
-                                <td class="text-start">{{ $tenant->first_name }} {{ $tenant->last_name }}</td>
+                                <td class="text-start">{{ $inactive_tenant->first_name }} {{ $inactive_tenant->last_name }}
+                                </td>
 
-                                <td class="text-start">{{ $tenant->email }}</td>
+                                <td class="text-start">{{ $inactive_tenant->email }}</td>
 
                                 <td class="text-start">
-                                    @if ($tenant->property)
-                                        {{ $tenant->property->location }}
+                                    @if ($inactive_tenant->tenantProperty)
+                                        {{ $inactive_tenant->tenantProperty->location }}
+                                    @else
+                                        N/A
+                                    @endif
+                                </td>
+                                <td class="text-start">
+                                    @if ($inactive_tenant->tenantProperty)
+                                        {{ $inactive_tenant->tenantProperty->room_unit }}
                                     @else
                                         N/A
                                     @endif
                                 </td>
 
-                                <td class="text-start">
-                                    @if ($tenant->property)
-                                        {{ $tenant->property->room_unit }}
-                                    @else
-                                        N/A
-                                    @endif
-                                </td>
-
-                                <!--To change the color if mag due date na si tenant-->
-                                <td class="text-center @if ($tenant->rental && $tenant->rental->due_date->isToday()) text-danger fw-bold @endif">
-                                    @if ($tenant->rental)
-                                        {{ $tenant->rental->due_date->format('F d, Y') }}
+                                <td
+                                    class="text-center
+                                @if ($inactive_tenant->rental && $inactive_tenant->rental->due_date->isToday()) text-danger fw-bold @endif">
+                                    @if ($inactive_tenant->rental)
+                                        {{ $inactive_tenant->rental->due_date->format('F d, Y') }}
                                     @else
                                         N/A
                                     @endif
                                 </td>
 
                                 <td class="text-center">
-                                    {{ $tenant->rental->status }}
+                                    {{ $inactive_tenant->rental->status }}
                                 </td>
 
-
-                                <td class="text-center">
-                                    <button class="btn btn-primary btn-sm detailsBtn" data-tenant-id='{{ $tenant->id }}'
-                                        data-bs-toggle='modal' data-bs-target='#tenantProfileModal'><svg
-                                            xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                {{-- <td class="text-center">
+                                    <button class="btn btn-primary btn-sm inactiveDetailsBtn"
+                                        data-inactiveTenant-id='{{ $inactive_tenant->id }}' data-bs-toggle="modal"
+                                        data-bs-target="#inactiveTenantProfileModal">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                             fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
                                             <path
                                                 d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
                                         </svg>
                                     </button>
-                                </td>
+                                </td> --}}
+
+                                {{-- <button class="btn btn-primary btn-sm inactiveDetailsBtn"
+                                        data-inactiveTenant-id='{{ $inactive_tenant->id }}' data-bs-toggle="modal"
+                                        data-bs-target="#inactiveTenantProfileModal">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                                            <path
+                                                d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+                                        </svg>
+                                    </button> --}}
+
+                                {{-- <button class="btn btn-primary btn-sm inactiveDetailsBtn"
+                                        data-inactiveTenant-id='{{ $inactive_tenant->id }}' data-bs-toggle='modal'
+                                        data-bs-target='#inactiveTenantProfileModal'>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                                            <path
+                                                d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+                                        </svg>
+                                    </button> --}}
+
                             </tr>
                         @endforeach
                     </tbody>
@@ -147,20 +168,21 @@
             </div>
 
             {{-- MODAL --}}
-            <div class="modal fade" id="tenantProfileModal" tabindex="-1" aria-labelledby="tenantProfileModal"
+            <div class="modal fade" id="inactiveTenantProfileModal" tabindex="-1" aria-labelledby="tenantProfileModal"
                 aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-xl">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="tenantProfileModal">{{ __('Tenant Profile') }}</h5>
+                            <h5 class="modal-title" id="inactiveTenantProfileModal">{{ __('Tenant Profile') }}</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
 
                         <div class="modal-body m-2">
                             <div class="mb-3">
                                 <div class="">
-                                    <input id="tenant_id" required style="border-color: rgb(166, 166, 166)" type="hidden"
-                                        class="form-control" name="tenant_id" value="" readonly>
+                                    <input id="inactive_tenant_id" required style="border-color: rgb(166, 166, 166)"
+                                        type="" class="form-control" name="inactive_tenant_id" value=""
+                                        readonly>
                                 </div>
                             </div>
 
@@ -171,79 +193,80 @@
                                         <div class="row">
                                             <div class="row">
                                                 <div class="col-auto">
-                                                    {{-- <img style="width: 200px;" id="tenant_profile" src=""
+                                                    {{-- <img style="width: 200px;" id="inactive_profile" src=""
                                                     alt="Profile Picture"> --}}
                                                 </div>
                                             </div>
 
                                             <div class="form-group col-md-5">
                                                 <label style="color: rgb(128, 128, 128)">First Name</label>
-                                                <input id="tenant_first_name" style="border-color: rgb(166, 166, 166)"
-                                                    type="text" class="form-control" name="tenant_first_name" readonly
+                                                <input id="inactive_inactive_first_name"
+                                                    style="border-color: rgb(166, 166, 166)" type="text"
+                                                    class="form-control" name="inactive_inactive_first_name" readonly
                                                     value="">
                                             </div>
 
                                             <div class="form-group col-md-5">
                                                 <label style="color: rgb(128, 128, 128)">Last Name</label>
-                                                <input id="tenant_last_name" style="border-color: rgb(166, 166, 166)"
-                                                    type="text" class="form-control" name="tenant_last_name" readonly
-                                                    value="">
+                                                <input id="inactive_last_name" style="border-color: rgb(166, 166, 166)"
+                                                    type="text" class="form-control" name="inactive_last_name"
+                                                    readonly value="">
                                             </div>
 
                                             <div class="form-group col-md-5">
                                                 <label style="color: rgb(128, 128, 128)">Email</label>
-                                                <input id="tenant_email" style="border-color: rgb(166, 166, 166)"
-                                                    type="text" class="form-control" name="tenant_email"
+                                                <input id="inactive_email" style="border-color: rgb(166, 166, 166)"
+                                                    type="text" class="form-control" name="inactive_email"
                                                     value="" readonly>
                                             </div>
 
                                             <div class="form-group col-md-5">
                                                 <label style="color: rgb(128, 128, 128)">Phone Number</label>
-                                                <input id="tenant_phone_number" style="border-color: rgb(166, 166, 166)"
-                                                    type="text" class="form-control" name="tenant_phone_number"
+                                                <input id="inactive_phone_number" style="border-color: rgb(166, 166, 166)"
+                                                    type="text" class="form-control" name="inactive_phone_number"
                                                     readonly value="">
                                             </div>
 
                                             <div class="form-group col-md-5">
                                                 <label style="color: rgb(128, 128, 128)">Permanent Address</label>
-                                                <input id="tenant_address" style="border-color: rgb(166, 166, 166)"
-                                                    type="text" class="form-control" name="permanent_tenant_address"
-                                                    readonly value="">
+                                                <input id="inactive_address" style="border-color: rgb(166, 166, 166)"
+                                                    type="text" class="form-control" name="inactive_address" readonly
+                                                    value="">
                                             </div>
 
 
                                             <div class="form-group col-md-5">
                                                 <label style="color: rgb(128, 128, 128)">Birthdate</label>
-                                                <input id="tenant_birthdate" style="border-color: rgb(166, 166, 166)"
-                                                    type="text" class="form-control" name="tenant_birthdate" readonly
-                                                    value="">
+                                                <input id="inactive_birthdate" style="border-color: rgb(166, 166, 166)"
+                                                    type="text" class="form-control" name="inactive_birthdate"
+                                                    readonly value="">
                                             </div>
 
                                             <div class="form-group col-md-5">
                                                 <label style="color: rgb(128, 128, 128)">Age</label>
-                                                <input id="tenant_age" style="border-color: rgb(166, 166, 166)"
-                                                    type="text" class="form-control" name="tenant_age" readonly
+                                                <input id="inactive_age" style="border-color: rgb(166, 166, 166)"
+                                                    type="text" class="form-control" name="inactive_age" readonly
                                                     value="">
                                             </div>
 
                                             <div class="form-group col-md-5">
                                                 <label style="color: rgb(128, 128, 128)">Gender</label>
-                                                <input id="tenant_gender" style="border-color: rgb(166, 166, 166)"
-                                                    type="text" class="form-control" name="tenant_gender" readonly
+                                                <input id="inactive_gender" style="border-color: rgb(166, 166, 166)"
+                                                    type="text" class="form-control" name="inactive_gender" readonly
                                                     value="">
                                             </div>
 
                                             <div class="form-group col-md-5">
                                                 <label style="color: rgb(128, 128, 128)">Occupation</label>
-                                                <input id="tenant_occupation" style="border-color: rgb(166, 166, 166)"
-                                                    type="text" class="form-control" name="tenant_occupation" readonly
-                                                    value="">
+                                                <input id="inactive_occupation" style="border-color: rgb(166, 166, 166)"
+                                                    type="text" class="form-control" name="inactive_occupation"
+                                                    readonly value="">
                                             </div>
 
                                             <div class="form-group col-md-5">
                                                 <label style="color: rgb(128, 128, 128)">Work Address</label>
-                                                <input id="tenant_work_address" style="border-color: rgb(166, 166, 166)"
-                                                    type="text" class="form-control" name="tenant_work_address"
+                                                <input id="inactive_work_address" style="border-color: rgb(166, 166, 166)"
+                                                    type="text" class="form-control" name="inactive_work_address"
                                                     readonly value="">
                                             </div>
                                         </div>
@@ -256,12 +279,12 @@
                                         <div class="col-md-8 p-2">
                                             <div class="row">
                                                 <div class="col-auto">
-                                                    <img style="width: 200px;" id="tenant_idPhoto"
+                                                    <img style="width: 200px;" id="inactive_idPhoto"
                                                         src="{{ asset('image/default_photo.png') }}" alt="ID Photo">
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <a href="" id="tenant_contractLink" target="_blank">Contract of
+                                                <a href="" id="inactive_contractLink" target="_blank">Contract of
                                                     Agreement</a>
                                             </div>
                                         </div>
@@ -275,21 +298,22 @@
                                             <div class="row align-items-start">
                                                 <div class="form-group col md-5">
                                                     <label style="color: rgb(128, 128, 128)">Location</label>
-                                                    <input id="tenant_location" style="border-color: rgb(166, 166, 166)"
-                                                        type="text" class="form-control" name="tenant_location"
+                                                    <input id="inactive_location" style="border-color: rgb(166, 166, 166)"
+                                                        type="text" class="form-control" name="inactive_location"
                                                         readonly value="">
                                                 </div>
                                                 <div class="form-group col md-5">
                                                     <label style="color: rgb(128, 128, 128)">Room Unit</label>
-                                                    <input id="tenant_room_unit" style="border-color: rgb(166, 166, 166)"
-                                                        type="text" class="form-control" name="tenant_room_unit"
-                                                        readonly value="">
+                                                    <input id="inactive_room_unit"
+                                                        style="border-color: rgb(166, 166, 166)" type="text"
+                                                        class="form-control" name="inactive_room_unit" readonly
+                                                        value="">
                                                 </div>
                                                 <div class="form-group col md-5">
                                                     <label style="color: rgb(128, 128, 128)">Move-in Data</label>
-                                                    <input id="tenant_movein_date"
+                                                    <input id="inactive_movein_date"
                                                         style="border-color: rgb(166, 166, 166)" type="text"
-                                                        class="form-control" name="tenant_movein_date" readonly
+                                                        class="form-control" name="inactive_movein_date" readonly
                                                         value="">
                                                 </div>
                                             </div>
@@ -302,7 +326,7 @@
                                     <div class="col-md-12 p-2 m-2">
                                         <h5>PAYMENT HISTORY</h5>
                                         <div>
-                                            <table id="payment_history" class="table">
+                                            <table id="inactive_payment_history" class="table">
                                                 <thead>
                                                     <tr>
                                                         <th>Month</th>
@@ -326,60 +350,18 @@
                             <button type="button" class="btn btn-secondary"
                                 data-bs-dismiss="modal">{{ __('Cancel') }}</button>
 
-                            <button type="button" class="btn btn-danger deleteTenantBtn">
+                            {{-- <button type="button" class="btn btn-danger deleteTenantBtn">
                                 {{ __('Delete Tenant') }}
                             </button>
 
-                            {{-- @if (isset($tenant))
-                                <a href="#" onclick="updateTenantDetails('{{ $tenant->id }}')"
-                                    class="btn btn-primary updateDetailsBtn">{{ __('Update') }}</a>
-                            @endif --}}
 
-                            @if (isset($tenant))
-                                <a href="#" class="btn btn-primary updateDetailsBtn">{{ __('Update') }}</a>
-                            @endif
-
-
+                            <a href="{{ url('edit_tenant') }}" type="button"
+                                class="btn btn-primary">{{ __('Update') }}</a> --}}
                         </div>
 
-
-                        {{-- DELETE CONFIRMATION MODAL --}}
-
-                        <div class="modal fade bg-outline-danger" id="confirmDeleteTenantModal" tabindex="-1"
-                            aria-labelledby="confirmDeleteTenantModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <form id="deleteForm" method="POST" action="{{ route('tenant.delete_tenant') }}">
-                                    @csrf
-                                    {{-- @method('DELETE') --}}
-                                    <div class="modal-content">
-                                        <div class="modal-header bg-danger">
-                                            <h5 class="modal-title" id="confirmDeleteTenantModalLabel">Confirm Deletion
-                                            </h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <input type="hidden" name="tenant_delete_id" id="delete_tenant_id" readonly>
-
-                                            Are you sure you want to delete this tenant. All its details will be lost!
-                                            Delete with caution, darlin'!
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary"
-                                                data-bs-dismiss="modal">Cancel</button>
-                                            <button type="submit" class="btn btn-danger">Delete</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 @endsection
-
-<script>
-    var tenantData = {!! json_encode($tenant) !!};
-</script>

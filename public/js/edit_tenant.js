@@ -23,6 +23,80 @@ function fetchTenantsList() {
     });
 }
 
+
+$(document).ready(function () {
+
+    var bday = new Date(tenantData.birthdate);
+    var options = {
+        timeZone: 'UTC', // Use UTC or your desired timezone
+        month: 'long',
+        day: 'numeric',
+        year: 'numeric',
+    };
+    var bdate = bday.toLocaleString('en-US', options);
+
+    $('#email').val(tenantData.email);
+    $('#phone_number').val(tenantData.phone_number);
+    $("#address").val(tenantData.address);
+    $("#first_name").val(tenantData.first_name);
+    $("#last_name").val(tenantData.last_name);
+    $("#birthdate").val(bdate);
+    $("#age").val(tenantData.age);
+    $("#gender").val(tenantData.gender);
+    $("#occupation").val(tenantData.occupation);
+
+    var rentStarted = new Date(tenantData.rental.rent_started);
+    var options = {
+        timeZone: 'UTC', // Use UTC or your desired timezone
+        month: 'long',
+        day: 'numeric',
+        year: 'numeric',
+    };
+    var formattedRentStarted = rentStarted.toLocaleString('en-US', options);
+    // Parse the datetime string from the tenantData and create a Date object
+    var dueDate = new Date(tenantData.rental.due_date);
+
+    // Format the date as 'yyyy-MM-dd'
+    var formattedDueDate = dueDate.toISOString().split('T')[0];
+
+    $("#rental_id").val(tenantData.rental.id);
+    $("#edit_location").val(tenantData.rental.property.location);
+    $("#edit_room_unit").val(tenantData.rental.property.room_unit);
+    $("#edit_rent_started").val(formattedRentStarted);
+    $("#edit_rent_from").val(tenantData.rental.rent_from);
+    $("#edit_due_date").val(formattedDueDate);
+    $("#edit_room_rent").val(tenantData.rental.property.room_fee);
+    $("#edit_water_bill").val(tenantData.rental.water_bill);
+    $("#edit_electric_bill").val(tenantData.rental.electric_bill);
+    $("#edit_total_bill").val(tenantData.rental.total_bill);
+    $("#edit_amount_paid").val(tenantData.rental.amount_paid);
+    $("#edit_balance").val(tenantData.rental.balance);
+    $("#edit_status").val(tenantData.rental.status);
+
+    if (tenantData.file.length > 0) {
+        var defaultPhotoUrl = "{{ asset('image/default_photo.png') }}";
+
+        var idPhotoPath = tenantData.file.find(file => file.type === 'id_photo');
+        var contractPath = tenantData.file.find(file => file.type === 'contract_pdf');
+
+        if (idPhotoPath) {
+            $('#idPhoto').attr('src', 'https://jerpm.s3.amazonaws.com/' + idPhotoPath.file_path);
+        } else {
+            $('#idPhoto').attr('src', defaultPhotoUrl); // No ID photo available
+        }
+
+        if (contractPath) {
+            $('#contractLink').attr('href', 'https://jerpm.s3.amazonaws.com/' + contractPath.file_path);
+        } else {
+            $('#contractLink').attr('href', ' '); // No contract available
+        }
+    }
+});
+
+
+
+
+
 function selectTenant(id, name, email) { //retrieve data and display to the edit page
 
     // $("#tenant_id").val(id);

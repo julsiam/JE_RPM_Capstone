@@ -95,7 +95,7 @@ Route::middleware(['auth', 'user-access:business_owner'])->group(function () {
 
     Route::post('/add_tenant', [UserController::class, 'addTenant'])->name('tenant.addTenant');
 
-    Route::get('/edit_tenant', [UserController::class, 'editTenantForm']);
+    Route::get('/edit_tenant/{id}', [UserController::class, 'editTenantForm']);
 
     Route::get('/tenants', [UserController::class, 'tenantsList'])->name('tenants'); //SHOW ALL TENANTS
 
@@ -112,6 +112,11 @@ Route::middleware(['auth', 'user-access:business_owner'])->group(function () {
     Route::get('/get-tenant-details', [UserController::class, 'getTenantDetails']); //INDIVIDUAL IN EDIT RENTAL
 
     Route::get('/tenant-details', [UserController::class, 'getTenant']);
+
+    Route::get('/inactive-tenant-details', [UserController::class, 'getInactiveTenant']);
+
+
+    Route::get('/inactive-tenant', [UserController::class, 'getInactiveTenants'])->name('inactive-tenants');
 
 
 

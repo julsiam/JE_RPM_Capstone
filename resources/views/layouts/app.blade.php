@@ -54,8 +54,7 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
-                        
+
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -68,11 +67,6 @@
                         </li>
                         @endif
 
-                        <!-- {{-- @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                        </li>
-                        @endif --}} -->
                         @else
                         <li class="nav-item">
                             <a class="nav-link d-flex align-items-center" href="{{ url('home') }}"><svg
@@ -114,45 +108,22 @@
 
                         <li class="nav-item">
                             <a href="#" id="bell" class="btn btn-primary" type="button"><svg
-                                    xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                    fill="currentColor" class="bi bi-bell" viewBox="0 0 16 16">
+                                    xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                                    class="bi bi-bell" viewBox="0 0 16 16">
                                     <path
                                         d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z" />
                                 </svg>
-                                <span id="notification-count"
-                                    class="badge badge-danger"></span>
+                                <span id="notification-count" class="badge badge-danger"></span>
                             </a>
                         </li>
 
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                              |  {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}
+                                | {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-
-                                <a class="dropdown-item">
-                                    {{-- <h6 class="dropdown-header">
-                                            <img style="width:65px" src="image/gwapo1.jpg" alt="">
-                                            {{ Auth::user()->name }} <br>
-                                    {{ Auth::user()->email }}
-                                    </h6> --}}
-
-
-                                    <div class="card">
-                                        <h6 class="dropdown-header">
-                                            <img style="width:65px" src="image/gwapo1.jpg" alt="">
-                                            {{ Auth::user()->name }} <br> <br>
-                                            {{ Auth::user()->email }}
-                                        </h6>
-
-                                        {{-- <img style="width:65px" src="image/gwapo1.jpg" alt="">
-                                            <h6 class="card-title">{{ Auth::user()->name }}</h6>
-                                        <h6> {{ Auth::user()->email }}</h6> --}}
-                                    </div>
-
-                                </a>
 
                                 <a class="dropdown-item" href="{{ url('profile') }}">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -163,15 +134,6 @@
                                     {{ __('Profile') }}
                                 </a>
 
-                                <a class="dropdown-item" href="{{ route('logout') }}">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                        class="bi bi-key" viewBox="0 0 16 16">
-                                        <path
-                                            d="M0 8a4 4 0 0 1 7.465-2H14a.5.5 0 0 1 .354.146l1.5 1.5a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0L13 9.207l-.646.647a.5.5 0 0 1-.708 0L11 9.207l-.646.647a.5.5 0 0 1-.708 0L9 9.207l-.646.647A.5.5 0 0 1 8 10h-.535A4 4 0 0 1 0 8zm4-3a3 3 0 1 0 2.712 4.285A.5.5 0 0 1 7.163 9h.63l.853-.854a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.793-.793-1-1h-6.63a.5.5 0 0 1-.451-.285A3 3 0 0 0 4 5z" />
-                                        <path d="M4 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
-                                    </svg>
-                                    {{ __('Change Password') }}
-                                </a>
 
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                     @csrf

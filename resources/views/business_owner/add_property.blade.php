@@ -10,8 +10,8 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div style="margin-top:10%" class="card">
-                    <div class="text-center col-md-12 p-4">
-                        <h2>J and E Rental</h2>
+                    <div class="text-center col-md-12 p-2 mb-2" style="background-color: #A9CCE8;">
+                        <h2 style="color: #135083; font-weight:700; letter-spacing: 2px;">J and E Add Property</h2>
                     </div>
 
                     <form action="{{ route('property.addProperty') }}" method="POST">
@@ -103,7 +103,7 @@
                                 <a style="cursor: pointer; width: 100px;color:#fff;" class="btn btn-sm btn-danger"
                                     onclick="history.back()">BACK
                                 </a>
-                                <button type="submit" class="btn btn-primary  btn-sm">
+                                <button type="submit" class="btn btn-outline-dark btn-sm" style="background-color: #FFA500;">
                                     {{ __('ADD PROPERTY') }}
                                 </button>
                             </div>

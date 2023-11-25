@@ -5,7 +5,7 @@
         "development": "mix",
         "build": "npm run production",
         "production": "mix --production",
-        "watch":"mix watch",
+        "watch": "mix watch",
         "start": "php artisan serve",
         "migrate": "php artisan migrate --force",
         "notification": "php artisan notification:create",
@@ -14,7 +14,6 @@
         "storage:link": "php artisan storage:link",
         "sms": "php artisan sms:send-due-date-notifications"
     },
-
     "devDependencies": {
         "@popperjs/core": "^2.11.6",
         "axios": "^1.1.2",
@@ -25,5 +24,8 @@
         "sass": "^1.56.1",
         "sass-loader": "^12.1.0",
         "vite": "^4.0.0"
+    },
+    "dependencies": {
+        "chart.js": "^4.4.0"
     }
 }

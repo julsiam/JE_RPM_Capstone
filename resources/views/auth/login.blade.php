@@ -22,6 +22,7 @@
         .title {
             color: #FE8900;
             text-align: center;
+
             /* font-family: Poppins; */
             font-size: 30px;
             font-style: normal;
@@ -33,6 +34,7 @@
         .login_label {
             color: #003057;
             text-align: center;
+            
             /* font-family: Poppins; */
             font-size: 16px;
             font-style: normal;

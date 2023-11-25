@@ -21,7 +21,7 @@ function getMonthNo(month_name) {
 
 
 $(document).ready(function () {
-
+    
     const currMonth = new Date().getMonth() + 1;
 
     const month_names = [
@@ -55,6 +55,5 @@ $(document).ready(function () {
         const selectedMonth = $(this).val();
         updateTotalIncome(selectedMonth);
     })
+
 });
-
-

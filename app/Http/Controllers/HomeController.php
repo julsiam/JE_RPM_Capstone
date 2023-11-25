@@ -164,4 +164,16 @@ class HomeController extends Controller
 
         return response()->json(['totalIncome' => $totalIncome]);
     }
+
+    // Added chart
+    public function showLineChart()
+    {
+        // Fetch data for the line chart (replace with your data retrieval logic)
+        $lineChartData = [
+            'labels' => ['Label 1', 'Label 2', 'Label 3', 'Label 4', 'Label 5'],
+            'data' => [30, 40, 20, 45, 35],
+        ];
+
+        return view('your.line.chart.view', compact('lineChartData'));
+    }
 }

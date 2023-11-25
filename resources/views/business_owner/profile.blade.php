@@ -14,11 +14,6 @@
                         <div class="card-body text-center">
                             <form method="POST" action="{{ route('edit_profile_pic') }}" enctype="multipart/form-data">
                                 @csrf
-                                {{-- <img id="profilePicturePreview" src="{{ Auth::user()->profile_picture }}" alt="avatar"
-                                    class="rounded-circle img-fluid" style="width: 150px;">
-                                <img id="profilePicturePreview"
-                                    src="{{ Storage::disk('s3')->url(Auth::user()->profile_picture) }}"
-                                    alt="Profile Picture" class="rounded-circle img-fluid" style="width: 150px;"> --}}
 
                                 @if (Storage::disk('s3')->exists(Auth::user()->profile_picture))
                                     <img id="profilePicturePreview"

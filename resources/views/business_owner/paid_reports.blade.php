@@ -16,8 +16,8 @@
                         aria-label="Basic mixed styles example">
                         <a href="{{ url('/paid_reports') }}" class="btn" aria-current="page"
                             style="background-color: #28a745; color: black; text-decoration: none;"
-                            onmouseover="this.style.backgroundColor='pink'; this.style.color='red';"
-                            onmouseout="this.style.backgroundColor='green'; this.style.color='black';">Paid</a>
+                            onmouseover="this.style.backgroundColor='#28a745'; this.style.color='white';"
+                            onmouseout="this.style.backgroundColor='#28a745'; this.style.color='black';">Paid</a>
                         <a href="{{ url('/unpaid_reports') }}" class="btn btn-outline-warning" aria-current="page"> Not
                             Yet Paid</a>
                         <a href="{{ url('/notfullypaid_reports') }}" class="btn btn-outline-danger"> Not Fully Paid</a>

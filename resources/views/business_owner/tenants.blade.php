@@ -10,7 +10,8 @@
 
 <div class="container" style="margin-top: 10%">
     <div class="row justify-content-center" style="padding-left: 12px;font-size: medium;">
-        <div class="" style=" color: #135083;font-weight: 700;">Note: Add the properties first before adding any tenants.</div>
+        <div class="" style=" color: #135083;font-weight: 700;">Note: Add the properties first before adding any
+            tenants.</div>
     </div>
     <div class="card mt-2" style="border-radius: 25px;">
         <div class="row justify-content-center"
@@ -20,24 +21,24 @@
                 </h2>
             </div>
 
-                <div class="col-md-6 text-end">
-                    {{-- INACTIVE --}}
-                    <a href="{{ route('inactive-tenants') }}" class="btn btn btn-outline-warning me-2">Inactive Tenants
-                        {{-- <svg xmlns="http://www.w3.org/2000/svg"
+            <div class="col-md-6 text-end p-2">
+                {{-- INACTIVE --}}
+                <a href="{{ route('inactive-tenants') }}" class="btn btn btn-outline-warning me-2" style="color:#135083;">Inactive Tenants
+                    {{-- <svg xmlns="http://www.w3.org/2000/svg"
                             width="16" height="16" fill="currentColor" class="bi bi-file type-pdf"
                             viewBox="0 0 16 16">
                             <path fill-rule="evenodd"
                                 d="M14 4.5V14a2 2 0 0 1-2 2h-1v-1h1a1 1 0 0 0 1-1V4.5h-2A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v9H2V2a2 2 0 0 1 2-2h5.5L14 4.5ZM1.6 11.85H0v3.999h.791v-1.342h.803c.287 0 .531-.057.732-.173.203-.117.358-.275.463-.474a1.42 1.42 0 0 0 .161-.677c0-.25-.053-.476-.158-.677a1.176 1.176 0 0 0-.46-.477c-.2-.12-.443-.179-.732-.179Zm.545 1.333a.795.795 0 0 1-.085.38.574.574 0 0 1-.238.241.794.794 0 0 1-.375.082H.788V12.48h.66c.218 0 .389.06.512.181.123.122.185.296.185.522Zm1.217-1.333v3.999h1.46c.401 0 .734-.08.998-.237a1.45 1.45 0 0 0 .595-.689c.13-.3.196-.662.196-1.084 0-.42-.065-.778-.196-1.075a1.426 1.426 0 0 0-.589-.68c-.264-.156-.599-.234-1.005-.234H3.362Zm.791.645h.563c.248 0 .45.05.609.152a.89.89 0 0 1 .354.454c.079.201.118.452.118.753a2.3 2.3 0 0 1-.068.592 1.14 1.14 0 0 1-.196.422.8.8 0 0 1-.334.252 1.298 1.298 0 0 1-.483.082h-.563v-2.707Zm3.743 1.763v1.591h-.79V11.85h2.548v.653H7.896v1.117h1.606v.638H7.896Z" />
                         </svg> --}}
-                    </a>
+                </a>
 
-                    {{-- SHEET --}}
-                    <a href="{{ route('tenants_export') }}" class="btn btn-outline-success me-2"><svg
-                            xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                            class="bi bi-filetype-xls" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd"
-                                d="M14 4.5V14a2 2 0 0 1-2 2h-1v-1h1a1 1 0 0 0 1-1V4.5h-2A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v9H2V2a2 2 0 0 1 2-2h5.5L14 4.5ZM6.472 15.29a1.176 1.176 0 0 1-.111-.449h.765a.578.578 0 0 0 .254.384c.07.049.154.087.25.114.095.028.202.041.319.041.164 0 .302-.023.413-.07a.559.559 0 0 0 .255-.193.507.507 0 0 0 .085-.29.387.387 0 0 0-.153-.326c-.101-.08-.255-.144-.462-.193l-.619-.143a1.72 1.72 0 0 1-.539-.214 1.001 1.001 0 0 1-.351-.367 1.068 1.068 0 0 1-.123-.524c0-.244.063-.457.19-.639.127-.181.303-.322.527-.422.225-.1.484-.149.777-.149.305 0 .564.05.78.152.216.102.383.239.5.41.12.17.186.359.2.566h-.75a.56.56 0 0 0-.12-.258.625.625 0 0 0-.247-.181.923.923 0 0 0-.369-.068c-.217 0-.388.05-.513.152a.472.472 0 0 0-.184.384c0 .121.048.22.143.3a.97.97 0 0 0 .405.175l.62.143c.217.05.406.12.566.211a1 1 0 0 1 .375.358c.09.148.135.335.135.56 0 .247-.063.466-.188.656a1.216 1.216 0 0 1-.539.439c-.234.105-.52.158-.858.158-.254 0-.476-.03-.665-.09a1.404 1.404 0 0 1-.478-.252 1.13 1.13 0 0 1-.29-.375Zm-2.945-3.358h-.893L1.81 13.37h-.036l-.832-1.438h-.93l1.227 1.983L0 15.931h.861l.853-1.415h.035l.85 1.415h.908L2.253 13.94l1.274-2.007Zm2.727 3.325H4.557v-3.325h-.79v4h2.487v-.675Z" />
-                        </svg></a>
+                {{-- SHEET --}}
+                <a href="{{ route('tenants_export') }}" class="btn btn-outline-success me-2"><svg
+                        xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-filetype-xls" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                            d="M14 4.5V14a2 2 0 0 1-2 2h-1v-1h1a1 1 0 0 0 1-1V4.5h-2A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v9H2V2a2 2 0 0 1 2-2h5.5L14 4.5ZM6.472 15.29a1.176 1.176 0 0 1-.111-.449h.765a.578.578 0 0 0 .254.384c.07.049.154.087.25.114.095.028.202.041.319.041.164 0 .302-.023.413-.07a.559.559 0 0 0 .255-.193.507.507 0 0 0 .085-.29.387.387 0 0 0-.153-.326c-.101-.08-.255-.144-.462-.193l-.619-.143a1.72 1.72 0 0 1-.539-.214 1.001 1.001 0 0 1-.351-.367 1.068 1.068 0 0 1-.123-.524c0-.244.063-.457.19-.639.127-.181.303-.322.527-.422.225-.1.484-.149.777-.149.305 0 .564.05.78.152.216.102.383.239.5.41.12.17.186.359.2.566h-.75a.56.56 0 0 0-.12-.258.625.625 0 0 0-.247-.181.923.923 0 0 0-.369-.068c-.217 0-.388.05-.513.152a.472.472 0 0 0-.184.384c0 .121.048.22.143.3a.97.97 0 0 0 .405.175l.62.143c.217.05.406.12.566.211a1 1 0 0 1 .375.358c.09.148.135.335.135.56 0 .247-.063.466-.188.656a1.216 1.216 0 0 1-.539.439c-.234.105-.52.158-.858.158-.254 0-.476-.03-.665-.09a1.404 1.404 0 0 1-.478-.252 1.13 1.13 0 0 1-.29-.375Zm-2.945-3.358h-.893L1.81 13.37h-.036l-.832-1.438h-.93l1.227 1.983L0 15.931h.861l.853-1.415h.035l.85 1.415h.908L2.253 13.94l1.274-2.007Zm2.727 3.325H4.557v-3.325h-.79v4h2.487v-.675Z" />
+                    </svg></a>
 
                 {{-- REFRESH --}}
                 <a href="" class="btn btn-danger me-2"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -58,27 +59,6 @@
                     </svg>
                 </a>
 
-                {{-- EDIT TENANT --}}
-                <a href="{{ url('edit_tenant') }}" class="btn btn-success me-2" class="btn btn-success me-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                        class="bi bi-pencil-square" viewBox="0 0 16 16">
-                        <path
-                            d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
-                        <path fill-rule="evenodd"
-                            d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
-                    </svg>
-                </a>
-                    {{-- EDIT TENANT --}}
-                    {{-- <a href="{{ url('edit_tenant') }}" class="btn btn-dark me-2" class="btn btn-success me-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                            class="bi bi-pencil-square" viewBox="0 0 16 16">
-                            <path
-                                d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
-                            <path fill-rule="evenodd"
-                                d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
-                        </svg>
-                    </a> --}}
-
                 {{-- BACK --}}
                 <a onclick="history.back()" class="btn btn-danger me-2"><svg xmlns="http://www.w3.org/2000/svg"
                         width="16" height="16" fill="currentColor" class="bi bi-arrow-left-circle" viewBox="0 0 16 16">
@@ -89,21 +69,21 @@
         </div>
 
 
-            <div class="card p-2">
-                <table id="tenantsData" class="table table-hover">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th hidden class="text-start">ID</th>
-                            <th class="text-start">NAME</th>
-                            <th class="text-start">EMAIL</th>
-                            <th class="text-start">LOCATION</th>
-                            <th class="text-start">ROOM UNIT</th>
-                            <th class="text-center">DUES</th>
-                            <th class="text-center">STATUS</th>
-                            <th class="text-center">DETAILS</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+        <div class="card p-2">
+            <table id="tenantsData" class="table table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th hidden class="text-start">ID</th>
+                        <th class="text-start">NAME</th>
+                        <th class="text-start">EMAIL</th>
+                        <th class="text-start">LOCATION</th>
+                        <th class="text-start">ROOM UNIT</th>
+                        <th class="text-center">DUES</th>
+                        <th class="text-center">STATUS</th>
+                        <th class="text-center">DETAILS</th>
+                    </tr>
+                </thead>
+                <tbody>
 
                     @foreach ($tenants as $tenant)
                     <tr>
@@ -129,26 +109,26 @@
                             @endif
                         </td>
 
-                                <!--To change the color if mag due date na si tenant-->
-                                <td class="text-center @if ($tenant->rental && $tenant->rental->due_date->isToday()) text-danger fw-bold @endif">
-                                    @if ($tenant->rental)
-                                        {{ $tenant->rental->due_date->format('F d, Y') }}
-                                    @else
-                                        N/A
-                                    @endif
-                                </td>
+                        <!--To change the color if mag due date na si tenant-->
+                        <td
+                            class="text-center @if ($tenant->rental && $tenant->rental->due_date->isToday()) text-danger fw-bold @endif">
+                            @if ($tenant->rental)
+                            {{ $tenant->rental->due_date->format('F d, Y') }}
+                            @else
+                            N/A
+                            @endif
+                        </td>
 
-                                <td class="text-center">
-                                    {{ $tenant->rental->status }}
-                                </td>
+                        <td class="text-center">
+                            {{ $tenant->rental->status }}
+                        </td>
 
 
                         <td class="text-center">
-                            <button class="btn btn-outline-primary btn-sm detailsBtn"
-                                data-tenant-id='{{ $tenant->id }}' data-bs-toggle='modal'
-                                data-bs-target='#tenantProfileModal'><svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                    height="16" fill="currentColor" class="bi bi-three-dots-vertical"
-                                    viewBox="0 0 16 16">
+                            <button class="btn btn-outline-primary btn-sm detailsBtn" data-tenant-id='{{ $tenant->id }}'
+                                data-bs-toggle='modal' data-bs-target='#tenantProfileModal'><svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
                                     <path
                                         d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
                                 </svg></button>
@@ -340,17 +320,17 @@
                             {{ __('Delete Tenant') }}
                         </button>
 
-                            {{-- @if (isset($tenant))
+                        {{-- @if (isset($tenant))
                                 <a href="#" onclick="updateTenantDetails('{{ $tenant->id }}')"
-                                    class="btn btn-primary updateDetailsBtn">{{ __('Update') }}</a>
-                            @endif --}}
+                        class="btn btn-primary updateDetailsBtn">{{ __('Update') }}</a>
+                        @endif --}}
 
-                            @if (isset($tenant))
-                                <a href="#" class="btn btn-primary updateDetailsBtn">{{ __('Update') }}</a>
-                            @endif
+                        @if (isset($tenant))
+                        <a href="#" class="btn btn-primary updateDetailsBtn">{{ __('Update') }}</a>
+                        @endif
 
 
-                        </div>
+                    </div>
 
 
                     {{-- DELETE CONFIRMATION MODAL --}}
@@ -390,6 +370,8 @@
 </div>
 @endsection
 
-<script>
-    var tenantData = {!! json_encode($tenant) !!};
-</script>
+<!-- <script>
+var tenantData = {
+    !!json_encode($tenant) !!
+};
+</script> -->

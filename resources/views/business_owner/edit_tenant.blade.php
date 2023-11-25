@@ -350,9 +350,6 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <!-- <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                </div> -->
                         </div>
                     </div>
                 </div>
@@ -361,6 +358,6 @@
     </div>
 @endsection
 
-<script>
+<!-- <script>
     var tenantData = {!! json_encode($tenant) !!};
-</script>
+</script> -->

@@ -10,7 +10,7 @@
             @endif
             <div class="row">
                 <div class="col-lg-4">
-                    <div class="card mb-4">
+                    <div class="card mb-4" style="background-color: #A9CCE8;">
                         <div class="card-body text-center">
                             <form method="POST" action="{{ route('edit_profile_pic') }}" enctype="multipart/form-data">
                                 @csrf
@@ -18,18 +18,18 @@
                                 @if (Storage::disk('s3')->exists(Auth::user()->profile_picture))
                                     <img id="profilePicturePreview"
                                         src="{{ Storage::disk('s3')->url(Auth::user()->profile_picture) }}"
-                                        alt="Profile Picture" class="rounded-circle img-fluid" style="width: 150px;">
+                                        alt="Profile Picture" class="rounded-circle img-fluid" style="border: solid 5px #FFA500; width: 150px;">
                                 @else
                                     <img id="profilePicturePreview" src="{{ Auth::user()->profile_picture }}" alt="avatar"
                                         class="rounded-circle img-fluid" style="width: 150px;">
                                 @endif
 
-                                <h5 class="my-3">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</h5>
-                                <p class="text-muted mb-1">J and E RPM Business Owner</p>
+                                <h5 class="my-3" style="color:#135083; font-weight: 700;">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</h5>
+                                <p class="text-muted mb-1" style="color:#135083;">J and E RPM Business Owner</p>
                                 <p class="text-muted mb-4">{{ Auth::user()->address }}</p>
 
                                 <div class="d-flex justify-content-center mb-2">
-                                    <label for="profilePictureInput" class="btn btn-outline-primary ms-1">
+                                    <label for="profilePictureInput" class="btn btn-outline-warning ms-1" style="color:#135083;">
                                         Edit Profile Picture
                                     </label>
                                     <input type="file" id="profilePictureInput" name="profilePictureInput"
@@ -43,11 +43,10 @@
                     </div>
                 </div>
 
-
                 <div class="col-lg-8">
-                    <div class="card mb-4">
+                    <div class="card mb-4" style="background-color: #A9CCE8;">
                         <div class="mx-3 p-2">
-                            <button type="button" class="btn btn-outline-dark profile_edit_btn mb-3" style="float:right;"
+                            <button type="button" class="btn profile_edit_btn mb-3" style="float:right; background-color: #FFA500; color:#135083; "
                                 data-profile-id='{{ Auth::user()->id }}' data-bs-toggle="modal"
                                 data-bs-target="#editProfile">Edit
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -59,14 +58,13 @@
                                 </svg>
                             </button>
                         </div>
-                        <div class="card-body">
-
+                        <div class="card-body" style="color:#135083;">
                             <div class="row mt-2">
                                 <div class="col-sm-3">
                                     <p class="mb-0">Full Name</p>
                                 </div>
                                 <div class="col-sm-9">
-                                    <p id="first_name" class="text-muted mb-0">{{ Auth::user()->first_name }}
+                                    <p id="first_name" class="text-muted mb-0" style="font-weight: 700;">{{ Auth::user()->first_name }}
                                         {{ Auth::user()->last_name }}
                                     </p>
                                 </div>
@@ -77,7 +75,7 @@
                                     <p class="mb-0">Email</p>
                                 </div>
                                 <div class="col-sm-9">
-                                    <p class="text-muted mb-0">{{ Auth::user()->email }}</p>
+                                    <p class="text-muted mb-0" style="font-weight: 700;">{{ Auth::user()->email }}</p>
                                 </div>
                             </div>
                             <hr>
@@ -86,7 +84,7 @@
                                     <p class="mb-0">Phone</p>
                                 </div>
                                 <div class="col-sm-9">
-                                    <p class="text-muted mb-0">{{ Auth::user()->phone_number }}</p>
+                                    <p class="text-muted mb-0" style="font-weight: 700;">{{ Auth::user()->phone_number }}</p>
                                 </div>
                             </div>
                             <hr>
@@ -95,7 +93,7 @@
                                     <p class="mb-0">Birthdate</p>
                                 </div>
                                 <div class="col-sm-9">
-                                    <p class="text-muted mb-0">{{ Auth::user()->birthdate->format('F d, Y') }}</p>
+                                    <p class="text-muted mb-0" style="font-weight: 700;">{{ Auth::user()->birthdate->format('F d, Y') }}</p>
                                 </div>
                             </div>
                             <hr>
@@ -104,7 +102,7 @@
                                     <p class="mb-0">Age</p>
                                 </div>
                                 <div class="col-sm-9">
-                                    <p class="text-muted mb-0">{{ Auth::user()->age }}</p>
+                                    <p class="text-muted mb-0" style="font-weight: 700;">{{ Auth::user()->age }}</p>
                                 </div>
                             </div>
 
@@ -114,7 +112,7 @@
                                     <p class="mb-0">Address</p>
                                 </div>
                                 <div class="col-sm-9">
-                                    <p class="text-muted mb-0">{{ Auth::user()->address }}</p>
+                                    <p class="text-muted mb-0" style="font-weight: 700;">{{ Auth::user()->address }}</p>
                                 </div>
                             </div>
                         </div>

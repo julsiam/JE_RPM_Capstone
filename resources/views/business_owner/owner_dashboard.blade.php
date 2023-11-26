@@ -35,7 +35,7 @@ option {
             @endif
 
             <div class="card-group row d-flex align-items-center justify-content-center gap-3 mx-2">
-                <div class="card border-primary mb-3 shadow-sm p-1 mb-3 rounded col-12 col-md-4"
+                <div class="card mb-3 shadow-sm p-1 mb-3 rounded col-12 col-md-4"
                     style="height: 170px;border-style: none;background-color:  #135083;">
                     <div class="card-body text-black">
                         <div class="svg-cont d-flex justify-content-md-end">
@@ -58,7 +58,7 @@ option {
                     </div>
                 </div>
 
-                <div class="card border-dark mb-3 shadow-sm p-2 mb-1 rounded col-12 col-md-4"
+                <div class="card  mb-3 shadow-sm p-2 mb-1 rounded col-12 col-md-4"
                     style="height: 170px;border-style: none;background-color: #A9CCE8;">
                     <div class="card-body text-black">
                         <div class="svg-cont d-flex justify-content-md-end">
@@ -90,7 +90,7 @@ option {
                     </div>
                 </div>
 
-                <div class="card border-warning mb-3 shadow-sm p-2 mb-1 rounded col-12 col-md-4"
+                <div class="card mb-3 shadow-sm p-2 mb-1 rounded col-12 col-md-4"
                     style="height: 170px;border-style: none;background-color: #135083;">
                     <a style="text-decoration: none" href="{{ url('maintenance') }}">
                         <div class="card-body text-black">
@@ -109,7 +109,7 @@ option {
                     </a>
                 </div>
 
-                <div class="card border-success mb-3 shadow-sm p-2 mb-1 rounded col-12 col-md-4 "
+                <div class="card mb-3 shadow-sm p-2 mb-1 rounded col-12 col-md-4 "
                     style="height: 170px;border-style: none;background-color: #A9CCE8;">
                     <div class="card-body text-black">
                         <div class="svg-cont d-flex justify-content-md-end">

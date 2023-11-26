@@ -376,7 +376,7 @@
                                         <input id="due_date" type="date"
                                             class="form-control @error('due_date') is-invalid @enderror" name="due_date"
                                             value="{{ old('due_date') }}" required autocomplete="due_date" autofocus>
-                                            
+
                                         @error('due_date')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -498,13 +498,12 @@
                         </div>
 
                         <div class="col-md-12 d-flex justify-content-center mt-4">
-                            <button type="submit" class="btn btn-primary" data-toggle="modal"
-                                data-target="#successModal">
+                            <button type="submit" class="btn" data-toggle="modal" data-target="#successModal" style="background-color: #FFA500; color:#135083;"> 
                                 {{ __('Add Tenant') }}
                             </button>
                             <button type="reset"
                                 style="cursor: pointer; margin-left: 10px; width: 100px; color: #fff; background-color: gray;"
-                                class="btnH30 btn">CLEAR
+                                class="btnH30 btn">Clear
                             </button>
                         </div>
 

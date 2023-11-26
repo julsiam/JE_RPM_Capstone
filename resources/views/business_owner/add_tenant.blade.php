@@ -19,7 +19,11 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div style="margin-top:15%" class="card">
-                <div class="card-header" style="margin-left: inherit; margin-right: inherit; background-color:#A9CCE8; border-top-left-radius:10px; border-top-right-radius:10px;"><h2 style="color:#135083; font-weight: 700;padding-top: 15px;padding-left: 23px;">{{ __('Add Tenant') }}</h2></div>
+                <div class="card-header"
+                    style="margin-left: inherit; margin-right: inherit; background-color:#A9CCE8; border-top-left-radius:10px; border-top-right-radius:10px;">
+                    <h2 style="color:#135083; font-weight: 700;padding-top: 10px;padding-left: 23px;">
+                        {{ __('Add Tenant') }}</h2>
+                </div>
                 @if (session('status'))
                 <div class="alert alert-success" role="alert">
                     {{ session('status') }}
@@ -67,6 +71,13 @@
                                         </span>
                                         @enderror
                                     </div>
+                                    <!-- <div>
+                                        @error('email')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </div> -->
 
                                     <div class="input-group mb-3">
                                         <span class="input-group-text col-md-4 text-md-end">{{ __('Birthday') }}</span>
@@ -365,13 +376,14 @@
                                         <input id="due_date" type="date"
                                             class="form-control @error('due_date') is-invalid @enderror" name="due_date"
                                             value="{{ old('due_date') }}" required autocomplete="due_date" autofocus>
-
+                                            
                                         @error('due_date')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                         @enderror
                                     </div>
+                                    
                                 </div>
 
                                 <div class="input-group mb-3">
@@ -486,8 +498,13 @@
                         </div>
 
                         <div class="col-md-12 d-flex justify-content-center mt-4">
-                            <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#successModal">
+                            <button type="submit" class="btn btn-primary" data-toggle="modal"
+                                data-target="#successModal">
                                 {{ __('Add Tenant') }}
+                            </button>
+                            <button type="reset"
+                                style="cursor: pointer; margin-left: 10px; width: 100px; color: #fff; background-color: gray;"
+                                class="btnH30 btn">CLEAR
                             </button>
                         </div>
 

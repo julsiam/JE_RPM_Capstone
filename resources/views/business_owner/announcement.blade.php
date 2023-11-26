@@ -124,8 +124,8 @@
 
 
 
-                            <div class="card-body" style="background: #EFEFEF;padding-bottom: 1px;padding-top: 30px;">
-                                <p class="card-text">{{ $announcement->details }}</p>
+                            <div class="card-body" style="background: #EFEFEF;padding-bottom: 1px;padding-top: 30px;" id="displayEditedDetails">
+                                <p class="card-text">{!! nl2br(e($announcement->details)) !!}</p>
                             </div>
 
                             <div class="card-footer text-muted"
@@ -347,9 +347,16 @@
 @endsection
 
 
-
 <script>
 function confirmAnnouncement() {
     return confirm("Are you sure you want to save this announcement?");
 }
+// Get the edit_details textarea value
+var editDetailsValue = '{!! addslashes(old("edit_details")) !!}';
+
+// Replace newline characters with <br> tags
+var formattedEditDetails = editDetailsValue.replace(/(?:\r\n|\r|\n)/g, '<br>');
+
+// Display the formatted edit_details
+document.getElementById('displayEditedDetails').innerHTML = formattedEditDetails;
 </script>

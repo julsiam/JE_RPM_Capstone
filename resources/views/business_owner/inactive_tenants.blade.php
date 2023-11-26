@@ -43,7 +43,7 @@
                     </svg></a>
 
                 {{-- ADD TENANT --}}
-                <a href="{{ route('add_tenant_form') }}" class="btn btn-success me-2" class="btn btn-success me-2">
+                <a href="{{ route('add_tenant_form') }}" class="btn btn-warning me-2" class="btn btn-success me-2">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                         class="bi bi-person-plus" viewBox="0 0 16 16">
                         <path

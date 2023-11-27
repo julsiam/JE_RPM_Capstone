@@ -245,8 +245,6 @@
                                 </div>
 
                                 <div class="modal-footer">
-                                    <!-- <button type="button" class="btn btn-secondary"
-                                        data-bs-dismiss="modal">{{ __('Cancel') }}</button> -->
                                     <button type="submit" class="btn btn-outline-dark"
                                         style="background-color: #FFA500;">{{ __('Update') }}</button>
                                 </div>

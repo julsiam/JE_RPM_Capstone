@@ -383,7 +383,7 @@
                                         </span>
                                         @enderror
                                     </div>
-                                    
+
                                 </div>
 
                                 <div class="input-group mb-3">
@@ -498,7 +498,8 @@
                         </div>
 
                         <div class="col-md-12 d-flex justify-content-center mt-4">
-                            <button type="submit" class="btn" data-toggle="modal" data-target="#successModal" style="background-color: #FFA500; color:#135083;"> 
+                            <button type="submit" class="btn" data-toggle="modal" data-target="#successModal"
+                                style="background-color: #FFA500; color:#135083;">
                                 {{ __('Add Tenant') }}
                             </button>
                             <button type="reset"
@@ -529,7 +530,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>             
             </div>
         </div>
     </div>

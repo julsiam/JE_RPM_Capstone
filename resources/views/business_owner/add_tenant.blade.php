@@ -489,6 +489,11 @@
                             <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#successModal">
                                 {{ __('Add Tenant') }}
                             </button>
+
+                            <button type="reset"
+                                    style="cursor: pointer; margin-left: 10px; width: 100px; color: #fff; background-color: gray;"
+                                    class="btnH30 btn">CLEAR</button>
+
                         </div>
 
                     </form>

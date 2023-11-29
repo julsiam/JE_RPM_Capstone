@@ -28,9 +28,9 @@ Route::get('/', function () {
     return view ('welcome');
 });
 
-Route::get('/mail', function () {
-    return view ('email.receipt_mail');
-});
+// Route::get('/mail', function () {
+//     return view ('email.receipt_mail');
+// });
 
 
 Auth::routes([ //for email verify
@@ -195,7 +195,7 @@ Route::middleware(['auth', 'user-access:business_owner'])->group(function () {
 
     // Route::get('/sms', [SmsController::class, 'sendsms']);
 
-    Route::get('email', [MailController::class, 'sendReceiptEmail']);
+    Route::get('/due-email', [MailController::class, 'sendDueDateEmail']);
 
     // To show the line graphs
     Route::get('/show-line-chart', [YourController::class, 'showLineChart']);

@@ -14,21 +14,22 @@
                         <h2 style="color: #135083; font-weight:700; letter-spacing: 2px;">J and E Add Property</h2>
                     </div>
 
-                    <form action="{{ route('property.addProperty') }}" method="POST">
+                    <form id="addPropertyForm" action="{{ route('property.addProperty') }}" method="POST">
                         @csrf
                         <div class="form-section">
                             <div class="row mb-3">
-                                <label for="location" class="col-md-4 col-form-label text-md-end">{{ __('Location') }}</label>
-                                    <div class="col-md-6">
-                                        <input id="location" type="text"
-                                            class="form-control @error('location') is-invalid @enderror" name="location"
-                                            value="{{ old('location') }}" required autocomplete="location" autofocus>
-                                        @error('location')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
+                                <label for="location"
+                                    class="col-md-4 col-form-label text-md-end">{{ __('Location') }}</label>
+                                <div class="col-md-6">
+                                    <input id="location" type="text"
+                                        class="form-control @error('location') is-invalid @enderror" name="location"
+                                        value="{{ old('location') }}" required autocomplete="location" autofocus>
+                                    @error('location')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
                             </div>
 
                             <div class="row mb-3">
@@ -39,7 +40,7 @@
                                     <input id="room_unit" type="text"
                                         class="form-control @error('room_unit') is-invalid @enderror" name="room_unit"
                                         value="{{ old('room_unit') }}" required autocomplete="room_unit" autofocus>
-                                   
+
                                     @error('room_unit')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -103,7 +104,8 @@
                                 <a style="cursor: pointer; width: 100px;color:#fff;" class="btn btn-sm btn-danger"
                                     onclick="history.back()">BACK
                                 </a>
-                                <button type="submit" class="btn btn-outline-dark btn-sm" style="background-color: #FFA500;">
+                                <button id="confirmAddPropertyBtn" type="button" class="btn btn-outline-dark btn-sm "
+                                    style="background-color: #FFA500;">
                                     {{ __('ADD PROPERTY') }}
                                 </button>
                             </div>
@@ -111,6 +113,47 @@
                         </div>
                     </form>
 
+                </div>
+            </div>
+        </div>
+
+        {{-- CONFIRM ADD PROPERTY MODAL --}}
+
+        <div class="modal fade" id="confirmAddPropModal" tabindex="-1" aria-labelledby="confirmAddPropModal"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Confirm Add Property</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to add this property?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-warning confirmAdd">Confirm Add</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{-- SUCCESS ADD PROP MODAL --}}
+
+        <div class="modal fade" id="successAddPropModal" tabindex="-1" aria-labelledby="confirmAddPropModal"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Successful!</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Property Added Succcessfully!
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Okay</button>
+                    </div>
                 </div>
             </div>
         </div>

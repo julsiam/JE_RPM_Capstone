@@ -105,14 +105,13 @@ class UserController extends Controller
             'water_bill' => ['required', 'numeric'],
             'electric_bill' => ['required', 'numeric'],
             'total_bill' => ['required', 'numeric'],
-            'due_date' => ['required', 'date_format:Y-m-d', 'after:today'],
+            'due_date' => ['required', 'date_format:Y-m-d', 'after_or_equal:today'],
+            // 'due_date' => ['required', 'date_format:Y-m-d', 'after:today'],
             'status' => ['string', 'in:On Going,Not Yet Paid,Paid,Not Fully Paid'],
 
 
             'id_photo' => 'required|mimes:jpg,png|max:2048', // Validate id_photo file
             'contract_pdf' => 'required|mimes:pdf|max:2048',
-
-
         ]);
     }
 
@@ -283,7 +282,7 @@ class UserController extends Controller
 
         return response()->json($tenants);
     }
-    
+
 
 
     public function editTenantForm($id)

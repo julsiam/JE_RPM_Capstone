@@ -17,6 +17,7 @@ function calculateTotalBillAndStatus() {
     const waterBill = parseFloat(document.getElementById('water_bill').value) || 0;
     const electricBill = parseFloat(document.getElementById('electric_bill').value) || 0;
 
+
     const amountPaid = parseFloat(document.getElementById('amount_paid').value) || 0;
 
     const rentalStatusInput = document.getElementById('rentalStatus')

@@ -41,7 +41,7 @@ class PropertyController extends Controller
             ->count();
 
 
-        return view('business_owner.property_list', compact('notifications', 'newNotification','properties', 'totalProperties', 'totalOccupiedProperties', 'totalAvailProperties'));
+        return view('business_owner.property_list', compact('notifications', 'newNotification', 'properties', 'totalProperties', 'totalOccupiedProperties', 'totalAvailProperties'));
     }
 
     public function exportPropertyExcel()
@@ -100,8 +100,9 @@ class PropertyController extends Controller
             'status' => $request->input('status')
         ]);
 
-        return redirect()->route('properties')->with('message', 'Property Added Successfully!');
+        return redirect()->route('properties');
     }
+
 
 
     public function getPropertyDetails(Request $request)

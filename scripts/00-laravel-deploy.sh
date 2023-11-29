@@ -29,3 +29,6 @@ npm run production
 #for pictures
 echo "Creating storage link..."
 php artisan storage:link
+
+# php artisan send:send-due-emails
+# php artisan sms:send-due-date-notifications

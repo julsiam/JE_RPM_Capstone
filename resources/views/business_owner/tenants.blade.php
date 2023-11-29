@@ -8,7 +8,7 @@
 </div>
 @endif
 
-<div class="container" style="margin-top: 10%">
+<div class="container" style="margin-top: 7%">
     <div class="row justify-content-center" style="padding-left: 12px;font-size: medium;">
         <div style=" color: #135083;font-weight: 700;">Note: Add the properties first before adding any tenants.</div>
     </div>

@@ -1,11 +1,11 @@
 @extends('layouts.verification')
 
 @section('content')
-<div class="container"style="margin-top: 7%">
+<div class="container"style="margin-top: 10%">
     <div class="row justify-content-center mt-5">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Reset Password') }}</div>
+                <div class="card-header" style="color:#135083; font-weight: 700; background-color:#A9CCE8;">{{ __('Reset Password') }}</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -33,7 +33,7 @@
 
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn" style="background-color:  #FFA500;">
                                     {{ __('Send Password Reset Link') }}
                                 </button>
                             </div>

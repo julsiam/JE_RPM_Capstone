@@ -143,11 +143,6 @@
                                             alt="Profile" class="rounded-circle img-fluid">
                                         @endif
 
-
-
-
-
-
                                     </div>
 
                                     <div class="col">

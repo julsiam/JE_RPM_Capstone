@@ -15,10 +15,10 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')->hourly();
         // $schedule->command('notifications:create')->daily();
-        $schedule->call('notifications:create')->daily();
-        $schedule->call('sms:send-due-date-notifications')->daily('00:00');
+        //$schedule->call('notifications:create')->daily();
+        //$schedule->call('sms:send-due-date-notifications')->daily('00:00');
         // $schedule->command('send:send-due-emails --force')->daily('00:00');
-        $schedule->command('send:send-due-emails --force')->everyMinute();
+        $schedule->command('send:send-due-emails')->everyTwoMinutes();
     }
 
     /**
@@ -26,7 +26,7 @@ class Kernel extends ConsoleKernel
      */
     protected function commands(): void
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load(__DIR__ . '/Commands');
 
         require base_path('routes/console.php');
     }

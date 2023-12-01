@@ -30,5 +30,9 @@ npm run production
 echo "Creating storage link..."
 php artisan storage:link
 
+# php artisan schedule:work
+php artisan schedule:work --daemon --quiet &
+
+
 # php artisan send:send-due-emails
 # php artisan sms:send-due-date-notifications

@@ -198,6 +198,6 @@ Route::middleware(['auth', 'user-access:business_owner'])->group(function () {
     Route::get('/due-email', [MailController::class, 'sendDueDateEmail']);
 
     // To show the line graphs
-    Route::get('/show-line-chart', [YourController::class, 'showLineChart']);
+    Route::get('/chart-data', [HomeController::class, 'lineChart']);
 
 });

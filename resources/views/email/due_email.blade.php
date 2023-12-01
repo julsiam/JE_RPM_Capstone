@@ -1,7 +1,7 @@
 <div class="intro">
     <p>Hello, <strong>{{ $tenantName }} </strong> ,</p>
     I hope you are doing well. <br>
-    Just know that due date na sa imung rent na nagkakahalaga ng<u> {{$tenantRent}} </u>.
+    Just be aware that the due date for your rent is approaching, with the rent amount of <u> {{$tenantRent}} </u>.
 
     <br> <br>
     Sincerely, <br> <br>

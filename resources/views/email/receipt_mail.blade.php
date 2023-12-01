@@ -191,10 +191,9 @@
 
                                     <div class="headers clearfix">
                                         <div class="row">
-                                            <div class="col-xs-4"> <strong>Pahimangno: </strong> <br>
-                                                Bayad lang ta sa atung due date ha para mas masaya, just don't forget
-                                                po!
-                                                Thanks a lot.</div>
+                                            <div class="col-xs-4"> <strong>Reminder: </strong> <br>
+                                            Kindly ensure to make the payment on our due date for a more delightful experience, and please do not forget.<br>
+                                            Thanks a lot.</div>
                                         </div>
                                     </div>
 

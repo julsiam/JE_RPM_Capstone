@@ -140,8 +140,8 @@
                                         {{ $mailData['first_name'] }} {{ $mailData['last_name'] }}
                                     </strong>
                                     <p>
-                                        {{ $mailData['location'] }} <br>
-                                        {{ $mailData['room_unit'] }} <br>
+                                      <span>Location: </span>  {{ $mailData['location'] }} <br>
+                                       <span>Room: </span> {{ $mailData['room_unit'] }} <br>
                                     </p>
                                 </div>
                                 <div class="col-sm-6 text-right">

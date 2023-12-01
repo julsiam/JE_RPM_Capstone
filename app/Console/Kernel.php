@@ -18,8 +18,7 @@ class Kernel extends ConsoleKernel
         $schedule->call('notifications:create')->daily();
         $schedule->call('sms:send-due-date-notifications')->daily('00:00');
         // $schedule->command('send:send-due-emails --force')->daily('00:00');
-        // $schedule->command('send:send-due-emails --force')->cron('* 16 * * *');
-
+        $schedule->command('send:send-due-emails --force')->everyMinute();
     }
 
     /**

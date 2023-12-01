@@ -165,15 +165,45 @@ class HomeController extends Controller
         return response()->json(['totalIncome' => $totalIncome]);
     }
 
-    // Added chart
-    public function showLineChart()
-    {
-        // Fetch data for the line chart (replace with your data retrieval logic)
-        $lineChartData = [
-            'labels' => ['Label 1', 'Label 2', 'Label 3', 'Label 4', 'Label 5'],
-            'data' => [30, 40, 20, 45, 35],
-        ];
 
-        return view('your.line.chart.view', compact('lineChartData'));
+
+    public function lineChart()
+    {
+        $locations = Property::distinct()->pluck('location')->toArray();
+
+        $locationData = [];
+
+        foreach ($locations as $location) {
+            $data = RentalHistory::whereHas('rental.property', function ($query) use ($location) {
+                $query->where('location', $location);
+            })->get(['end_date', 'initial_paid_amount']);
+
+            $monthlyData = [];
+
+            foreach ($data as $record) {
+                $endDate = Carbon::parse($record->end_date);
+
+                // Add the initial_paid_amount to the corresponding month
+                $monthKey = $endDate->format('F'); // Format month as a key (e.g., 'November', 'December', etc.)
+                if (!isset($monthlyData[$monthKey])) {
+                    $monthlyData[$monthKey] = 0;
+                }
+
+                $monthlyData[$monthKey] += $record->initial_paid_amount;
+            }
+
+            $initialPaidSum = array_sum($monthlyData);
+
+            $locationData[$location] = [
+                'totalPaid' => $monthlyData,
+                'initialPaidSum' => $initialPaidSum,
+            ];
+        }
+
+        // // Dump and die to inspect the data
+        // dd($locationData);
+
+        // Return the JSON response
+        return response()->json(['locations' => $locations, 'locationData' => $locationData]);
     }
 }

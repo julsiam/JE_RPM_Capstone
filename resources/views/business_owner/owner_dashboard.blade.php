@@ -156,7 +156,7 @@ option {
         </div>
 
         <!-- <div class="card mb-3 shadow-sm p-1 mb-3 rounded">
-          
+
             <canvas id="lineChart" width="400" height="200"></canvas>
         </div> -->
     </div>
@@ -170,6 +170,7 @@ option {
     </div>
 </div>
 
+<canvas id="lineChart"></canvas>
 
 <!-- Include the Chart.js -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

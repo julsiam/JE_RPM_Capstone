@@ -18,16 +18,16 @@
 
         .payment-details span {
             color: #A9B0BB;
-            display: block;
+            /* display: block; */
         }
 
         .payment-info span {
             color: #A9B0BB;
-            display: block;
+            /* display: block; */
         }
 
         .payment-details a {
-            display: inline-block;
+            /* display: inline-block; */
             margin-top: 5px;
         }
 
@@ -36,7 +36,7 @@
         }
 
         .line-items .print a {
-            display: inline-block;
+            /* display: inline-block; */
             border: 1px solid #9CB5D6;
             padding: 13px 13px;
             border-radius: 5px;
@@ -89,6 +89,17 @@
             margin-top: 50px;
             text-align: center;
         }
+
+        .receipt-content{
+            width: 65%;
+            margin: 0 auto;
+            border: 1px solid #000;
+            padding: 30px;
+            background-color: #EFEFEF;
+            
+
+        }
+
     </style>
 </head>
 
@@ -104,7 +115,7 @@
                             This email serves as proof or receipt for your rental payment of ₱
                             <strong>{{ $mailData['amount_paid'] }}</strong> on the rent from
                             <strong>{{ $mailData['rent_from'] }} </strong>to
-                            <strong>{{ $mailData['due_date'] }}</strong> <br>See details below.
+                            <strong>{{ $mailData['due_date'] }}</strong> <br><i>See details below....</i>
                         </div>
                         <hr>
 
@@ -119,7 +130,7 @@
                                     <strong>{{ $mailData['location'] }}</strong>
                                 </div>
                             </div>
-                        </div> <br>
+                        </div> 
 
                         <div class="payment-details">
                             <div class="row">
@@ -129,8 +140,8 @@
                                         {{ $mailData['first_name'] }} {{ $mailData['last_name'] }}
                                     </strong>
                                     <p>
-                                        {{ $mailData['location'] }} <br>
-                                        {{ $mailData['room_unit'] }} <br>
+                                      <span>Location: </span>  {{ $mailData['location'] }} <br>
+                                       <span>Room: </span> {{ $mailData['room_unit'] }} <br>
                                     </p>
                                 </div>
                                 <div class="col-sm-6 text-right">
@@ -147,7 +158,7 @@
                         </div>
                         <hr>
 
-                        <div class="payment-info">
+                        <div class="payment-info"> 
                             <div class="row">
                                 <div class="col-sm-6">
                                     <span>Rental Breakdown</span>
@@ -165,7 +176,7 @@
                                             <strong>₱ {{ $mailData['total_bill'] }}</strong>
                                         </div>
                                     </div>
-                                </div> <br>
+                                </div> 
                                 <hr>
 
 
@@ -176,14 +187,13 @@
                                             <div class="col-xs-4"><strong>Notes: </strong> <br>
                                                 This payment is from <strong>{{ $mailData['rent_from'] }} </strong> to {{ $mailData['due_date'] }}</div>
                                         </div>
-                                    </div> <br>
+                                    </div>
 
                                     <div class="headers clearfix">
                                         <div class="row">
-                                            <div class="col-xs-4"> <strong>Pahimangno: </strong> <br>
-                                                Bayad lang ta sa atung due date ha para mas masaya, just don't forget
-                                                po!
-                                                Thanks a lot.</div>
+                                            <div class="col-xs-4"> <strong>Reminder: </strong> <br>
+                                            Kindly ensure to make the payment on our due date for a more delightful experience, and please do not forget.<br>
+                                            Thanks a lot.</div>
                                         </div>
                                     </div>
 
@@ -193,7 +203,7 @@
                                             <strong> J and E Rentals and Property</strong>
                                             Danao City, Cebu Philippines <br>
                                             JE_RPM 2023
-                                        </p> <br>
+                                        </p> <br><br><br>
                                     </div>
 
 

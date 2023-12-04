@@ -51,7 +51,7 @@ margin-bottom: 4%;
                             </div>
 
                             <div class="card-body" style="background: #EFEFEF;padding-bottom: 1px;padding-top: 30px;">
-                                <p class="card-text">{{ $announcement->details }}</p>
+                                <p class="card-text">{!! nl2br(e($announcement->details)) !!}</p>
                             </div>
 
                             <div class="card-footer text-muted"style="height: 105px;background-color: #EFEFEF;border-style: none;">

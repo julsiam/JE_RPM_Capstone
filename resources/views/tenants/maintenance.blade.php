@@ -41,7 +41,7 @@
                                 <th>Priority</th>
                                 <th>Status</th>
                                 <th>Schedule</th>
-                                <th>Action</th>
+                                <th>Details</th>
                             </tr>
                         </thead>
 
@@ -54,7 +54,7 @@
                                 <td>{{ $maintenance->status }}</td>
                                 <td></td>
                                 <td>
-                                    <button class="btn btn-primary btn-sm detailsBtn" data-bs-toggle="modal"
+                                    <button class="btn btn-outline-primary btn-sm detailsBtn" data-bs-toggle="modal"
                                         data-bs-target="#detailsModal" data-request-id='{{ $maintenance->id }}'><svg
                                             xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                             fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">

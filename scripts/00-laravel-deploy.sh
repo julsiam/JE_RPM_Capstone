@@ -17,9 +17,9 @@ php artisan route:cache
 
 # Running migrations
 echo "Running migrations..."
-# php artisan migrate:fresh --seed --force
-php artisan migrate --force
-php artisan db:seed
+php artisan migrate:fresh --seed --force
+# php artisan migrate --force
+# php artisan db:seed
 
 #build asset...
 echo "Building assets"
@@ -30,8 +30,8 @@ npm run production
 echo "Creating storage link..."
 php artisan storage:link
 
-# php artisan schedule:work
-php artisan schedule:work --daemon --quiet &
+php artisan schedule:work
+# php artisan schedule:work --daemon --quiet &
 
 
 # php artisan send:send-due-emails

@@ -30,7 +30,7 @@ npm run production
 echo "Creating storage link..."
 php artisan storage:link
 
-php artisan schedule:work
+# php artisan schedule:work
 # php artisan schedule:work --daemon --quiet &
 
 

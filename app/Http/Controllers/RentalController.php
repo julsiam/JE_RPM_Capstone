@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Log;
 use App\Mail\SendReceiptEmail;
 use App\Models\Maintenance;
 use App\Models\User;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class RentalController extends Controller
@@ -339,12 +341,11 @@ class RentalController extends Controller
 
                 if ($rental->property) {
                     $description .= '<br>Locations: ' . $rental->property->location;
-                    $description .= '<br>Email: '. $tenantEmail;
-
+                    $description .= '<br>Email: ' . $tenantEmail;
                 } else {
                     $description .= '<br>Location: User is INACTIVE';
-                    $description .= '<br>Email: '. $tenantEmail;
-                    $description .= '<br>Email: '. $tenantContact;
+                    $description .= '<br>Email: ' . $tenantEmail;
+                    $description .= '<br>Email: ' . $tenantContact;
                 }
 
                 return [
@@ -427,5 +428,36 @@ class RentalController extends Controller
         $events = $dueDates->concat($birthdays)->concat($maintenances);
 
         return response()->json($events);
+    }
+
+
+    public function getPaymentHistory()
+    {
+        $tenant = Auth::user();
+
+        $paymentHistory = RentalHistory::with(['rental.rentalHistory'])
+            ->whereHas('rental', function ($query) use ($tenant) {
+                $query->where('user_id', $tenant->id);
+            })
+            ->where('status', 'Paid')
+            ->get();
+
+        // Format the end_date in each payment history
+        // $paymentHistory->transform(function ($history) {
+        //     $history->formatted_end_date = Carbon::parse($history->end_date)->format('F');
+        //     return $history;
+        // });
+
+        return view('tenants.rental', compact('paymentHistory'));
+    }
+
+
+    public function getHistory(Request $request)
+    {
+        $paymentHistoryId = $request->input('data-payment-id');
+        $paymentHistory = RentalHistory::with(['rental.rentalHistory'])
+        ->findOrFail($paymentHistoryId);
+
+        return response()->json($paymentHistory);
     }
 }

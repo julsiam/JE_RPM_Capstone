@@ -50,11 +50,13 @@ Route::middleware(['auth', 'user-access:tenant', 'verified'])->group(function ()
 
     Route::post('/submit-request', [MaintenanceController::class, 'addMaintenanceRequest'])->name('maintenance.submit');
 
-    // Route::get('/showAddRequestModal', [MaintenanceController::class, 'showAddRequestModal'])->name('maintenance.showAddRequestModal');
+    Route::get('/payment-history', [RentalController::class, 'getPaymentHistory'])->name('payment-history');
+
+    Route::get('/get-payment-history', [RentalController::class, 'getHistory']);
 
 
-    Route::get('/rental', function () {
-        return view('./tenants/rental');
+    Route::get('/tenant-profile', function () {
+        return view('./tenants/profile');
     });
 });
 

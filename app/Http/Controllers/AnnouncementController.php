@@ -21,7 +21,7 @@ class AnnouncementController extends Controller
     public function addAnnouncement(Request $request)
     {
         date_default_timezone_set('Asia/Manila'); // change default timezone from America/New_York toAsia/Manila
-        
+
         $currentDate = date('Y-m-d H:i');
 
         $user = Auth::user();
@@ -65,6 +65,7 @@ class AnnouncementController extends Controller
 
         return response()->json($announcement);
     }
+    
 
     public function editAnnouncement(Request $request) //for business owner STATUS UPDATE
     {

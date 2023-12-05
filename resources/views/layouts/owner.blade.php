@@ -304,8 +304,6 @@
         <script src="{{ asset('js/notification.js') }}"></script>
         <script src="{{ asset('js/update_tenant.js') }}"></script>
         <script src="{{ asset('js/inactive_tenants_details.js') }}"></script>
-        <script src="{{ asset('js/modal_confirm.js') }}"></script>
-
 
     @else
         <script src="{{ secure_asset('js/tenants_counts.js') }}"></script>

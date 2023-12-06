@@ -27,8 +27,6 @@
 
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
     <script src="{{ mix('js/app.js') }}"></script>
-
-
 </head>
 <style>
     .logo {
@@ -74,18 +72,15 @@
     a.alert_message:hover {
         color: grey
     }
-    body{
+
+    body {
         background-color: #EFEFEF;
     }
+
     .fc-event {
-  background-color: #3498db;
-  color: #fff;
-}
-
-
-
-
-
+        background-color: #3498db;
+        color: #fff;
+    }
 </style>
 
 <body>
@@ -93,11 +88,11 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm fixed-top">
             <div class="container-fluid">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    @if (env('APP_ENV') === 'local')
-                        <img class="logo" src="{{ asset('image/logo.png') }}" alt="logo">
-                    @else
+                    {{-- @if (env('APP_ENV') === 'local') --}}
+                    <img class="logo" src="{{ asset('image/logo.png') }}" alt="logo">
+                    {{-- @else
                         <img class="logo" src="{{ secure_asset('image/logo.png') }}" alt="logo">
-                    @endif
+                    @endif --}}
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -169,14 +164,14 @@
                         </li> --}}
 
                         <li class="nav-item">
-                            <a href="#" id="bell" class="btn" type="button" style="background-color: #135083;" ><svg
-                                    xmlns="http://www.w3.org/2000/svg" width="20" height="20" style="color:#FFFFFF;"
-                                    fill="currentColor" class="bi bi-bell" viewBox="0 0 16 16">
+                            <a href="#" id="bell" class="btn" type="button"
+                                style="background-color: #135083;"><svg xmlns="http://www.w3.org/2000/svg"
+                                    width="20" height="20" style="color:#FFFFFF;" fill="currentColor"
+                                    class="bi bi-bell" viewBox="0 0 16 16">
                                     <path
                                         d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z" />
                                 </svg>
-                                <span id="notification-count"
-                                    class="badge badge-danger">{{ $newNotification }}</span>
+                                <span id="notification-count" class="badge badge-danger">{{ $newNotification }}</span>
                             </a>
                             <div style="display:none" class="alert_list">
                                 <ul class="unstyled">
@@ -203,7 +198,6 @@
                                     <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                                 </li>
                             @endif
-
                         @else
                             <li class="nav-item dropdown">
 
@@ -218,8 +212,7 @@
                                         {{ __('Profile') }}
                                     </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                        class="d-none">
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
 
@@ -270,42 +263,42 @@
 
     <script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js'></script>
 
-    @if (env('APP_ENV') === 'local')
-        <script src="{{ asset('js/tenants_counts.js') }}"></script>
-        <script src="{{ asset('js/tenants_counts.js') }}"></script>
-        <script src="{{ asset('js/property_counts.js') }}"></script>
-        <script src="{{ asset('js/income_count.js') }}"></script>
+    {{-- @if (env('APP_ENV') === 'local') --}}
+    <script src="{{ asset('js/tenants_counts.js') }}"></script>
+    <script src="{{ asset('js/tenants_counts.js') }}"></script>
+    <script src="{{ asset('js/property_counts.js') }}"></script>
+    <script src="{{ asset('js/income_count.js') }}"></script>
 
 
-        <script src="{{ asset('js/tenant_form.js') }}"></script>
-        <script src="{{ asset('js/rental_status.js') }}"></script>
-        <script src="{{ asset('js/bday.js') }}" defer></script>
-        <script src="{{ asset('js/bday_input.js') }}"></script>
-        <script src="{{ asset('js/room_unit.js') }}"></script>
-        <script src="{{ asset('js/rental_details.js') }}"></script>
-        <script src="{{ asset('js/edit_tenant.js') }}"></script>
-        <script src="{{ asset('js/success_add_Modal.js') }}"></script>
-        <script src="{{ asset('js/bill_status_calculate.js') }}"></script>
-        <script src="{{ asset('js/rent_date.js') }}"></script>
-        <script src="{{ asset('js/maintenance.js') }}"></script>
-        <script src="{{ asset('js/search_sort.js') }}"></script>
-        <script src="{{ asset('js/announcement.js') }}"></script>
-        <script src="{{ asset('js/delete_confirm.js') }}"></script>
-        <script src="{{ asset('js/data_tables.js') }}"></script>
-        <script src="{{ asset('js/paid_records.js') }}"></script>
-        <script src="{{ asset('js/unpaid_records.js') }}"></script>
-        <script src="{{ asset('js/notfullypaid_records.js') }}"></script>
-        <script src="{{ asset('js/paid_report.js') }}"></script>
-        <script src="{{ asset('js/unpaid_report.js') }}"></script>
-        <script src="{{ asset('js/calendar.js') }}"></script>
-        <script src="{{ asset('js/tenants_details.js') }}"></script>
-        <script src="{{ asset('js/profile.js') }}"></script>
-        <script src="{{ asset('js/property.js') }}"></script>
-        <script src="{{ asset('js/notification.js') }}"></script>
-        <script src="{{ asset('js/update_tenant.js') }}"></script>
-        <script src="{{ asset('js/inactive_tenants_details.js') }}"></script>
+    <script src="{{ asset('js/tenant_form.js') }}"></script>
+    <script src="{{ asset('js/rental_status.js') }}"></script>
+    <script src="{{ asset('js/bday.js') }}" defer></script>
+    <script src="{{ asset('js/bday_input.js') }}"></script>
+    <script src="{{ asset('js/room_unit.js') }}"></script>
+    <script src="{{ asset('js/rental_details.js') }}"></script>
+    <script src="{{ asset('js/edit_tenant.js') }}"></script>
+    <script src="{{ asset('js/success_add_Modal.js') }}"></script>
+    <script src="{{ asset('js/bill_status_calculate.js') }}"></script>
+    <script src="{{ asset('js/rent_date.js') }}"></script>
+    <script src="{{ asset('js/maintenance.js') }}"></script>
+    <script src="{{ asset('js/search_sort.js') }}"></script>
+    <script src="{{ asset('js/announcement.js') }}"></script>
+    <script src="{{ asset('js/delete_confirm.js') }}"></script>
+    <script src="{{ asset('js/data_tables.js') }}"></script>
+    <script src="{{ asset('js/paid_records.js') }}"></script>
+    <script src="{{ asset('js/unpaid_records.js') }}"></script>
+    <script src="{{ asset('js/notfullypaid_records.js') }}"></script>
+    <script src="{{ asset('js/paid_report.js') }}"></script>
+    <script src="{{ asset('js/unpaid_report.js') }}"></script>
+    <script src="{{ asset('js/calendar.js') }}"></script>
+    <script src="{{ asset('js/tenants_details.js') }}"></script>
+    <script src="{{ asset('js/profile.js') }}"></script>
+    <script src="{{ asset('js/property.js') }}"></script>
+    <script src="{{ asset('js/notification.js') }}"></script>
+    <script src="{{ asset('js/update_tenant.js') }}"></script>
+    <script src="{{ asset('js/inactive_tenants_details.js') }}"></script>
 
-    @else
+    {{-- @else
         <script src="{{ secure_asset('js/tenants_counts.js') }}"></script>
         <script src="{{ secure_asset('js/property_counts.js') }}"></script>
         <script src="{{ secure_asset('js/income_count.js') }}"></script>
@@ -338,7 +331,7 @@
         <script src="{{ secure_asset('js/inactive_tenants_details.js') }}"></script>
         <script src="{{ secure_asset('js/modal_confirm.js') }}"></script>
 
-    @endif
+    @endif --}}
 </body>
 
 </html>

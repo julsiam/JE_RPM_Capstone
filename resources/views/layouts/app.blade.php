@@ -196,15 +196,13 @@
 
     <script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js'></script>
 
-    @if (env('APP_ENV') === 'local')
+    {{-- @if (env('APP_ENV') === 'local') --}}
         <script src="{{ asset('js/payment-history.js') }}"></script>
 
-
-
-    @else
+    {{-- @else
         <script src="{{ secure_asset('js/payment-history.js') }}"></script>
 
-    @endif
+    @endif --}}
 </body>
 
 </html>

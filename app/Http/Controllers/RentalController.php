@@ -358,9 +358,8 @@ class RentalController extends Controller
             });
 
 
-        // if (env('APP_ENV') == 'local') {
-            // $birthdays = User::whereDate('birthdate', $currentDate->toDateString())
-            $birthdays = User::whereMonth('birthdate', '=', $currentDate->month)
+        // $birthdays = User::whereDate('birthdate', $currentDate->toDateString())
+        $birthdays = User::whereMonth('birthdate', '=', $currentDate->month)
             ->whereDay('birthdate', '=', $currentDate->day)
             ->where('status', 'Active')
             ->get()
@@ -375,56 +374,6 @@ class RentalController extends Controller
                     'event_type' => 'birthday',
                 ];
             });
-
-        } else {
-            // $birthdays = User::whereDate('birthdate', $currentDate->toDateString())
-            $birthdays = User::whereRaw("EXTRACT(MONTH FROM birthdate::date) = EXTRACT(MONTH FROM ?::date) AND EXTRACT(DAY FROM birthdate::date) = EXTRACT(DAY FROM ?::date)", [$currentDate, $currentDate])
-                ->where('status', 'Active')
-                ->get()
-                ->map(function ($user) use ($currentDate) {
-                    $tenantName = $user->first_name . ' ' . $user->last_name;
-                    return [
-                        'title' => $tenantName,
-                        'start' => $currentDate,
-                        'end' => $currentDate,
-                        'description' => 'Tenant: ' . $user->first_name . ' ' .
-                            $user->last_name . '<br> Location: ' . $user->property->location,
-                        'event_type' => 'birthday',
-            $birthdays = User::whereMonth('birthdate', '=', $currentDate->month)
-            ->whereDay('birthdate', '=', $currentDate->day)
-            ->where('status', 'Active')
-            ->get()
-            ->map(function ($user) use ($currentDate) {
-                $tenantName = $user->first_name . ' ' . $user->last_name;
-                return [
-                    'title' => $tenantName,
-                    'start' => $currentDate,
-                    'end' => $currentDate,
-                    'description' => 'Tenant: ' . $user->first_name . ' ' .
-                        $user->last_name . '<br> Location: ' . $user->property->location,
-                    'event_type' => 'birthday',
-                ];
-            });
-
-        // } else {
-        //     // $birthdays = User::whereDate('birthdate', $currentDate->toDateString())
-        //     $birthdays = User::whereRaw("EXTRACT(MONTH FROM birthdate::date) = EXTRACT(MONTH FROM ?::date) AND EXTRACT(DAY FROM birthdate::date) = EXTRACT(DAY FROM ?::date)", [$currentDate, $currentDate])
-        //         ->where('status', 'Active')
-        //         ->get()
-        //         ->map(function ($user) use ($currentDate) {
-        //             $tenantName = $user->first_name . ' ' . $user->last_name;
-        //             return [
-        //                 'title' => $tenantName,
-        //                 'start' => $currentDate,
-        //                 'end' => $currentDate,
-        //                 'description' => 'Tenant: ' . $user->first_name . ' ' .
-        //                     $user->last_name . '<br> Location: ' . $user->property->location,
-        //                 'event_type' => 'birthday',
-
-        //             ];
-        //         });
-        // }
-
 
         $maintenances = Maintenance::with(['user', 'user.property'])
             ->whereDate('schedule', $currentDate)
@@ -487,7 +436,7 @@ class RentalController extends Controller
     {
         $paymentHistoryId = $request->input('data-payment-id');
         $paymentHistory = RentalHistory::with(['rental.rentalHistory'])
-        ->findOrFail($paymentHistoryId);
+            ->findOrFail($paymentHistoryId);
 
         return response()->json($paymentHistory);
     }

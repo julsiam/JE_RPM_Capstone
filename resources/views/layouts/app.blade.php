@@ -201,10 +201,10 @@
 
 
 
-    @else
+    {{-- @else
         <script src="{{ secure_asset('js/payment-history.js') }}"></script>
 
-    @endif --}}
+    @endif  --}}
 </body>
 
 </html>

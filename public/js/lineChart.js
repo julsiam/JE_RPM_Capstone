@@ -1,5 +1,4 @@
 
-
 // document.addEventListener('DOMContentLoaded', function () {
 //     // Example data in pesos
 //     var data1 = [1000, 8000, 1500, 2500, 3000];
@@ -49,6 +48,23 @@ document.addEventListener('DOMContentLoaded', function () {
     var ctx = document.getElementById('lineChart').getContext('2d');
     var chart;
 
+    var year;
+
+    function initializedChart() {
+        $.ajax({
+            url: '/chart-data',
+            type: 'GET',
+            data: { year: year },
+
+            success: function (data) {
+                updateChart(data.locations, data.locationData);
+            },
+            error: function (error) {
+                console.error('Error loading fetching data: ', error);
+            }
+        });
+    }
+
     function updateChart(locations, locationData) {
         if (chart) {
             chart.destroy();
@@ -94,16 +110,13 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    $.ajax({
-        url: '/chart-data',
-        type: 'GET',
-        success: function (data) {
-            updateChart(data.locations, data.locationData);
-        },
-        error: function (error) {
-            console.error('Error fetching chart data: ', error);
-        }
-    });
+    function onYearChange() {
+        year = document.getElementById('yearSelect').value;
+        initializedChart();
+    }
+
+    document.getElementById('yearSelect').addEventListener('change', onYearChange);
+    initializedChart();
 });
 
 

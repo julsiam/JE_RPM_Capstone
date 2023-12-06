@@ -295,9 +295,9 @@
                                             <thead>
                                                 <tr>
                                                     <th>Month</th>
-                                                    <th scope="col">Total Rent</th>
                                                     <th scope="col">Due Date</th>
-                                                    <th scope="col">Date Paid</th>
+                                                    <th scope="col">Total Rent</th>
+                                                    {{-- <th scope="col">Date Paid</th> --}}
                                                     <th scope="col">Amount Paid</th>
                                                     <th scope="col">Status</th>
                                                 </tr>

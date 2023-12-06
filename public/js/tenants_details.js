@@ -65,7 +65,7 @@ $(document).ready(function () {
                     data.rental.rental_history.forEach(function (historyItem) {
                         var month = new Date(historyItem.end_date);
                         var dueDate = new Date(historyItem.end_date);
-                        var datePaid = new Date(historyItem.created_at);
+                        //var datePaid = new Date(historyItem.created_at);
                         var options = {
                             timeZone: 'UTC', // Use UTC or your desired timezone
                             month: 'long',
@@ -77,14 +77,14 @@ $(document).ready(function () {
                             month: 'long',
                         };
                         var due = dueDate.toLocaleString('en-US', options);
-                        var _datePaid = datePaid.toLocaleString('en-US', options);
+                        // var _datePaid = datePaid.toLocaleString('en-US', options);
                         var _month = month.toLocaleString('en-US', month_options);
 
                         var row = $('<tr>');
                         row.append($('<td>').text(_month));
-                        row.append($('<td>').text(historyItem.total_rent));
                         row.append($('<td>').text(due));
-                        row.append($('<td>').text(_datePaid));
+                        row.append($('<td>').text(historyItem.total_rent));
+                        // row.append($('<td>').text(_datePaid));
                         row.append($('<td>').text(historyItem.initial_paid_amount));
                         row.append($('<td>').text(historyItem.status));
 

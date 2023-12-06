@@ -167,15 +167,18 @@ class HomeController extends Controller
 
 
 
-    public function lineChart()
+    public function lineChart(Request $request)
     {
+        $selectedYear = $request->input('year', date('Y'));
+
         $locations = Property::distinct()->pluck('location')->toArray();
 
         $locationData = [];
 
         foreach ($locations as $location) {
-            $data = RentalHistory::whereHas('rental.property', function ($query) use ($location) {
+            $data = RentalHistory::whereHas('rental.property', function ($query) use ($location, $selectedYear) {
                 $query->where('location', $location);
+                $query->whereYear('end_date', $selectedYear);
             })->get(['end_date', 'initial_paid_amount']);
 
             $monthlyData = [];

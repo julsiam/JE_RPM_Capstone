@@ -1,3 +1,6 @@
+web
+
+
 <?php
 
 use App\Http\Controllers\AnnouncementController;
@@ -54,10 +57,14 @@ Route::middleware(['auth', 'user-access:tenant', 'verified'])->group(function ()
 
     Route::get('/get-payment-history', [RentalController::class, 'getHistory']);
 
+    Route::get('/tenant-profile', [UserController::class, 'getTenantProfile']);
 
-    Route::get('/tenant-profile', function () {
-        return view('./tenants/profile');
-    });
+    Route::post('/edit-tenant-profile', [UserController::class, 'editTenantProfile'])->name('edit-tenant-profile');
+
+
+    // Route::get('/tenant-profile', function () {
+    //     return view('./tenants/profile');
+    // });
 });
 
 

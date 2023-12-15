@@ -514,4 +514,55 @@ class UserController extends Controller
 
         return redirect()->back()->with('error', 'No image selected.');
     }
+
+
+
+    //TENANT SIDE
+    public function getTenantProfile()
+    {
+        $user = Auth::user();
+
+        $profilePicture = File::where('user_id', $user->id)
+            ->where('type', 'id_photo')
+            ->first();
+
+        return view('tenants.profile', compact('user', 'profilePicture'));
+    }
+
+
+    public function editTenantProfile(Request $request)
+    {
+        // $user = Auth::user();
+        $user = User::find(Auth::user()->id);
+
+        $validator = Validator::make($request->all(), [
+            'edit_firstname' => ['required', 'string', 'max:255'],
+            'edit_lastname' => ['required', 'string', 'max:255'],
+            'edit_email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . $user->id], // Include the user's ID to exclude their current email
+            'edit_phone' => ['required', 'numeric', 'digits_between:10,11'], // change to numeric and add digits_between rule
+            'edit_birthdate' => ['required', 'date_format:Y-m-d', 'before_or_equal:today'], // add before_or_equal rule to ensure the birthdate is not in the future
+            'edit_age' => ['required', 'integer', 'min:2'], // add integer and min rule
+            'edit_address' => ['required', 'string', 'max:255'],
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        // Update the user's details based on the validated input
+        $user->first_name = $request->input('edit_firstname');
+        $user->last_name = $request->input('edit_lastname');
+        $user->email = $request->input('edit_email');
+        $user->phone_number = $request->input('edit_phone');
+        $user->age = $request->input('edit_age');
+        $user->birthdate = $request->input('edit_birthdate');
+        $user->address = $request->input('edit_address');
+
+        // Save the changes to the user's profile
+        $user->save();
+
+        return redirect()->back()->with('success', 'Profile details updated successfully!');
+    }
 }

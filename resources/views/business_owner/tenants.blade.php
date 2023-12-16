@@ -332,8 +332,6 @@
                             @if (isset($tenant))
                                 <a href="#" class="btn btn-primary updateDetailsBtn">{{ __('Update') }}</a>
                             @endif
-
-
                         </div>
 
 

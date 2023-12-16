@@ -64,12 +64,12 @@
 
                                         <div class="col-auto">
                                             @if (Storage::disk('s3')->exists($announcement->user->profile_picture))
-                                                <img style="max-width: 60px"
+                                                <img style="width: 42px"
                                                     src="{{ Storage::disk('s3')->url($announcement->user->profile_picture) }}"
-                                                    alt="" class="rounded-circle">
+                                                    alt="profile" class="rounded-circle img-fluid">
                                             @else
-                                                <img style="width: 60px" src="{{ asset('image/default_photo.png') }}"
-                                                    alt="Profile" class="rounded-circle">
+                                                <img style="width: 42px" src="{{ asset('image/default_photo.png') }}"
+                                                    alt="profile" class="rounded-circle img-fluid">
                                             @endif
                                         </div>
 

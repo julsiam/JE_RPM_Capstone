@@ -382,9 +382,9 @@ class UserController extends Controller
         $inactiveTenants = User::with(['rental', 'tenantProperty'])
             ->where('type', 0)
             ->where('status', 'Inactive')
-            ->whereHas('rental', function ($query) {
-                $query->where('status', 'Not Yet Paid');
-            })
+            // ->whereHas('rental', function ($query) {
+            //     $query->where('status', 'Not Yet Paid');
+            // })
             ->get();
 
 
